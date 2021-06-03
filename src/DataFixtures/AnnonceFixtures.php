@@ -14,9 +14,14 @@ class AnnonceFixtures extends Fixture
         $annonce1-> setTitle('Evenement');
         $annonce1-> setDescription('Evenement DanceFloor sur Paris ');
         $annonce1-> setStatus(true);
-        $annonce1-> setDateTime(true);
+
+        $annonce2 = new Annonce();
+        $annonce2-> setTitle('Recherche');
+        $annonce2-> setDescription('Recherche Beatmaker sur Grenoble');
+        $annonce2-> setStatus(true);
 
         $manager->persist($annonce1);
+        $manager->persist($annonce2);
 
 
         $manager->flush();

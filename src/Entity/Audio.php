@@ -18,14 +18,9 @@ class Audio
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="json")
      */
-    private $user_id;
-
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $type;
+    private $type = [];
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -52,24 +47,18 @@ class Audio
      */
     private $deleted_at;
 
+    public function __construct()
+    {
+        $this -> created_at = new \DateTime();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-
-    public function getType(): ?string
+    public function getType(): array
     {
         return $this->type;
     }

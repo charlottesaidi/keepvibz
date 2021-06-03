@@ -18,24 +18,14 @@ class Annonce
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $user_id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $region_id;
-
-    /**
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="json")
      */
-    private $status;
+    private $status = [];
 
     /**
      * @ORM\Column(type="text")
@@ -57,33 +47,15 @@ class Annonce
      */
     private $deleted_at;
 
+    public function __construct()
+    {
+        $this -> created_at = new \DateTime();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-
-    public function getRegionId(): ?int
-    {
-        return $this->region_id;
-    }
-
-    public function setRegionId(int $region_id): self
-    {
-        $this->region_id = $region_id;
-
-        return $this;
     }
 
     public function getTitle(): ?string
@@ -98,7 +70,7 @@ class Annonce
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): array
     {
         return $this->status;
     }

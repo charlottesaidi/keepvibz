@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Texte{% endblock %}
+
+{% block body %}
+    <h1>Texte</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ texte.id }}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ texte.type }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>{{ texte.status ? texte.status|json_encode : '' }}</td>
+            </tr>
+            <tr>
+                <th>File</th>
+                <td>{{ texte.file }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ texte.content }}</td>
+            </tr>
+            <tr>
+                <th>Created_at</th>
+                <td>{{ texte.createdAt ? texte.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Modified_at</th>
+                <td>{{ texte.modifiedAt ? texte.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Deleted_at</th>
+                <td>{{ texte.deletedAt ? texte.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('texte_index') }}">back to list</a>
+
+    <a href="{{ path('texte_edit', {'id': texte.id}) }}">edit</a>
+
+    {{ include('texte/_delete_form.html.twig') }}
+{% endblock %}

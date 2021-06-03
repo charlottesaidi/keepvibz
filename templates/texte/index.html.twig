@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Texte index{% endblock %}
+
+{% block body %}
+    <h1>Texte index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>File</th>
+                <th>Content</th>
+                <th>Created_at</th>
+                <th>Modified_at</th>
+                <th>Deleted_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for texte in textes %}
+            <tr>
+                <td>{{ texte.id }}</td>
+                <td>{{ texte.type }}</td>
+                <td>{{ texte.status ? texte.status|json_encode : '' }}</td>
+                <td>{{ texte.file }}</td>
+                <td>{{ texte.content }}</td>
+                <td>{{ texte.createdAt ? texte.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ texte.modifiedAt ? texte.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ texte.deletedAt ? texte.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('texte_show', {'id': texte.id}) }}">show</a>
+                    <a href="{{ path('texte_edit', {'id': texte.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('texte_new') }}">Create new</a>
+{% endblock %}

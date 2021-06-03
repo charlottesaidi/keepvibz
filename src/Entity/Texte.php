@@ -16,19 +16,13 @@ class Texte
      * @ORM\Column(type="integer")
      */
     private $id;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $user_id;
-
     /**
      * @ORM\Column(type="string", length=30)
      */
     private $type;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="json")
      */
     private $status;
 
@@ -74,7 +68,7 @@ class Texte
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): array
     {
         return $this->type;
     }

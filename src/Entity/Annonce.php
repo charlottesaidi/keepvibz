@@ -23,9 +23,9 @@ class Annonce
     private $title;
 
     /**
-     * @ORM\Column(type="string", length=25)
+     * @ORM\Column(type="json")
      */
-    private $status;
+    private $status = [];
 
     /**
      * @ORM\Column(type="text")
@@ -64,7 +64,7 @@ class Annonce
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): array
     {
         return $this->status;
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Audio;
 use App\Form\AudioType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/audio')]
+#[Route('/admin/audio')]
 class AudioController extends AbstractController
 {
     #[Route('/', name: 'audio_index', methods: ['GET'])]

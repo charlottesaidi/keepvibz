@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Competence;
 use App\Form\CompetenceType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/competence')]
+#[Route('/admin/competence')]
 class CompetenceController extends AbstractController
 {
     #[Route('/', name: 'competence_index', methods: ['GET'])]

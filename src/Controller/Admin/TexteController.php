@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Texte;
 use App\Form\TexteType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/texte')]
+#[Route('/admin/texte')]
 class TexteController extends AbstractController
 {
     #[Route('/', name: 'texte_index', methods: ['GET'])]

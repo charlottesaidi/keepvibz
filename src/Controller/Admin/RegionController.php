@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
 use App\Entity\Region;
 use App\Form\RegionType;
@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/region')]
+#[Route('/admin/region')]
 class RegionController extends AbstractController
 {
     #[Route('/', name: 'region_index', methods: ['GET'])]

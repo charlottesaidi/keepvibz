@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Avatar index{% endblock %}
+
+{% block body %}
+    <h1>Avatar index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>File</th>
+                <th>Created_at</th>
+                <th>Modified_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for avatar in avatars %}
+            <tr>
+                <td>{{ avatar.id }}</td>
+                <td>{{ avatar.file }}</td>
+                <td>{{ avatar.createdAt ? avatar.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ avatar.modifiedAt ? avatar.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('avatar_show', {'id': avatar.id}) }}">show</a>
+                    <a href="{{ path('avatar_edit', {'id': avatar.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('avatar_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Competence index{% endblock %}
+
+{% block body %}
+    <h1>Competence index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Actif</th>
+                <th>Created_at</th>
+                <th>Modified_at</th>
+                <th>Deleted_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for competence in competences %}
+            <tr>
+                <td>{{ competence.id }}</td>
+                <td>{{ competence.title }}</td>
+                <td>{{ competence.actif ? 'Yes' : 'No' }}</td>
+                <td>{{ competence.createdAt ? competence.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ competence.modifiedAt ? competence.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ competence.deletedAt ? competence.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('competence_show', {'id': competence.id}) }}">show</a>
+                    <a href="{{ path('competence_edit', {'id': competence.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('competence_new') }}">Create new</a>
+{% endblock %}

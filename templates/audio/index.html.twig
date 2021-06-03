@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Audio index{% endblock %}
+
+{% block body %}
+    <h1>Audio index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Type</th>
+                <th>File</th>
+                <th>Description</th>
+                <th>Created_at</th>
+                <th>Modified_at</th>
+                <th>Deleted_at</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for audio in audio %}
+            <tr>
+                <td>{{ audio.id }}</td>
+                <td>{{ audio.type ? audio.type|json_encode : '' }}</td>
+                <td>{{ audio.file }}</td>
+                <td>{{ audio.description }}</td>
+                <td>{{ audio.createdAt ? audio.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ audio.modifiedAt ? audio.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ audio.deletedAt ? audio.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('audio_show', {'id': audio.id}) }}">show</a>
+                    <a href="{{ path('audio_edit', {'id': audio.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('audio_new') }}">Create new</a>
+{% endblock %}

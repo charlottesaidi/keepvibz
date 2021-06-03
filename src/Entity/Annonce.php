@@ -38,18 +38,20 @@ class Annonce
     private $created_at;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $modified_at;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $deleted_at;
 
     public function __construct()
     {
         $this -> created_at = new \DateTime();
+        $this -> modified_at = new \DateTime();
+        $this -> deleted_at = new \DateTime();
     }
 
 

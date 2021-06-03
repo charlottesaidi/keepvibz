@@ -1,13 +1,24 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin-base.html.twig' %}
 
-{% block title %}Edit Texte{% endblock %}
+{% block title %}{{texte.title}}{% endblock %}
 
 {% block body %}
-    <h1>Edit Texte</h1>
-
-    {{ include('texte/_form.html.twig', {'button_label': 'Update'}) }}
-
-    <a href="{{ path('texte_index') }}">back to list</a>
-
-    {{ include('texte/_delete_form.html.twig') }}
+    <div class="app-wrapper">
+    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+                <div class="row g-3 mb-4 align-items-center justify-content-center">
+			        <h1 class="app-page-title mb-0 text-center">Modifier ce texte</h1>
+                    <div class="col-sm-6">
+                        <div class="app-card app-card-settings shadow-sm p-4">
+                            <div class="app-card">
+                            {{ include('texte/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+                            {{ include('texte/_delete_form.html.twig') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

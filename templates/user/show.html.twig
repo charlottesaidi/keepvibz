@@ -1,62 +1,106 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin-base.html.twig' %}
 
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Fiche utilisateur</h1>
+				    </div>
+                </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
-            <tr>
-                <th>Roles</th>
-                <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Password</th>
-                <td>{{ user.password }}</td>
-            </tr>
-            <tr>
-                <th>Name</th>
-                <td>{{ user.name }}</td>
-            </tr>
-            <tr>
-                <th>Town</th>
-                <td>{{ user.town }}</td>
-            </tr>
-            <tr>
-                <th>Phone</th>
-                <td>{{ user.phone }}</td>
-            </tr>
-            <tr>
-                <th>Valid</th>
-                <td>{{ user.valid ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Actif</th>
-                <td>{{ user.actif ? 'Yes' : 'No' }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ user.createdAt ? user.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Modified_at</th>
-                <td>{{ user.modifiedAt ? user.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <tbody>
+                                            <tr>
+                                                <th class="cell">Identifiant</th>
+                                                <td class="cell">#{{ user.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Adresse e-mail</th>
+                                                <td>{{ user.email }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Roles</th>
+                                                <td class="cell">
+                                                {% if 'ROLE_ADMIN' in user.roles %}
+                                                    <p>Administrateur</p>
+                                                    {% else %}
+                                                        
+                                                {% endif %}
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Password</th>
+                                                <td class="cell">{{ user.password }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Nom d'utilisateur</th>
+                                                <td class="cell">{{ user.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Ville</th>
+                                                <td class="cell">{{ user.town }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Phone</th>
+                                                <td class="cell">{{ user.phone }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Inscription confirmée</th>
+                                                <td class="cell">
+                                                    {% if user.valid %}
+                                                        <span class="badge bg-success">Oui</span>
+                                                        {% else %}
+                                                            <span class="badge bg-danger">Non</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Actif</th>
+                                                <td class="cell">
+                                                    {% if user.actif %}
+                                                        <span class="badge bg-success">Oui</span>
+                                                        {% else %}
+                                                            <span class="badge bg-danger">Non</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Date d'inscription</th>
+                                                <td class="cell">{{ user.createdAt ? user.createdAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Dernière modification</th>
+                                                <td class="cell">{{ user.modifiedAt ? user.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="container mt-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <a class="btn app-btn-secondary" href="{{ path('user_edit', {'id': user.id}) }}">Modifier</a>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{ include('user/_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <a href="{{ path('user_index') }}">back to list</a>
-
-    <a href="{{ path('user_edit', {'id': user.id}) }}">edit</a>
-
-    {{ include('user/_delete_form.html.twig') }}
 {% endblock %}

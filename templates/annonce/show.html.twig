@@ -1,46 +1,78 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin-base.html.twig' %}
 
-{% block title %}Annonce{% endblock %}
+{% block title %}{{annonce.title}}{% endblock %}
 
 {% block body %}
-    <h1>Annonce</h1>
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Détail</h1>
+				    </div>
+                </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ annonce.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ annonce.title }}</td>
-            </tr>
-            <tr>
-                <th>Status</th>
-                <td>{{ annonce.status ? annonce.status|json_encode : '' }}</td>
-            </tr>
-            <tr>
-                <th>Description</th>
-                <td>{{ annonce.description }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ annonce.createdAt ? annonce.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Modified_at</th>
-                <td>{{ annonce.modifiedAt ? annonce.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Deleted_at</th>
-                <td>{{ annonce.deletedAt ? annonce.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('annonce_index') }}">back to list</a>
-
-    <a href="{{ path('annonce_edit', {'id': annonce.id}) }}">edit</a>
-
-    {{ include('annonce/_delete_form.html.twig') }}
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <tbody>
+                                            <tr>
+                                                <th class="cell">Référence</th>
+                                                <td class="cell">#{{ annonce.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Titre</th>
+                                                <td class="cell">{{ annonce.title }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Description</th>
+                                                <td class="cell">{{ annonce.description }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Status</th>
+                                                <td class="cell">
+                                                    {% if 'published' in annonce.status %}
+                                                        <span class="badge bg-success">Publié</span>
+                                                    {% endif %}
+                                                    {% if 'refused' in annonce.status %}
+                                                        <span class="badge bg-danger">Refusé</span>
+                                                    {% endif %}
+                                                    {% if 'draft' in annonce.status %}
+                                                        <span class="badge bg-warning">Brouillon</span>
+                                                    {% endif %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Date de publication</th>
+                                                <td class="cell">{{ annonce.createdAt ? annonce.createdAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Dernière modification</th>
+                                                <td class="cell">{{ annonce.modifiedAt ? annonce.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="container mt-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <a class="btn app-btn-secondary" href="{{ path('annonce_edit', {'id': annonce.id}) }}">Modifier</a>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{ include('annonce/_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

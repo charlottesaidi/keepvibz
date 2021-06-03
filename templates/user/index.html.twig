@@ -21,7 +21,7 @@
 					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
 					                    </div>
 					                    <div class="col-auto">
-					                        <button type="submit" class="btn app-btn-secondary">Search</button>
+					                        <button type="submit" class="btn app-btn-secondary">Rechercher</button>
 					                    </div>
 					                </form>
                                 </div>
@@ -32,7 +32,7 @@
 
                 <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                     <div class="col-auto">
-                        <a class="btn app-btn-secondary" href="{{ path('user_new') }}">Enregistrer un nouvel utilisateur</a>
+                        <a class="btn app-btn-secondary mb-3" href="{{ path('user_new') }}">Enregistrer un nouvel utilisateur</a>
                     </div>
                 </div>
 
@@ -53,7 +53,7 @@
                                                 <th class="cell">Inscription confirmée</th>
                                                 <th class="cell">Actif</th>
                                                 <th class="cell">Date d'inscription</th>
-                                                <th class="cell">Date de modification</th>
+                                                <th class="cell">Dernière modification</th>
                                                 <th class="cell">Actions</th>
                                             </tr>
                                         </thead>
@@ -97,7 +97,7 @@
                                             </tr>
                                         {% else %}
                                             <tr>
-                                                <td class="cell" colspan="12">Aucun résultat trouvé</td>
+                                                <td class="cell" colspan="11">Aucun résultat trouvé</td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>

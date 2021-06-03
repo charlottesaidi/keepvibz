@@ -16,25 +16,26 @@ class Texte
      * @ORM\Column(type="integer")
      */
     private $id;
-    /**
-     * @ORM\Column(type="string", length=30)
-     */
-    private $type;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="json", nullable=true)
      */
-    private $status;
+    private $status = [];
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $file;
+    private $title;
 
     /**
      * @ORM\Column(type="text")
      */
     private $content;
+
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    private $type;
 
     /**
      * @ORM\Column(type="datetime")
@@ -56,56 +57,31 @@ class Texte
         $this -> created_at = new \DateTime();
     }
 
-
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUserId(): ?int
-    {
-        return $this->user_id;
-    }
-
-    public function setUserId(int $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-
-    public function getType(): array
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): self
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    public function getStatus(): ?string
+    public function getStatus(): ?array
     {
         return $this->status;
     }
 
-    public function setStatus(string $status): self
+    public function setStatus(?array $status): self
     {
         $this->status = $status;
 
         return $this;
     }
 
-    public function getFile(): ?string
+    public function getTitle(): ?string
     {
-        return $this->file;
+        return $this->title;
     }
 
-    public function setFile(string $file): self
+    public function setTitle(string $title): self
     {
-        $this->file = $file;
+        $this->title = $title;
 
         return $this;
     }
@@ -118,6 +94,18 @@ class Texte
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -151,7 +139,7 @@ class Texte
         return $this->deleted_at;
     }
 
-    public function setDeletedAt(\DateTimeInterface $deleted_at): self
+    public function setDeletedAt(?\DateTimeInterface $deleted_at): self
     {
         $this->deleted_at = $deleted_at;
 

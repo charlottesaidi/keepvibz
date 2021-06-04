@@ -7,13 +7,8 @@ $(document).ready(function(){
         $(".block_filters").toggle('slide');
     })
 
-    //SEARCH
-    $(".link").on('hover', function () {
-        $("a").slideDown(500);
-      })
-
     //CAROUSSEL MOST DOWNLOADED
-    $(window).load(function() {
+    $(window).on('load', function() {
         $('.flexslider').flexslider({
           animation: "slide",
           animationLoop: false,
@@ -22,4 +17,4 @@ $(document).ready(function(){
         });
     });
 
-}
+})

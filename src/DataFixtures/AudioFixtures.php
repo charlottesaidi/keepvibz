@@ -11,6 +11,7 @@ class AudioFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $audio1 = new Audio();
+        $audio1-> setTitle('Titre audio');
         $audio1-> setType('Rap');
         $audio1-> setFile('instru1.mp3');
         $audio1-> setDescription('Prod Chill BPM 145 Key Am');

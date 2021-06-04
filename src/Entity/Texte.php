@@ -18,7 +18,7 @@ class Texte
     private $id;
 
     /**
-     * @ORM\Column(type="json", nullable=true)
+     * @ORM\Column(type="json")
      */
     private $status = [];
 

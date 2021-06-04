@@ -17,6 +17,7 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $user1 = new User();
+        $user1-> setName('User1');
         $user1-> setEmail('Old School');
         $user1-> setRoles(['ROLE_USER']);
         $user1-> setPassword('ferfrfeffer');
@@ -29,6 +30,7 @@ class UserFixtures extends Fixture
         $manager->persist($user1);
 
         $admin = new User();
+        $user1-> setName('Admin');
         $admin->setEmail('admin@example.fr');
         $admin->setPassword($this->passwordEncoder->encodePassword(
                 $admin,
@@ -38,6 +40,7 @@ class UserFixtures extends Fixture
         $manager->persist($admin);
 
         $user = new User();
+        $user-> setName('User');
         $user->setEmail('user@example.fr');
         $user->setPassword($this->passwordEncoder->encodePassword(
                 $user,

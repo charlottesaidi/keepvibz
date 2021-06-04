@@ -1,38 +1,59 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin-base.html.twig' %}
 
-{% block title %}Category{% endblock %}
+{% block title %}{{category.title}}{% endblock %}
 
 {% block body %}
-    <h1>Category</h1>
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Détail</h1>
+				    </div>
+                </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ category.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ category.title }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ category.createdAt ? category.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Modified_at</th>
-                <td>{{ category.modifiedAt ? category.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Deleted_at</th>
-                <td>{{ category.deletedAt ? category.deletedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('category_index') }}">back to list</a>
-
-    <a href="{{ path('category_edit', {'id': category.id}) }}">edit</a>
-
-    {{ include('category/_delete_form.html.twig') }}
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <tbody>
+                                            <tr>
+                                                <th class="cell">Référence</th>
+                                                <td class="cell">#{{ category.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Label</th>
+                                                <td class="cell">{{ category.title }}</td>
+                                            </tr>
+                                                <th class="cell">Date d'ajout'</th>
+                                                <td class="cell">{{ category.createdAt ? category.createdAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Dernière modification</th>
+                                                <td class="cell">{{ category.modifiedAt ? category.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="container mt-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <a class="btn app-btn-secondary" href="{{ path('category_edit', {'id': category.id}) }}">Modifier</a>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{ include('category/_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

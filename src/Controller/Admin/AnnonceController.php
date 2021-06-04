@@ -57,6 +57,7 @@ class AnnonceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $annonce->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('annonce_index');

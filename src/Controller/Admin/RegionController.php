@@ -57,6 +57,7 @@ class RegionController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $region->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('region_index');

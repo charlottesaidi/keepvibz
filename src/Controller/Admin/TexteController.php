@@ -57,6 +57,7 @@ class TexteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $texte->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('texte_index');

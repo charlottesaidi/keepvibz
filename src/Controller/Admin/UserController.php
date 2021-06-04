@@ -57,6 +57,7 @@ class UserController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index');

@@ -17,7 +17,7 @@ class AudioController extends AbstractController
     public function index(AudioRepository $audioRepository): Response
     {
         return $this->render('audio/index.html.twig', [
-            'audio' => $audioRepository->findAll(),
+            'audios' => $audioRepository->findAll(),
         ]);
     }
 
@@ -57,6 +57,7 @@ class AudioController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $audio->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('audio_index');

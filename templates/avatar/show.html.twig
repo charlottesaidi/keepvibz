@@ -1,34 +1,59 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin-base.html.twig' %}
 
-{% block title %}Avatar{% endblock %}
+{% block title %}Détail de l'avatar{% endblock %}
 
 {% block body %}
-    <h1>Avatar</h1>
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Détail</h1>
+				    </div>
+                </div>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ avatar.id }}</td>
-            </tr>
-            <tr>
-                <th>File</th>
-                <td>{{ avatar.file }}</td>
-            </tr>
-            <tr>
-                <th>Created_at</th>
-                <td>{{ avatar.createdAt ? avatar.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-            <tr>
-                <th>Modified_at</th>
-                <td>{{ avatar.modifiedAt ? avatar.modifiedAt|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <a href="{{ path('avatar_index') }}">back to list</a>
-
-    <a href="{{ path('avatar_edit', {'id': avatar.id}) }}">edit</a>
-
-    {{ include('avatar/_delete_form.html.twig') }}
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <tbody>
+                                            <tr>
+                                                <th class="cell">Référence</th>
+                                                <td class="cell">#{{ avatar.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Label</th>
+                                                <td class="cell">{{ avatar.title }}</td>
+                                            </tr>
+                                                <th class="cell">Date d'ajout'</th>
+                                                <td class="cell">{{ avatar.createdAt ? avatar.createdAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Dernière modification</th>
+                                                <td class="cell">{{ avatar.modifiedAt ? avatar.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="container mt-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <a class="btn app-btn-secondary" href="{{ path('avatar_edit', {'id': avatar.id}) }}">Modifier</a>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{ include('avatar/_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}

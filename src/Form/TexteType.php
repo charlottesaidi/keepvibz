@@ -30,7 +30,7 @@ class TexteType extends AbstractType
                     'Publier' => 'published',
                     'Brouillon' => 'draft',
                 ],
-                'multiple' => true,
+                'multiple' => false,
                 'expanded' => true,
             ])
         ;

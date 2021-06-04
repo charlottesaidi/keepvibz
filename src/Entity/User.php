@@ -3,10 +3,13 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -44,7 +47,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $town;
 
@@ -54,7 +57,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $phone;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $valid;
 
@@ -73,9 +76,38 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $modified_at;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Competence::class, inversedBy="users")
+     */
+    private $competences;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="user")
+     */
+    private $annonces;
+
+    /**
+     * @ORM\OneToOne(targetEntity=Avatar::class, inversedBy="user", cascade={"persist", "remove"})
+     */
+    private $avatar;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Audio::class, mappedBy="user")
+     */
+    private $audios;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="user")
+     */
+    private $textes;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
+        $this->competences = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
+        $this->audios = new ArrayCollection();
+        $this->textes = new ArrayCollection();
     }
 
 
@@ -240,6 +272,132 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setModifiedAt(?\DateTimeInterface $modified_at): self
     {
         $this->modified_at = $modified_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Competence[]
+     */
+    public function getCompetences(): Collection
+    {
+        return $this->competences;
+    }
+
+    public function addCompetence(Competence $competence): self
+    {
+        if (!$this->competences->contains($competence)) {
+            $this->competences[] = $competence;
+        }
+
+        return $this;
+    }
+
+    public function removeCompetence(Competence $competence): self
+    {
+        $this->competences->removeElement($competence);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Annonce[]
+     */
+    public function getAnnonces(): Collection
+    {
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonce $annonce): self
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces[] = $annonce;
+            $annonce->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnonce(Annonce $annonce): self
+    {
+        if ($this->annonces->removeElement($annonce)) {
+            // set the owning side to null (unless already changed)
+            if ($annonce->getUser() === $this) {
+                $annonce->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getAvatar(): ?Avatar
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?Avatar $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Audio[]
+     */
+    public function getAudios(): Collection
+    {
+        return $this->audios;
+    }
+
+    public function addAudio(Audio $audio): self
+    {
+        if (!$this->audios->contains($audio)) {
+            $this->audios[] = $audio;
+            $audio->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAudio(Audio $audio): self
+    {
+        if ($this->audios->removeElement($audio)) {
+            // set the owning side to null (unless already changed)
+            if ($audio->getUser() === $this) {
+                $audio->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Texte[]
+     */
+    public function getTextes(): Collection
+    {
+        return $this->textes;
+    }
+
+    public function addTexte(Texte $texte): self
+    {
+        if (!$this->textes->contains($texte)) {
+            $this->textes[] = $texte;
+            $texte->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTexte(Texte $texte): self
+    {
+        if ($this->textes->removeElement($texte)) {
+            // set the owning side to null (unless already changed)
+            if ($texte->getUser() === $this) {
+                $texte->setUser(null);
+            }
+        }
 
         return $this;
     }

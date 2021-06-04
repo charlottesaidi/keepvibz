@@ -30,10 +30,14 @@
                                                 <td class="cell">{{ audio.file }}</td>
                                             </tr>
                                             <tr>
+                                                <th class="cell">Auteur</th>
+                                                <td class="cell">{{ audio.user.name }}</td>
+                                            </tr>
+                                            <tr>
                                                 <th class="cell">Genre</th>
                                                 <td class="cell">
                                                     {% for type in audio.type %}
-                                                        <p> {{type}} </p>
+                                                        <span> {{type}} </span><br>
                                                     {% endfor %}
                                                 </td>
                                             </tr>

@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Repository\AnnonceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AnnonceRepository::class)
@@ -18,16 +21,31 @@ class Annonce
     private $id;
 
     /**
+     * @Assert\NotBlank
+     *  @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
-     * @ORM\Column(type="json")
+     * @Assert\NotBlank
+     * @ORM\Column(type="string")
      */
-    private $status = [];
+    private $status;
 
-    /**
+    /** 
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 255,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="text")
      */
     private $description;
@@ -47,11 +65,29 @@ class Annonce
      */
     private $deleted_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Region::class, inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $region;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Category::class, inversedBy="annonces")
+     */
+    private $categories;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="annonces")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
         $this -> modified_at = new \DateTime();
         $this -> deleted_at = new \DateTime();
+        $this->categories = new ArrayCollection();
     }
 
 
@@ -72,7 +108,7 @@ class Annonce
         return $this;
     }
 
-    public function getStatus(): array
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -128,6 +164,54 @@ class Annonce
     public function setDeletedAt(\DateTimeInterface $deleted_at): self
     {
         $this->deleted_at = $deleted_at;
+
+        return $this;
+    }
+
+    public function getRegion(): ?Region
+    {
+        return $this->region;
+    }
+
+    public function setRegion(?Region $region): self
+    {
+        $this->region = $region;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Category[]
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): self
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories[] = $category;
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): self
+    {
+        $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

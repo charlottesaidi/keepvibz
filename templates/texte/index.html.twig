@@ -46,6 +46,7 @@
                                             <tr>
                                                 <th class="cell">Référence</th>
                                                 <th class="cell">Titre</th>
+                                                <th class="cell">Auteur</th>
                                                 <th class="cell">Type</th>
                                                 <th class="cell">Status</th>
                                                 <th class="cell">Date de publication</th>
@@ -57,8 +58,9 @@
                                         {% for texte in textes %}
                                             <tr>
                                                 <td class="cell">#{{ texte.id }}</td>
-                                                <td class="cell">{{ texte.type }}</td>
                                                 <td class="cell">{{ texte.title }}</td>
+                                                <td class="cell">{{ texte.user.name }}</td>
+                                                <td class="cell">{{ texte.type }}</td>
                                                 <td class="cell">
                                                     {% if 'published' in texte.status %}
                                                         <span class="badge bg-success">Publié</span>

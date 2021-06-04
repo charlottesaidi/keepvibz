@@ -40,6 +40,7 @@
                                             <tr>
                                                 <th class="cell">Référence</th>
                                                 <th class="cell">Fichier</th>
+                                                <th class="cell">Utilisateur correspondant</th>
                                                 <th class="cell">Date d'ajout</th>
                                                 <th class="cell">Dernière modification</th>
                                                 <th class="cell">Actions</th>
@@ -50,6 +51,7 @@
                                             <tr>
                                                 <td class="cell">#{{ avatar.id }}</td>
                                                 <td class="cell">{{ avatar.file }}</td>
+                                                <td class="cell">{{ avatar.user.name }}</td>
                                                 <td class="cell">
                                                     <span class="cell-data">{{ avatar.createdAt ? avatar.createdAt|date('d/m/Y') : '' }}</span>
                                                     <span class="note">{{ avatar.createdAt ? avatar.createdAt|date('H:i') : '' }}</span>

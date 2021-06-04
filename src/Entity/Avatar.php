@@ -32,6 +32,11 @@ class Avatar
      */
     private $modified_at;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, mappedBy="avatar", cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
@@ -75,6 +80,28 @@ class Avatar
     public function setModifiedAt(?\DateTimeInterface $modified_at): self
     {
         $this->modified_at = $modified_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($user === null && $this->user !== null) {
+            $this->user->setAvatar(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($user !== null && $user->getAvatar() !== $this) {
+            $user->setAvatar($this);
+        }
+
+        $this->user = $user;
 
         return $this;
     }

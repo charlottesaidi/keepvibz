@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\RegionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,9 +39,15 @@ class Region
      */
     private $deleted_at;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="region")
+     */
+    private $annonces;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
+        $this->annonces = new ArrayCollection();
     }
 
 
@@ -92,6 +100,36 @@ class Region
     public function setDeletedAt(\DateTimeInterface $deleted_at): self
     {
         $this->deleted_at = $deleted_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Annonce[]
+     */
+    public function getAnnonces(): Collection
+    {
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonce $annonce): self
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces[] = $annonce;
+            $annonce->setRegion($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnonce(Annonce $annonce): self
+    {
+        if ($this->annonces->removeElement($annonce)) {
+            // set the owning side to null (unless already changed)
+            if ($annonce->getRegion() === $this) {
+                $annonce->setRegion(null);
+            }
+        }
 
         return $this;
     }

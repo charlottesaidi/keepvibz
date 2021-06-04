@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,9 +39,15 @@ class Category
      */
     private $deleted_at;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Annonce::class, mappedBy="categories")
+     */
+    private $annonces;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
+        $this->annonces = new ArrayCollection();
     }
 
 
@@ -92,6 +100,33 @@ class Category
     public function setDeletedAt(\DateTimeInterface $deleted_at): self
     {
         $this->deleted_at = $deleted_at;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Annonce[]
+     */
+    public function getAnnonces(): Collection
+    {
+        return $this->annonces;
+    }
+
+    public function addAnnonce(Annonce $annonce): self
+    {
+        if (!$this->annonces->contains($annonce)) {
+            $this->annonces[] = $annonce;
+            $annonce->addCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAnnonce(Annonce $annonce): self
+    {
+        if ($this->annonces->removeElement($annonce)) {
+            $annonce->removeCategory($this);
+        }
 
         return $this;
     }

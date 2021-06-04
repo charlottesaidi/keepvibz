@@ -46,6 +46,9 @@
                                             <tr>
                                                 <th class="cell">Référence</th>
                                                 <th class="cell">Title</th>
+                                                <th class="cell">Auteur</th>
+                                                <th class="cell">Catégorie(s)</th>
+                                                <th class="cell">Région</th>
                                                 <th class="cell">Description</th>
                                                 <th class="cell">Status</th>
                                                 <th class="cell">Date de publication</th>
@@ -58,6 +61,13 @@
                                             <tr>
                                                 <td class="cell">#{{ annonce.id }}</td>
                                                 <td class="cell">{{ annonce.title }}</td>
+                                                <td class="cell">{{ annonce.user.name }}</td>
+                                                <td class="cell">
+                                                    {% for category in annonce.categories %}
+                                                        <span> {{category.title}} </span><br>
+                                                    {% endfor %}
+                                                </td>
+                                                <td class="cell">{{ annonce.region.title }}</td>
                                                 <td class="cell">{{ annonce.description }}</td>
                                                 <td class="cell">
                                                     {% if 'published' in annonce.status %}

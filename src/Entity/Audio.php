@@ -52,6 +52,12 @@ class Audio
      */
     private $deleted_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="audios")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
@@ -79,7 +85,7 @@ class Audio
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(array $type): self
     {
         $this->type = $type;
 
@@ -142,6 +148,18 @@ class Audio
     public function setDeletedAt(\DateTimeInterface $deleted_at): self
     {
         $this->deleted_at = $deleted_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -1,12 +1,15 @@
 {{ form_start(form) }}     
     <div class="mb-3">
-        {{ form_row(form.genre)}}
+        {{ form_row(form.type)}}
+        {{ form_errors(form.type)}}
     </div>  
     <div class="mb-3">
         {{ form_row(form.file)}}
+        {{ form_errors(form.file)}}
     </div>  
     <div class="mb-3">
         {{ form_row(form.description)}}
+        {{ form_errors(form.description)}}
     </div>
     <div class="mb-3">
         <button class="btn app-btn-primary">{{ button_label|default('Ajouter') }}</button>

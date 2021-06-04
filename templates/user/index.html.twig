@@ -47,13 +47,14 @@
                                                 <th class="cell">Identifiant</th>
                                                 <th class="cell">Email</th>
                                                 <th class="cell">Roles</th>
+                                                <th class="cell">Compétences</th>
                                                 <th class="cell">Nom</th>
                                                 <th class="cell">Ville</th>
-                                                <th class="cell">Téléphone</th>
                                                 <th class="cell">Inscription confirmée</th>
                                                 <th class="cell">Actif</th>
                                                 <th class="cell">Date d'inscription</th>
                                                 <th class="cell">Dernière modification</th>
+                                                <th class="cell">Avatar</th>
                                                 <th class="cell">Actions</th>
                                             </tr>
                                         </thead>
@@ -63,13 +64,20 @@
                                                 <td class="cell">#{{ user.id }}</td>
                                                 <td class="cell">{{ user.email }}</td>
                                                 <td class="cell">
-                                                {% if 'ROLE_ADMIN' in user.roles %}
-                                                    <p>Administrateur</p>
-                                                {% endif %}
+                                                    {% if 'ROLE_ADMIN' in user.roles %}
+                                                        <span> Administrateur </span><br>
+                                                    {% endif %}
+                                                    {% if 'ROLE_USER' in user.roles %}
+                                                        <span> Utilisateur </span><br>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="cell">
+                                                    {% for competence in user.competences %}
+                                                        <span> {{competence.title}} </span><br>
+                                                    {% endfor %}
                                                 </td>
                                                 <td class="cell">{{ user.name }}</td>
                                                 <td class="cell">{{ user.town }}</td>
-                                                <td class="cell">{{ user.phone }}</td>
                                                 <td class="cell">
                                                     {% if user.valid %}
                                                         <span class="badge bg-success">Oui</span>
@@ -90,6 +98,7 @@
                                                 <td class="cell"><span class="cell-data">{{ user.modifiedAt ? user.modifiedAt|date('d/m/Y') : '' }}</span>
                                                     <span class="note">{{ user.modifiedAt ? user.modifiedAt|date('H:i') : '' }}</span>
                                                 </td>
+                                                <td class="cell">{# balise <img>, src "user.avatar.file" #}</td>
                                                 <td class="cell">
                                                     <a href="{{ path('user_show', {'id': user.id}) }}"  class="btn-sm app-btn-secondary">Détails</a>
                                                     <a href="{{ path('user_edit', {'id': user.id}) }}"  class="btn-sm app-btn-secondary">Modifier</a>

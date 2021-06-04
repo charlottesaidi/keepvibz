@@ -18,9 +18,9 @@ class Texte
     private $id;
 
     /**
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string")
      */
-    private $status = [];
+    private $status;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -33,7 +33,7 @@ class Texte
     private $content;
 
     /**
-     * @ORM\Column(type="string", length=100)
+     * @ORM\Column(type="string", length="50")
      */
     private $type;
 
@@ -52,6 +52,12 @@ class Texte
      */
     private $deleted_at;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="textes")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
@@ -62,12 +68,12 @@ class Texte
         return $this->id;
     }
 
-    public function getStatus(): ?array
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
-    public function setStatus(?array $status): self
+    public function setStatus(string $status): self
     {
         $this->status = $status;
 
@@ -142,6 +148,18 @@ class Texte
     public function setDeletedAt(?\DateTimeInterface $deleted_at): self
     {
         $this->deleted_at = $deleted_at;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -1,0 +1,101 @@
+Pour inserer le plug Flexslider:
+
+Dans le HTML(HEAD):
+inserer le chemin CSS flexslider avant mon css
+=================================================
+Dans le HTML(BODY):
+inserer le chemin JS flexslider entre JQUERY.JS et MAIN.JS
+=================================================
+Pour un SLIDER SIMPLE:
+
+Dans le MAIN.JS:
+ajouter le script suivant :
+
+$(window).on('load', function() {
+    $('.flexslider').flexslider();
+  });
+=================================================
+Dans le INDEX.HTML:
+ajouter le script suivant :
+
+<div id="slider" class="flexslider">
+    <ul class="slides">
+      <li>
+        <img src="https://picsum.photos/id/232/1600/700" />
+      </li>
+      <li>
+        <img src="https://picsum.photos/id/233/1600/700" />
+      </li>
+      <li>
+        <img src="https://picsum.photos/id/234/1600/700" />
+      </li>
+    </ul>
+</div>
+=================================================
+Pour un CAROUSSEL SIMPLE:
+
+Dans le MAIN.JS:
+ajouter le script suivant :
+
+$(window).on('load', function() {
+    $('.flexslider').flexslider({
+    animation: "slide",
+    animationLoop: false,
+    itemWidth: 210,
+    itemMargin: 5
+  });
+});
+=================================================
+Dans le INDEX.HTML:
+ajouter le script suivant :
+
+<div class="flexslider carousel">
+  <ul class="slides">
+    <li>
+      <img src="slide1.jpg" />
+    </li>
+    <li>
+      <img src="slide2.jpg" />
+    </li>
+    <li>
+      <img src="slide3.jpg" />
+    </li>
+    <li>
+      <img src="slide4.jpg" />
+    </li>
+    <!-- items mirrored twice, total of 12 -->
+  </ul>
+</div>
+=================================================
+Pour un THUMBNAIL CONTROLNAV PATTERN:
+
+Dans le MAIN.JS:
+ajouter le script suivant :
+
+$(window).on('load', function() {
+    $('.flexslider').flexslider({
+    animation: "slide",
+    controlNav: "thumbnails"
+  });
+});
+=================================================
+Dans le INDEX.HTML:
+ajouter le script suivant :
+
+<div class="flexslider">
+  <ul class="slides">
+    <li data-thumb="slide1-thumb.jpg">
+      <img src="slide1.jpg" />
+    </li>
+    <li data-thumb="slide2-thumb.jpg">
+      <img src="slide2.jpg" />
+    </li>
+    <li data-thumb="slide3-thumb.jpg">
+      <img src="slide3.jpg" />
+    </li>
+    <li data-thumb="slide4-thumb.jpg">
+      <img src="slide4.jpg" />
+    </li>
+  </ul>
+</div>
+

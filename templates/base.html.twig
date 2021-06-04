@@ -16,38 +16,46 @@
         {% endblock %}
     </head>
     <body>
-    <header id="header" class="header">
-        <h1 class="site">KeepVibz</h1>
-        <div class="wrap1 flex sb">
-            <div class="left flex">
-                <div class="logo">
-                    <a href="/"><img class="img_logo" src="img/logo2Fichier_4_svg.svg" alt="logo"></a>
+        <header id="header" class="header">
+            <h1 class="site">KeepVibz</h1>
+            <div class="wrap1 flex sb">
+                <div class="left flex">
+                    <div class="logo">
+                        <a href="/"><img class="img_logo" src="img/logo2Fichier_4_svg.svg" alt="logo"></a>
+                    </div>
+                    <nav class="navigation">
+                        <ul class="nav flex">
+                            <li class="link"><a href="#">Annonces</a></li>
+                            <li class="link"><a href="#">Collaborations</a></li>
+                        </ul>
+                    </nav>
                 </div>
-                <nav class="navigation">
-                    <ul class="nav flex">
-                        <li><a href="#">Annonces</a></li>
-                        <li><a href="#">Collaborations</a></li>
-                    </ul>
-                </nav>
+                <div class="right">
+                    <a href="{{ path ('app_register') }}">Inscription</a>
+                    <a href="{{ path ('app_login') }}">Connexion</a>
+                </div>
             </div>
-            <div class="right">
-                <a href="#">Inscription</a>
-                <a href="#">Connexion</a>
+            <div class="wrap2 flex fs">
+                <div class="search flex fs">
+                    <img class="icon_search" src="assets/images/icons/icon_search.svg" alt="icon search">
+                    <input type="search" name="search" id="search" placeholder="Tapes ta recherche">
+                    <button class="btn_search">Filtres</button>
+                    <img class="icon_arrow" src="assets/images/icons/arrow-204-64.png" alt="icon arrow">
+                    <div class="block_filters">
+                        <ul class="filters">
+                            <li class="filter">Audios</li>
+                            <li class="filter">Textes</li>
+                            <li class="filter">Studios</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="wrap2 flex fs">
-            <div class="search flex fs">
-                <img class="icon_search" src="assets/images/icons/icon_search.svg" alt="icon search">
-                <input type="search" name="search" id="search" placeholder="Tapes ta recherche">
-                <button class="btn_search">Filtres</button>
-            </div>
-        </div>
-    </header>
+        </header>
         {% block body %}
-         
         {% endblock %}
     <footer>
-    
+        
     </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
     </body>
 </html>

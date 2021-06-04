@@ -1,15 +1,141 @@
-body{
-    background-color: black;
-}
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
 
-.logo-header{
-    width: 80px;
-    height: 80px;
-    background-color: lime;
-    margin-left: 20%;
-    margin-top: 2% ;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
 }
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+*,*:after,*:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.clear:before,.clear:after {
+  content:' ';display: table;
+}
+.clear:after {
+  clear: both;
+}
+.clear {
+  *zoom: 1;
+}
+a{text-decoration: none;}
 
-img{
- width: 100%;
+/* CSS PERSO */
+
+.flex {display:flex;}
+.col {flex-direction: column;}
+.row {flex-direction: row;}
+.fs {justify-content: flex-start;}
+.fe {justify-content: flex-end;}
+.jcc {justify-content: center;}
+.sa {justify-content: space-around;}
+.sb {justify-content: space-between;}
+.fw {flex-wrap: wrap;}
+.cv {margin: auto;} 
+.acc {align-content: center;}
+.aic {align-items: center;}
+.aifs {align-items: flex-start;}
+.aife {align-items: flex-end;}
+.tac {text-align: center;}
+.w100 {width: 100%;}
+.w50 {width: 50%;}
+.w33 {width: 33.333333%;}
+.w25 {width: 25%;}
+.bgc {background-color: rgb(10, 168, 186);}
+.bgl {background-color:lime;}
+.pr {position: relative;}
+.pa {position: absolute;}
+.tcv {transform: translateY(-50%); top: 50%;}
+.tch {transform: translateX(-50%); left: 50%;}
+.tchv {top: 50%; left: 50%; transform: translate(-50%, -50%);}
+.z1 {z-index: 1;}
+.z2 {z-index: 2;}
+.z3 {z-index: 3;}
+
+
+/* FIN DE CLASS PERSO */
+
+body{font-family: 'Squada One', cursive; letter-spacing: 3px; background-color: black; font-weight: 500; padding: 0 20px;}
+.site{position: absolute; right: -50000px;}
+
+/* HEADER */
+#header{background-color: #000;}
+.wrap1{height: 77px; max-width: 1300px; width: 100%; margin: 0 auto;}
+a{color: #fff;}
+.img_logo{height: 60px; margin-top: 10px;}
+.navigation{margin-top: 30px;}
+.navigation li{margin-left: 20px;}
+.navigation li a:hover{padding-bottom: 5px ;border-bottom: 2px solid #A27440}
+.right{margin-top: 30px;}
+.right :first-child:hover{padding-bottom: 5px ;border-bottom: 2px solid #A27440}
+.right :nth-child(2){border: 1px solid transparent; margin-left: 20px; background-color: #A27440; padding: 14px; border-radius: 4px;}
+.right :nth-child(2):hover{background-color: transparent; color:#A27440; border: 1px solid #fff; }
+.wrap2{max-width: 1300px; width: 100%; margin: 0 auto 20px auto;}
+.search{position: relative;}
+.icon_search{
+    position: absolute;
+    left: 18px;
+    top: 14px;
+    height: 19px;}
+.search input{background: #282828; height: 48px; width: 60vw; outline: none; border-radius: 30px; border: none; color: #fff; font-family: 'Squada One', cursive; letter-spacing: 3px; padding: 0px 100px 0px 50px;}
+.search .btn_search{
+    position: absolute;
+    height: 48px;
+    width: 70px;
+    left: 52vw;
+    top: 0px;
+    border: none;
+    background: transparent;
+    z-index: 2;
+    font-weight: 400;
+    font-family: 'Squada One', cursive;
+    letter-spacing: 3px;
+    font-size: 18px;
+    color: #fff;
 }
+/* HEADER */
+
+
+
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </head>
+    <body>
+    <header id="header" class="header">
+        <h1 class="site">KeepVibz</h1>
+        <div class="wrap1 flex sb">
+            <div class="left flex">
+                <div class="logo">
+                    <a href="/"><img class="img_logo" src="img/logo2Fichier_4_svg.svg" alt="logo"></a>
+                </div>
+                <nav class="navigation">
+                    <ul class="nav flex">
+                        <li><a href="#">Annonces</a></li>
+                        <li><a href="#">Collaborations</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="right">
+                <a href="#">Inscription</a>
+                <a href="#">Connexion</a>
+            </div>
+        </div>
+        <div class="wrap2 flex fs">
+            <div class="search flex fs">
+                <img class="icon_search" src="assets/images/icons/icon_search.svg" alt="icon search">
+                <input type="search" name="search" id="search" placeholder="Tapes ta recherche">
+                <button class="btn_search">Filtres</button>
+            </div>
+        </div>
+    </header>
+        {% block body %}
+         
+        {% endblock %}
+    <footer>
+    
+    </footer>
+    </body>
+</html>

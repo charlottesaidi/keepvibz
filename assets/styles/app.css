@@ -118,12 +118,12 @@ a{color: #fff;}
     left: 18px;
     top: 14px;
     height: 19px;}
-.search input{background: #282828; height: 48px; width: 60vw; outline: none; border-radius: 30px; border: none; color: #fff; font-family: 'Squada One', cursive; letter-spacing: 3px; padding: 0px 100px 0px 50px;}
+.search input{background: #282828; height: 48px; width: 34vw; outline: none; border-radius: 30px; border: none; color: #fff; font-family: 'Squada One', cursive; letter-spacing: 3px; padding: 0px 100px 0px 50px;}
 .search .btn_search{
     position: absolute;
     height: 48px;
     width: 70px;
-    left: 52vw;
+    left: 30vw;
     top: 0px;
     border: none;
     background: transparent;

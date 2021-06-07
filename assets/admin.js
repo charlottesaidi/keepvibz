@@ -7,10 +7,11 @@
 
 // any CSS you import will output into a single css file (app.css in this case)
 import './admin/css/portal.css';
+// JS
 import './admin/plugins/fontawesome/js/all.min.js';
 import './admin/plugins/popper.min.js'
 import './admin/plugins/bootstrap/js/bootstrap.min.js'  
-import './admin/plugins/chart.js/chart.min.js'
+// import './admin/plugins/chart.js/chart.min.js'
 import './admin/js/index-charts.js' 
 import './admin/js/app.js'
 

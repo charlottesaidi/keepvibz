@@ -1,0 +1,82 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Avatars utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Avatars Utilisateurs</h1>
+				    </div>
+				    <div class="col-auto">
+					     <div class="page-utilities">
+						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							    <div class="col-auto">
+								    <form class="table-search-form row gx-1 align-items-center">
+					                    <div class="col-auto">
+					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
+					                    </div>
+					                    <div class="col-auto">
+					                        <button type="submit" class="btn app-btn-secondary">Rechercher</button>
+					                    </div>
+					                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <thead>
+                                            <tr>
+                                                <th class="cell">Référence</th>
+                                                <th class="cell">Fichier</th>
+                                                <th class="cell">Utilisateur correspondant</th>
+                                                <th class="cell">Date d'ajout</th>
+                                                <th class="cell">Dernière modification</th>
+                                                <th class="cell">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for avatar in avatars %}
+                                            <tr>
+                                                <td class="cell">#{{ avatar.id }}</td>
+                                                {# <td class="cell"> <img src="{{asset('uploads/'{avatar.file})}}"> </td> #}
+                                                <td class="cell">{{ avatar.user.name }}</td>
+                                                <td class="cell">
+                                                    <span class="cell-data">{{ avatar.createdAt ? avatar.createdAt|date('d/m/Y') : '' }}</span>
+                                                    <span class="note">{{ avatar.createdAt ? avatar.createdAt|date('H:i') : '' }}</span>
+                                                </td>
+                                                <td class="cell"><span class="cell-data">{{ avatar.modifiedAt ? avatar.modifiedAt|date('d/m/Y') : '' }}</span>
+                                                    <span class="note">{{ avatar.modifiedAt ? avatar.modifiedAt|date('H:i') : '' }}</span>
+                                                </td>
+                                                <td class="cell">
+                                                    <a href="{{ path('avatar_show', {'id': avatar.id}) }}" class="btn-sm app-btn-secondary">Détails</a>
+                                                    <a href="{{ path('avatar_edit', {'id': avatar.id}) }}" class="btn-sm app-btn-secondary">Modifier</a>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td  class="cell" colspan="5">Aucun résultat trouvé</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {{include('pagination.html.twig')}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

@@ -9,6 +9,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Filesystem\Filesystem;
+use JasonGrimes\Paginator;
 
 #[Route('/admin/avatar')]
 class AvatarController extends AbstractController
@@ -16,8 +18,21 @@ class AvatarController extends AbstractController
     #[Route('/', name: 'avatar_index', methods: ['GET'])]
     public function index(AvatarRepository $avatarRepository): Response
     {
-        return $this->render('avatar/index.html.twig', [
-            'avatars' => $avatarRepository->findAll(),
+        $totalItems = count($avatarRepository->findAll());
+        $itemsPerPage = 10;
+        $currentPage = 1;
+        $urlPattern = '/admin/avatar?page=(:num)';
+        $offset = 0;
+        if(!empty($_GET['page'])) {
+            $currentPage = $_GET['page'];
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+
+        return $this->render('admin/avatar/index.html.twig', [
+            'avatars' => $avatarRepository->paginateAll($itemsPerPage, $offset),
+            'paginator' => $paginator
         ]);
     }
 
@@ -29,6 +44,21 @@ class AvatarController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $avatar->setUser($this->getUser());
+            if ($avatar->getFile() !== null) {
+                $file = $form->get('picture')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'), // Le dossier dans le quel le fichier va etre charger
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    return new Response($e->getMessage());
+                }
+
+            $avatar->setFile($fileName);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($avatar);
             $entityManager->flush();
@@ -36,7 +66,7 @@ class AvatarController extends AbstractController
             return $this->redirectToRoute('avatar_index');
         }
 
-        return $this->render('avatar/new.html.twig', [
+        return $this->render('admin/avatar/new.html.twig', [
             'avatar' => $avatar,
             'form' => $form->createView(),
         ]);
@@ -45,7 +75,7 @@ class AvatarController extends AbstractController
     #[Route('/{id}', name: 'avatar_show', methods: ['GET'])]
     public function show(Avatar $avatar): Response
     {
-        return $this->render('avatar/show.html.twig', [
+        return $this->render('admin/avatar/show.html.twig', [
             'avatar' => $avatar,
         ]);
     }
@@ -63,7 +93,7 @@ class AvatarController extends AbstractController
             return $this->redirectToRoute('avatar_index');
         }
 
-        return $this->render('avatar/edit.html.twig', [
+        return $this->render('admin/avatar/edit.html.twig', [
             'avatar' => $avatar,
             'form' => $form->createView(),
         ]);

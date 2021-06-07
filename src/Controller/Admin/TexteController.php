@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use JasonGrimes\Paginator;
 
 #[Route('/admin/texte')]
 class TexteController extends AbstractController
@@ -16,8 +17,20 @@ class TexteController extends AbstractController
     #[Route('/', name: 'texte_index', methods: ['GET'])]
     public function index(TexteRepository $texteRepository): Response
     {
-        return $this->render('texte/index.html.twig', [
-            'textes' => $texteRepository->findAll(),
+        $totalItems = count($texteRepository->findAll());
+        $itemsPerPage = 10;
+        $currentPage = 1;
+        $urlPattern = '/admin/texte?page=(:num)';
+        $offset = 0;
+        if(!empty($_GET['page'])) {
+            $currentPage = $_GET['page'];
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+        return $this->render('admin/texte/index.html.twig', [
+            'textes' => $texteRepository->paginateAll($itemsPerPage, $offset),
+            'paginator' => $paginator
         ]);
     }
 
@@ -29,6 +42,7 @@ class TexteController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $texte->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($texte);
             $entityManager->flush();
@@ -36,7 +50,7 @@ class TexteController extends AbstractController
             return $this->redirectToRoute('texte_index');
         }
 
-        return $this->render('texte/new.html.twig', [
+        return $this->render('admin/texte/new.html.twig', [
             'texte' => $texte,
             'form' => $form->createView(),
         ]);
@@ -45,7 +59,7 @@ class TexteController extends AbstractController
     #[Route('/{id}', name: 'texte_show', methods: ['GET'])]
     public function show(Texte $texte): Response
     {
-        return $this->render('texte/show.html.twig', [
+        return $this->render('admin/texte/show.html.twig', [
             'texte' => $texte,
         ]);
     }
@@ -63,7 +77,7 @@ class TexteController extends AbstractController
             return $this->redirectToRoute('texte_index');
         }
 
-        return $this->render('texte/edit.html.twig', [
+        return $this->render('admin/texte/edit.html.twig', [
             'texte' => $texte,
             'form' => $form->createView(),
         ]);

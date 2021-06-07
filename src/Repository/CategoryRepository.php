@@ -19,6 +19,16 @@ class CategoryRepository extends ServiceEntityRepository
         parent::__construct($registry, Category::class);
     }
 
+    public function paginateAll($limit, $offset) {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.title', 'ASC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Category[] Returns an array of Category objects
     //  */

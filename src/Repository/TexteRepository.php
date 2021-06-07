@@ -19,6 +19,16 @@ class TexteRepository extends ServiceEntityRepository
         parent::__construct($registry, Texte::class);
     }
 
+    public function paginateAll($limit, $offset) {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.title', 'ASC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Texte[] Returns an array of Texte objects
     //  */

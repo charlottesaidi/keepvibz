@@ -19,6 +19,16 @@ class RegionRepository extends ServiceEntityRepository
         parent::__construct($registry, Region::class);
     }
 
+    public function paginateAll($limit, $offset) {
+        return $this->createQueryBuilder('r')
+            ->orderBy('r.title', 'ASC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Region[] Returns an array of Region objects
     //  */

@@ -1,0 +1,25 @@
+{% extends 'auth-base.html.twig' %}
+
+{% block title %}Nouveau mot de passe{% endblock %}
+
+    {% block body %}
+    <div class="wrap">
+        <div>
+            <h1>Réinitialiser le mot de passe</h1>
+        </div>
+        {{ form_start(resetForm) }} 
+            <div class="input-group">
+                    <label for="registration_form_name"><span><i class="fas fa-unlock-alt"></i></span>Nouveau mot de passe</label>
+                    {{ form_widget(resetForm.plainPassword.first) }}
+                    {{ form_errors(resetForm.plainPassword) }}
+                </div>
+                <div class="input-group">
+                    <label for="registration_form_name"><span><i class="fas fa-check"></i></span> Confirmation </label>
+                    {{ form_widget(resetForm.plainPassword.second) }}
+                </div>
+            <div class="input-group">
+                <button class="btn-primary">Envoyer <span><i class="fas fa-paper-plane"></i></span></button>
+            </div>
+        {{ form_end(resetForm) }}
+    </div>
+{% endblock %}

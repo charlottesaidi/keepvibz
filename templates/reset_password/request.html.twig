@@ -1,0 +1,33 @@
+{% extends 'auth-base.html.twig' %}
+
+{% block title %}Réinitialiser le mot de passe{% endblock %}
+
+{% block body %}
+    <div class="wrap">
+        <div>
+            <a class="reset-link" href="{{path('app_login')}}">Retour</a>
+        </div>
+        <div>
+            <h1>Mot de passe oublié ?</h1>
+        </div>
+        {% for flashError in app.flashes('reset_password_error') %}
+            <div class="error" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        {{ form_start(requestForm, {'attr': {'novalidate': 'novalidate'}}) }}
+            <div class="input-group">
+                <label for="registration_form_name">Email</label>
+                {{ form_widget(requestForm.email) }}
+            </div>
+            <div>
+                <small>
+                    Entrez votre adresse e-mail et nous vous enverrons un lien pour réinitialiser votre mot de passe.
+                </small>
+            </div>
+            
+            <div class="input-group">
+                <button class="btn-primary">Envoyer <span><i class="fas fa-paper-plane"></i></span></button>
+            </div>
+        {{ form_end(requestForm) }}
+    </div>
+{% endblock %}

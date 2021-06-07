@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use JasonGrimes\Paginator;
 
 #[Route('/admin/audio')]
 class AudioController extends AbstractController
@@ -16,8 +17,21 @@ class AudioController extends AbstractController
     #[Route('/', name: 'audio_index', methods: ['GET'])]
     public function index(AudioRepository $audioRepository): Response
     {
-        return $this->render('audio/index.html.twig', [
-            'audios' => $audioRepository->findAll(),
+        $totalItems = count($audioRepository->findAll());
+        $itemsPerPage = 10;
+        $currentPage = 1;
+        $urlPattern = '/admin/audio?page=(:num)';
+        $offset = 0;
+        if(!empty($_GET['page'])) {
+            $currentPage = $_GET['page'];
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+
+        return $this->render('admin/audio/index.html.twig', [
+            'audios' => $audioRepository->paginateAll($itemsPerPage, $offset),
+            'paginator' => $paginator
         ]);
     }
 
@@ -29,6 +43,7 @@ class AudioController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $audio->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($audio);
             $entityManager->flush();
@@ -36,7 +51,7 @@ class AudioController extends AbstractController
             return $this->redirectToRoute('audio_index');
         }
 
-        return $this->render('audio/new.html.twig', [
+        return $this->render('admin/audio/new.html.twig', [
             'audio' => $audio,
             'form' => $form->createView(),
         ]);
@@ -45,7 +60,7 @@ class AudioController extends AbstractController
     #[Route('/{id}', name: 'audio_show', methods: ['GET'])]
     public function show(Audio $audio): Response
     {
-        return $this->render('audio/show.html.twig', [
+        return $this->render('admin/audio/show.html.twig', [
             'audio' => $audio,
         ]);
     }
@@ -63,7 +78,7 @@ class AudioController extends AbstractController
             return $this->redirectToRoute('audio_index');
         }
 
-        return $this->render('audio/edit.html.twig', [
+        return $this->render('admin/audio/edit.html.twig', [
             'audio' => $audio,
             'form' => $form->createView(),
         ]);

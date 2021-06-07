@@ -19,6 +19,16 @@ class AudioRepository extends ServiceEntityRepository
         parent::__construct($registry, Audio::class);
     }
 
+    public function paginateAll($limit, $offset) {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.title', 'ASC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Audio[] Returns an array of Audio objects
     //  */

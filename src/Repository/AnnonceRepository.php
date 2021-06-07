@@ -19,6 +19,16 @@ class AnnonceRepository extends ServiceEntityRepository
         parent::__construct($registry, Annonce::class);
     }
 
+    public function paginateAll($limit, $offset) {
+        return $this->createQueryBuilder('a')
+            ->orderBy('a.title', 'ASC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Annonce[] Returns an array of Annonce objects
     //  */

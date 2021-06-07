@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <title>{% block title %}KeepVibz | Connexion{% endblock %}</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet">
+        {# Run `composer require symfony/webpack-encore-bundle`
+           and uncomment the following Encore helpers to start using Symfony UX #}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('auth') }}
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('auth') }} 
+        {% endblock %}
+    </head>
+    <body class="full-height">
+
+        <div class="auth">
+        
+            <main class="container">
+                {% block body %}{% endblock %}
+            </main>
+
+            <footer>
+                <div class="wrap">
+                    <p>© 2021 KeepVibz</p>
+                    <div>
+                        <a href="{{path('home')}}">
+                            <img src="{{asset('img/logo2Fichier_4_svg.svg')}}">
+                        </a>
+                    </div>
+                    <div class="social-nav">
+                        <ul>
+                            <li><a href=""><i class="fab fa-facebook"></i></a></li>
+                            <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
+                            <li><a href=""><i class="fab fa-instagram"></i></a></li>
+                            <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+
+        </div>
+
+    </body>
+</html>

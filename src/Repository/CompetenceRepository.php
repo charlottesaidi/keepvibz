@@ -19,6 +19,16 @@ class CompetenceRepository extends ServiceEntityRepository
         parent::__construct($registry, Competence::class);
     }
 
+    public function paginateAll($limit, $offset) {
+        return $this->createQueryBuilder('c')
+            ->orderBy('c.title', 'ASC')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Competence[] Returns an array of Competence objects
     //  */

@@ -1,26 +1,46 @@
-{% extends 'base.html.twig' %}
+{% extends 'auth-base.html.twig' %}
 
-{% block title %}Inscription{% endblock %}
+{% block title %}KeepVibz | Inscription{% endblock %}
 
 {% block body %}
-    {% for flashError in app.flashes('verify_email_error') %}
-        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
-    {% endfor %}
+    <div class="wrap">
+        <div>
+            <h1>Inscription</h1>
+        </div>
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="error" role="alert">{{ flashError }}</div>
+        {% endfor %} 
 
-    <h1>Inscription</h1>
-
-    {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_row(registrationForm.name, {
-            label: 'Nom d\'utilisateur'
-        }) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword.first, {
-            label: 'Mot de passe'
-        }) }}
-        {{ form_row(registrationForm.plainPassword.second, {
-            label: 'Confirmez le mot de passe'
-        }) }}
-
-        <button type="submit" class="btn">S'incrire</button>
-    {{ form_end(registrationForm) }}
+        {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+            
+            <div class="input-group">
+                <label for="registration_form_name"><span><i class="fas fa-user-tag"></i></span> Nom d'utilisateur</label>
+                {{ form_widget(registrationForm.name)}}
+                {{ form_errors(registrationForm.name)}}
+            </div>
+            <div class="input-group">
+                <label for="registration_form_name"><span><i class="fas fa-envelope"></i></span> Adresse e-mail</label>
+                {{ form_widget(registrationForm.email) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+            <div class="pass-group">
+                <div class="input-group">
+                    <label for="registration_form_name"><span><i class="fas fa-unlock-alt"></i></span> Mot de passe</label>
+                    {{ form_widget(registrationForm.plainPassword.first) }}
+                </div>
+                <div class="input-group">
+                    <label for="registration_form_name"><span><i class="fas fa-check"></i></span> Confirmer le mot de passe</label>
+                    {{ form_widget(registrationForm.plainPassword.second) }}
+                </div>
+            </div>
+                    {{ form_errors(registrationForm.plainPassword.first) }}
+                    {{ form_errors(registrationForm.plainPassword.second) }}
+            <div class="input-group">
+                <button type="submit" class="btn-primary">S'incrire <span><i class="fas fa-paper-plane"></i></span></button>
+            </div>
+            <div class="input-group">
+                <p>Vous avez déjà un compte ? <a href="{{path('app_login')}}">Connectez-vous</a>.</p>
+            </div>
+        {{ form_end(registrationForm) }}
+    </div>
 {% endblock %}

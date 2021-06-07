@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use JasonGrimes\Paginator;
 
 #[Route('/admin/region')]
 class RegionController extends AbstractController
@@ -16,8 +17,20 @@ class RegionController extends AbstractController
     #[Route('/', name: 'region_index', methods: ['GET'])]
     public function index(RegionRepository $regionRepository): Response
     {
-        return $this->render('region/index.html.twig', [
-            'regions' => $regionRepository->findAll(),
+        $totalItems = count($regionRepository->findAll());
+        $itemsPerPage = 10;
+        $currentPage = 1;
+        $urlPattern = '/admin/region?page=(:num)';
+        $offset = 0;
+        if(!empty($_GET['page'])) {
+            $currentPage = $_GET['page'];
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+        return $this->render('admin/region/index.html.twig', [
+            'regions' => $regionRepository->paginateAll($itemsPerPage, $offset),
+            'paginator' => $paginator
         ]);
     }
 
@@ -36,7 +49,7 @@ class RegionController extends AbstractController
             return $this->redirectToRoute('region_index');
         }
 
-        return $this->render('region/new.html.twig', [
+        return $this->render('admin/region/new.html.twig', [
             'region' => $region,
             'form' => $form->createView(),
         ]);
@@ -45,7 +58,7 @@ class RegionController extends AbstractController
     #[Route('/{id}', name: 'region_show', methods: ['GET'])]
     public function show(Region $region): Response
     {
-        return $this->render('region/show.html.twig', [
+        return $this->render('admin/region/show.html.twig', [
             'region' => $region,
         ]);
     }
@@ -63,7 +76,7 @@ class RegionController extends AbstractController
             return $this->redirectToRoute('region_index');
         }
 
-        return $this->render('region/edit.html.twig', [
+        return $this->render('admin/region/edit.html.twig', [
             'region' => $region,
             'form' => $form->createView(),
         ]);

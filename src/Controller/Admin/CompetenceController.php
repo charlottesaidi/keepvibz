@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use JasonGrimes\Paginator;
 
 #[Route('/admin/competence')]
 class CompetenceController extends AbstractController
@@ -16,8 +17,20 @@ class CompetenceController extends AbstractController
     #[Route('/', name: 'competence_index', methods: ['GET'])]
     public function index(CompetenceRepository $competenceRepository): Response
     {
-        return $this->render('competence/index.html.twig', [
-            'competences' => $competenceRepository->findAll(),
+        $totalItems = count($competenceRepository->findAll());
+        $itemsPerPage = 10;
+        $currentPage = 1;
+        $urlPattern = '/admin/annonce?page=(:num)';
+        $offset = 0;
+        if(!empty($_GET['page'])) {
+            $currentPage = $_GET['page'];
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+        return $this->render('admin/competence/index.html.twig', [
+            'competences' => $competenceRepository->paginateAll($itemsPerPage, $offset),
+            'paginator' => $paginator
         ]);
     }
 
@@ -36,7 +49,7 @@ class CompetenceController extends AbstractController
             return $this->redirectToRoute('competence_index');
         }
 
-        return $this->render('competence/new.html.twig', [
+        return $this->render('admin/competence/new.html.twig', [
             'competence' => $competence,
             'form' => $form->createView(),
         ]);
@@ -45,7 +58,7 @@ class CompetenceController extends AbstractController
     #[Route('/{id}', name: 'competence_show', methods: ['GET'])]
     public function show(Competence $competence): Response
     {
-        return $this->render('competence/show.html.twig', [
+        return $this->render('admin/competence/show.html.twig', [
             'competence' => $competence,
         ]);
     }
@@ -63,7 +76,7 @@ class CompetenceController extends AbstractController
             return $this->redirectToRoute('competence_index');
         }
 
-        return $this->render('competence/edit.html.twig', [
+        return $this->render('admin/competence/edit.html.twig', [
             'competence' => $competence,
             'form' => $form->createView(),
         ]);

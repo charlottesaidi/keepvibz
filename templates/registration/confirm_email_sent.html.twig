@@ -1,0 +1,12 @@
+{% extends 'auth-base.html.twig' %}
+
+{% block title %}Inscription prise en compte }}{% endblock %}
+
+{% block body %}
+    <div class="wrap">
+        <div class="container">
+            <p>Un e-mail vous a été envoyé. Cliquez sur le lien fourni pour finaliser votre inscription.</p>
+            <p>Si vous ne recevez pas cet e-mail, vérifiez vos spam ou <a class="reset-link" href="{{ path('app_register') }}">essayez à nouveau</a>.
+        </div>
+    </div>
+{% endblock %}

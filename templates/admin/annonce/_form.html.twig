@@ -1,0 +1,21 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}    
+    <div class="mb-3">
+        {{ form_row(form.title)}}
+    </div>     
+    <div class="mb-3">
+        {{ form_row(form.region)}}
+    </div>     
+    <div class="mb-3">
+        {{ form_row(form.categories)}}
+    </div>  
+    <div class="mb-3">
+        {{ form_row(form.description)}}
+    </div>
+    <div class="mb-3">
+        {{ form_widget(form.status)}}
+        {{ form_errors(form.status)}}
+    </div>
+    <div class="mb-3">
+        <button class="btn app-btn-primary">{{ button_label|default('Valider') }}</button>
+    </div>
+{{ form_end(form) }}

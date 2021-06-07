@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use JasonGrimes\Paginator;
 
 #[Route('/admin/annonce')]
 class AnnonceController extends AbstractController
@@ -16,8 +17,21 @@ class AnnonceController extends AbstractController
     #[Route('/', name: 'annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
     {
-        return $this->render('annonce/index.html.twig', [
-            'annonces' => $annonceRepository->findAll(),
+        $totalItems = count($annonceRepository->findAll());
+        $itemsPerPage = 10;
+        $currentPage = 1;
+        $urlPattern = '/admin/annonce?page=(:num)';
+        $offset = 0;
+        if(!empty($_GET['page'])) {
+            $currentPage = $_GET['page'];
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+
+        return $this->render('admin/annonce/index.html.twig', [
+            'annonces' => $annonceRepository->paginateAll($itemsPerPage, $offset),
+            'paginator' => $paginator
         ]);
     }
 
@@ -29,6 +43,7 @@ class AnnonceController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $annonce->setUser($this->getUser());
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($annonce);
             $entityManager->flush();
@@ -36,7 +51,7 @@ class AnnonceController extends AbstractController
             return $this->redirectToRoute('annonce_index');
         }
 
-        return $this->render('annonce/new.html.twig', [
+        return $this->render('admin/annonce/new.html.twig', [
             'annonce' => $annonce,
             'form' => $form->createView(),
         ]);
@@ -45,7 +60,7 @@ class AnnonceController extends AbstractController
     #[Route('/{id}', name: 'annonce_show', methods: ['GET'])]
     public function show(Annonce $annonce): Response
     {
-        return $this->render('annonce/show.html.twig', [
+        return $this->render('admin/annonce/show.html.twig', [
             'annonce' => $annonce,
         ]);
     }
@@ -63,7 +78,7 @@ class AnnonceController extends AbstractController
             return $this->redirectToRoute('annonce_index');
         }
 
-        return $this->render('annonce/edit.html.twig', [
+        return $this->render('admin/annonce/edit.html.twig', [
             'annonce' => $annonce,
             'form' => $form->createView(),
         ]);

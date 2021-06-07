@@ -1,0 +1,12 @@
+{% extends 'auth-base.html.twig' %}
+
+{% block title %}Réinitialiser le mot de passe{% endblock %}
+
+{% block body %}
+    <div class="wrap">
+        <div class="container">
+            <p>Un e-mail vous a été envoyé. Cliquez sur le lien fourni pour réinitialiser votre mot de passe.</p>
+            <p>Si vous ne recevez pas cet e-mail, vérifiez vos spam ou <a class="reset-link" href="{{ path('app_forgot_password_request') }}">essayez à nouveau</a>.
+        </div>
+    </div>
+    {% endblock %}

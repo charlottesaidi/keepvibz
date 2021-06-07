@@ -29,6 +29,13 @@ class AnnonceRepository extends ServiceEntityRepository
         ;
     }
 
+    public function paginateCount() {
+        return $this->createQueryBuilder('a')
+            ->select('count(a.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Annonce[] Returns an array of Annonce objects
     //  */

@@ -17,7 +17,7 @@ class TexteController extends AbstractController
     #[Route('/', name: 'texte_index', methods: ['GET'])]
     public function index(TexteRepository $texteRepository): Response
     {
-        $totalItems = count($texteRepository->findAll());
+        $totalItems = $texteRepository->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
         $urlPattern = '/admin/texte?page=(:num)';

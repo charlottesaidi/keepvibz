@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AudioRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AudioRepository::class)
@@ -18,21 +19,37 @@ class Audio
     private $id;
     
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="json")
      */
     private $type = [];
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $file;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="text")
      */
     private $description;

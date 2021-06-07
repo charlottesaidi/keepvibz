@@ -29,6 +29,13 @@ class AudioRepository extends ServiceEntityRepository
         ;
     }
 
+    public function paginateCount() {
+        return $this->createQueryBuilder('a')
+            ->select('count(a.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Audio[] Returns an array of Audio objects
     //  */

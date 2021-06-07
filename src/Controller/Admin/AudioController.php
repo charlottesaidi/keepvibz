@@ -17,7 +17,7 @@ class AudioController extends AbstractController
     #[Route('/', name: 'audio_index', methods: ['GET'])]
     public function index(AudioRepository $audioRepository): Response
     {
-        $totalItems = count($audioRepository->findAll());
+        $totalItems = $audioRepository->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
         $urlPattern = '/admin/audio?page=(:num)';

@@ -18,7 +18,7 @@ class AvatarController extends AbstractController
     #[Route('/', name: 'avatar_index', methods: ['GET'])]
     public function index(AvatarRepository $avatarRepository): Response
     {
-        $totalItems = count($avatarRepository->findAll());
+        $totalItems = $avatarRepository->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
         $urlPattern = '/admin/avatar?page=(:num)';

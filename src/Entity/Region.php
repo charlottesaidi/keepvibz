@@ -6,6 +6,7 @@ use App\Repository\RegionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=RegionRepository::class)
@@ -20,6 +21,13 @@ class Region
     private $id;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="string", length=25)
      */
     private $title;

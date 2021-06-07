@@ -22,7 +22,7 @@ class Annonce
 
     /**
      * @Assert\NotBlank
-     *  @Assert\Length(
+     * @Assert\Length(
      *      min = 2,
      *      max = 50,
      *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",

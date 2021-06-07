@@ -29,6 +29,13 @@ class TexteRepository extends ServiceEntityRepository
         ;
     }
 
+    public function paginateCount() {
+        return $this->createQueryBuilder('t')
+            ->select('count(t.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Texte[] Returns an array of Texte objects
     //  */

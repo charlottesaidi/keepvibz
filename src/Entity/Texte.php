@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\TexteRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=TexteRepository::class)
@@ -18,21 +19,43 @@ class Texte
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string")
      */
     private $status;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 255,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="text")
      */
     private $content;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 50,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="string", length="50")
      */
     private $type;

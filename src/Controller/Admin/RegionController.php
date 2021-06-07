@@ -17,7 +17,7 @@ class RegionController extends AbstractController
     #[Route('/', name: 'region_index', methods: ['GET'])]
     public function index(RegionRepository $regionRepository): Response
     {
-        $totalItems = count($regionRepository->findAll());
+        $totalItems = $regionRepository->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
         $urlPattern = '/admin/region?page=(:num)';

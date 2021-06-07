@@ -17,8 +17,8 @@ class AnnonceController extends AbstractController
     #[Route('/', name: 'annonce_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
     {
-        $totalItems = count($annonceRepository->findAll());
-        $itemsPerPage = 10;
+        $totalItems = $annonceRepository->paginateCount();
+        $itemsPerPage = 5;
         $currentPage = 1;
         $urlPattern = '/admin/annonce?page=(:num)';
         $offset = 0;

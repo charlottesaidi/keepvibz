@@ -29,6 +29,13 @@ class CompetenceRepository extends ServiceEntityRepository
         ;
     }
 
+    public function paginateCount() {
+        return $this->createQueryBuilder('c')
+            ->select('count(c.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Competence[] Returns an array of Competence objects
     //  */

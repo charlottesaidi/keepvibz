@@ -29,6 +29,13 @@ class RegionRepository extends ServiceEntityRepository
         ;
     }
 
+    public function paginateCount() {
+        return $this->createQueryBuilder('r')
+            ->select('count(r.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
     // /**
     //  * @return Region[] Returns an array of Region objects
     //  */

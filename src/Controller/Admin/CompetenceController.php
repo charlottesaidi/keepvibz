@@ -17,7 +17,7 @@ class CompetenceController extends AbstractController
     #[Route('/', name: 'competence_index', methods: ['GET'])]
     public function index(CompetenceRepository $competenceRepository): Response
     {
-        $totalItems = count($competenceRepository->findAll());
+        $totalItems = $competenceRepository->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
         $urlPattern = '/admin/annonce?page=(:num)';

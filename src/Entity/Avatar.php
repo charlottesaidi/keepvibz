@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AvatarRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=AvatarRepository::class)
@@ -18,6 +19,7 @@ class Avatar
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $file;

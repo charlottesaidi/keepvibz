@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Un compte existe déjà avec cette adresse e-mail")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -26,6 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -37,11 +38,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 6,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     * )
      * @ORM\Column(type="string")
      */
     private $password;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 2,
+     *      max = 100,
+     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     * )
      * @ORM\Column(type="string", length=50)
      */
     private $name;
@@ -52,6 +65,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $town;
 
     /**
+     * @Assert\Length(
+     *      min = 10,
+     *      max = 10,
+     *      minMessage = "Renseignez un numéro de téléphone valide",
+     *      maxMessage = "Renseignez un numéro de téléphone valide"
+     * )
+     * @Assert\Regex(pattern="/^([123]0|[012][1-9]|31)\/(0[1-9]|1[012])\/(19[0-9]{2}|2[0-9]{3})$/", message="Renseignez un numéro de téléphone valide")
      * @ORM\Column(type="string", nullable=true)
      */
     private $phone;

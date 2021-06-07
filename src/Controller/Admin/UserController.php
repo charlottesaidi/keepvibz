@@ -20,7 +20,7 @@ class UserController extends AbstractController
     #[Route('/', name: 'user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        $totalItems = count($userRepository->findAll());
+        $totalItems = $userRepository->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
         $urlPattern = '/admin/user?page=(:num)';

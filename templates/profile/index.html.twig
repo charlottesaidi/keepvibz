@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user-profile') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('user-profile') }}
+{% endblock %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+
+    <div class="main">
+        <div class="side-nav">
+            <nav>
+                <ul>
+                    <li>
+                        <button href="#!" class="tablinks" id="prof-link">Profil</button>
+                    </li>
+                    <li>
+                        <button href="#!" class="tablinks" id="contrib-link">Contributions</button>
+                    </li>
+                    <li>
+                        <button href="#!" class="tablinks" id="fav-link">Favoris</button>
+                    </li>
+                    <li>
+                        <button href="#!" class="tablinks" id="mess-link">Messagerie</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container">
+            <div id="profil" class="tabcontent" style="display: block">
+                <h2>Profil</h2>
+                <div class="user-block">
+                    <div class="title-block">
+                        <h3></h3>
+                        <p> {{app.user.name}} </p>
+                    </div>
+                </div>
+            </div>
+            <div id="contributions" class="tabcontent" style="display: none">
+                <h2>Contributions</h2>
+            </div>
+            <div id="favoris" class="tabcontent" style="display: none">
+                <h2>Favoris</h2>
+            </div>
+            <div id="messagerie" class="tabcontent" style="display: none">
+                <h2>Messagerie</h2>
+            </div>  
+        </div>
+    </div>
+
+{% endblock %}

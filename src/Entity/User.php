@@ -27,6 +27,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "Adresse e-mail invalide"
+     * )
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
@@ -41,7 +44,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 6,
-     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
+     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
      * )
      * @ORM\Column(type="string")
      */
@@ -52,8 +55,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Length(
      *      min = 2,
      *      max = 100,
-     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
-     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Ce champ doit comporter {{ limit }} caractères au maximum"
      * )
      * @ORM\Column(type="string", length=50)
      */

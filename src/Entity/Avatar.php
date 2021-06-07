@@ -20,6 +20,10 @@ class Avatar
 
     /**
      * @Assert\NotBlank
+     * @Assert\Image(
+     *     allowLandscape = false,
+     *     allowPortrait = true,
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $file;

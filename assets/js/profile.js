@@ -39,7 +39,6 @@ document.querySelector('#mess-link').addEventListener('click', (e) => {
 */
 document.querySelector('#name-button').addEventListener('click', (e) => {
     openSection(e, 'edit-name', 'formsection', 'formbuttons');
-    this.style.display = 'none';
 })
 document.querySelector('#avatar-button').addEventListener('click', (e) => {
     openSection(e, 'edit-avatar', 'formsection', 'formbuttons')

@@ -93,22 +93,6 @@ class UserController extends AbstractController
                     )
                 );
             }
-            // avatar
-            if ($avatar->getFile() !== null) {
-                $file = $form->get('file')->getData();
-                $fileName =  uniqid(). '.' .$file->guessExtension();
-                try {
-                    $file->move(
-                        $this->getParameter('images_directory'), // Le dossier dans lequel le fichier va etre chargé
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    return new Response($e->getMessage());
-                }
-            
-            $avatar->setUser($this->getUser());
-            $avatar->setFile($fileName);
-            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('user_index');

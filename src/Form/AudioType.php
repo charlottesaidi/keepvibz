@@ -19,8 +19,10 @@ class AudioType extends AbstractType
             ->add('type', ChoiceType::class, [
                 'label' => 'Genre',
                 'choices'  => [
-                    'Rap' => 'rap',
                     'Hip-Hop' => 'hip_hop',
+                    'Trap' => 'trap',
+                    'R\'n\'B' => 'R\'n\'B',
+                    'Pop' => 'Pop',
                 ],
                 'multiple' => true,
                 'expanded' => true,

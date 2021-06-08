@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+<style>body {color: #fff}</style>
+    <div class="main">
+        <div class="container">
+            {% for annonce in annonces %}
+            <div>
+                <div>
+                    <div>
+                        <h2> {{annonce.title}} </h2>
+                        <p> {{annonce.user.name}} </p>
+                    </div>
+                    <div>
+                        <p> {{ annonce.createdAt ? annonce.createdAt|date('d/m/Y') : '' }} </p>
+                        <p> {{ annonce.createdAt ? annonce.modifiedAt|date('H:i') : '' }} </p>
+                    </div>
+                </div>
+                <div>
+                    <p> {{annonce.region.title}} </p>
+                    <p> {{annonce.description}} </p>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <div>
+                        <h2> Me contacter </h2>
+                    </div>
+                    <div>
+                        <p> {{annonce.user.email}} </p>
+                    </div>
+                </div>
+                <div>
+                    {% if annonce.user.phone %}
+                        <button>Téléphone</button>
+                        <p> {{annonce.user.phone}} </p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            
+            {{include('pagination.html.twig')}}
+        </div>
+    </div>
+
+{% endblock %}

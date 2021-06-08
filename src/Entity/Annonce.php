@@ -83,8 +83,6 @@ class Annonce
     public function __construct()
     {
         $this -> created_at = new \DateTime();
-        $this -> modified_at = new \DateTime();
-        $this -> deleted_at = new \DateTime();
         $this->categories = new ArrayCollection();
     }
 

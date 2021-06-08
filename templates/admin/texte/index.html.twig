@@ -47,7 +47,6 @@
                                                 <th class="cell">Référence</th>
                                                 <th class="cell">Titre</th>
                                                 <th class="cell">Auteur</th>
-                                                <th class="cell">Type</th>
                                                 <th class="cell">Status</th>
                                                 <th class="cell">Date de publication</th>
                                                 <th class="cell">Dernière modification</th>
@@ -60,7 +59,6 @@
                                                 <td class="cell">#{{ texte.id }}</td>
                                                 <td class="cell">{{ texte.title }}</td>
                                                 <td class="cell">{{ texte.user.name }}</td>
-                                                <td class="cell">{{ texte.type }}</td>
                                                 <td class="cell">
                                                     {% if 'published' in texte.status %}
                                                         <span class="badge bg-success">Publié</span>
@@ -76,7 +74,8 @@
                                                     <span class="cell-data">{{ texte.createdAt ? texte.createdAt|date('d/m/Y') : '' }}</span>
                                                     <span class="note">{{ texte.createdAt ? texte.createdAt|date('H:i') : '' }}</span>
                                                 </td>
-                                                <td class="cell"><span class="cell-data">{{ texte.modifiedAt ? texte.modifiedAt|date('d/m/Y') : '' }}</span>
+                                                <td class="cell">
+                                                    <span class="cell-data">{{ texte.modifiedAt ? texte.modifiedAt|date('d/m/Y') : '' }}</span>
                                                     <span class="note">{{ texte.modifiedAt ? texte.modifiedAt|date('H:i') : '' }}</span>
                                                 </td>
                                                 <td class="cell">

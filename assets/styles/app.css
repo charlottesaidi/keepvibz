@@ -217,8 +217,8 @@ a{color: #fff;}
 .navigation li a:hover{padding-bottom: 5px ;border-bottom: 2px solid #A27440}
 .right{margin-top: 30px;}
 .right :first-child:hover{padding-bottom: 5px ;border-bottom: 2px solid #A27440}
-.right :nth-child(2){border: 1px solid transparent; margin-left: 20px; background-color: #A27440; padding: 10px; border-radius: 4px;}
-.right :nth-child(2):hover{background-color: transparent; color:#A27440; border: 1px solid #fff; }
+.right .link_connexion{border: 1px solid transparent; margin-left: 20px; background-color: #A27440; padding: 10px; border-radius: 4px;}
+.right .link_connexion:hover{background-color: transparent; color:#A27440; border: 1px solid #fff; }
 .wrap2{max-width: 1300px; width: 100%; margin: 0 auto 20px auto;padding: 0 20px;}
 .search{position: relative;}
 .icon_search{

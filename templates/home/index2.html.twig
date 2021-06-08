@@ -1,4 +1,173 @@
 {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    {# SECTION 1 #}
+    <section id="section_1" class="section_1">
+        <div class="background">
+            <img class="gif_background" src="assets/images/background/fond_projet.gif" alt="image animé en fond d'ecran pr">
+            <div class="gradient"></div>
+        </div>
+            {# PLAYER #}
+            <div class="block_player tchv">
+                <div class="content_player">
+                    <h2 class="accroche">"Ensemble </br><span>on est plus fort !</span>"</h2>
+                    <h1 class="site_name">KeepVibz</h1>
+                    <h2 class="latest_upload">Derniers uploads</h2>
+                    <audio preload controls autoplay>
+                        <source src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" type="audio/mpeg">
+                    </audio>
+                    <h3 class="title_player">Titre (Artiste - BPM)</h3>
+                </div>
+            </div>
+    </section>
+    {# FIN SECTION 1 #}
+
+    {# SECTION 2 #}
+    <section id="section_2" class="section_2">
+        <div class="wrap4">
+            <h2 id="most_popular" class="most_downloads">Les plus populaires</h2>
+                <div class="flexslider carousel">
+                {# CUSTOM NAVIGATION #}
+                <div class="custom-navigation">
+                    <div class="paginate_button flex jcfe">
+                            <a href=""><img src="/assets/images/icons/arrow-92-64.png" alt="icône de navigation (précédent)"></a>
+                            <a href=""><img src="/assets/images/icons/arrow-28-64.png" alt="icône de navigation (suivant)"></a>
+                    </div>
+                </div>
+                {# CUSTOM NAVIGATION #}
+                    <ul class="slides">
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="">
+                                    <img class="img_downloaded" src="assets\images\unnamed.jpg" alt="">
+                                </a>
+                            </div>
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </li>
+                    </ul>
+                </div>
+        </div>
+    </section>
+    {# FIN SECTION 2 #}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
 
 {% block title %}Hello HomeController!{% endblock %}
 

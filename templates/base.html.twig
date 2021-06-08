@@ -16,11 +16,20 @@
         {% endblock %}
     </head>
     <body>
+        {# PAGE DE CHARGEMENT #}
         <div class="chargement">
             <div class="logo_chargement pa tchv">
                 <a href="/"><img class="img_logo_chargement" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
+            <div id="preloader">
+                <div class="logo_chargement pa">
+                    <img class="img_logo_chargement" src="img/logo2Fichier_4_svg.svg" alt="logo">
+                </div>
+                <div class="loader">Please wait...</div>
             </div>
         </div>
+        {# PAGE DE CHARGEMENT #}
+
+        {# HEADER #}
         <header id="header" class="header">
             <h1 class="site">KeepVibz</h1>
             <div class="wrap1 flex sb">
@@ -64,6 +73,7 @@
                 </div>
             </div>
         </header>
+        {# HEADER #}
         {% block body %}
         {% endblock %}
     <footer>
@@ -79,3 +89,86 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
     </body>
 </html>
+
+        {% endblock %}
+        {# SECTION FIXE AVANT FOOTER #}
+        <section class="bottom flex aic wrap">
+            <div class="wrap4 flex wrap sb">
+                <div class="left_bottom flex col aic">
+                    <a class="link_img_logo_bottom" href="/"><img class="img_logo_bottom" src="img/logo2Fichier_4_svg.svg" alt="logo"></a>
+                    <div class="block_social_icons flex sb wrap">
+                        <a href="#" class="social_icon"><img src="assets/images/icons/social_blanc/facebook-3-64.png" alt="icone facebook"></a>
+                        <a href="#" class="social_icon"><img src="assets/images/icons/social_blanc/instagram-3-64.png" alt="icone instagram"></a>
+                        <a href="#" class="social_icon"><img src="assets/images/icons/social_blanc/facebook-3-64.png" alt="icone linkedin"></a>
+                        <a href="#" class="social_icon"><img src="assets/images/icons/social_blanc/twitter-3-64.png" alt="icone twitter"></a>
+                    </div>
+                </div>
+                    <div class="center1 flex col">
+                        <h4 class="title_bottom">Keepvibz</h4>
+                        <ul class="nav_bottom">
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="#">Mentions légales</a></li>
+                            <li><a href="#">F.A.Q.</a></li>
+                            <li><a href="#">Discord</a></li>
+                        </ul>
+                    </div>
+                    <div class="center2 flex col">
+                        <h4 class="title_bottom">Explorer</h4>
+                        <ul class="nav_bottom">
+                            <li><a href="#">Toutes les instrus</a></li>
+                            <li><a href="#">Toutes les Toplines</a></li>
+                            <li><a href="#">Tous les textes</a></li>
+                            <li><a href="#most_popular">Les plus populaires</a></li>
+                            <li><a href="#">Trouvez un studio</a></li>
+                            <li><a href="#">Recherchez des collaborateurs </a></li>
+                        </ul>
+                    </div>
+                <div class="right_bottom flex col">
+                    <h4 class="title_bottom">Statistiques</h4>
+                    <div class="block_statistiques flex sb wrap">
+                        <div class="left_block_statistiques flex col">
+                            <div class="left1 flex col">
+                                <h5 class="visites">Visites</h5>
+                                <p class="number">0</p>
+                            </div>
+                            <div class="left2 flex col">
+                                <h5 class="posts">Posts</h5>
+                                <p class="number">0</p>
+                            </div>
+                        </div>
+                        <div class="right_block_statistiques flex col">
+                            <div class="right1 flex col">
+                                <h5 class="membres">Membres</h5>
+                                <p class="number">0</p>
+                            </div>
+                            <div class="right2 flex col">
+                                <h5 class="en_ligne">En ligne</h5>
+                                <p class="number">0</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        {# SECTION FIXE AVANT FOOTER #}
+
+        {# FOOTER #}
+        <footer>
+            <div id="footer" class="footer flex aic sb">
+                <div class="wrap4 flex wrap jcc">
+                    <p class="copyright" style="color: #fff">© 2021 KeepVibz</p>
+                    
+                </div>
+            </div>
+        </footer>
+        {# FOOTER #}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+    </body>
+</html>
+
+
+
+
+
+

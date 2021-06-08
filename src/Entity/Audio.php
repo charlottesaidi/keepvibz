@@ -23,8 +23,8 @@ class Audio
      * @Assert\Length(
      *      min = 2,
      *      max = 100,
-     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
-     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Ce champ doit comporter {{ limit }} caractères au maximum"
      * )
      * @ORM\Column(type="string", length=255)
      */
@@ -38,6 +38,11 @@ class Audio
 
     /**
      * @Assert\NotBlank
+     * @Assert\File(
+     *    maxSize = "10000k",
+     *    mimeTypes = {"application/mp3", "application/wma", "application/flac", "application/flac"},
+     *    mimeTypesMessage = "Type de fichier non valide"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $file;
@@ -47,8 +52,8 @@ class Audio
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
-     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
-     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Ce champ doit comporter {{ limit }} caractères au maximum"
      * )
      * @ORM\Column(type="text")
      */

@@ -18,6 +18,8 @@
     <body>
         {# PAGE DE CHARGEMENT #}
         <div class="chargement">
+            <div class="logo_chargement pa tchv">
+                <a href="/"><img class="img_logo_chargement" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
             <div id="preloader">
                 <div class="logo_chargement pa">
                     <img class="img_logo_chargement" src="img/logo2Fichier_4_svg.svg" alt="logo">
@@ -33,7 +35,7 @@
             <div class="wrap1 flex sb">
                 <div class="left flex">
                     <div class="logo">
-                        <a href="/"><img class="img_logo" src="img/logo2Fichier_4_svg.svg" alt="logo"></a>
+                        <a href="/"><img class="img_logo" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
                     </div>
                     <nav class="navigation">
                         <ul class="nav flex">
@@ -44,10 +46,11 @@
                 </div>
                 <div class="right">
                 {% if app.user %}
-                        <a href="">Profil</a>
+                        <a href="{{ path ('user_profile') }}">Profil</a>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <span><a href="{{ path ('admin_dashboard') }}">Admin</a></span>
+                            <a href="{{ path ('admin_dashboard') }}">Admin</a>
                         {% endif %}
+                        <a href="{{ path ('app_logout') }}">Déconnexion</a>
                     {% else %}
                         <a href="{{ path ('app_register') }}">Inscription</a>
                         <a href="{{ path ('app_login') }}">Connexion</a>
@@ -56,10 +59,10 @@
             </div>
             <div class="wrap2 flex fs">
                 <div class="search flex fs">
-                    <img class="icon_search" src="assets/images/icons/icon_search.svg" alt="icon search">
+                    <img class="icon_search" src="{{asset('assets/images/icons/icon_search.svg')}}" alt="icon search">
                     <input type="search" name="search" id="search" placeholder="Tapes ta recherche">
                     <button class="btn_search">Filtres</button>
-                    <img class="icon_arrow" src="assets/images/icons/arrow-204-64.png" alt="icon arrow">
+                    <img class="icon_arrow" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="icon arrow">
                     <div class="block_filters">
                         <ul class="filters">
                             <li class="filter">Audios</li>
@@ -72,6 +75,20 @@
         </header>
         {# HEADER #}
         {% block body %}
+        {% endblock %}
+    <footer>
+        <div id="footer" class="footer flex aic sb">
+            <p class="copyright" style="color: #fff">© 2021 KeepVibz</p>
+            <ul class="nav_footer flex">
+                <li><a href="#">Link 1</a></li>
+                <li><a href="#">Link 2</a></li>
+                <li><a href="#">Link 3</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+    </body>
+</html>
 
         {% endblock %}
         {# SECTION FIXE AVANT FOOTER #}

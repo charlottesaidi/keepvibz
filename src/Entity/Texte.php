@@ -29,8 +29,8 @@ class Texte
      * @Assert\Length(
      *      min = 2,
      *      max = 100,
-     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
-     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Ce champ doit comporter {{ limit }} caractères au maximum"
      * )
      * @ORM\Column(type="string", length=255)
      */
@@ -40,9 +40,7 @@ class Texte
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 2,
-     *      max = 255,
-     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
-     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
      * )
      * @ORM\Column(type="text")
      */
@@ -52,9 +50,8 @@ class Texte
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 2,
-     *      max = 50,
-     *      minMessage = "Le titre doit comporter {{ limit }} caractères au minimum",
-     *      maxMessage = "Le titre doit comporter {{ limit }} caractères au maximum"
+     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
+     *      maxMessage = "Ce champ doit comporter {{ limit }} caractères au maximum"
      * )
      * @ORM\Column(type="string", length="50")
      */

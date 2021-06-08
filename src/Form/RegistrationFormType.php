@@ -42,19 +42,7 @@ class RegistrationFormType extends AbstractType
                 'second_options' => ['label' => 'Confirmer le mot de passe'],
                 'invalid_message' => 'Les mots de passe ne correspondent pas.'
             ])
-            ->add('name', TextType::class, [
-                'constraints' => [
-                    new NotBlank([
-                        'message' => 'Ce champ doit être renseigné',
-                    ]),
-                    new Length([
-                        'min' => 2,
-                        'max' => 50,
-                        'minMessage' => 'Ce champ doit contenir au moins {{ limit }} caractères.',
-                        'maxMessage' => 'Ce champ ne peut contenir plus de {{ limit }} caractères.',
-                    ]),
-                ],
-            ])
+            ->add('name')
         ;
     }
 

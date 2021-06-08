@@ -8,8 +8,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
-// use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -52,13 +50,6 @@ class UserType extends AbstractType
             ->add('name', TextType::class, [
                 'label' => 'Nom d\'utilisateur'
             ])
-            // ->add('phone', TelType::class, [
-            //     'label' => 'numéro de téléphone'
-            // ])
-            ->add('avatar', FileType::class, [
-                'required' => false,
-                'data_class' => null
-                ])
             ->add('actif', ChoiceType::class, [
                 'label' => 'Actif ?',
                 'choices'  => [

@@ -62,6 +62,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $name;
 
+    // /**
+    //  * @Assert\Length(
+    //  *      min = 2,
+    //  *      max = 255,
+    //  *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
+    //  *      maxMessage = "Ce champ doit comporter {{ limit }} caractères au maximum"
+    //  * )
+    //  * @ORM\Column(type="text", nullable=true)
+    //  */
+    // private $description;
+
     /**
      * @ORM\Column(type="string", nullable=true)
      */
@@ -160,6 +171,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return (string) $this->email;
     }
+
+    // public function getDescription(): ?string
+    // {
+    //     return $this->description;
+    // }
+
+    // public function setDescription(string $description): self
+    // {
+    //     $this->description = $description;
+
+    //     return $this;
+    // }
 
     /**
      * @see UserInterface

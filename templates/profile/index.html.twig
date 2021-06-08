@@ -38,21 +38,182 @@
             <div id="profil" class="tabcontent" style="display: block">
                 <h2>Profil</h2>
                 <div class="user-block">
-                    <div class="title-block">
-                        <h3></h3>
-                        <p> {{app.user.name}} </p>
+                            <h3>Pseudonyme</h3>
+                    <div class="attr-block name">
+                        <div class="title-block">
+                            <p> {{app.user.name}} </p>
+                        </div>
+                        <div class="edit-button">
+                            <button class="btn-secondary formbuttons"  id="name-button">Modifier</button>
+                        </div>
+                        <div class="edit-block formsection" id="edit-name">
+                            <form action="{{path('user_profile_edit')}}" method="post">
+                                <div class="input-group">
+                                    <label for="name">Nom d'utilisateur</label>
+                                    <input type="text" id="name" name="name">
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                            <h3>Photo de profil</h3>
+                    <div class="attr-block avatar">
+                        <div class="title-block">
+                            {% if app.user.avatar %}
+                                    <p> <img src="{# dossier uploads/ => app.user.avatar.file #}"> </p> 
+                                {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="edit-button">
+                            <button class="btn-secondary formbuttons"  id="avatar-button">Modifier</button>
+                        </div>
+                        <div class="edit-block formsection" id="edit-avatar">
+                            <form action="{{path('user_profile_edit')}}" method="post">
+                                <div class="input-group">
+                                    <label for="avatar">Photo de profil</label>
+                                    <input type="file" id="avatar" name="avatar">
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                            <h3>Adresse e-mail</h3>
+                    <div class="attr-block email">
+                        <div class="title-block">
+                            <p> {{app.user.email}} </p>
+                        </div>
+                        <div class="edit-button">
+                            <button class="btn-secondary formbuttons"  id="email-button">Modifier</button>
+                        </div>
+                        <div class="edit-block formsection" id="edit-email">
+                            <form action="{{path('user_profile_edit')}}" method="post">
+                                <div class="input-group">
+                                    <label for="email">Adresse e-mail</label>
+                                    <input type="email" id="email" name="email">
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    {# <h3>A propos de moi</h3>
+                    <div class="attr-block description">
+                        <div class="title-block">
+                            {% if app.user.description %}
+                                    <p> </p>  
+                                {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="edit-button">
+                            <button class="btn-secondary formbuttons"  id="desc-button">Modifier</button>
+                        </div>
+                        <div class="edit-block formsection" id="edit-desc">
+                            <form action="{{path('user_profile_edit')}}" method="post">
+                                <div class="input-group">
+                                    <label for="description">Courte description</label>
+                                    <textarea id="description" name="description">
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </form>
+                        </div>
+                    </div> #}
+                            <h3>Activités sur le réseau</h3>
+                    <div class="attr-block competence">
+                        <div class="title-block">
+                            {% if app.user.competences %}
+                                    {% for competence in app.user.competences %}
+                                        <p> {{competence.title}} </p>  
+                                    {% endfor %}
+                                {% else %}
+                            {% endif %}
+                        </div>
+                        <div class="edit-button">
+                            <button class="btn-secondary formbuttons"  id="competence-button">Modifier</button>
+                        </div>
+                        <div class="edit-block formsection" id="edit-competence">
+                            <form action="{{path('user_profile_edit')}}" method="post">
+                                <div class="input-group">
+                                    <label for="competence">Ajouter des compétences</label>
+                                    {% for competence in competences %}
+                                        <label> 
+                                            <input type="checkbox" value="{{competence.id}}"> {{competence.title}}
+                                        <label>
+                                    {% endfor %}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                            <h3>Paramètres</h3>
+                    <div class="settings">
+                        <div class="attr-block account">
+                            <div class="title-block">
+                                <p> Supprimer mon compte </p>
+                            </div>
+                            <div class="edit-button">
+                                <button class="btn-secondary formbuttons"  id="delete-button">Supprimer</button>
+                            </div>
+                            <div class="delete-block formsection" id="delete">
+                                <form action="{{path('user_profile_edit')}}" method="post">
+                                    <div class="input-group">
+                                        <label for="delete-message">Motif</label>
+                                        <textarea id="delete-message" name="delete-message"></textarea>
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="submit" class="btn-primary" value="Confirmer">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        <div class="attr-block account">    
+                            <div class="title-block">
+                                <p> Modifier mon mot de passe </p>
+                            </div>
+                            <div class="edit-button">
+                                <button class="btn-secondary formbuttons"  id="password-button">Modifier</button>
+                            </div>
+                            <div class="edit-block formsection" id="edit-password">
+                                <form action="{{path('user_profile_edit')}}" method="post">
+                                    <div class="input-group">
+                                        <label for="old-password">Ancien mot de passe</label>
+                                        <input type="password" id="old-password" name="old-password">
+                                    </div>
+                                    <div class="input-group">
+                                        <label for="password">Nouveau mot de passe</label>
+                                        <input type="password" id="password" name="password">
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="submit" class="btn-primary" value="Confirmer">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
             <div id="contributions" class="tabcontent" style="display: none">
                 <h2>Contributions</h2>
             </div>
+
             <div id="favoris" class="tabcontent" style="display: none">
                 <h2>Favoris</h2>
             </div>
+
             <div id="messagerie" class="tabcontent" style="display: none">
                 <h2>Messagerie</h2>
             </div>  
+
         </div>
     </div>
 

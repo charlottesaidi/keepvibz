@@ -114,4 +114,13 @@ $(document).ready(function(){
         }, 1000);
     });
     
+
+    //SECTION BOTTOM
+    $('.btn_bottom_keepvibz').on('click', function(){
+        $('.submenu_center1').slideToggle('slow');
+    })
+    $('.btn_bottom_explorer').on('click', function(){
+        $('.submenu_center2').slideToggle('slow');
+    })
+    
 })

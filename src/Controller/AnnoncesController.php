@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Annonce;
-use App\Form\AnnonceType;
+use App\Form\PostAnnonceType;
 use App\Repository\AnnonceRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,11 +39,12 @@ class AnnoncesController extends AbstractController
     public function new(Request $request): Response
     {
         $annonce = new Annonce();
-        $form = $this->createForm(AnnonceType::class, $annonce);
+        $form = $this->createForm(PostAnnonceType::class, $annonce);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $annonce->setUser($this->getUser());
+            $annonce->setStatus('draft');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($annonce);
             $entityManager->flush();

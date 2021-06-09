@@ -454,7 +454,7 @@ h2{
   .icon_arrow{left: 79vw;}
   .block_filters{right: 0; left: auto;}
   /* =========================================== */
-  .navigation_mobile{position: fixed; bottom: 0; left: 0; z-index: 10000; background-color: #000; height: 87.5vh; width: 100vw;}
+  .navigation_mobile{position: fixed; bottom: 0; left: 0; z-index: 10000; background-color: #000; width: 100vw; height: calc(100vh - 85px);}
   .top_block_menu{background-color: #3d3c3c;}
   .title_nav{ color: #A27440; text-align: center; font-size: 2em; padding: 10px 0;}
   .nav_mobile{padding: 70px;}

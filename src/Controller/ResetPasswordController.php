@@ -2,9 +2,11 @@
 
 namespace App\Controller;
 
+use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
+use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +15,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\VarDumper\Cloner\Data;
+
+use function PHPUnit\Framework\isNull;
 
 #[Route('/reset-password')]
 class ResetPasswordController extends AbstractController
@@ -21,18 +26,31 @@ class ResetPasswordController extends AbstractController
      * Display & process form to request a password reset.
      */
     #[Route('', name: 'app_forgot_password_request')]
-    public function request(Request $request, MailerInterface $mailer): Response
+    public function request(Request $request, MailerInterface $mailer, UserRepository $ur): Response
     {
         $form = $this->createForm(ResetPasswordRequestFormType::class);
-
+        $form -> handleRequest($request);
+        $error = '';
         if ($form->isSubmitted() && $form->isValid()) {
             // traiter la requête
+            $email = $form -> get("email") -> getData();
+            $user = $ur -> findOneBySomeField($email);
+            if($user == Null){
+               $error = 'T TRO NUL';
+                
+            }else{
+               return $this->redirectToRoute('app_check_email');
+            }
+            
             // vérifier le mail => erreur ou succès
+
+
             // si succès => envoie email avec token => redirection, méthode suivante (checkEmail)
         }
         
         return $this->render('reset_password/request.html.twig', [
             'requestForm' => $form->createView(),
+            'error' => $error
         ]);
     }
 

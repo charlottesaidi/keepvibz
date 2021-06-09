@@ -19,17 +19,17 @@
                 {{ form_errors(registrationForm.name)}}
             </div>
             <div class="input-group">
-                <label for="registration_form_name"><span><i class="fas fa-envelope"></i></span> Adresse e-mail</label>
+                <label for="registration_form_email"><span><i class="fas fa-envelope"></i></span> Adresse e-mail</label>
                 {{ form_widget(registrationForm.email) }}
                 {{ form_errors(registrationForm.email) }}
             </div>
             <div class="pass-group">
                 <div class="input-group">
-                    <label for="registration_form_name"><span><i class="fas fa-unlock-alt"></i></span> Mot de passe</label>
+                    <label for="registration_form_plainPassword.first"><span><i class="fas fa-unlock-alt"></i></span> Mot de passe</label>
                     {{ form_widget(registrationForm.plainPassword.first) }}
                 </div>
                 <div class="input-group">
-                    <label for="registration_form_name"><span><i class="fas fa-check"></i></span> Confirmer le mot de passe</label>
+                    <label for="registration_form_plainPassword.second"><span><i class="fas fa-check"></i></span> Confirmer le mot de passe</label>
                     {{ form_widget(registrationForm.plainPassword.second) }}
                 </div>
             </div>

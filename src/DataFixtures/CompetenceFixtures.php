@@ -26,7 +26,7 @@ class CompetenceFixtures extends Fixture
         $manager->persist($competence3);
 
         $competence4 = new Competence();
-        $competence4->setTitle('Chant');
+        $competence4->setTitle('Chanteur');
         $competence4->setActif(true);
         $manager->persist($competence4);
 

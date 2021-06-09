@@ -19,6 +19,16 @@
         {% endblock %}
     </head>
     <body class="full-height">
+        {# PAGE DE CHARGEMENT #}
+        <div class="chargement">
+            <div id="preloader">
+                <div class="logo_chargement pa">
+                    <img class="img_logo_chargement" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo">
+                </div>
+                <div class="loader">Please wait...</div>
+            </div>
+        </div>
+        {# PAGE DE CHARGEMENT #}
 
         <div class="auth">
         
@@ -28,8 +38,10 @@
 
             <footer>
                 <div class="wrap">
-                    <p>© 2021 KeepVibz</p>
                     <div>
+                        <p>© 2021 KeepVibz</p>
+                    </div>
+                    <div class="logo">
                         <a href="{{path('home')}}">
                             <img src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}">
                         </a>
@@ -46,6 +58,8 @@
             </footer>
 
         </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
 
     </body>
 </html>

@@ -41,6 +41,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @var string The hashed password
+     * @Assert\NotBlank
      * @Assert\Length(
      *      min = 6,
      *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",

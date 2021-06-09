@@ -251,6 +251,7 @@
 
             <div id="annonces" class="tabcontent" style="display: none">
                 <h2>Mes annonces</h2>
+                <div><a class="link" href="{{path('annonces_new')}}">Poster une nouvelle annonce</a></div>
                 <div>
                     {% for annonce in app.user.annonces %}
                         <div>

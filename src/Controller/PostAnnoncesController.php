@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use JasonGrimes\Paginator;
 
 #[Route('/annonces')]
-class AnnoncesController extends AbstractController
+class PostAnnoncesController extends AbstractController
 {
     #[Route('/', name: 'annonces_index', methods: ['GET'])]
     public function index(AnnonceRepository $annonceRepository): Response
@@ -38,6 +38,7 @@ class AnnoncesController extends AbstractController
     #[Route('/new', name: 'annonces_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $annonce = new Annonce();
         $form = $this->createForm(PostAnnonceType::class, $annonce);
         $form->handleRequest($request);
@@ -69,6 +70,7 @@ class AnnoncesController extends AbstractController
     #[Route('/{id}/edit', name: 'annonces_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Annonce $annonce): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $form = $this->createForm(AnnonceType::class, $annonce);
         $form->handleRequest($request);
 
@@ -88,6 +90,7 @@ class AnnoncesController extends AbstractController
     #[Route('/{id}', name: 'annonces_delete', methods: ['POST'])]
     public function delete(Request $request, Annonce $annonce): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         if ($this->isCsrfTokenValid('delete'.$annonce->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($annonce);

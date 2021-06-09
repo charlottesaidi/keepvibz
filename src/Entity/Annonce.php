@@ -33,7 +33,6 @@ class Annonce
     private $title;
 
     /**
-     * @Assert\NotBlank
      * @ORM\Column(type="string")
      */
     private $status;

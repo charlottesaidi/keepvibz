@@ -353,7 +353,8 @@ h2{
 .paginate_button a :hover{opacity: .5;}
 .paginate_button a img{width: 22px;}
 .paginate_button a :first-child{margin-right: 6px;}
-.img_downloaded{width: 100%;}
+.content_download {width: 19%;}
+.img_downloaded{object-fit: cover; height: 204px; width: 100%; }
 .image_downloaded :hover{opacity: .8;}
 .date_ajout_downloaded, .genre_downloaded,.description_downloaded{
     color: #A27440;

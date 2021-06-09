@@ -10,14 +10,15 @@
         <div>
             <h1>Mot de passe oublié ?</h1>
         </div>
-        {% for flashError in app.flashes('reset_password_error') %}
-            <div class="error" role="alert">{{ flashError }}</div>
-        {% endfor %}
+        {% if error %}
+                <div class="invalid-feedback d-block">{{ error }}</div>
+            {% endif %}
 
         {{ form_start(requestForm, {'attr': {'novalidate': 'novalidate'}}) }}
             <div class="input-group">
                 <label for="registration_form_name">Email</label>
                 {{ form_widget(requestForm.email) }}
+                 {{ form_errors(requestForm.email) }}
             </div>
             <div>
                 <small>

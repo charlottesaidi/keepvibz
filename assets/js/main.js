@@ -7,6 +7,8 @@ $(document).ready(function(){
         $("#preloader").delay(500).fadeOut("slow");
     });
 
+// ==============================================================
+
     //HEADER
     var headerOffset = $('.header').offset().top;
 
@@ -17,6 +19,7 @@ $(document).ready(function(){
       if (scroll >= headerOffset) header.addClass('fixed');
       else header.removeClass('fixed');
     });
+// ==============================================================
 
     //BURGER
     $('.btn_burger').on('click', function(){
@@ -28,9 +31,9 @@ $(document).ready(function(){
     $(".btn_search, .icon_arrow").on('click', function(){
         $(".block_filters").toggle('slide');
     })
+// ==============================================================
 
-
-
+    //CAROUSSEL MOST DOWNLOADED
     if (window.matchMedia("(max-width: 550px)").matches) {
         $('.flexslider').flexslider({
             animation: "slide",
@@ -74,7 +77,7 @@ $(document).ready(function(){
             itemWidth: 200,
             itemMargin: 20,
             minItems: 4,
-            maxItems: "",
+            maxItems: 4,
             controlNav: false,
             controlsContainer: $(".custom-controls-container"),
             customDirectionNav: $(".custom-navigation a")
@@ -92,19 +95,18 @@ $(document).ready(function(){
             customDirectionNav: $(".custom-navigation a")
     });}
 
-
-    //CAROUSSEL MOST DOWNLOADED
     $('.flexslider').flexslider({
-    animation: "slide",
-    animationLoop: false,
-    itemWidth: 200,
-    itemMargin: 20,
-    minItems: 5,
-    maxItems: 5,
-    controlNav: false,
-    controlsContainer: $(".custom-controls-container"),
-    customDirectionNav: $(".custom-navigation a")
-    });
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: 200,
+        itemMargin: 20,
+        minItems: 5,
+        maxItems: 5,
+        controlNav: false,
+        controlsContainer: $(".custom-controls-container"),
+        customDirectionNav: $(".custom-navigation a")
+        });
+// ==============================================================
 
     //ANCOR SMOOOTH SCROLL
     $(document).on('click', 'a[href^="#"]', function(e) {
@@ -113,7 +115,7 @@ $(document).ready(function(){
             scrollTop: $($.attr(this, 'href')).offset().top
         }, 1000);
     });
-    
+// ==============================================================
 
     //SECTION BOTTOM
     $('.btn_bottom_keepvibz').on('click', function(){

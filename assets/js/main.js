@@ -7,6 +7,8 @@ $(document).ready(function(){
         $("#preloader").delay(500).fadeOut("slow");
     });
 
+// ==============================================================
+
     //HEADER
     var headerOffset = $('.header').offset().top;
 
@@ -17,6 +19,7 @@ $(document).ready(function(){
       if (scroll >= headerOffset) header.addClass('fixed');
       else header.removeClass('fixed');
     });
+// ==============================================================
 
     //BURGER
     $('.btn_burger').on('click', function(){
@@ -28,50 +31,9 @@ $(document).ready(function(){
     $(".btn_search, .icon_arrow").on('click', function(){
         $(".block_filters").toggle('slide');
     })
-
-    // (function() {
- 
-    //     // store the slider in a local variable
-    //     var $window = $(window),
-    //         flexslider = { vars:{} };
-       
-    //     // tiny helper function to add breakpoints
-    //     function getGridSize() {
-    //       return (window.innerWidth < 600) ? 2 :
-    //              (window.innerWidth < 900) ? 3 : 4;
-    //     }
-       
-    //     $(function() {
-    //       SyntaxHighlighter.all();
-    //     });
-       
-    //     $window.on('load', function() {
-    //       $('.flexslider').flexslider({
-    //         animation: "slide",
-    //         animationLoop: false,
-    //         itemWidth: 210,
-    //         itemMargin: 20,
-    //         minItems: getGridSize(), // use function to pull in initial value
-    //         maxItems: getGridSize(), // use function to pull in initial value
-    //         controlsContainer: $(".custom-controls-container"),
-    //         customDirectionNav: $(".custom-navigation a")
-    //       });
-    //     });
-       
-    //     // check grid size on resize event
-    //     $window.resize(function() {
-    //       var gridSize = getGridSize();
-       
-    //       flexslider.vars.minItems = gridSize;
-    //       flexslider.vars.maxItems = gridSize;
-    //     });
-    //   }());
-
+// ==============================================================
 
     //CAROUSSEL MOST DOWNLOADED
-    
-    
-
     if (window.matchMedia("(max-width: 550px)").matches) {
         $('.flexslider').flexslider({
             animation: "slide",
@@ -144,7 +106,7 @@ $(document).ready(function(){
         controlsContainer: $(".custom-controls-container"),
         customDirectionNav: $(".custom-navigation a")
         });
-
+// ==============================================================
 
     //ANCOR SMOOOTH SCROLL
     $(document).on('click', 'a[href^="#"]', function(e) {
@@ -153,7 +115,7 @@ $(document).ready(function(){
             scrollTop: $($.attr(this, 'href')).offset().top
         }, 1000);
     });
-    
+// ==============================================================
 
     //SECTION BOTTOM
     $('.btn_bottom_keepvibz').on('click', function(){

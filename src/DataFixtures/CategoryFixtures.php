@@ -18,6 +18,14 @@ class CategoryFixtures extends Fixture
         $category2->setTitle('Studio d\'enregistrement');
         $manager->persist($category2);
 
+        $category3 = new Category();
+        $category3->setTitle('Evènement');
+        $manager->persist($category3);
+
         $manager->flush();
+
+        $this->addReference('category1', $category1);
+        $this->addReference('category2', $category2);
+        $this->addReference('category3', $category3);
     }
 }

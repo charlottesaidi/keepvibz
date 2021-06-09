@@ -18,9 +18,6 @@ class TexteType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre',
             ])
-            ->add('type', TextType::class, [
-                'label' => 'Genre',
-            ])
             ->add('content', TextareaType::class, [
                 'label' => 'Contenu',
             ])

@@ -104,7 +104,8 @@ body {
                     justify-content: space-between;
                     align-items: center;
                     div {
-                        width: 33.33333%
+                        width: 33.33333%;
+                        padding: 10px 0;
                     }
                     .btn-secondary {
                         color: $font-secondary;
@@ -116,77 +117,80 @@ body {
                         font-size: 18px;
                         cursor: pointer;
                     }
-                    .edit-block, .delete-block {
+                    .hidden {
                         display: none;
-                        form {
-                            .input-group {
-                                width: 100%;
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: space-around;
-                                padding: 10px 0;
-                                a {
-                                    color: $font-secondary;
-                                }
-                                label, p {
+                    }
+                    .show {
+                        display: block;
+                    }
+                    .edit-block, .delete-block {
+                        .input-group {
+                            width: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: space-around;
+                            padding: 10px 0;
+                            a {
+                                color: $font-secondary;
+                            }
+                            label, p {
+                                font-size: 14px;
+                                padding: 5px 0;
+                                .checkbox-label {
+                                    padding-left: 15px;
                                     font-size: 14px;
-                                    padding: 5px 0;
-                                    .checkbox-label {
-                                        padding-left: 15px;
-                                        font-size: 14px;
-                                    }
-                                    span {
-                                        display: inline-block;
-                                        font-size: 16px;
-                                        margin-right: 10px;
-                                    }
                                 }
-                                input, textarea, button {
-                                    background: #3d3c3c; 
-                                    outline: none; 
-                                    border-radius: 3px; 
-                                    border: none; 
-                                    color: $font-primary; 
-                                    font-family: 'Squada One', cursive; 
-                                    letter-spacing: 3px; 
-                                    padding: 10px 0 10px 10px;
-                                }
-                                .btn-primary {
-                                    background: $font-secondary;
-                                    padding: 8px 20px;
-                                    margin: auto;
-                                    cursor: pointer;
-                                    border: 1px solid $font-secondary;
-                                    transition: all .3s;
-                                    border-radius: 2px; 
-                                    font-size: 16px;
-                                    height: 36px;
-                                    line-height: 36px;
-                                    padding: 0 16px;
-                                    font-weight: bold;
-                                }
-                                .btn-primary:hover {
-                                    background: transparent;
-                                    color: $font-secondary
-                                }
-                                .error {
-                                    border: 1px rgb(196, 1, 1) solid;
+                                span {
                                     display: inline-block;
-                                    color: rgb(196, 1, 1);
-                                    border-radius: 3px;
-                                    padding: 5px 10px;
-                                    margin: 8px 0;
-                                    font-weight: bold;
-                                    font-size: 14px;
+                                    font-size: 16px;
+                                    margin-right: 10px;
                                 }
+                            }
+                            input, textarea, button {
+                                background: #3d3c3c; 
+                                outline: none; 
+                                border-radius: 3px; 
+                                border: none; 
+                                color: $font-primary; 
+                                font-family: 'Squada One', cursive; 
+                                letter-spacing: 3px; 
+                                padding: 10px 0 10px 10px;
+                            }
+                            .btn-primary {
+                                background: $font-secondary;
+                                padding: 8px 20px;
+                                margin: auto;
+                                cursor: pointer;
+                                border: 1px solid $font-secondary;
+                                transition: all .3s;
+                                border-radius: 2px; 
+                                font-size: 16px;
+                                height: 36px;
+                                line-height: 36px;
+                                padding: 0 16px;
+                                font-weight: bold;
+                            }
+                            .btn-primary:hover {
+                                background: transparent;
+                                color: $font-secondary
+                            }
+                            .error {
+                                border: 1px rgb(196, 1, 1) solid;
+                                display: inline-block;
+                                color: rgb(196, 1, 1);
+                                border-radius: 3px;
+                                padding: 5px 10px;
+                                margin: 8px 0;
+                                font-weight: bold;
+                                font-size: 14px;
                             }
                         }
                     }
                 }
-                .settings {
+                .global-attr-block {
                     border-bottom: solid 1px hsla(0,0%,100%,.12);
                 }
-                .attr-block.account {
+                .global {
                     border: none;
                 }
             }
@@ -236,5 +240,14 @@ body {
     }
     body .main .container {
         width: 100%;
+    }
+}
+@media screen AND (max-width: 750px) {
+    body .main .container .user-block .attr-block {
+        flex-direction: column;
+        align-items: flex-start;
+        div {
+            width: 100%;
+        }
     }
 }

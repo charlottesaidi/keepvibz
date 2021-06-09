@@ -38,6 +38,10 @@
                                                 <td class="cell">{{ user.name }}</td>
                                             </tr>
                                             <tr>
+                                                <th class="cell">Bio</th>
+                                                <td class="cell">{{ user.bio }}</td>
+                                            </tr>
+                                            <tr>
                                                 <th class="cell">Roles</th>
                                                 <td class="cell">
                                                     {% if 'ROLE_ADMIN' in user.roles %}

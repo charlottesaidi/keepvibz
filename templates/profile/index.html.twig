@@ -28,7 +28,7 @@
                         <button href="#!" class="tablinks" id="fav-link">Favoris</button>
                     </li>
                     <li>
-                        <button href="#!" class="tablinks" id="mess-link">Messagerie</button>
+                        <button href="#!" class="tablinks" id="mess-link">Mes annonces</button>
                     </li>
                 </ul>
             </nav>
@@ -38,27 +38,9 @@
             <div id="profil" class="tabcontent" style="display: block">
                 <h2>Profil</h2>
                 <div class="user-block">
-                            <h3>Pseudonyme</h3>
-                    <div class="attr-block name">
-                        <div class="title-block">
-                            <p> {{app.user.name}} </p>
-                        </div>
-                        <div class="edit-button">
-                            <button class="btn-secondary formbuttons"  id="name-button">Modifier</button>
-                        </div>
-                        <div class="edit-block formsection" id="edit-name">
-                            <form action="{{path('user_profile_edit')}}" method="post">
-                                <div class="input-group">
-                                    <label for="name">Nom d'utilisateur</label>
-                                    <input type="text" id="name" name="name">
-                                </div>
-                                <div class="input-group">
-                                    <input type="submit" class="btn-primary" value="Valider">
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                            <h3>Photo de profil</h3>
+                    {{ form_start(profileForm, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                    <h3>Photo de profil</h3>
                     <div class="attr-block avatar">
                         <div class="title-block">
                             {% if app.user.avatar %}
@@ -67,64 +49,120 @@
                             {% endif %}
                         </div>
                         <div class="edit-button">
-                            <button class="btn-secondary formbuttons"  id="avatar-button">Modifier</button>
+                            <a href="" class="btn-secondary formbuttons" id="avatar-button">Modifier</a>
                         </div>
-                        <div class="edit-block formsection" id="edit-avatar">
-                            <form action="{{path('user_profile_edit')}}" method="post">
-                                <div class="input-group">
-                                    <label for="avatar">Photo de profil</label>
-                                    <input type="file" id="avatar" name="avatar">
-                                </div>
-                                <div class="input-group">
-                                    <input type="submit" class="btn-primary" value="Valider">
-                                </div>
-                            </form>
+                        <div class="edit-block formsection hidden" id="edit-avatar">
+                            <div class="input-group">
+                                {{form_widget(profileForm.avatar)}}
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" class="btn-primary" value="Valider">
+                            </div>
                         </div>
                     </div>
-                            <h3>Adresse e-mail</h3>
-                    <div class="attr-block email">
+
+                    <h3>Pseudonyme</h3>
+                    <div class="attr-block name">
                         <div class="title-block">
-                            <p> {{app.user.email}} </p>
+                            <p> {{app.user.name}} </p>
                         </div>
                         <div class="edit-button">
-                            <button class="btn-secondary formbuttons"  id="email-button">Modifier</button>
+                            <a href="" class="btn-secondary formbuttons" id="name-button">Modifier</a>
                         </div>
-                        <div class="edit-block formsection" id="edit-email">
-                            <form action="{{path('user_profile_edit')}}" method="post">
+                        <div class="edit-block formsection hidden" id="edit-name">
+                            <div class="input-group">
+                                {{form_widget(profileForm.name)}}
+                                {{form_errors(profileForm.name)}}
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" class="btn-primary" value="Valider">
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3>Informations personnelles</h3>
+                    <div class="global-attr-block">
+                        <p>Adresse e-mail</p>
+                        <div class="attr-block global email">
+                            <div class="title-block">
+                                <p> {{app.user.email}} </p>
+                            </div>
+                            <div class="edit-button">
+                                <a href="" class="btn-secondary formbuttons" id="email-button">Modifier</a>
+                            </div>
+                            <div class="edit-block formsection hidden" id="edit-email">
                                 <div class="input-group">
-                                    <label for="email">Adresse e-mail</label>
-                                    <input type="email" id="email" name="email">
+                                    {{form_widget(profileForm.email)}}
+                                    {{form_errors(profileForm.email)}}
                                 </div>
                                 <div class="input-group">
                                     <input type="submit" class="btn-primary" value="Valider">
                                 </div>
-                            </form>
+                            </div>
+                        </div>
+                        
+                        <p>Ville</p>
+                        <div class="attr-block global town">
+                            <div class="title-block">
+                                <p> {{app.user.town}} </p>
+                            </div>
+                            <div class="edit-button">
+                                <a href="" class="btn-secondary formbuttons" id="town-button">Modifier</a>
+                            </div>
+                            <div class="edit-block formsection hidden" id="edit-town">
+                                <div class="input-group">
+                                    {{form_widget(profileForm.town)}}
+                                    {{form_errors(profileForm.town)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </div>
+                        </div>
+
+                        <p>Téléphone</p>
+                        <div class="attr-block global phone">
+                            <div class="title-block">
+                                <p> {{app.user.phone}} </p>
+                            </div>
+                            <div class="edit-button">
+                                <a href="" class="btn-secondary formbuttons" id="phone-button">Modifier</a>
+                            </div>
+                            <div class="edit-block formsection hidden" id="edit-phone">
+                                <div class="input-group">
+                                    {{form_widget(profileForm.phone)}}
+                                    {{form_errors(profileForm.phone)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    {# <h3>A propos de moi</h3>
+
+                    <h3>A propos de moi</h3>
                     <div class="attr-block description">
                         <div class="title-block">
-                            {% if app.user.description %}
-                                    <p> </p>  
+                            {% if app.user.bio %}
+                                    <p> {{ app.user.bio }} </p>  
                                 {% else %}
                             {% endif %}
                         </div>
                         <div class="edit-button">
-                            <button class="btn-secondary formbuttons"  id="desc-button">Modifier</button>
+                            <a href="" class="btn-secondary formbuttons" id="desc-button">Modifier</a>
                         </div>
-                        <div class="edit-block formsection" id="edit-desc">
-                            <form action="{{path('user_profile_edit')}}" method="post">
-                                <div class="input-group">
-                                    <label for="description">Courte description</label>
-                                    <textarea id="description" name="description">
-                                </div>
-                                <div class="input-group">
-                                    <input type="submit" class="btn-primary" value="Valider">
-                                </div>
-                            </form>
+                        <div class="edit-block formsection hidden" id="edit-desc">
+                            <div class="input-group">
+                                {{form_widget(profileForm.bio, {'attr': {'placeholder': 'Courte description...'}})}}
+                                {{form_errors(profileForm.bio)}}
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" class="btn-primary" value="Valider">
+                            </div>
                         </div>
-                    </div> #}
-                            <h3>Activités sur le réseau</h3>
+                    </div>
+
+                    <h3>Activités sur le réseau</h3>
                     <div class="attr-block competence">
                         <div class="title-block">
                             {% if app.user.competences %}
@@ -135,43 +173,38 @@
                             {% endif %}
                         </div>
                         <div class="edit-button">
-                            <button class="btn-secondary formbuttons"  id="competence-button">Modifier</button>
+                            <a href="" class="btn-secondary formbuttons" id="competence-button">Modifier</a>
                         </div>
-                        <div class="edit-block formsection" id="edit-competence">
-                            <form action="{{path('user_profile_edit')}}" method="post">
-                                <div class="input-group">
-                                    <label for="competence">Ajouter des compétences</label>
-                                    {% for competence in competences %}
-                                        <label> 
-                                            <input type="checkbox" value="{{competence.id}}"> {{competence.title}}
-                                        <label>
-                                    {% endfor %}
-                                </div>
-                                <div class="input-group">
-                                    <input type="submit" class="btn-primary" value="Valider">
-                                </div>
-                            </form>
+                        <div class="edit-block formsection hidden" id="edit-competence">
+                            <div class="input-group">
+                                <label for="competences">Ajouter des compétences</label>
+                                {{form_widget(profileForm.competences)}}
+                                {{form_errors(profileForm.competences)}}
+                            </div>
+                            <div class="input-group">
+                                <input type="submit" class="btn-primary" value="Valider">
+                            </div>
                         </div>
                     </div>
-                            <h3>Paramètres</h3>
-                    <div class="settings">
-                        <div class="attr-block account">
+
+                    <h3>Paramètres</h3>
+                    <div class="global-attr-block">
+                        <div class="attr-block global account">
                             <div class="title-block">
                                 <p> Supprimer mon compte </p>
                             </div>
                             <div class="edit-button">
-                                <button class="btn-secondary formbuttons"  id="delete-button">Supprimer</button>
+                                <a href="" class="btn-secondary formbuttons" id="delete-button">Supprimer</a>
                             </div>
-                            <div class="delete-block formsection" id="delete">
-                                <form action="{{path('user_profile_edit')}}" method="post">
-                                    <div class="input-group">
-                                        <label for="delete-message">Motif</label>
-                                        <textarea id="delete-message" name="delete-message"></textarea>
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="submit" class="btn-primary" value="Confirmer">
-                                    </div>
-                                </form>
+                            <div class="delete-block formsection hidden" id="delete">
+                                <div class="input-group">
+                                    <label for="delete-message">Motif</label>
+                                    {{form_widget(profileForm.deleteReason)}}
+                                    {{form_errors(profileForm.deleteReason)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Confirmer">
+                                </div>
                             </div>
                         </div>
                         
@@ -180,25 +213,31 @@
                                 <p> Modifier mon mot de passe </p>
                             </div>
                             <div class="edit-button">
-                                <button class="btn-secondary formbuttons"  id="password-button">Modifier</button>
+                                <a href="" class="btn-secondary formbuttons" id="password-button">Modifier</a>
                             </div>
-                            <div class="edit-block formsection" id="edit-password">
-                                <form action="{{path('user_profile_edit')}}" method="post">
-                                    <div class="input-group">
-                                        <label for="old-password">Ancien mot de passe</label>
-                                        <input type="password" id="old-password" name="old-password">
-                                    </div>
-                                    <div class="input-group">
-                                        <label for="password">Nouveau mot de passe</label>
-                                        <input type="password" id="password" name="password">
-                                    </div>
-                                    <div class="input-group">
-                                        <input type="submit" class="btn-primary" value="Confirmer">
-                                    </div>
-                                </form>
+                            <div class="edit-block formsection hidden" id="edit-password">
+                                <div class="input-group">
+                                    <label for="old-password">Mot de passe actuel</label>
+                                    {# {{form_widget(profileForm.oldPassword)}}
+                                    {{form_errors(profileForm.oldPassword)}} #}
+                                </div>
+                                <div class="input-group">
+                                    <label for="password">Nouveau mot de passe</label>
+                                    {{form_widget(profileForm.newPassword.first)}}
+                                    {{form_errors(profileForm.newPassword.first)}}
+                                </div>
+                                <div class="input-group">
+                                    <label for="password">Confirmer</label>
+                                    {{form_widget(profileForm.newPassword.second)}}
+                                    {{form_errors(profileForm.newPassword.second)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {{ form_end(profileForm) }}
                 </div>
             </div>
 
@@ -210,8 +249,26 @@
                 <h2>Favoris</h2>
             </div>
 
-            <div id="messagerie" class="tabcontent" style="display: none">
-                <h2>Messagerie</h2>
+            <div id="annonces" class="tabcontent" style="display: none">
+                <h2>Mes annonces</h2>
+                <div>
+                    {% for annonce in app.user.annonces %}
+                        <div>
+                            <h4> {{annonce.title}} </h4>
+                            <p> {{annonce.region.title}} </p>
+                            <p> {{ annonce.createdAt ? annonce.createdAt|date('d/m/Y') : '' }} </p>
+                            <p> {{ annonce.createdAt ? annonce.modifiedAt|date('H:i') : '' }} </p>
+                            <p> {{annonce.description}} </p>
+                            <p> {% if annonce.status == 'draft' %}
+                                    Brouillon
+                                {% endif %}
+                                {% if annonce.status == 'published' %}
+                                    Publié
+                                {% endif %}
+                            </p>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>  
 
         </div>

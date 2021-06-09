@@ -8,8 +8,18 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/auth.scss';
 
+// start the Stimulus application
+import './bootstrap';
+
 // JS
 import './admin/plugins/fontawesome/js/all.min.js';
 
-// start the Stimulus application
-import './bootstrap';
+$(document).ready(function(){
+    // Page de chargement
+    $(window).on('load', function(){
+        $('.chargement').delay(1000).fadeOut("slow");
+        $(".loader").fadeOut();
+        $(".logo_chargement").fadeOut();
+        $("#preloader").delay(500).fadeOut("slow");
+    });
+});

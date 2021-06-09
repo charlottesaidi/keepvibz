@@ -54,7 +54,7 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         if($hasAccess) {
             return new RedirectResponse($this->urlGenerator->generate('admin_dashboard'));
         } else {
-            return new RedirectResponse($this->urlGenerator->generate('home'));
+            return new RedirectResponse($this->urlGenerator->generate('user_profile'));
         }
     }
 

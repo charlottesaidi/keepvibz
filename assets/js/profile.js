@@ -29,7 +29,7 @@ document.querySelector('#fav-link').addEventListener('click', (e) => {
     openSection(e, 'favoris', 'tabcontent', 'tablinks')
 })
 document.querySelector('#mess-link').addEventListener('click', (e) => {
-    openSection(e, 'messagerie', 'tabcontent', 'tablinks')
+    openSection(e, 'annonces', 'tabcontent', 'tablinks')
 })
 
 /*
@@ -37,22 +37,37 @@ document.querySelector('#mess-link').addEventListener('click', (e) => {
 |   Edit user infos / section-forms
 |--------------------------------- 
 */
+function openForm(form, evt) {
+    evt.preventDefault();
+    var element = document.getElementById(form);
+    element.classList.toggle("show");
+    evt.currentTarget.className += " hidden";
+}
+
 document.querySelector('#name-button').addEventListener('click', (e) => {
-    openSection(e, 'edit-name', 'formsection', 'formbuttons');
-    this.style.display = 'none';
+    openForm('edit-name', e);
 })
 document.querySelector('#avatar-button').addEventListener('click', (e) => {
-    openSection(e, 'edit-avatar', 'formsection', 'formbuttons')
+    openForm('edit-avatar', e)
 })
 document.querySelector('#email-button').addEventListener('click', (e) => {
-    openSection(e, 'edit-email', 'formsection', 'formbuttons')
+    openForm('edit-email', e)
+})
+document.querySelector('#desc-button').addEventListener('click', (e) => {
+    openForm('edit-desc', e)
 })
 document.querySelector('#competence-button').addEventListener('click', (e) => {
-    openSection(e, 'edit-competence', 'formsection', 'formbuttons')
+    openForm('edit-competence', e)
+})
+document.querySelector('#town-button').addEventListener('click', (e) => {
+    openForm('edit-town', e)
+})
+document.querySelector('#phone-button').addEventListener('click', (e) => {
+    openForm('edit-phone', e)
 })
 document.querySelector('#delete-button').addEventListener('click', (e) => {
-    openSection(e, 'delete', 'formsection', 'formbuttons')
+    openForm('delete', e)
 })
 document.querySelector('#password-button').addEventListener('click', (e) => {
-    openSection(e, 'edit-password', 'formsection', 'formbuttons')
+    openForm('edit-password', e)
 })

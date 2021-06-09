@@ -53,7 +53,7 @@
                     </div>
                     <nav class="navigation">
                         <ul class="nav flex">
-                            <li class="link"><a href="#">Annonces</a></li>
+                            <li class="link"><a href="{{path('annonces_index')}}">Annonces</a></li>
                             <li class="link"><a href="#">Audios</a></li>
                             <li class="link"><a href="#">Textes</a></li>
                         </ul>
@@ -85,7 +85,7 @@
             <div class="wrap2 flex fs">
                 <div class="search flex fs">
                     <img class="icon_search" src="{{asset('assets/images/icons/icon_search.svg')}}" alt="icon search">
-                    <input type="search" name="search" id="search" placeholder="Tapes ta recherche">
+                    <input type="text" name="search" id="search" placeholder="Tapes ta recherche">
                     <button class="btn_search">Filtres</button>
                     <img class="icon_arrow" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="icon arrow">
                     <div class="block_filters">

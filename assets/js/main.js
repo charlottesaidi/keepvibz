@@ -4,7 +4,7 @@ $(document).ready(function(){
         $('.chargement').delay(1000).fadeOut("slow");
         $(".loader").fadeOut();
         $(".logo_chargement").fadeOut();
-        $("#preloader").delay(500).fadeOut("slow");
+        $("#preloader").delay(500).fadeOut("slow").scrollTop();
     });
 
 // ==============================================================

@@ -228,7 +228,7 @@ a{color: #fff;}
     top: 14px;
     height: 19px;
 }
-.search input{background: #3d3c3c; height: 48px; width: 34vw; outline: none; border-radius: 30px; border: none; color: #fff; font-family: 'Squada One', cursive; letter-spacing: 3px; padding: 0px 5vw 0px 50px;}
+.search input{background: #3d3c3c; height: 48px; width: 34vw; outline: none; border-radius: 30px; border: none; color: #fff; font-family: 'Squada One', cursive; letter-spacing: 3px; padding: 0px 6.5vw 0px 50px; }
 .search .btn_search{
     position: absolute;
     height: 41px;
@@ -410,10 +410,13 @@ h2{
 
 @media screen and (max-width: 1565px ){
   .btn_search{display: none;}
+  .search input{padding: 0px 2.5vw 0px 50px; }
 }
 
 @media screen and (max-width: 1242px ){
   .icon_arrow {left: 31.5vw}
+  .search input{padding: 0px 3vw 0px 50px; }
+
 }
 
 @media screen and (max-width: 1195px ){
@@ -429,6 +432,7 @@ h2{
 
 @media screen and (max-width: 880px ){
   .icon_arrow{left: 30.5vw;}
+  .search input{padding: 0px 4vw 0px 50px; }
 }
 
 
@@ -447,12 +451,9 @@ h2{
   .btn_bottom_explorer{display: inline;}
 }
 
-@media screen and (max-width: 780px ){
-  /* .wrap2{display: none;} */
-}
 
 @media screen and (max-width: 615px){
-  html{overflow-x: hidden;}
+  /* html{overflow-x: hidden;} */
   /* HEADER */
   .header{display: flex;}
   .top_header{display: flex; align-items: center;}
@@ -461,6 +462,7 @@ h2{
   .right{display: none;}
   .wrap2{display: block; margin-top: 16px;}
   .search input{width: 100%;}
+  .search input{padding: 0px 7.5vw 0px 50px; }
   .icon_arrow{left: 79vw;}
   .block_filters{right: 0; left: auto;}
   /* =========================================== */
@@ -497,6 +499,7 @@ h2{
 @media screen and (max-width: 450px){
   /* HEADER */
   .icon_arrow{left: 71vw;}
+  .search input{padding: 0px 8.5vw 0px 50px; }
 }
 
 @media screen and (max-width: 400px){

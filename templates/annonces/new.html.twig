@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces{% endblock %}
+
+{% block body %}
+<style>body {color: #fff} .link {color: #A27440} .main {margin-top: 150px}</style>
+    <div class="main">
+    
+	    <div class="container">
+            <div class="">
+                <h1 class="">Publier une annonce</h1>
+                <div class="">
+                    <div class="">
+                        <div class="">
+                            {{ include('annonces/_form.html.twig') }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

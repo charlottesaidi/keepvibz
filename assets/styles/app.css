@@ -375,15 +375,17 @@ h2{
 
 .center{width: 50%;}
 .title_bottom{color: #fff; margin-bottom: 5px;}
-.nav_bottom li a{color: #9f9f9f;}
-.nav_bottom li a:hover{opacity: .6;}
+.nav_bottom1 li a{color: #9f9f9f;}
+.nav_bottom1 li a:hover{opacity: .6;}
+.nav_bottom2 li a{color: #9f9f9f;}
+.nav_bottom2 li a:hover{opacity: .6;}
 .left_block_statistiques{margin-right: 15px;}
 .visites, .posts, .membres, .en_ligne {color: #fff; font-size: .8em; margin-bottom: 3px;}
 .number{color: #9f9f9f; margin-bottom: 3px;}
 .submenu_center1, .submenu_center2{display: none; background-color: transparent; padding: 0px 20px 5px 20px;}
-.btn_bottom_keepvibz{margin-left: 6px; height: 10px; cursor: pointer;}
+.btn_bottom_keepvibz{display: none ;margin-left: 6px; height: 10px; cursor: pointer;}
 .btn_bottom_keepvibz:hover{opacity: .4;}
-.btn_bottom_explorer{margin-left: 11px; height: 10px; cursor: pointer;}
+.btn_bottom_explorer{display: none ;margin-left: 11px; height: 10px; cursor: pointer;}
 .btn_bottom_explorer:hover{opacity: .4;}
 /* FIN SECTION_BOTTOM */
 
@@ -439,6 +441,9 @@ h2{
   .link_img_logo_bottom{display: none;}
   .right_bottom{display: none;}
   .center2{margin-bottom: 10px;}
+  .nav_bottom1{display: none;}
+  .btn_bottom_keepvibz{display: inline;}
+  .btn_bottom_explorer{display: inline;}
 }
 
 @media screen and (max-width: 780px ){

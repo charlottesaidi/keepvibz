@@ -5,15 +5,20 @@
 {% block body %}
     {# SECTION 1 #}
     <section id="section_1" class="section_1">
-        <div class="background">
-            <img class="gif_background" src="{{asset('assets/images/background/fond_projet_png.png')}}" alt="image animé en fond d'ecran pr">
+        <div class="background_1">
+            <img class="gif_background" src="{{asset('assets/images/background/fond_projet_png.png')}}" alt="image animé en fond d'ecran">
+            <div class="gradient"></div>
+        </div>
+        <div class="background_2">
+            <img class="background" src="{{asset('assets/images/background/fond_responsive.jpg')}}" alt="image en fond d'ecran">
             <div class="gradient"></div>
         </div>
             {# PLAYER #}
             <div class="block_player tchv">
                 <div class="content_player">
-                    <h2 class="accroche">"Ensemble </br><span>on est plus fort !</span>"</h2>
-                    <h1 class="site_name">KeepVibz</h1>
+                    <div class="top_block_accroche">
+                        <h2 class="accroche">"Ensemble <span>on est plus fort !</span>"</h2>
+                    </div>
                     <h2 class="latest_upload">Derniers uploads</h2>
                     <audio preload controls autoplay>
                         <source src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" type="audio/mpeg">
@@ -24,6 +29,22 @@
     </section>
     {# FIN SECTION 1 #}
 
+    <section class="section1_responsive">
+        <div class="block_player_responsive">
+            <div class="content_player">
+                <div class="top_block_accroche">
+                    <h2 class="accroche">"Ensemble <span>on est plus fort !</span>"</h2>
+                </div>
+                <h2 class="latest_upload">Derniers uploads</h2>
+                <audio preload controls autoplay>
+                    <source src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" type="audio/mpeg">
+                </audio>
+                <h3 class="title_player">Titre (Artiste - BPM)</h3>
+            </div>
+        </div>
+
+    </section>
+
     {# SECTION 2 #}
     <section id="section_2" class="section_2">
         <div class="wrap4">
@@ -32,8 +53,8 @@
                 {# CUSTOM NAVIGATION #}
                 <div class="custom-navigation">
                     <div class="paginate_button flex jcfe">
-                            <a href=""><img src="{{asset('assets/images/icons/arrow-92-64.png')}}" alt="icône de navigation (précédent)"></a>
-                            <a href=""><img src="{{asset('assets/images/icons/arrow-28-64.png')}}" alt="icône de navigation (suivant)"></a>
+                            <a href="#"><img src="{{asset('assets/images/icons/arrow-92-64.png')}}" alt="icône de navigation (précédent)"></a>
+                            <a href="#"><img src="{{asset('assets/images/icons/arrow-28-64.png')}}" alt="icône de navigation (suivant)"></a>
                     </div>
                 </div>
                 {# CUSTOM NAVIGATION #}

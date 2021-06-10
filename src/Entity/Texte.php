@@ -42,9 +42,9 @@ class Texte
      *      min = 10,
      *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
      * )
-     * @ORM\Column(type="json")
+     * @ORM\Column(type="string")
      */
-    private $couplet = [];
+    private $couplet;
 
     /**
      * @Assert\NotBlank
@@ -115,24 +115,13 @@ class Texte
         return $this;
     }
 
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
-
-        return $this;
-    }
-    public function getCouplet(): array
+    public function getCouplet(): string
     {
         $couplet = $this->couplet;
-        return array_unique($couplet);
+        return $this->couplet;
     }
 
-    public function setCouplet(array $couplet): self
+    public function setCouplet(string $couplet): self
     {
         $this->couplet = $couplet;
 

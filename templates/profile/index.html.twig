@@ -47,7 +47,7 @@
                     <div class="attr-block avatar">
                         <div class="title-block">
                             {% if app.user.avatar %}
-                                    <p> <img src="{# dossier uploads/ => app.user.avatar.file #}"> </p> 
+                                    <p class="avatar"><img src="{{asset('uploads/images/avatars/' ~ app.user.avatar.file)}}"> </p> 
                                 {% else %}
                             {% endif %}
                         </div>

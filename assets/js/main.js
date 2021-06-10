@@ -29,7 +29,7 @@ $(document).ready(function(){
 
     //SEARCH
     $(".btn_search, .icon_arrow").on('click', function(){
-        $(".block_filters").toggle('slide');
+        $(".block_filters").slideToggle('slow');
     })
 // ==============================================================
 
@@ -95,17 +95,29 @@ $(document).ready(function(){
             customDirectionNav: $(".custom-navigation a")
     });}
 
-    $('.flexslider').flexslider({
-        animation: "slide",
-        animationLoop: false,
-        itemWidth: 200,
-        itemMargin: 20,
-        minItems: 5,
-        maxItems: 5,
-        controlNav: false,
-        controlsContainer: $(".custom-controls-container"),
-        customDirectionNav: $(".custom-navigation a")
-        });
+// ==============================================================
+    // LECTEUR CAROUSSEL
+    // 1
+    $(".btn_1").on('click', function() {
+        if ($("#player_1")[0].paused == false) {
+            $("#player_1")[0].pause();
+        } else {
+            $("#player_2")[0].pause();
+            $("#player_1")[0].play();
+        }
+    });
+    
+    // 2
+    $(".btn_2").click(function() {
+        if ($("#player_2")[0].paused == false) {
+            $("#player_2")[0].pause();
+        } else {
+            $("#player_1")[0].pause();
+            $("#player_2")[0].play();
+        }
+    });
+
+
 // ==============================================================
 
     //ANCOR SMOOOTH SCROLL
@@ -121,7 +133,7 @@ $(document).ready(function(){
     $('.btn_bottom_keepvibz').on('click', function(){
         $('.submenu_center1').slideToggle('slow');
     })
-    $('.btn_bottom_explorer').on('click', function(){
+    $('.btn_bottom_navigation').on('click', function(){
         $('.submenu_center2').slideToggle('slow');
     })
     

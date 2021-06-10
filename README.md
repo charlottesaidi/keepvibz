@@ -10,6 +10,7 @@ npm install
 ```  
 __Webpack Compile__
 ```bash
+npm run dev-server  
 npm run watch
 ```  
 
@@ -19,6 +20,9 @@ npm run watch
 
 __Création de la base de donnée__
 ```bash
+php bin/console doctrine:database:create
+```  
+```bash
 php bin/console doctrine:migrations:migrate
 ```  
 __Fixtures(fake datas)__
@@ -26,7 +30,7 @@ __Fixtures(fake datas)__
 php bin/console doctrine:fixtures:load
 ```  
 __Modèle de données__
-![modele_logique_de_donnees](https://www.zupimages.net/up/21/22/32rg.png) 
+![modele_logique_de_donnees](https://www.zupimages.net/up/21/23/uhg7.png) 
 
 ##
 

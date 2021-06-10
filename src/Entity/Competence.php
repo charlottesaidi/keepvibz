@@ -33,11 +33,7 @@ class Competence
     private $title;
 
     /**
-     * @ORM\Column(type="boolean")
-     */
-    private $actif;
-
-    /**
+     * @Assert\Unique
      * @ORM\Column(type="datetime")
      */
     private $created_at;
@@ -77,18 +73,6 @@ class Competence
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getActif(): ?bool
-    {
-        return $this->actif;
-    }
-
-    public function setActif(bool $actif): self
-    {
-        $this->actif = $actif;
 
         return $this;
     }

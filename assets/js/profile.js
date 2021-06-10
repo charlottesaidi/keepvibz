@@ -22,14 +22,17 @@ function openSection(evt, sectionName, tab, links) {
 document.querySelector('#prof-link').addEventListener('click', (e) => {
     openSection(e, 'profil', 'tabcontent', 'tablinks')
 })
-document.querySelector('#contrib-link').addEventListener('click', (e) => {
-    openSection(e, 'contributions', 'tabcontent', 'tablinks')
+document.querySelector('#top-link').addEventListener('click', (e) => {
+    openSection(e, 'toplines', 'tabcontent', 'tablinks')
+})
+document.querySelector('#instru-link').addEventListener('click', (e) => {
+    openSection(e, 'instrus', 'tabcontent', 'tablinks')
+})
+document.querySelector('#text-link').addEventListener('click', (e) => {
+    openSection(e, 'textes', 'tabcontent', 'tablinks')
 })
 document.querySelector('#fav-link').addEventListener('click', (e) => {
     openSection(e, 'favoris', 'tabcontent', 'tablinks')
-})
-document.querySelector('#mess-link').addEventListener('click', (e) => {
-    openSection(e, 'annonces', 'tabcontent', 'tablinks')
 })
 
 /*

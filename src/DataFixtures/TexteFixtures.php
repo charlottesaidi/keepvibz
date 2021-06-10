@@ -14,6 +14,7 @@ class TexteFixtures extends Fixture implements DependentFixtureInterface
         $texte1 = new Texte();
         $texte1->setTitle('Texte 1');
         $texte1->setUser($this->getReference('user3'));
+        $texte1->setInstru($this->getReference('instru1'));
         $texte1->setStatus('published');
         $texte1->setContent('On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même.');
 
@@ -26,6 +27,7 @@ class TexteFixtures extends Fixture implements DependentFixtureInterface
     {
         return [
             UserFixtures::class,
+            InstruFixtures::class,
         ];
     }
 }

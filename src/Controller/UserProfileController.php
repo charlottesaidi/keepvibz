@@ -62,8 +62,9 @@ class UserProfileController extends AbstractController
                     return new Response($e->getMessage());
                 }
                 if($user->getAvatar() != null) {
-                    $entityManager->remove($user->getAvatar());
-                    $entityManager->flush();
+                // $entityManager = $this->getDoctrine()->getManager();
+                // $entityManager->remove($user->getAvatar());
+                // $entityManager->flush();
                 }
                 $avatar->setUser($user);
                 $avatar->setFile($fileName);

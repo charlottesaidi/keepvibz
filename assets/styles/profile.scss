@@ -110,6 +110,16 @@ body {
                         width: 33.33333%;
                         padding: 10px 0;
                     }
+                    .avatar {
+                        height: 200px;
+                        width: 200px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                    }
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
                     .btn-secondary {
                         color: $font-secondary;
                         border: $font-secondary 1px solid;

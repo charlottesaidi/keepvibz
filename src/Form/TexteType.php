@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class TexteType extends AbstractType
 {
@@ -19,11 +21,16 @@ class TexteType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre',
             ])
-            ->add('content', TextareaType::class, [
+            ->add('refrain', TextareaType::class, [
                 'label' => 'Refrain',
             ])
-            ->add('content', TextareaType::class, [
+            ->add('couplet', TextareaType::class, [
                 'label' => 'Couplet',
+            ])
+            ->add('instru', TextType::class, [
+                'mapped' => false,
+                'label' => 'Pour quelle morceau ?',
+                'required' => false,
             ])
             ->add('status', ChoiceType::class, [
                 'label' => 'Status',

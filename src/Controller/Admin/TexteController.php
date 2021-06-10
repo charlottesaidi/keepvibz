@@ -36,17 +36,19 @@ class TexteController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{id}', name: 'texte_new', methods: ['GET', 'POST'])]
-    public function new($id, Request $request, InstruRepository $instruRepository): Response
+    #[Route('/new', name: 'texte_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, InstruRepository $instruRepository): Response
     {
-        $instru = $instruRepository->find($id);
         $texte = new Texte();
         $form = $this->createForm(TexteType::class, $texte);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setUser($this->getUser());
-            $texte->setInstru($instru);
+            if($form->get('instru')->getData() != null) {
+                $instru = $instruRepository->findOneByTitle($form->get('instru')->getData());
+                $texte->setInstru($instru);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($texte);
             $entityManager->flush();

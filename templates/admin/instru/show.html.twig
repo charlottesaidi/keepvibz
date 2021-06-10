@@ -89,7 +89,7 @@
                                                 <a class="btn app-btn-secondary" href="{{ path('instru_edit', {'id': instru.id}) }}">Modifier</a>
                                             </div>
                                             <div class="col-auto">
-                                                <a class="btn app-btn-secondary" href="{{ path('texte_new', {'id': instru.id}) }}">Créer un texte pour ce morceau</a>
+                                                <a class="btn app-btn-secondary" href="{{ path('texte_new') }}">Créer un texte pour ce morceau</a>
                                             </div>
                                             <div class="col-auto">
                                                 {{ include('admin/instru/_delete_form.html.twig') }}

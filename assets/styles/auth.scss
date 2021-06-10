@@ -86,9 +86,20 @@ table {
 .full-height {
 	height: 100%; 
 }
+
 body {
     background: $theme;
     color: $font-primary;
+	.invalid-feedback.d-block{
+						border: 1px rgb(196, 1, 1) solid;
+						display: inline-block;
+						color: rgb(196, 1, 1);
+						border-radius: 3px;
+						padding: 5px 10px;
+						margin: 8px 0;
+						font-weight: bold;
+						font-size: 14px;
+	}
 	.auth {
 		position: absolute;
 		left: 0;

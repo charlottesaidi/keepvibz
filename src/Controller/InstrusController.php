@@ -2,25 +2,27 @@
 
 namespace App\Controller;
 
+use App\Form\InstruType;
+use App\Entity\Instru;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[Route('/instrus')]
 class InstrusController extends AbstractController
 {
-    #[Route('/instrus', name: 'instrus')]
+    #[Route('/', name: 'instrus')]
     public function index(): Response
     {
-        $instru = ""
-        return $this->render('instrus/index.html.twig', [
-            'controller_name' => 'InstrusController',
-        ]);
-
+        
+        return $this->render('instrus/index.html.twig');
     }
 
     #[Route('/new', name: 'instrus_new', methods: ['GET', 'POST'])]
     public function new(Request $request): Response
     {
+        // $this->denyAccessUnlessGranted('ROLE_USER');
         $instru = new Instru();
         $form = $this->createForm(InstruType::class, $instru);
         $form->handleRequest($request);
@@ -85,7 +87,7 @@ class InstrusController extends AbstractController
             return $this->redirectToRoute('instru_index');
         }
 
-        return $this->render('admin/instru/new.html.twig', [
+        return $this->render('instrus/new.html.twig', [
             'instru' => $instru,
             'form' => $form->createView(),
         ]);

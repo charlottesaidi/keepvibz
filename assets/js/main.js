@@ -108,7 +108,7 @@ $(document).ready(function(){
     });
     
     // 2
-    $(".btn_2").click(function() {
+    $(".btn_2").on('click', function() {
         if ($("#player_2")[0].paused == false) {
             $("#player_2")[0].pause();
         } else {

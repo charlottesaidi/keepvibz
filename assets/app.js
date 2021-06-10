@@ -23,7 +23,15 @@ import './plugs/flexslider/';
 
 
 // any CSS you import will output into a single css file (app.css in this case)
+//INSTRUS
+import './styles/instrus.css';
+
+//TEXTES
+import './styles/textes.css';
+
+//HOME
 import './styles/app.css';
+
 
 // start the Stimulus application
 import './bootstrap';

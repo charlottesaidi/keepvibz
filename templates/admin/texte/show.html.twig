@@ -54,8 +54,14 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <th class="cell">Contenu</th>
-                                                <td class="cell">{{ texte.content }}</td>
+                                                <th class="cell">Refrain</th>
+                                                <td class="cell">{{ texte.refrain|nl2br }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Couplet</th>
+                                                <td class="cell">{% for couplet in texte.couplet|nl2br %}
+                                                    <p> {{couplet}} </p>
+                                                {% endfor %}
                                             </tr>
                                             <tr>
                                                 <th class="cell">Date de publication</th>

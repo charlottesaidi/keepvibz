@@ -103,6 +103,10 @@ class AvatarController extends AbstractController
     public function delete(Request $request, Avatar $avatar): Response
     {
         if ($this->isCsrfTokenValid('delete'.$avatar->getId(), $request->request->get('_token'))) {
+            if($avatar->getFile() != null) {
+                $filename = 'uploads/images/users' . $topline->getFile();
+                unlink($filename);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($avatar);
             $entityManager->flush();

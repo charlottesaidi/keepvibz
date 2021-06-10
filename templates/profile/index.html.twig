@@ -147,7 +147,7 @@
                     <div class="attr-block description">
                         <div class="title-block">
                             {% if app.user.bio %}
-                                    <p> {{ app.user.bio }} </p>  
+                                    <p> {{ app.user.bio|nl2br }} </p>  
                                 {% else %}
                             {% endif %}
                         </div>

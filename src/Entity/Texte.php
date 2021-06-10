@@ -39,13 +39,22 @@ class Texte
     /**
      * @Assert\NotBlank
      * @Assert\Length(
-     *      min = 2,
+     *      min = 10,
+     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
+     * )
+     * @ORM\Column(type="json")
+     */
+    private $couplet = [];
+
+    /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     *      min = 10,
      *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
      * )
      * @ORM\Column(type="text")
      */
-    private $content;
-    
+    private $refrain;
     /**
      * @ORM\Column(type="datetime")
      */
@@ -117,6 +126,18 @@ class Texte
 
         return $this;
     }
+    public function getCouplet(): array
+    {
+        $couplet = $this->couplet;
+        return array_unique($couplet);
+    }
+
+    public function setCouplet(array $couplet): self
+    {
+        $this->couplet = $couplet;
+
+        return $this;
+    }
 
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -174,6 +195,18 @@ class Texte
     public function setInstru(?Instru $instru): self
     {
         $this->instru = $instru;
+
+        return $this;
+    }
+
+    public function getRefrain(): ?string
+    {
+        return $this->refrain;
+    }
+
+    public function setRefrain(string $refrain): self
+    {
+        $this->refrain = $refrain;
 
         return $this;
     }

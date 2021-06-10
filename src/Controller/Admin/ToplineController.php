@@ -45,6 +45,32 @@ class ToplineController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $topline->setUser($this->getUser());
+            
+            // fichier
+            if ($topline->getFile() != null) {
+                $directory = 'uploads';
+                $subdirectory = 'uploads/toplines';
+
+                if(!is_dir($directory)) {
+                    mkdir($directory);
+                    if(!is_dir($subdirectory)) {
+                        mkdir($subdirectory);
+                    }
+                } 
+
+                $file = $form->get('file')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('toplines_directory'), // Le dossier dans lequel le fichier va etre chargé
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    return new Response($e->getMessage());
+                }
+                $topline->setFile($fileName);
+            }
+        
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($topline);
             $entityManager->flush();
@@ -74,6 +100,31 @@ class ToplineController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $topline->setModifiedAt(new \dateTime());
+            
+            // fichier
+            if ($topline->getFile() != null) {
+                $directory = 'uploads';
+                $subdirectory = 'uploads/toplines';
+
+                if(!is_dir($directory)) {
+                    mkdir($directory);
+                    if(!is_dir($subdirectory)) {
+                        mkdir($subdirectory);
+                    }
+                } 
+
+                $file = $form->get('file')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('toplines_directory'), // Le dossier dans lequel le fichier va etre chargé
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    return new Response($e->getMessage());
+                }
+                $topline->setFile($fileName);
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('topline_index');
@@ -89,6 +140,10 @@ class ToplineController extends AbstractController
     public function delete(Request $request, Topline $topline): Response
     {
         if ($this->isCsrfTokenValid('delete'.$topline->getId(), $request->request->get('_token'))) {
+            if($topline->getFile() != null) {
+                $filename = 'uploads/toplines/' . $topline->getFile();
+                unlink($filename);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($topline);
             $entityManager->flush();

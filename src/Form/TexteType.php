@@ -20,7 +20,10 @@ class TexteType extends AbstractType
                 'label' => 'Titre',
             ])
             ->add('content', TextareaType::class, [
-                'label' => 'Contenu',
+                'label' => 'Refrain',
+            ])
+            ->add('content', TextareaType::class, [
+                'label' => 'Couplet',
             ])
             ->add('status', ChoiceType::class, [
                 'label' => 'Status',

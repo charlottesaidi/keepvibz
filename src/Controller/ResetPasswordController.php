@@ -16,12 +16,15 @@ use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\VarDumper\Cloner\Data;
+use App\Controller\RegistrationController;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 
 use function PHPUnit\Framework\isNull;
 
 #[Route('/reset-password')]
 class ResetPasswordController extends AbstractController
 {
+    private $emailVerifier;
      /**
      * Display & process form to request a password reset.
      */
@@ -36,10 +39,17 @@ class ResetPasswordController extends AbstractController
             $email = $form -> get("email") -> getData();
             $user = $ur -> findOneBySomeField($email);
             if($user == Null){
-               $error = 'T TRO NUL';
+               $error = 'Cette adresse mail n\'est pas enregistrée';
                 
             }else{
-               return $this->redirectToRoute('app_check_email');
+                $email = (new TemplatedEmail())
+                    ->from(new Address('no-reply@keepvibz.fr', 'KeepVibz Registration'))
+                    ->to($user->getEmail())
+                    ->subject('Modification du mot de passe')
+                    ->htmlTemplate('reset_password/reset_password_email.html.twig');
+                $mailer->send($email);
+
+               return $this->redirectToRoute('app_check_email');            
             }
             
             // vérifier le mail => erreur ou succès

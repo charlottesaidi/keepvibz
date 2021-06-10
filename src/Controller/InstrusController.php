@@ -11,9 +11,11 @@ class InstrusController extends AbstractController
     #[Route('/instrus', name: 'instrus')]
     public function index(): Response
     {
+        $instru = ""
         return $this->render('instrus/index.html.twig', [
             'controller_name' => 'InstrusController',
         ]);
+
     }
 
     #[Route('/new', name: 'instrus_new', methods: ['GET', 'POST'])]

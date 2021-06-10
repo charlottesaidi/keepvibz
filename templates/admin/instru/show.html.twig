@@ -1,0 +1,107 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Admin | Instrus{% endblock %}
+
+{% block body %}
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Fiche Instrumentales</h1>
+				    </div>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <tbody>
+                                            <tr>
+                                                <th class="cell">Référence</th>
+                                                <td class="cell">#{{ instru.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Toplines associées</th>
+                                                <td class="cell"> 
+                                                {% for topline in instru.toplines %}
+                                                    <span><a href="{{ path('topline_show', {'id': topline.id}) }}">{{ topline.title }}</a></span><br>
+                                                {% endfor %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Textes associés</th>
+                                                <td class="cell"> 
+                                                {% for texte in instru.textes %}
+                                                    <span><a href="{{ path('texte_show', {'id': texte.id}) }}">{{ texte.title }}</a></span><br>
+                                                {% endfor %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Titre</th>
+                                                <td class="cell">{{ instru.title }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Auteur</th>
+                                                <td class="cell">{{ instru.user.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Genre</th>
+                                                <td class="cell">
+                                                    {% for genre in instru.genre %}
+                                                        <span>{{ genre }}</span><br>
+                                                    {% endfor %}
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Bpm</th>
+                                                <td class="cell">{{ instru.bpm }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Key</th>
+                                                <td class="cell">{{ instru.cle }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Fichier</th>
+                                                <td class="cell">{{ instru.file }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Image associée</th>
+                                                <td class="cell">{{ instru.image }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Date de publication</th>
+                                                <td class="cell">{{ instru.createdAt ? instru.createdAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Dernière modification</th>
+                                                <td class="cell">{{ instru.modifiedAt ? instru.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="container mt-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <a class="btn app-btn-secondary" href="{{ path('instru_edit', {'id': instru.id}) }}">Modifier</a>
+                                            </div>
+                                            <div class="col-auto">
+                                                <a class="btn app-btn-secondary" href="{{ path('texte_new', {'id': instru.id}) }}">Créer un texte pour ce morceau</a>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{ include('admin/instru/_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

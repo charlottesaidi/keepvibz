@@ -22,13 +22,16 @@
                         <button href="#!" class="tablinks" id="prof-link">Profil</button>
                     </li>
                     <li>
-                        <button href="#!" class="tablinks" id="contrib-link">Contributions</button>
+                        <button href="#!" class="tablinks" id="instru-link">Mes Instrus</button>
                     </li>
                     <li>
-                        <button href="#!" class="tablinks" id="fav-link">Favoris</button>
+                        <button href="#!" class="tablinks" id="top-link">Mes Toplines</button>
                     </li>
                     <li>
-                        <button href="#!" class="tablinks" id="mess-link">Mes annonces</button>
+                        <button href="#!" class="tablinks" id="text-link">Mes Textes</button>
+                    </li>
+                    <li>
+                        <button href="#!" class="tablinks" id="fav-link">Mes Favoris</button>
                     </li>
                 </ul>
             </nav>
@@ -241,34 +244,77 @@
                 </div>
             </div>
 
-            <div id="contributions" class="tabcontent" style="display: none">
-                <h2>Contributions</h2>
-            </div>
-
-            <div id="favoris" class="tabcontent" style="display: none">
-                <h2>Favoris</h2>
-            </div>
-
-            <div id="annonces" class="tabcontent" style="display: none">
-                <h2>Mes annonces</h2>
-                <div><a class="link" href="{{path('annonces_new')}}">Poster une nouvelle annonce</a></div>
+            <div id="instrus" class="tabcontent" style="display: none">
+                <h2>Mes Instrus</h2>
                 <div>
-                    {% for annonce in app.user.annonces %}
+                    {% for instru in app.user.instrus %}
                         <div>
-                            <h4> {{annonce.title}} </h4>
-                            <p> {{ annonce.createdAt ? annonce.createdAt|date('d/m/Y') : '' }} </p>
-                            <p> {{ annonce.createdAt ? annonce.modifiedAt|date('H:i') : '' }} </p>
-                            <p> {% if annonce.status == 'draft' %}
-                                    Brouillon
-                                {% endif %}
-                                {% if annonce.status == 'published' %}
-                                    Publié
-                                {% endif %}
-                            </p>
-                            <a class="btn-primary" href="{{ path('annonces_edit', {'id': annonce.id}) }}">Modifier</a>
+                            <div>
+                                <a class="btn-secondary" href="">Uploader un morceau</a>
+                            </div>
+                            <div>
+                                <img> {# instru.image #}
+                            </div>
+                            <div>
+                                <p>{{instru.title}}</p>
+                                <p>{{ instru.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
+                                {% for genre in instru.genre %}
+                                    <p> {{genre}} </p>
+                                {% endfor %}
+                            </div>
+                            <div> 
+                                {# piste audio, instru.file #} 
+                            </div>
+                            <div> 
+                                <a class="btn-secondary" href="">Modifier</a>
+                            </div>
                         </div>
                     {% endfor %}
                 </div>
+            </div>
+
+            <div id="toplines" class="tabcontent" style="display: none">
+                <h2>Mes Toplines</h2>
+                <div>
+                    <div>
+                        <a class="btn-secondary" href="">Uploader une topline</a>
+                    </div>
+                    {% for topline in app.user.toplines %}
+                        <div>
+                            <div>
+                                <p>{{topline.title}}</p>
+                                {% for instru in topline.instrus %}
+                                    <p> {{instrus.title}} </p>
+                                {% endfor %}
+                                <p>{{ topline.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
+                            </div>
+                            <div> 
+                                {# piste audio, topline.file #}
+                            </div>
+                            <div>
+                                <a href="">Modifier</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="textes" class="tabcontent" style="display: none">
+                <h2>Mes Textes</h2>
+                <div>
+                    {% for texte in app.user.textes %}
+                        <div>
+                            <p>{{texte.title}}</p>
+                            <p>{{ texte.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
+                            <p>{{texte.instru.title}} </p>
+                            <a href="">Modifier</a>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div id="favoris" class="tabcontent" style="display: none">
+                <h2>Mes Favoris</h2>
             </div>  
 
         </div>

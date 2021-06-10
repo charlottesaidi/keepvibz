@@ -12,22 +12,18 @@ class CompetenceFixtures extends Fixture
     {
         $competence1 = new Competence();
         $competence1->setTitle('Beatmaker');
-        $competence1->setActif(true);
         $manager->persist($competence1);
 
         $competence2 = new Competence();
         $competence2->setTitle('Topliner');
-        $competence2->setActif(true);
         $manager->persist($competence2);
 
         $competence3 = new Competence();
         $competence3->setTitle('Parolier');
-        $competence3->setActif(true);
         $manager->persist($competence3);
 
         $competence4 = new Competence();
         $competence4->setTitle('Chanteur');
-        $competence4->setActif(true);
         $manager->persist($competence4);
 
         $manager->flush();

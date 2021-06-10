@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
- * @UniqueEntity(fields={"email"}, message="Un compte existe déjà avec cette adresse e-mail")
+ * @UniqueEntity(fields={"email"}, message="Un utilisateur existe déjà avec cette adresse e-mail")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -116,32 +116,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $competences;
 
     /**
-     * @ORM\OneToMany(targetEntity=Annonce::class, mappedBy="user")
-     */
-    private $annonces;
-
-    /**
      * @ORM\OneToOne(targetEntity=Avatar::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $avatar;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Audio::class, mappedBy="user")
-     */
-    private $audios;
 
     /**
      * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="user")
      */
     private $textes;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="user")
+     */
+    private $toplines;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Instru::class, mappedBy="user")
+     */
+    private $instrus;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
         $this->competences = new ArrayCollection();
-        $this->annonces = new ArrayCollection();
-        $this->audios = new ArrayCollection();
         $this->textes = new ArrayCollection();
+        $this->toplines = new ArrayCollection();
+        $this->instrus = new ArrayCollection();
     }
 
 
@@ -346,36 +346,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection|Annonce[]
-     */
-    public function getAnnonces(): Collection
-    {
-        return $this->annonces;
-    }
-
-    public function addAnnonce(Annonce $annonce): self
-    {
-        if (!$this->annonces->contains($annonce)) {
-            $this->annonces[] = $annonce;
-            $annonce->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAnnonce(Annonce $annonce): self
-    {
-        if ($this->annonces->removeElement($annonce)) {
-            // set the owning side to null (unless already changed)
-            if ($annonce->getUser() === $this) {
-                $annonce->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getAvatar(): ?Avatar
     {
         return $this->avatar;
@@ -384,36 +354,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatar(?Avatar $avatar): self
     {
         $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Audio[]
-     */
-    public function getAudios(): Collection
-    {
-        return $this->audios;
-    }
-
-    public function addAudio(Audio $audio): self
-    {
-        if (!$this->audios->contains($audio)) {
-            $this->audios[] = $audio;
-            $audio->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAudio(Audio $audio): self
-    {
-        if ($this->audios->removeElement($audio)) {
-            // set the owning side to null (unless already changed)
-            if ($audio->getUser() === $this) {
-                $audio->setUser(null);
-            }
-        }
 
         return $this;
     }
@@ -442,6 +382,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($texte->getUser() === $this) {
                 $texte->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Topline[]
+     */
+    public function getToplines(): Collection
+    {
+        return $this->toplines;
+    }
+
+    public function addTopline(Topline $topline): self
+    {
+        if (!$this->toplines->contains($topline)) {
+            $this->toplines[] = $topline;
+            $topline->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTopline(Topline $topline): self
+    {
+        if ($this->toplines->removeElement($topline)) {
+            // set the owning side to null (unless already changed)
+            if ($topline->getUser() === $this) {
+                $topline->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Instru[]
+     */
+    public function getInstrus(): Collection
+    {
+        return $this->instrus;
+    }
+
+    public function addInstru(Instru $instru): self
+    {
+        if (!$this->instrus->contains($instru)) {
+            $this->instrus[] = $instru;
+            $instru->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInstru(Instru $instru): self
+    {
+        if ($this->instrus->removeElement($instru)) {
+            // set the owning side to null (unless already changed)
+            if ($instru->getUser() === $this) {
+                $instru->setUser(null);
             }
         }
 

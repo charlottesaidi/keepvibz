@@ -1,6 +1,6 @@
 {% extends 'admin-base.html.twig' %}
 
-{% block title %}Compétences{% endblock %}
+{% block title %}Admin | Instrumentales{% endblock %}
 
 {% block body %}
     <div class="app-wrapper">
@@ -10,7 +10,7 @@
 			    
 			    <div class="row g-3 mb-4 align-items-center justify-content-between">
 				    <div class="col-auto">
-			            <h1 class="app-page-title mb-0">Compétences</h1>
+			            <h1 class="app-page-title mb-0">Instrumentales</h1>
 				    </div>
 				    <div class="col-auto">
 					     <div class="page-utilities">
@@ -32,7 +32,7 @@
 
                 <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
                     <div class="col-auto">
-                        <a class="btn app-btn-secondary mb-3" href="{{ path('competence_new') }}">Ajouter une compétence</a>
+                        <a class="btn app-btn-secondary mb-3" href="{{ path('instru_new') }}">Uploader un morceau</a>
                     </div>
                 </div>
 
@@ -45,32 +45,44 @@
                                         <thead>
                                             <tr>
                                                 <th class="cell">Référence</th>
-                                                <th class="cell">Label</th>
-                                                <th class="cell">Date d'ajout</th>
+                                                <th class="cell">Titre</th>
+                                                <th class="cell">Auteur</th>
+                                                <th class="cell">Genre</th>
+                                                <th class="cell">Bpm</th>
+                                                <th class="cell">Key</th>
+                                                <th class="cell">Date de publication</th>
                                                 <th class="cell">Dernière modification</th>
                                                 <th class="cell">Actions</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                        {% for competence in competences %}
+                                        {% for instru in instrus %}
                                             <tr>
-                                                <td class="cell">#{{ competence.id }}</td>
-                                                <td class="cell">{{ competence.title }}</td>
+                                                <td class="cell">#{{ instru.id }}</td>
+                                                <td class="cell">{{ instru.title }}</td>
+                                                <td class="cell">{{ instru.user.name }}</td>
                                                 <td class="cell">
-                                                    <span class="cell-data">{{ competence.createdAt ? competence.createdAt|date('d/m/Y') : '' }}</span>
-                                                    <span class="note">{{ competence.createdAt ? competence.createdAt|date('H:i') : '' }}</span>
+                                                    {% for genre in instru.genre %}
+                                                        <span>{{ genre }}</span><br>
+                                                    {% endfor %}
                                                 </td>
-                                                <td class="cell"><span class="cell-data">{{ competence.modifiedAt ? competence.modifiedAt|date('d/m/Y') : '' }}</span>
-                                                    <span class="note">{{ competence.modifiedAt ? competence.modifiedAt|date('H:i') : '' }}</span>
+                                                <td class="cell">{{ instru.bpm }}</td>
+                                                <td class="cell">{{ instru.cle }}</td>
+                                                <td class="cell">
+                                                    <span class="cell-data">{{ instru.createdAt ? instru.createdAt|date('d/m/Y') : '' }}</span>
+                                                    <span class="note">{{ instru.createdAt ? instru.createdAt|date('H:i') : '' }}</span>
+                                                </td>
+                                                <td class="cell"><span class="cell-data">{{ instru.modifiedAt ? instru.modifiedAt|date('d/m/Y') : '' }}</span>
+                                                    <span class="note">{{ instru.modifiedAt ? instru.modifiedAt|date('H:i') : '' }}</span>
                                                 </td>
                                                 <td class="cell">
-                                                    <a href="{{ path('competence_show', {'id': competence.id}) }}" class="btn-sm app-btn-secondary">Détails</a>
-                                                    <a href="{{ path('competence_edit', {'id': competence.id}) }}" class="btn-sm app-btn-secondary">Modifier</a>
+                                                    <a href="{{ path('instru_show', {'id': instru.id}) }}" class="btn-sm app-btn-secondary">Détails</a>
+                                                    <a href="{{ path('instru_edit', {'id': instru.id}) }}" class="btn-sm app-btn-secondary">Modifier</a>
                                                 </td>
                                             </tr>
                                         {% else %}
                                             <tr>
-                                                <td  class="cell" colspan="5">Aucun résultat trouvé</td>
+                                                <td  class="cell" colspan="11">Aucun résultat trouvé</td>
                                             </tr>
                                         {% endfor %}
                                         </tbody>

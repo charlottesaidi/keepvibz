@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}KeepVibz | Ensemble on est plus fort !{% endblock %}
 
 {% block body %}
     {# SECTION 1 #}
-    <section id="section_1" class="section_1">
+    <section id="section_1" class="section_home_1">
         <div class="background_1">
             <img class="gif_background" src="{{asset('assets/images/background/fond_projet_png.png')}}" alt="image animé en fond d'ecran">
             <div class="gradient"></div>
@@ -20,7 +20,7 @@
                         <h2 class="accroche">"Ensemble <span>on est plus fort !</span>"</h2>
                     </div>
                     <h2 class="latest_upload">Derniers uploads</h2>
-                    <audio preload controls autoplay>
+                    <audio preload controls>
                         <source src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" type="audio/mpeg">
                     </audio>
                     <h3 class="title_player">Titre (Artiste - BPM)</h3>
@@ -29,24 +29,8 @@
     </section>
     {# FIN SECTION 1 #}
 
-    <section class="section1_responsive">
-        <div class="block_player_responsive">
-            <div class="content_player">
-                <div class="top_block_accroche">
-                    <h2 class="accroche">"Ensemble <span>on est plus fort !</span>"</h2>
-                </div>
-                <h2 class="latest_upload">Derniers uploads</h2>
-                <audio preload controls autoplay>
-                    <source src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" type="audio/mpeg">
-                </audio>
-                <h3 class="title_player">Titre (Artiste - BPM)</h3>
-            </div>
-        </div>
-
-    </section>
-
     {# SECTION 2 #}
-    <section id="section_2" class="section_2">
+    <section id="section_2" class="section_home_2">
         <div class="wrap4">
             <h2 id="most_popular" class="most_downloads">Les plus populaires</h2>
                 <div class="flexslider carousel">
@@ -60,24 +44,36 @@
                 {# CUSTOM NAVIGATION #}
                     <ul class="slides">
                         <li class="content_download flex col">
+                            <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
                             <div class="image_downloaded">
                                 <a href="">
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="btn_play_caroussel btn_1">
+                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
+                            </div>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                         <li class="content_download flex col">
+                            <audio preload src="http://80.82.229.202/fidelite.mp3" controls id="player_2"></audio>
                             <div class="image_downloaded">
                                 <a href="">
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="btn_play_caroussel btn_2">
+                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
+                            </div>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                         <li class="content_download flex col">
                             <div class="image_downloaded">
@@ -85,9 +81,11 @@
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/3.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                         <li class="content_download flex col">
                             <div class="image_downloaded">
@@ -95,19 +93,23 @@
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/4.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                        </li>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
+                    </li>
                         <li class="content_download flex col">
                             <div class="image_downloaded">
                                 <a href="">
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/5.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                         <li class="content_download flex col">
                             <div class="image_downloaded">
@@ -115,9 +117,11 @@
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/6.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                         <li class="content_download flex col">
                             <div class="image_downloaded">
@@ -125,9 +129,11 @@
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                         <li class="content_download flex col">
                             <div class="image_downloaded">
@@ -135,9 +141,11 @@
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                         <li class="content_download flex col">
                             <div class="image_downloaded">
@@ -145,9 +153,11 @@
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/3.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                         <li class="content_download flex col">
                             <div class="image_downloaded">
@@ -155,9 +165,11 @@
                                     <img class="img_downloaded" src="{{asset('assets/images/caroussel/4.jpg')}}" alt="">
                                 </a>
                             </div>
-                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
-                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            <div class="block_info_instrus flex colrev">
+                                <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                            </div>
                         </li>
                     </ul>
                 </div>

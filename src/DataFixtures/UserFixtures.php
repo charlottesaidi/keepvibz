@@ -220,4 +220,11 @@ class UserFixtures extends Fixture
         $this->addReference('user12', $user12);
         $this->addReference('user13', $user13);
     }
+
+    public function getDependencies()
+    {
+        return [
+            CompetencesFixtures::class,
+        ];
+    }
 }

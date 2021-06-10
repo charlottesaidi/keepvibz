@@ -1,6 +1,6 @@
 {% extends 'admin-base.html.twig' %}
 
-{% block title %}{{competence.title}}{% endblock %}
+{% block title %}Admin | Toplines{% endblock %}
 
 {% block body %}
     <div class="app-wrapper">
@@ -10,7 +10,7 @@
 			    
 			    <div class="row g-3 mb-4 align-items-center justify-content-between">
 				    <div class="col-auto">
-			            <h1 class="app-page-title mb-0">Fiche Compétence</h1>
+			            <h1 class="app-page-title mb-0">Fiche Instrumentales</h1>
 				    </div>
                 </div>
 
@@ -23,29 +23,41 @@
                                         <tbody>
                                             <tr>
                                                 <th class="cell">Référence</th>
-                                                <td class="cell">#{{ competence.id }}</td>
+                                                <td class="cell">#{{ topline.id }}</td>
                                             </tr>
                                             <tr>
-                                                <th class="cell">Label</th>
-                                                <td class="cell">{{ competence.title }}</td>
+                                                <th class="cell">Morceau associé</th>
+                                                <td class="cell"> 
+                                                {% for instru in topline.instrus %}
+                                                    <span><a href="{{ path('instru_show', {'id': instru.id}) }}">{{ instru.title }}</a></span><br>
+                                                {% endfor %}
+                                                </td>
                                             </tr>
                                             <tr>
-                                                <th class="cell">Date d'ajout</th>
-                                                <td class="cell">{{ competence.createdAt ? competence.createdAt|date('d/m/Y, H:i') : '' }}</td>
+                                                <th class="cell">Titre</th>
+                                                <td class="cell">{{ topline.title }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Auteur</th>
+                                                <td class="cell">{{ topline.user.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Date de publication</th>
+                                                <td class="cell">{{ topline.createdAt ? topline.createdAt|date('d/m/Y, H:i') : '' }}</td>
                                             </tr>
                                             <tr>
                                                 <th class="cell">Dernière modification</th>
-                                                <td class="cell">{{ competence.modifiedAt ? competence.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
+                                                <td class="cell">{{ topline.modifiedAt ? topline.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                     <div class="container mt-3">
                                         <div class="row">
                                             <div class="col-auto">
-                                                <a class="btn app-btn-secondary" href="{{ path('competence_edit', {'id': competence.id}) }}">Modifier</a>
+                                                <a class="btn app-btn-secondary" href="{{ path('topline_edit', {'id': topline.id}) }}">Modifier</a>
                                             </div>
                                             <div class="col-auto">
-                                                {{ include('admin/competence/_delete_form.html.twig') }}
+                                                {{ include('admin/topline/_delete_form.html.twig') }}
                                             </div>
                                         </div>
                                     </div>

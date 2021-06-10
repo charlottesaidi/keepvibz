@@ -16,16 +16,19 @@
         {% endblock %}
     </head>
     <body>
-        {# PAGE DE CHARGEMENT #}
-        <div class="chargement">
-            <div id="preloader">
-                <div class="logo_chargement pa">
-                    <img class="img_logo_chargement" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo">
+    
+        {% if app.request.get('_route') == 'home' %}
+            {# PAGE DE CHARGEMENT #}
+            <div class="chargement">
+                <div id="preloader">
+                    <div class="logo_chargement pa">
+                        <img class="img_logo_chargement" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo">
+                    </div>
+                    <div class="loader">Please wait...</div>
                 </div>
-                <div class="loader">Please wait...</div>
             </div>
-        </div>
-        {# PAGE DE CHARGEMENT #}
+            {# PAGE DE CHARGEMENT #}
+        {% endif %}
 
         {# NAV MOBILE #}
         <div class="navigation_mobile">
@@ -33,12 +36,11 @@
                 <p class="title_nav">MENU</p>
             </div>
             <ul class="nav_mobile flex col aic">
-                <li class="link_mobile"><a href="#">Inscription</a></li>
-                <li class="link_mobile"><a href="#">Connexion</a></li>
-                <li class="link_mobile"><a href="#">Profil</a></li>
-                <li class="link_mobile"><a href="#">Annonces</a></li>
-                <li class="link_mobile"><a href="#">Audios</a></li>
-                <li class="link_mobile"><a href="#">Textes</a></li>
+                <li class="link_mobile"><a href="{{path('user_new')}}">Inscription</a></li>
+                <li class="link_mobile"><a href="{{path('app_login')}}">Connexion</a></li>
+                <li class="link_mobile"><a href="{{path('user_profile')}}">Profil</a></li>
+                <li class="link_mobile"><a href="{{path('instrus')}}">Instrus</a></li>
+                <li class="link_mobile"><a href="{{path('textes')}}">Textes</a></li>
             </ul>
         </div>
         {# NAV MOBILE #}
@@ -49,13 +51,12 @@
             <div class="wrap1 flex sb">
                 <div class="left flex">
                     <div class="logo">
-                        <a href="/"><img class="img_logo" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
+                        <a href="{{path('home')}}"><img class="img_logo" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
                     </div>
                     <nav class="navigation">
                         <ul class="nav flex">
-                            <li class="link"><a href="{{path('annonces_index')}}">Annonces</a></li>
-                            <li class="link"><a href="#">Audios</a></li>
-                            <li class="link"><a href="#">Textes</a></li>
+                            <li class="link"><a href="{{path('instrus')}}">Instrus</a></li>
+                            <li class="link"><a href="{{path('textes')}}">Textes</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -90,9 +91,10 @@
                     <img class="icon_arrow" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="icon arrow">
                     <div class="block_filters">
                         <ul class="filters">
-                            <li class="filter">Audios</li>
-                            <li class="filter">Textes</li>
-                            <li class="filter">Studios</li>
+                            <li class="filter">Hip hop</li>
+                            <li class="filter">Trap</li>
+                            <li class="filter">Rnb</li>
+                            <li class="filter">Pop</li>
                         </ul>
                     </div>
                 </div>
@@ -103,7 +105,7 @@
 
         {% endblock %}
         {# SECTION FIXE AVANT FOOTER #}
-        <section class="bottom flex aic wrap">
+        <section class="section_bottom flex aic wrap">
             <div class="wrap4 flex wrap sb">
                 <div class="left_bottom flex col aic">
                     <a class="link_img_logo_bottom" href="/"><img class="img_logo_bottom" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
@@ -114,50 +116,44 @@
                         <a href="#" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/twitter-3-64.png')}}" alt="icone twitter"></a>
                     </div>
                 </div>
-                    <div class="center1 flex col">
-                        <h4 class="title_bottom">Keepvibz<img class="btn_bottom_keepvibz" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu KeepVibz"></h4>
-                        <ul class="nav_bottom1">
-                            <li><a href="#">Accueil</a></li>
+                {# ====================================================== #}
+                <div class="center2 flex col">
+                    <h4 class="title_bottom">Navigation<img class="btn_bottom_navigation" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu Navigation"></h4>
+                    <ul class="nav_bottom1">
+                        <li><a href="#">Toutes les Instrus</a></li>
+                        <li><a href="{{path('textes')}}">Tous les Textes</a></li>
+                        <li><a href="#most_popular">Les plus populaires</a></li>
+                    </ul>
+                    {# ====================================================== #}
+                    {# SUB MENU NAVIGATION MOBILE #}
+                    <div class="submenu_center2">
+                        <ul class="nav_bottom2">
+                            <li><a href="{{path('instrus')}}">Toutes les Instrus</a></li>
+                            <li><a href="{{path('textes')}}">Tous les Textes</a></li>
+                            <li><a href="#most_popular">Les plus populaires</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {# ====================================================== #}
+                <div class="center1 flex col">
+                    <h4 class="title_bottom">Keepvibz<img class="btn_bottom_keepvibz" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu KeepVibz"></h4>
+                    <ul class="nav_bottom1">
+                        <li><a href="{{path('home')}}">Accueil</a></li>
+                        <li><a href="#">Mentions légales</a></li>
+                        <li><a href="#">F.A.Q.</a></li>
+                        <li><a href="#">Discord</a></li>
+                    </ul>
+                    {# ====================================================== #}
+                    {# SUB MENU KEEPVIBZ MOBILE #}
+                    <div class="submenu_center1">
+                        <ul class="nav_bottom2">
+                            <li><a href="{{path('home')}}">Accueil</a></li>
                             <li><a href="#">Mentions légales</a></li>
                             <li><a href="#">F.A.Q.</a></li>
                             <li><a href="#">Discord</a></li>
                         </ul>
-                        {# ====================================================== #}
-                        {# SUB MENU KEEPVIBZ MOBILE #}
-                        <div class="submenu_center1">
-                            <ul class="nav_bottom2">
-                                <li><a href="#">Accueil</a></li>
-                                <li><a href="#">Mentions légales</a></li>
-                                <li><a href="#">F.A.Q.</a></li>
-                                <li><a href="#">Discord</a></li>
-                            </ul>
-                        </div>
-                        {# ====================================================== #}
                     </div>
-                    <div class="center2 flex col">
-                        <h4 class="title_bottom">Explorer<img class="btn_bottom_explorer" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu Explorer"></h4>
-                        <ul class="nav_bottom1">
-                            <li><a href="#">Toutes les instrus</a></li>
-                            <li><a href="#">Toutes les Toplines</a></li>
-                            <li><a href="#">Tous les textes</a></li>
-                            <li><a href="#most_popular">Les plus populaires</a></li>
-                            <li><a href="#">Trouvez un studio</a></li>
-                            <li><a href="#">Recherchez des collaborateurs </a></li>
-                        </ul>
-                        {# ====================================================== #}
-                        {# SUB MENU EXPLORER MOBILE #}
-                        <div class="submenu_center2">
-                            <ul class="nav_bottom2">
-                                <li><a href="#">Toutes les instrus</a></li>
-                                <li><a href="#">Toutes les Toplines</a></li>
-                                <li><a href="#">Tous les textes</a></li>
-                                <li><a href="#most_popular">Les plus populaires</a></li>
-                                <li><a href="#">Trouvez un studio</a></li>
-                                <li><a href="#">Recherchez des collaborateurs </a></li>
-                            </ul>
-                        </div>
-                        {# ====================================================== #}
-                    </div>
+                </div>
                 <div class="right_bottom flex col">
                     <h4 class="title_bottom">Statistiques</h4>
                     <div class="block_statistiques flex sb wrap">

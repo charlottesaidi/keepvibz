@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KeepVibz | Toutes les instrus !{% endblock %}
+
+{% block body %}
+    <section id="section3" class="section_instrus_1 bgc">
+        <div class="wrap5 flex">
+            <nav class="nav_left_instrus bgl">
+                <ul>
+                    <li><a href="#">Nav 1</a></li>
+                    <li><a href="#">Nav 2</a></li>
+                    <li><a href="#">Nav 3</a></li>
+                </ul>
+            </nav>
+            <div class="content_all_instrus red">
+                <h2 class="all_instrus">Toutes les instrus</h1>
+                <div class="frfr flex wrap">
+                    <li class="content_download flex col w25">
+                        <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
+                        <div class="image_downloaded">
+                            <a href="">
+                                <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="btn_play_caroussel btn_1">
+                                <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
+                        </div>
+                        <div class="block_info_instrus flex colrev">
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </div>
+                    </li>
+                    <li class="content_download flex col w25">
+                        <audio preload src="http://80.82.229.202/fidelite.mp3" controls id="player_2"></audio>
+                        <div class="image_downloaded">
+                            <a href="">
+                                <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
+                            </a>
+                        </div>
+                        <div class="btn_play_caroussel btn_2">
+                                <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
+                        </div>
+                        <div class="block_info_instrus flex colrev">
+                            <h4 class="date_ajout_downloaded">Date d'ajout : <span class="span_downloaded">21/05/2021</span></h4>
+                            <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
+                            <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                        </div>
+                    </li>
+                </div>                
+            </div>
+        </div>
+    </section>
+{% endblock %}

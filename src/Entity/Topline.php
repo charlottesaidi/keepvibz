@@ -2,14 +2,16 @@
 
 namespace App\Entity;
 
-use App\Repository\TexteRepository;
+use App\Repository\ToplineRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass=TexteRepository::class)
+ * @ORM\Entity(repositoryClass=ToplineRepository::class)
  */
-class Texte
+class Topline
 {
     /**
      * @ORM\Id
@@ -20,9 +22,14 @@ class Texte
 
     /**
      * @Assert\NotBlank
-     * @ORM\Column(type="string")
+     * @Assert\File(
+     *    maxSize = "10000k",
+     *    mimeTypes = {"application/mp3", "application/wma", "application/flac", "application/flac"},
+     *    mimeTypesMessage = "Format de fichier invalide"
+     * )
+     * @ORM\Column(type="string", length=255)
      */
-    private $status;
+    private $file;
 
     /**
      * @Assert\NotBlank
@@ -36,16 +43,6 @@ class Texte
      */
     private $title;
 
-    /**
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min = 2,
-     *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
-     * )
-     * @ORM\Column(type="text")
-     */
-    private $content;
-    
     /**
      * @ORM\Column(type="datetime")
      */
@@ -62,19 +59,19 @@ class Texte
     private $deleted_at;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="textes")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToMany(targetEntity=Instru::class, mappedBy="toplines")
+     */
+    private $instrus;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="toplines")
      */
     private $user;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Instru::class, inversedBy="textes")
-     */
-    private $instru;
-
     public function __construct()
     {
-        $this->created_at = new \DateTime();
+        $this -> created_at = new \DateTime();
+        $this->instrus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,14 +79,14 @@ class Texte
         return $this->id;
     }
 
-    public function getStatus(): ?string
+    public function getFile(): ?string
     {
-        return $this->status;
+        return $this->file;
     }
 
-    public function setStatus(string $status): self
+    public function setFile(string $file): self
     {
-        $this->status = $status;
+        $this->file = $file;
 
         return $this;
     }
@@ -102,18 +99,6 @@ class Texte
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getContent(): ?string
-    {
-        return $this->content;
-    }
-
-    public function setContent(string $content): self
-    {
-        $this->content = $content;
 
         return $this;
     }
@@ -154,6 +139,33 @@ class Texte
         return $this;
     }
 
+    /**
+     * @return Collection|Instru[]
+     */
+    public function getInstrus(): Collection
+    {
+        return $this->instrus;
+    }
+
+    public function addInstru(Instru $instru): self
+    {
+        if (!$this->instrus->contains($instru)) {
+            $this->instrus[] = $instru;
+            $instru->addTopline($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInstru(Instru $instru): self
+    {
+        if ($this->instrus->removeElement($instru)) {
+            $instru->removeTopline($this);
+        }
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -162,18 +174,6 @@ class Texte
     public function setUser(?User $user): self
     {
         $this->user = $user;
-
-        return $this;
-    }
-
-    public function getInstru(): ?Instru
-    {
-        return $this->instru;
-    }
-
-    public function setInstru(?Instru $instru): self
-    {
-        $this->instru = $instru;
 
         return $this;
     }

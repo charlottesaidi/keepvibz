@@ -45,6 +45,57 @@ class InstruController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $instru->setUser($this->getUser());
+            
+            // fichier
+            if ($instru->getFile() != null) {
+                $directory = 'uploads';
+                $subdirectory = 'uploads/instrus';
+
+                if(!is_dir($directory)) {
+                    mkdir($directory);
+                    if(!is_dir($subdirectory)) {
+                        mkdir($subdirectory);
+                    }
+                }
+                $file = $form->get('file')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('instrus_directory'), // Le dossier dans lequel le fichier va etre chargé
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    return new Response($e->getMessage());
+                }
+                $instru->setFile($fileName);
+            }
+            // image
+            if ($instru->getImage() != null) {
+                $directory = 'uploads';
+                $subdirectory = 'uploads/images';
+                $imageDirectory = 'uploads/images/instrus';
+
+                if(!is_dir($directory)) {
+                    mkdir($directory);
+                    if(!is_dir($subdirectory)) {
+                        mkdir($subdirectory);
+                        if(!is_dir($imageDirectory)) {
+                            mkdir($imageDirectory);
+                        }
+                    }
+                }
+                $file = $form->get('image')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('imagesInstrus_directory'), // Le dossier dans lequel le fichier va etre chargé
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    return new Response($e->getMessage());
+                }
+                $instru->setImage($fileName);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($instru);
             $entityManager->flush();
@@ -74,6 +125,59 @@ class InstruController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $instru->setModifiedAt(new \dateTime());
+            if ($form->isSubmitted() && $form->isValid()) {
+                
+                // fichier
+                if ($instru->getFile() != null) {
+                    $directory = 'uploads';
+                    $subdirectory = 'uploads/instrus';
+
+                    if(!is_dir($directory)) {
+                        mkdir($directory);
+                        if(!is_dir($subdirectory)) {
+                            mkdir($subdirectory);
+                        }
+                    }
+                    $file = $form->get('file')->getData();
+                    $fileName =  uniqid(). '.' .$file->guessExtension();
+                    try {
+                        $file->move(
+                            $this->getParameter('instrus_directory'), // Le dossier dans lequel le fichier va etre chargé
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        return new Response($e->getMessage());
+                    }
+                    $instru->setFile($fileName);
+                }
+                // image
+                if ($instru->getFile() != null) {
+                    $directory = 'uploads';
+                    $subdirectory = 'uploads/images';
+                    $imageDirectory = 'uploads/images/instrus';
+
+                    if(!is_dir($directory)) {
+                        mkdir($directory);
+                        if(!is_dir($subdirectory)) {
+                            mkdir($subdirectory);
+                            if(!is_dir($imageDirectory)) {
+                                mkdir($imageDirectory);
+                            }
+                        }
+                    }
+                    $file = $form->get('image')->getData();
+                    $fileName =  uniqid(). '.' .$file->guessExtension();
+                    try {
+                        $file->move(
+                            $this->getParameter('imagesInstrus_directory'), // Le dossier dans lequel le fichier va etre chargé
+                            $fileName
+                        );
+                    } catch (FileException $e) {
+                        return new Response($e->getMessage());
+                    }
+                    $instru->setImage($fileName);
+                }
+            }
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('instru_index');
@@ -89,6 +193,14 @@ class InstruController extends AbstractController
     public function delete(Request $request, Instru $instru): Response
     {
         if ($this->isCsrfTokenValid('delete'.$instru->getId(), $request->request->get('_token'))) {
+            if($instru->getFile() != null) {
+                $filename = 'uploads/instrus/' . $topline->getFile();
+                unlink($filename);
+            }
+            if($instru->getImage() != null) {
+                $imagename = 'uploads/images/instrus' . $topline->getFile();
+                unlink($imagename);
+            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($instru);
             $entityManager->flush();

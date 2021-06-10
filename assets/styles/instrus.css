@@ -109,12 +109,11 @@ h1{position: absolute; left: -50000px;}
 /* PAGE INSTRUS */
 .main{width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 20px; background-color: #000; }
 .section_instrus{margin-top: 146px;}
-.sidebar_instrus{height: 400px; width: 200px; top: 20px; left: 20px; border-radius: 20px; background-color: #3d3c3c;}
-
+.sidebar_instrus{top: 20px; border-radius: 20px; background-color: #3d3c3c; padding: 10px 20px 20px 20px;
+}
 .right_content{width: 80%; float: right; margin-top: 20px;}
 .title_instrus{color: #fff; font-size: 2em; float: left; padding-bottom: 20px;}
 .content_download {width: 19%; position: relative; margin-bottom: 50px;}
-.sidebar_instrus { height: 250px;}
 .genre{margin: 10px 0px 30px 0px;}
 .title_instrus_genre, .title_instrus_keys{color: #fff; font-size: 2em; margin-bottom: 10px;}
 
@@ -123,7 +122,7 @@ h1{position: absolute; left: -50000px;}
     display: flex;
     width: 170px;
     height: 30px;
-    line-height: 3;
+    line-height: 2.2;
     background-color: #000;
     overflow: hidden;
     border-radius: .25em;

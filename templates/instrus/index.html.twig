@@ -38,7 +38,7 @@
                             </div>
                         </div>
                         <div class="submit">
-                            <button class="bouton_filter" ><img class="img_bouton_filter" src="{{asset('assets/images/icons/arrow-right-8-64.png')}}" alt="bouton pour filtrer la recherche"></button>
+                            <button class="bouton_filter" ><img class="img_bouton_filter" src="{{asset('assets/images/icons/play.png')}}" alt="bouton pour filtrer la recherche"></button>
                         </div>
                     </div>
                 </div>
@@ -47,14 +47,14 @@
                     <div class="content_instrus flex sb fw">
                         {% for beat in instrus %}
                             <li class="content_download_instrus flex col pr">
-                                <audio preload src="{{ asset('uploads/images' ~ beat.file) }}" controls id="player_1"></audio>
+                                <audio preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_1"></audio>
                                 <div class="image_downloaded">
                                     <a href="{{path('instru_show', {'id': beat.id})}}">
-                                        <img class="img_downloaded" src="{{ beat.image }}" alt="">
+                                        <img class="img_downloaded" src="{{ asset('uploads/images/' ~ beat.image) }}" alt="{{ beat.title }}">
                                     </a>
                                 </div>
                                 <div class="btn_play_caroussel btn_1">
-                                    <img class="img_play_caroussel" src="{{ asset('uploads/images' ~ beat.image) }}" alt="{{ beat.title }}">
+                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/arrow-right-8-64.png')}}" alt="bouton de lecture audio">
                                 </div>
                                 <div class="block_info_instrus flex col">
                                     <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>

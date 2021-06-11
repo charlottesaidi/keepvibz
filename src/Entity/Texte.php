@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\TexteRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -72,13 +74,14 @@ class Texte
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Instru::class, inversedBy="textes")
+     * @ORM\ManyToMany(targetEntity=Instru::class, inversedBy="textes")
      */
-    private $instru;
+    private $instrus;
 
     public function __construct()
     {
         $this->created_at = new \DateTime();
+        $this->instrus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -159,18 +162,6 @@ class Texte
         return $this;
     }
 
-    public function getInstru(): ?Instru
-    {
-        return $this->instru;
-    }
-
-    public function setInstru(?Instru $instru): self
-    {
-        $this->instru = $instru;
-
-        return $this;
-    }
-
     public function getRefrain(): ?string
     {
         return $this->refrain;
@@ -179,6 +170,30 @@ class Texte
     public function setRefrain(string $refrain): self
     {
         $this->refrain = $refrain;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Instru[]
+     */
+    public function getInstrus(): Collection
+    {
+        return $this->instrus;
+    }
+
+    public function addInstru(Instru $instru): self
+    {
+        if (!$this->instrus->contains($instru)) {
+            $this->instrus[] = $instru;
+        }
+
+        return $this;
+    }
+
+    public function removeInstru(Instru $instru): self
+    {
+        $this->instrus->removeElement($instru);
 
         return $this;
     }

@@ -15,14 +15,14 @@
                                     <img src="{{asset('assets/images/icons/avatar.png')}}" alt="avatar du User" class="avatar_image">
                                 </div>
                                 <div class="description_textes">
-                                    <h3 class="title_texte">Titre</h3>
-                                    <h3 class="author_textes">Auteur</h3>
+                                    <h3 class="title_texte">{{texte.title}}</h3>
+                                    <h3 class="author_textes">Par {{texte.user.name}}</h3>
                                 </div>
                                 <div class="instrus_associees flex">
                                     <p class="title_instrus_associees">Instrus associées: </p>
                                     <ul class="block_instrus_associees flex aic">
-                                    {% for texte in texte.instrus.title %}
-                                        <li class="link_instru_associee"><a href="#" class="titre_instru_associee"> {{texte.instrus.title}} </a></li>
+                                    {% for texte in texte.instrus %}
+                                        <li class="link_instru_associee"><a href="#" class="titre_instru_associee"> {{texte.title}} </a></li>
                                     {% endfor %}
                                     </ul>
                                 </div>

@@ -9,7 +9,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ToplineType extends AbstractType
 {
@@ -23,12 +22,9 @@ class ToplineType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre',
             ])
-            ->add('instrus', EntityType::class, [
-                'class' => Instru::class,
+            ->add('instru', TextType::class, [
                 'label' => 'Pour quelle morceau ?',
-                'choice_label' => 'title',
-                'multiple' => true,
-                'expanded' => false,
+                'mapped' => false
             ])
         ;
     }

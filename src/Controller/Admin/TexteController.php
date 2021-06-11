@@ -62,7 +62,7 @@ class TexteController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'texte_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'texte-show', methods: ['GET'])]
     public function show(Texte $texte): Response
     {
         return $this->render('admin/texte/show.html.twig', [

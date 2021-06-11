@@ -129,4 +129,10 @@ $(document).ready(function(){
         $('.submenu_center2').slideToggle('slow');
     })
     
+
+    //GENRE INSTRUS
+    $('.btn_genre').on('click', function(){
+        $('.block_genre').slideToggle('slow');
+    })
+    
 })

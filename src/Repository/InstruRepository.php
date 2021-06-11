@@ -45,6 +45,16 @@ class InstruRepository extends ServiceEntityRepository
             ->getOneOrNullResult()
         ;
     }
+    
+    public function findLatest()
+    {
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.createdAt', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 
     // /**
     //  * @return Instru[] Returns an array of Instru objects

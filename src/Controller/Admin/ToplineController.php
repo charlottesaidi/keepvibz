@@ -48,7 +48,7 @@ class ToplineController extends AbstractController
             $topline->setUser($this->getUser());
             
             // fichier
-            if ($topline->getFile() != null) {
+            if ($form->get('file')->getData() != null) {
                 $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/toplines');
 
                 $file = $form->get('file')->getData();

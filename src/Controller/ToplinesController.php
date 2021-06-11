@@ -48,16 +48,8 @@ class ToplinesController extends AbstractController
             $topline->setUser($this->getUser());
             
             // fichier
-            if ($topline->getFile() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/toplines';
-
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                    }
-                } 
+            if ($form->get('file')->getData() != null) {
+                $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/toplines');
 
                 $file = $form->get('file')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
@@ -104,15 +96,7 @@ class ToplinesController extends AbstractController
             
             // fichier
             if ($topline->getFile() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/toplines';
-
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                    }
-                } 
+                $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/toplines');
 
                 $file = $form->get('file')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();

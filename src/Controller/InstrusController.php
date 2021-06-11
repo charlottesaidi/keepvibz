@@ -4,22 +4,24 @@ namespace App\Controller;
 
 use App\Form\InstruType;
 use App\Entity\Instru;
+use App\Repository\InstruRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\FolderGenerator;
+use JasonGrimes\Paginator;
 
 #[Route('/instrus')]
 class InstrusController extends AbstractController
 {
     #[Route('/', name: 'instrus')]
-    public function index(): Response
+    public function index(InstruRepository $instruRepository): Response
     {
         $totalItems = $instruRepository->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
-        $urlPattern = '/admin/instru?page=(:num)';
+        $urlPattern = '/instru?page=(:num)';
         $offset = 0;
         if(!empty($_GET['page'])) {
             $currentPage = $_GET['page'];
@@ -45,15 +47,8 @@ class InstrusController extends AbstractController
             
             // fichier
             if ($instru->getFile() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/instrus';
+                $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/instrus');
 
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                    }
-                }
                 $file = $form->get('file')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
@@ -115,15 +110,8 @@ class InstrusController extends AbstractController
                 
                 // fichier
                 if ($instru->getFile() != null) {
-                    $directory = 'uploads';
-                    $subdirectory = 'uploads/instrus';
+                    $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/instrus');
 
-                    if(!is_dir($directory)) {
-                        mkdir($directory);
-                        if(!is_dir($subdirectory)) {
-                            mkdir($subdirectory);
-                        }
-                    }
                     $file = $form->get('file')->getData();
                     $fileName =  uniqid(). '.' .$file->guessExtension();
                     try {

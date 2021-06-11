@@ -10,10 +10,10 @@ $(document).ready(function(){
 // ==============================================================
 
     //HEADER
-    var headerOffset = $('.header').offset().top;
+    var headerOffset = $('#header').offset().top;
 
     $(window).on('scroll', function(){
-      var header = $('.header'),
+      var header = $('#header'),
           scroll = $(window).scrollTop();
     
       if (scroll >= headerOffset) header.addClass('fixed');

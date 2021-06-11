@@ -159,11 +159,11 @@ class InstruController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$instru->getId(), $request->request->get('_token'))) {
             if($instru->getFile() != null) {
-                $filename = 'uploads/instrus/' . $topline->getFile();
+                $filename = 'uploads/instrus/' . $instru->getFile();
                 unlink($filename);
             }
             if($instru->getImage() != null) {
-                $imagename = 'uploads/images/instrus' . $topline->getFile();
+                $imagename = 'uploads/images/instrus' . $instru->getFile();
                 unlink($imagename);
             }
             $entityManager = $this->getDoctrine()->getManager();

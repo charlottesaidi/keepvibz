@@ -13,7 +13,7 @@
                     <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
                 </div>
                 <p class="title_content_show_instru">{{ instru.title }}</p>
-                <p class="author_content_show_instru">by<span class="name_author_content_show_instru">{{ instru.user.name }}</span></p>
+                <p class="author_content_show_instru">par <span class="name_author_content_show_instru">{{ instru.user.name }}</span></p>
                 <div class="details_content_show_instru">
                     <p class="genre_content_show_instru">
                     {% for genre in instru.genre %}
@@ -44,7 +44,7 @@
                     <p class="title_others_instrus_author">{{ beats.title }}</p>
                 </div>
                 <div class="bottom_right_others_instrus_author flex ">
-                    <p class="user_others_instrus_author">by <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
+                    <p class="user_others_instrus_author">par <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
                     <p class="separator_others_instrus_author"> | </p>
                     <p class="bpm_others_instrus_author">{{ beats.bpm }} BPM</p>
                     <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>

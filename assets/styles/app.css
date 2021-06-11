@@ -379,7 +379,7 @@ h2{
 #player_2{position: absolute; left: 54393px;}
 
 
-.date_ajout_downloaded, .genre_downloaded,.description_downloaded{
+.title_downloaded, .genre_downloaded,.description_downloaded{
     color: #A27440;
     margin-top: .4rem;
 }

@@ -23,7 +23,7 @@ class InstruType extends AbstractType
             ->add('genre', ChoiceType::class, [
                 'label' => 'Genre',
                 'choices'  => [
-                    'Hip-Hop' => 'hip_hop',
+                    'Hip-Hop' => 'Hip Hop',
                     'Trap' => 'trap',
                     'R\'n\'B' => 'r\'n\'b',
                     'Pop' => 'pop',

@@ -104,7 +104,7 @@ a{text-decoration: none;}
 
 
 
-/* PAGE INSTRUS */
+/* PAGE TOUTES INSTRUS */
 .main_instrus{width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 20px; background-color: #000; }
 .section_instrus{margin-top: 146px;}
 .sidebar_instrus{top: 20px; border-radius: 20px; background-color: #3d3c3c; padding: 10px 20px 20px 20px;
@@ -153,13 +153,6 @@ option{background-color: #3d3c3c; border: none;}
   /* Transition */
 .select:hover::after {color: #828282;}
 
-
-
-
-
-
-
-
 .nav_bottom2 li a{color: #9f9f9f;}
 .nav_bottom2 li a:hover{opacity: .6;}
 .left_block_statistiques{margin-right: 15px;}
@@ -173,18 +166,27 @@ option{background-color: #3d3c3c; border: none;}
 .img_bouton_filter{height: 40px; width: 40px;}
 .img_bouton_filter:hover{opacity: .7; cursor: pointer;}
 
+/* PAGE TOUTES INSTRUS */
+
+
+/* PAGE SHOW INSTRUS */
+
+/* TOP */
+.instru_show{margin-top: 146px;}
+.title_content_show_instru, .author_content_show_instru,.name_author_content_show_instru, .genre_content_show_instru, .bpm_content_show_instru, .key_content_show_instru{color: #fff;}
+
+
+
+/* BOTTOM */
+.bottom_content{border-top: 1px solid #3d3c3c; width: 100%;}
+.title_others_instrus_author, .user_others_instrus_author, .name_others_instrus_author, .separator_others_instrus_author, .bpm_others_instrus_author, .nombre_lecture_others_instrus_author{color: #fff;}
+
+/* PAGE SHOW INSTRUS */
 
 
 
 
 
-
-
-
-
-
-
-/* PAGE INSTRUS */
 
 
 

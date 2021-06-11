@@ -161,8 +161,10 @@ class InstrusController extends AbstractController
                 unlink($filename);
             }
             if($instru->getImage() != null) {
+                if(is_dir('uploads/images/instrus')) {
                 $imagename = 'uploads/images/instrus' . $topline->getFile();
                 unlink($imagename);
+                }
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($instru);

@@ -156,16 +156,18 @@ class InstrusController extends AbstractController
     public function delete(Request $request, Instru $instru): Response
     {
         if ($this->isCsrfTokenValid('delete'.$instru->getId(), $request->request->get('_token'))) {
-            if($instru->getFile() != null) {
-                $filename = 'uploads/instrus/' . $topline->getFile();
-                unlink($filename);
-            }
-            if($instru->getImage() != null) {
-                if(is_dir('uploads/images/instrus')) {
-                $imagename = 'uploads/images/instrus' . $topline->getFile();
-                unlink($imagename);
-                }
-            }
+            // if($instru->getFile() != null) {
+            //     if(is_dir('uploads/images/instrus')) {
+            //         $filename = 'uploads/instrus/' . $topline->getFile();
+            //         unlink($filename);
+            //     }
+            // }
+            // if($instru->getImage() != null) {
+            //     if(is_dir('uploads/images/instrus')) {
+            //     $imagename = 'uploads/images/instrus' . $topline->getFile();
+            //     unlink($imagename);
+            //     }
+            // }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($instru);
             $entityManager->flush();

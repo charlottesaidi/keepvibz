@@ -92,7 +92,7 @@ class InstruController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'instru_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'instru-show', methods: ['GET'])]
     public function show(Instru $instru): Response
     {
         return $this->render('admin/instru/show.html.twig', [
@@ -158,14 +158,14 @@ class InstruController extends AbstractController
     public function delete(Request $request, Instru $instru): Response
     {
         if ($this->isCsrfTokenValid('delete'.$instru->getId(), $request->request->get('_token'))) {
-            if($instru->getFile() != null) {
-                $filename = 'uploads/instrus/' . $instru->getFile();
-                unlink($filename);
-            }
-            if($instru->getImage() != null) {
-                $imagename = 'uploads/images/instrus' . $instru->getFile();
-                unlink($imagename);
-            }
+            // if($instru->getFile() != null) {
+            //     $filename = 'uploads/instrus/' . $instru->getFile();
+            //     unlink($filename);
+            // }
+            // if($instru->getImage() != null) {
+            //     $imagename = 'uploads/images/instrus' . $instru->getFile();
+            //     unlink($imagename);
+            // }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($instru);
             $entityManager->flush();

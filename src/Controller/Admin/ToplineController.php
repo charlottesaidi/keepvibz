@@ -125,10 +125,10 @@ class ToplineController extends AbstractController
     public function delete(Request $request, Topline $topline): Response
     {
         if ($this->isCsrfTokenValid('delete'.$topline->getId(), $request->request->get('_token'))) {
-            if($topline->getFile() != null) {
-                $filename = 'uploads/toplines/' . $topline->getFile();
-                unlink($filename);
-            }
+            // if($topline->getFile() != null) {
+            //     $filename = 'uploads/toplines/' . $topline->getFile();
+            //     unlink($filename);
+            // }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($topline);
             $entityManager->flush();

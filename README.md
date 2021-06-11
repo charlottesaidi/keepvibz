@@ -30,7 +30,7 @@ __Fixtures(fake datas)__
 ```bash
 php bin/console doctrine:fixtures:load
 ```  
-__Modèle de données__
+__Modèle de données__  
 ![modele_logique_de_donnees](https://www.zupimages.net/up/21/23/uhg7.png) 
 
 ##

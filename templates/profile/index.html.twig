@@ -30,9 +30,6 @@
                     <li>
                         <button href="#!" class="tablinks" id="text-link">Mes Textes</button>
                     </li>
-                    <li>
-                        <button href="#!" class="tablinks" id="fav-link">Mes Favoris</button>
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -64,7 +61,7 @@
                         </div>
                     </div>
 
-                    <h3>Pseudonyme</h3>
+                    <h3>Pseudo</h3>
                     <div class="attr-block name">
                         <div class="title-block">
                             <p> {{app.user.name}} </p>
@@ -192,26 +189,8 @@
 
                     <h3>Paramètres</h3>
                     <div class="global-attr-block">
-                        <div class="attr-block global account">
-                            <div class="title-block">
-                                <p> Supprimer mon compte </p>
-                            </div>
-                            <div class="edit-button">
-                                <a href="" class="btn-secondary formbuttons" id="delete-button">Supprimer</a>
-                            </div>
-                            <div class="delete-block formsection hidden" id="delete">
-                                <div class="input-group">
-                                    <label for="delete-message">Motif</label>
-                                    {{form_widget(profileForm.deleteReason)}}
-                                    {{form_errors(profileForm.deleteReason)}}
-                                </div>
-                                <div class="input-group">
-                                    <input type="submit" class="btn-primary" value="Confirmer">
-                                </div>
-                            </div>
-                        </div>
                         
-                        <div class="attr-block account">    
+                        <div class="attr-block global account">    
                             <div class="title-block">
                                 <p> Modifier mon mot de passe </p>
                             </div>
@@ -239,34 +218,62 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
                     {{ form_end(profileForm) }}
+
+                        <div class="attr-block account">
+                            <div class="title-block">
+                                <p> Supprimer mon compte </p>
+                            </div>
+                            <div class="edit-button">
+                                <a href="" class="btn-secondary formbuttons" id="delete-button">Supprimer</a>
+                            </div>
+                            <div class="delete-block formsection hidden" id="delete">
+                                <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T'es sûr(e) de toi ? Supprimer ton compte est définitif.');">
+                                    <div class="input-group">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <button class="btn btn-danger mb-3">Confirmer</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div id="instrus" class="tabcontent" style="display: none">
                 <h2>Mes Instrus</h2>
                 <div>
+                    <a class="btn-secondary" href="{{ path('instrus_new') }}">Uploader un morceau</a>
+                </div>
+                <div class="listing">
                     {% for instru in app.user.instrus %}
                         <div>
+                            {% if instru.deletedAt %}
+                                <div class="warning">
+                                    L'administrateur a retiré cette publication
+                                </div>
+                            {% endif %}
                             <div>
-                                <a class="btn-secondary" href="">Uploader un morceau</a>
+                            {% if instru.image %}
+                                <img src="{{asset('uploads/images/instrus/' ~ instru.image)}}">
+                            {% endif %}
                             </div>
                             <div>
-                                <img> {# instru.image #}
-                            </div>
-                            <div>
-                                <p>{{instru.title}}</p>
+                                <p><a href="" class="link">{{instru.title}}</a></p>
                                 <p>{{ instru.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
                                 {% for genre in instru.genre %}
                                     <p> {{genre}} </p>
                                 {% endfor %}
                             </div>
                             <div> 
-                                {# piste audio, instru.file #} 
+                            {% if instru.file %}
+                                <audio preload src="{{asset('uploads/instrus/' ~ instru.file)}}" controls id="player_1"></audio>
+                            {% endif %} 
                             </div>
                             <div> 
-                                <a class="btn-secondary" href="">Modifier</a>
+                                <a class="link" href="{{ path('instrus_edit', {'id': instru.id}) }}">Modifier</a>
                             </div>
                         </div>
                     {% endfor %}
@@ -276,23 +283,30 @@
             <div id="toplines" class="tabcontent" style="display: none">
                 <h2>Mes Toplines</h2>
                 <div>
-                    <div>
-                        <a class="btn-secondary" href="">Uploader une topline</a>
-                    </div>
+                    <a class="btn-secondary" href="{{ path('toplines_new') }}">Uploader une topline</a>
+                </div>
+                <div class="listing">
                     {% for topline in app.user.toplines %}
                         <div>
+                            {% if topline.deletedAt %}
+                                <div class="warning">
+                                    L'administrateur a retiré cette publication
+                                </div>
+                            {% endif %}
                             <div>
-                                <p>{{topline.title}}</p>
+                                <p><a href="" class="link">{{topline.title}}</a></p>
                                 {% for instru in topline.instrus %}
                                     <p> {{instrus.title}} </p>
                                 {% endfor %}
                                 <p>{{ topline.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
                             </div>
-                            <div> 
-                                {# piste audio, topline.file #}
+                            <div>  
+                            {% if topline.file %}
+                                <audio preload src="{{asset('uploads/toplines/' ~ topline.file)}}" controls id="player_1"></audio>
+                            {% endif %}
                             </div>
                             <div>
-                                <a href="">Modifier</a>
+                                <a class="link" href="{{ path('toplines_edit', {'id': instru.id}) }}">Modifier</a>
                             </div>
                         </div>
                     {% endfor %}
@@ -302,20 +316,31 @@
             <div id="textes" class="tabcontent" style="display: none">
                 <h2>Mes Textes</h2>
                 <div>
+                    <a class="btn-secondary" href="{{ path('textes_new') }}">Publier un texte</a>
+                </div>
+                <div class="listing">
                     {% for texte in app.user.textes %}
                         <div>
-                            <p>{{texte.title}}</p>
-                            <p>{{ texte.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
-                            <p>{{texte.instru.title}} </p>
-                            <a href="">Modifier</a>
+                            {% if texte.deletedAt %}
+                                <div class="warning">
+                                    L'administrateur a retiré cette publication
+                                </div>
+                            {% endif %}
+                            <p><a href="" class="">{{texte.title}}</a></p>
+                            <p>
+                                <span class="date">{{ texte.createdAt ? texte.createdAt|date('d/m/Y') : '' }}</span><br>
+                                <span class="time">{{ texte.createdAt ? texte.createdAt|date('H:i') : '' }}</span>
+                            </p>
+                            <p>
+                                {% if texte.instru %}
+                                    {{texte.instru.title}}
+                                {% endif %}
+                            </p>
+                            <a class="link" href="{{ path('textes_edit', {'id': texte.id}) }}">Modifier</a>
                         </div>
                     {% endfor %}
                 </div>
             </div>
-
-            <div id="favoris" class="tabcontent" style="display: none">
-                <h2>Mes Favoris</h2>
-            </div>  
 
         </div>
     </div>

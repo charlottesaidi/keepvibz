@@ -49,16 +49,20 @@
                             <li class="content_download_instrus flex col pr">
                                 <audio preload src="{{ asset('uploads/images' ~ beat.file) }}" controls id="player_1"></audio>
                                 <div class="image_downloaded">
-                                    <a href="{{path('instru_show', {'id': instru.id})}}">
+                                    <a href="{{path('instru_show', {'id': beat.id})}}">
                                         <img class="img_downloaded" src="{{ beat.image }}" alt="">
                                     </a>
                                 </div>
                                 <div class="btn_play_caroussel btn_1">
-                                    <img class="img_play_caroussel" src="{{ asset('uploads/images' ~ beat.image) }}" alt="">
+                                    <img class="img_play_caroussel" src="{{ asset('uploads/images' ~ beat.image) }}" alt="{{ beat.title }}">
                                 </div>
                                 <div class="block_info_instrus flex col">
                                     <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
-                                    <h4 class="genre_downloaded">Genre : <span class="span_downloaded">{{ beat.genre }}</span></h4>
+                                    <h4 class="genre_downloaded">Genre : 
+                                        {% for genre in beat.genre %}
+                                            {{ genre }}
+                                        {% endfor %}
+                                    </h4>
                                     <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>
                                 </div>
                             </li>

@@ -21,8 +21,9 @@
                                 <div class="instrus_associees flex">
                                     <p class="title_instrus_associees">Instrus associées: </p>
                                     <ul class="block_instrus_associees flex aic">
-                                        <li class="link_instru_associee"><a href="#" class="titre_instru_associee">Titre - Instru 1jhgjhjghjkgtjkhjhljyjhkjkjlj</a></li>
-                                        <li class="link_instru_associee link_2_instru_associee"><a href="#" class="titre_instru_associee">Titre - Instru 2</a></li>
+                                    {% for texte in texte.instrus.title %}
+                                        <li class="link_instru_associee"><a href="#" class="titre_instru_associee"> {{texte.instrus.title}} </a></li>
+                                    {% endfor %}
                                     </ul>
                                 </div>
                             </a>

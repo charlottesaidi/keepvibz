@@ -6,19 +6,6 @@ $(document).ready(function(){
         $(".logo_chargement").fadeOut();
         $("#preloader").delay(500).fadeOut("slow").scrollTop();
     });
-
-// ==============================================================
-
-    //HEADER
-    var headerOffset = $('#header').offset().top;
-
-    $(window).on('scroll', function(){
-      var header = $('#header'),
-          scroll = $(window).scrollTop();
-    
-      if (scroll >= headerOffset) header.addClass('fixed');
-      else header.removeClass('fixed');
-    });
 // ==============================================================
 
     //BURGER
@@ -98,24 +85,29 @@ $(document).ready(function(){
 // ==============================================================
     // LECTEUR CAROUSSEL
     // 1
-    $(".btn_1").on('click', function() {
-        if ($("#player_1")[0].paused == false) {
-            $("#player_1")[0].pause();
+    $(".btn").on('click', function() {
+        // if ($("#player_1")[0].paused == false) {
+        //     $("#player_1")[0].pause();
+        // } else {
+        //     $("#player_2")[0].pause();
+        //     $("#player_1")[0].play();
+        // }
+        if(this[0].paused == false) {
+            this[0].pause();
         } else {
-            $("#player_2")[0].pause();
-            $("#player_1")[0].play();
+            this[0].play();
         }
     });
     
     // 2
-    $(".btn_2").on('click', function() {
-        if ($("#player_2")[0].paused == false) {
-            $("#player_2")[0].pause();
-        } else {
-            $("#player_1")[0].pause();
-            $("#player_2")[0].play();
-        }
-    });
+    // $(".btn_2").on('click', function() {
+    //     if ($("#player_2")[0].paused == false) {
+    //         $("#player_2")[0].pause();
+    //     } else {
+    //         $("#player_1")[0].pause();
+    //         $("#player_2")[0].play();
+    //     }
+    // });
 
 
 // ==============================================================

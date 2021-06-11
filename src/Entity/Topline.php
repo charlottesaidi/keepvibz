@@ -54,19 +54,18 @@ class Topline
     private $modified_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Instru::class, mappedBy="toplines")
-     */
-    private $instrus;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="toplines")
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Instru::class, inversedBy="toplines")
+     */
+    private $instru;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
-        $this->instrus = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -122,33 +121,6 @@ class Topline
         return $this;
     }
 
-    /**
-     * @return Collection|Instru[]
-     */
-    public function getInstrus(): Collection
-    {
-        return $this->instrus;
-    }
-
-    public function addInstru(Instru $instru): self
-    {
-        if (!$this->instrus->contains($instru)) {
-            $this->instrus[] = $instru;
-            $instru->addTopline($this);
-        }
-
-        return $this;
-    }
-
-    public function removeInstru(Instru $instru): self
-    {
-        if ($this->instrus->removeElement($instru)) {
-            $instru->removeTopline($this);
-        }
-
-        return $this;
-    }
-
     public function getUser(): ?User
     {
         return $this->user;
@@ -157,6 +129,18 @@ class Topline
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getInstru(): ?Instru
+    {
+        return $this->instru;
+    }
+
+    public function setInstru(?Instru $instru): self
+    {
+        $this->instru = $instru;
 
         return $this;
     }

@@ -16,7 +16,7 @@ class TexteFixtures extends Fixture implements DependentFixtureInterface
         $texte1->setUser($this->getReference('user3'));
         $texte1->setCouplet('Couplet 1 instru1');
         $texte1->setRefrain('Refrain instru1');
-        $texte1->setInstru($this->getReference('instru1'));
+        $texte1->addInstru($this->getReference('instru1'));
         $texte1->setStatus('published');
 
         $manager->persist($texte1);

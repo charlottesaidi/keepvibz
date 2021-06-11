@@ -27,10 +27,12 @@ class TexteType extends AbstractType
             ->add('couplet', TextareaType::class, [
                 'label' => 'Couplet',
             ])
-            ->add('instru', TextType::class, [
-                'mapped' => false,
+            ->add('instrus', EntityType::class, [
+                'class' => Instru::class,
                 'label' => 'Pour quelle morceau ?',
-                'required' => false,
+                'choice_label' => 'title',
+                'multiple' => true,
+                'expanded' => false,
             ])
             ->add('status', ChoiceType::class, [
                 'label' => 'Status',

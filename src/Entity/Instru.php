@@ -88,25 +88,25 @@ class Instru
     private $modified_at;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Topline::class, inversedBy="instrus")
-     */
-    private $toplines;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="instru", cascade={"remove"})
-     */
-    private $textes;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="instrus")
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Texte::class, mappedBy="instrus")
+     */
+    private $textes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="instru")
+     */
+    private $toplines;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
-        $this->toplines = new ArrayCollection();
         $this->textes = new ArrayCollection();
+        $this->toplines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -209,26 +209,14 @@ class Instru
         return $this;
     }
 
-    /**
-     * @return Collection|Topline[]
-     */
-    public function getToplines(): Collection
+    public function getUser(): ?User
     {
-        return $this->toplines;
+        return $this->user;
     }
 
-    public function addTopline(Topline $topline): self
+    public function setUser(?User $user): self
     {
-        if (!$this->toplines->contains($topline)) {
-            $this->toplines[] = $topline;
-        }
-
-        return $this;
-    }
-
-    public function removeTopline(Topline $topline): self
-    {
-        $this->toplines->removeElement($topline);
+        $this->user = $user;
 
         return $this;
     }
@@ -245,7 +233,7 @@ class Instru
     {
         if (!$this->textes->contains($texte)) {
             $this->textes[] = $texte;
-            $texte->setInstru($this);
+            $texte->addInstru($this);
         }
 
         return $this;
@@ -254,23 +242,38 @@ class Instru
     public function removeTexte(Texte $texte): self
     {
         if ($this->textes->removeElement($texte)) {
-            // set the owning side to null (unless already changed)
-            if ($texte->getInstru() === $this) {
-                $texte->setInstru(null);
-            }
+            $texte->removeInstru($this);
         }
 
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection|Topline[]
+     */
+    public function getToplines(): Collection
     {
-        return $this->user;
+        return $this->toplines;
     }
 
-    public function setUser(?User $user): self
+    public function addTopline(Topline $topline): self
     {
-        $this->user = $user;
+        if (!$this->toplines->contains($topline)) {
+            $this->toplines[] = $topline;
+            $topline->setInstru($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTopline(Topline $topline): self
+    {
+        if ($this->toplines->removeElement($topline)) {
+            // set the owning side to null (unless already changed)
+            if ($topline->getInstru() === $this) {
+                $topline->setInstru(null);
+            }
+        }
 
         return $this;
     }

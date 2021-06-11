@@ -28,9 +28,7 @@
                                             <tr>
                                                 <th class="cell">Morceau associé</th>
                                                 <td class="cell"> 
-                                                {% for instru in topline.instrus %}
-                                                    <span><a href="{{ path('instru_show', {'id': instru.id}) }}">{{ instru.title }}</a></span><br>
-                                                {% endfor %}
+                                                    <span><a href="{{ path('instru-show', {'id':  topline.instru.id}) }}">{{  topline.instru.title }}</a></span><br>
                                                 </td>
                                             </tr>
                                             <tr>

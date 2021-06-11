@@ -28,8 +28,10 @@
                                             <tr>
                                                 <th class="cell">Morceau associé</th>
                                                 <td class="cell"> 
-                                                {% if texte.instru %}
-                                                    <span><a href="{{ path('instru_show', {'id': texte.instru.id}) }}">{{ texte.instru.title }}</a></span><br>
+                                                {% if texte.instrus %}
+                                                {% for instru in texte.instrus %}
+                                                    <span><a href="{{ path('instru-show', {'id': instru.id}) }}">{{ instru.title }}</a></span><br>
+                                                {% endfor %}
                                                 {% endif %}
                                                 </td>
                                             </tr>

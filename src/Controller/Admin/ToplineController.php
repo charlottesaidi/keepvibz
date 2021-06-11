@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use JasonGrimes\Paginator;
+use App\Service\FolderGenerator;
 
 #[Route('admin/topline')]
 class ToplineController extends AbstractController
@@ -37,7 +38,7 @@ class ToplineController extends AbstractController
     }
 
     #[Route('/new', name: 'topline_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, FolderGenerator $folderGenerator): Response
     {
         $topline = new Topline();
         $form = $this->createForm(ToplineType::class, $topline);
@@ -48,15 +49,7 @@ class ToplineController extends AbstractController
             
             // fichier
             if ($topline->getFile() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/toplines';
-
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                    }
-                } 
+                $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/toplines');
 
                 $file = $form->get('file')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
@@ -93,7 +86,7 @@ class ToplineController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'topline_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Topline $topline): Response
+    public function edit(Request $request, Topline $topline, FolderGenerator $folderGenerator): Response
     {
         $form = $this->createForm(ToplineType::class, $topline);
         $form->handleRequest($request);
@@ -103,15 +96,7 @@ class ToplineController extends AbstractController
             
             // fichier
             if ($topline->getFile() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/toplines';
-
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                    }
-                } 
+                $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/toplines');
 
                 $file = $form->get('file')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();

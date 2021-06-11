@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\FolderGenerator;
 
 #[Route('/instrus')]
 class InstrusController extends AbstractController
@@ -15,14 +16,26 @@ class InstrusController extends AbstractController
     #[Route('/', name: 'instrus')]
     public function index(): Response
     {
-        // requête paginateAll()
-        return $this->render('instrus/index.html.twig');
+        $totalItems = $instruRepository->paginateCount();
+        $itemsPerPage = 10;
+        $currentPage = 1;
+        $urlPattern = '/admin/instru?page=(:num)';
+        $offset = 0;
+        if(!empty($_GET['page'])) {
+            $currentPage = $_GET['page'];
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+        return $this->render('instrus/index.html.twig', [
+            'instrus' => $instruRepository->paginateAll($itemsPerPage, $offset),
+            'paginator' => $paginator
+        ]);
     }
 
     #[Route('/new', name: 'instrus_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request,  FolderGenerator $folderGenerator): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         $instru = new Instru();
         $form = $this->createForm(InstruType::class, $instru);
         $form->handleRequest($request);
@@ -55,19 +68,8 @@ class InstrusController extends AbstractController
             }
             // image
             if ($instru->getImage() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/images';
-                $imageDirectory = 'uploads/images/instrus';
+                $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/instrus');
 
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                        if(!is_dir($imageDirectory)) {
-                            mkdir($imageDirectory);
-                        }
-                    }
-                }
                 $file = $form->get('image')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
@@ -102,9 +104,8 @@ class InstrusController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'instrus_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Instru $instru): Response
+    public function edit(Request $request, Instru $instru, FolderGenerator $folderGenerator): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         $form = $this->createForm(InstruType::class, $instru);
         $form->handleRequest($request);
 
@@ -136,20 +137,9 @@ class InstrusController extends AbstractController
                     $instru->setFile($fileName);
                 }
                 // image
-                if ($instru->getFile() != null) {
-                    $directory = 'uploads';
-                    $subdirectory = 'uploads/images';
-                    $imageDirectory = 'uploads/images/instrus';
+                if ($instru->getImage() != null) {
+                    $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/instrus');
 
-                    if(!is_dir($directory)) {
-                        mkdir($directory);
-                        if(!is_dir($subdirectory)) {
-                            mkdir($subdirectory);
-                            if(!is_dir($imageDirectory)) {
-                                mkdir($imageDirectory);
-                            }
-                        }
-                    }
                     $file = $form->get('image')->getData();
                     $fileName =  uniqid(). '.' .$file->guessExtension();
                     try {
@@ -177,7 +167,6 @@ class InstrusController extends AbstractController
     #[Route('/{id}', name: 'instrus_delete', methods: ['POST'])]
     public function delete(Request $request, Instru $instru): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         if ($this->isCsrfTokenValid('delete'.$instru->getId(), $request->request->get('_token'))) {
             if($instru->getFile() != null) {
                 $filename = 'uploads/instrus/' . $topline->getFile();

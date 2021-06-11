@@ -3,8 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Instru;
+use App\Entity\Texte;
 use App\Form\InstruType;
 use App\Repository\InstruRepository;
+use App\Repository\TexteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -155,9 +157,11 @@ class InstruController extends AbstractController
     }
 
     #[Route('/{id}', name: 'instru_delete', methods: ['POST'])]
-    public function delete(Request $request, Instru $instru): Response
+    public function delete(Request $request, Instru $instru, TexteRepository $texteRepository): Response
     {
+
         if ($this->isCsrfTokenValid('delete'.$instru->getId(), $request->request->get('_token'))) {
+    
             // if($instru->getFile() != null) {
             //     $filename = 'uploads/instrus/' . $instru->getFile();
             //     unlink($filename);

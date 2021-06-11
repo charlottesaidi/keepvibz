@@ -13,12 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Service\FolderGenerator;
 
 #[Route('/profile')]
 class UserProfileController extends AbstractController
 {
     #[Route('/', name: 'user_profile', methods: ['GET', 'POST'])]
-    public function index(Request $request,  UserPasswordEncoderInterface $passwordEncoder, AvatarRepository $avatarRepo): Response
+    public function index(Request $request,  UserPasswordEncoderInterface $passwordEncoder, AvatarRepository $avatarRepo, FolderGenerator $folderGenerator): Response
     {           
         $user = $this->getUser();
         $form = $this->createForm(UserProfileType::class, $user);
@@ -37,20 +38,9 @@ class UserProfileController extends AbstractController
                 );
             }
             // avatar
-            if ($form->get('avatar')->getData() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/images';
-                $imageDirectory = 'uploads/images/avatars';
-
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                        if(!is_dir($imageDirectory)) {
-                            mkdir($imageDirectory);
-                        }
-                    }
-                }
+            if($form->get('avatar')->getData() != null) {
+                $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
+                
                 $file = $form->get('avatar')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {

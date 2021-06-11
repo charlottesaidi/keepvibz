@@ -60,7 +60,7 @@ class UserController extends AbstractController
             $email = (new TemplatedEmail())
                 ->from(new Address('no-reply@keepvibz.fr', 'KeepVibz Registration'))
                 ->to($user->getEmail())
-                ->subject('Création de votre compte')
+                ->subject('Création de ton compte')
                 ->htmlTemplate('admin/user/account_created_email.html.twig');
             $mailer->send($email);
 

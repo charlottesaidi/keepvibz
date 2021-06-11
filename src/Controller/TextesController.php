@@ -41,7 +41,6 @@ class TextesController extends AbstractController
     #[Route('/new', name: 'textes_new', methods: ['GET', 'POST'])]
     public function new(Request $request, InstruRepository $instruRepository): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         $texte = new Texte();
         $form = $this->createForm(TexteType::class, $texte);
         $form->handleRequest($request);
@@ -76,7 +75,6 @@ class TextesController extends AbstractController
     #[Route('/{id}/edit', name: 'textes_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Texte $texte): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         $form = $this->createForm(TexteType::class, $texte);
         $form->handleRequest($request);
 
@@ -96,7 +94,6 @@ class TextesController extends AbstractController
     #[Route('/{id}', name: 'textes_delete', methods: ['POST'])]
     public function delete(Request $request, Texte $texte): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         if ($this->isCsrfTokenValid('delete'.$texte->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($texte);

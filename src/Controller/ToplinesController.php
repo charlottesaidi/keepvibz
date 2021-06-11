@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use JasonGrimes\Paginator;
+use App\Service\FolderGenerator;
 
 #[Route('/toplines')]
 class ToplinesController extends AbstractController
@@ -37,9 +38,8 @@ class ToplinesController extends AbstractController
     }
 
     #[Route('/new', name: 'toplines_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, FolderGenerator $folderGenerator): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         $topline = new Topline();
         $form = $this->createForm(ToplineType::class, $topline);
         $form->handleRequest($request);
@@ -94,9 +94,8 @@ class ToplinesController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'toplines_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Topline $topline): Response
+    public function edit(Request $request, Topline $topline, FolderGenerator $folderGenerator): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         $form = $this->createForm(ToplineType::class, $topline);
         $form->handleRequest($request);
 
@@ -141,7 +140,6 @@ class ToplinesController extends AbstractController
     #[Route('/{id}', name: 'toplines_delete', methods: ['POST'])]
     public function delete(Request $request, Topline $topline): Response
     {
-        // $this->denyAccessUnlessGranted('ROLE_USER');
         if ($this->isCsrfTokenValid('delete'.$topline->getId(), $request->request->get('_token'))) {
             if($topline->getFile() != null) {
                 $filename = 'uploads/toplines/' . $topline->getFile();

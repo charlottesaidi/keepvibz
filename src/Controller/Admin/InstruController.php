@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use JasonGrimes\Paginator;
+use App\Service\FolderGenerator;
 
 #[Route('admin/instru')]
 class InstruController extends AbstractController
@@ -37,7 +38,7 @@ class InstruController extends AbstractController
     }
 
     #[Route('/new', name: 'instru_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request,  FolderGenerator $folderGenerator): Response
     {
         $instru = new Instru();
         $form = $this->createForm(InstruType::class, $instru);
@@ -48,15 +49,8 @@ class InstruController extends AbstractController
             
             // fichier
             if ($instru->getFile() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/instrus';
+                $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/instrus');
 
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                    }
-                }
                 $file = $form->get('file')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
@@ -71,19 +65,8 @@ class InstruController extends AbstractController
             }
             // image
             if ($instru->getImage() != null) {
-                $directory = 'uploads';
-                $subdirectory = 'uploads/images';
-                $imageDirectory = 'uploads/images/instrus';
+                $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/instrus');
 
-                if(!is_dir($directory)) {
-                    mkdir($directory);
-                    if(!is_dir($subdirectory)) {
-                        mkdir($subdirectory);
-                        if(!is_dir($imageDirectory)) {
-                            mkdir($imageDirectory);
-                        }
-                    }
-                }
                 $file = $form->get('image')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
@@ -118,7 +101,7 @@ class InstruController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'instru_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Instru $instru): Response
+    public function edit(Request $request, Instru $instru, FolderGenerator $folderGenerator): Response
     {
         $form = $this->createForm(InstruType::class, $instru);
         $form->handleRequest($request);
@@ -129,15 +112,8 @@ class InstruController extends AbstractController
                 
                 // fichier
                 if ($instru->getFile() != null) {
-                    $directory = 'uploads';
-                    $subdirectory = 'uploads/instrus';
-
-                    if(!is_dir($directory)) {
-                        mkdir($directory);
-                        if(!is_dir($subdirectory)) {
-                            mkdir($subdirectory);
-                        }
-                    }
+                    $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/instrus');
+                    
                     $file = $form->get('file')->getData();
                     $fileName =  uniqid(). '.' .$file->guessExtension();
                     try {
@@ -151,20 +127,9 @@ class InstruController extends AbstractController
                     $instru->setFile($fileName);
                 }
                 // image
-                if ($instru->getFile() != null) {
-                    $directory = 'uploads';
-                    $subdirectory = 'uploads/images';
-                    $imageDirectory = 'uploads/images/instrus';
+                if ($instru->getImage() != null) {
+                    $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/instrus');
 
-                    if(!is_dir($directory)) {
-                        mkdir($directory);
-                        if(!is_dir($subdirectory)) {
-                            mkdir($subdirectory);
-                            if(!is_dir($imageDirectory)) {
-                                mkdir($imageDirectory);
-                            }
-                        }
-                    }
                     $file = $form->get('image')->getData();
                     $fileName =  uniqid(). '.' .$file->guessExtension();
                     try {

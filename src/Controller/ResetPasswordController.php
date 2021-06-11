@@ -6,7 +6,6 @@ use App\Repository\UserRepository;
 use App\Entity\User;
 use App\Form\ChangePasswordFormType;
 use App\Form\ResetPasswordRequestFormType;
-use phpDocumentor\Reflection\Types\Null_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,7 +42,7 @@ class ResetPasswordController extends AbstractController
                 
             }else{
                 $email = (new TemplatedEmail())
-                    ->from(new Address('no-reply@keepvibz.fr', 'KeepVibz Registration'))
+                    ->from(new Address('no-reply@keepvibz.fr', 'KeepVibz Reset Password'))
                     ->to($user->getEmail())
                     ->subject('Modification du mot de passe')
                     ->htmlTemplate('reset_password/reset_password_email.html.twig');
@@ -76,7 +75,7 @@ class ResetPasswordController extends AbstractController
     /**
      * Validates and process the reset URL that the user clicked in their email.
      */
-    #[Route('/reset/{token}', name: 'app_reset_password')]
+    #[Route('/reset/{email}/{token}', name: 'app_reset_password')]
     public function reset(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         // récupère le token, stock en session et retire de l'URL => sécurité

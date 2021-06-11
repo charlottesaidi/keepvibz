@@ -30,8 +30,9 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
+        ;
+        if ($form->isSubmitted()) {
+            dump($form->get('plainPassword')->getData());
             // encode the plain password
             $user->setPassword(
                 $passwordEncoder->encodePassword(
@@ -46,13 +47,14 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-            //     (new TemplatedEmail())
-            //         ->from(new Address('no-reply@keepvibz.fr', 'KeepVibz Registration'))
-            //         ->to($user->getEmail())
-            //         ->subject('Confirmez votre adresse e-mail')
-            //         ->htmlTemplate('registration/confirmation_email.html.twig')
-            // );
+            // generate a signed url and email it to the user
+            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->from(new Address('no-reply@keepvibz.fr', 'KeepVibz Registration'))
+                    ->to($user->getEmail())
+                    ->subject('Confirme ton adresse e-mail')
+                    ->htmlTemplate('registration/confirmation_email.html.twig')
+            );
             
             return $this->redirectToRoute('app_email_sent');
         }

@@ -41,7 +41,12 @@ body {
 		right: 0;
 		top: 50%;
 		transform: translateY(-50%);
-		font-family: 'Bebas-Neue-Light', cursive; letter-spacing: 3px;
+		font-family: 'Bebas-Neue-Light', cursive; 
+		letter-spacing: 3px;
+		button {
+			font-family: 'Bebas-Neue-Light', cursive;
+			letter-spacing: 3px;
+		}
 		a {
 			color: $font-primary;
 			text-decoration: none;
@@ -162,6 +167,7 @@ body {
 							padding: 8px 20px;
 							margin: auto;
 							cursor: pointer;
+							color: $font-primary;
 							border: 1px solid $font-secondary;
 							transition: all .3s;
 							border-radius: 2px; 

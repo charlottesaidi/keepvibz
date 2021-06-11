@@ -12,6 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use JasonGrimes\Paginator;
 
 #[Route('/admin/user')]
@@ -54,6 +56,13 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
+
+            $email = (new TemplatedEmail())
+                ->from(new Address('no-reply@keepvibz.fr', 'KeepVibz Registration'))
+                ->to($user->getEmail())
+                ->subject('Création de votre compte')
+                ->htmlTemplate('admin/user/account_created_email.html.twig');
+            $mailer->send($email);
 
             return $this->redirectToRoute('user_index');
         }

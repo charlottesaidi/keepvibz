@@ -24,7 +24,7 @@ class Topline
      * @Assert\NotBlank
      * @Assert\File(
      *    maxSize = "10000k",
-     *    mimeTypes = {"application/mp3", "application/wma", "application/flac", "application/flac"},
+     *    mimeTypes = {"audio/mpeg", "audio/wma", "audio/flac"},
      *    mimeTypesMessage = "Format de fichier invalide"
      * )
      * @ORM\Column(type="string", length=255)

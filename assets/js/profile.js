@@ -31,9 +31,6 @@ document.querySelector('#instru-link').addEventListener('click', (e) => {
 document.querySelector('#text-link').addEventListener('click', (e) => {
     openSection(e, 'textes', 'tabcontent', 'tablinks')
 })
-document.querySelector('#fav-link').addEventListener('click', (e) => {
-    openSection(e, 'favoris', 'tabcontent', 'tablinks')
-})
 
 /*
 |---------------------------------

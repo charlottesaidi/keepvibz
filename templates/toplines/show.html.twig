@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KeepVibz | {{topline.title}}{% endblock %}
+
+{% block body %}
+
+<div class="main">
+
+    Titre: {{topline.title}}
+    Auteur: {{topline.user.name}}
+    Date d'upload: {{ topline.createdAt ? topline.createdAt|date('d/m/Y H:i') : '' }}
+    Modification: {{ topline.modifiedAt ? topline.modifiedAt|date('d/m/Y H:i') : '' }}
+    {# Audio: <audio preload src="{{asset('uploads/topline/' ~ topline.file) }}" controls id="player_1"></audio> #}
+    {% if topline.instrus %}
+        Morceaux associés: 
+        {% for instru in topline.instrus %}
+            <a href=""> {{instru.title}} </a>
+        {% endfor %}
+    {% endif %}
+    
+
+</div>
+{% endblock %}

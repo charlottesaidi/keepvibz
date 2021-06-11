@@ -51,9 +51,6 @@ class UserProfileType extends AbstractType
                 'multiple' => true,
                 'expanded' => true,
             ])
-            ->add('deleteReason', TextareaType::class, [
-                'mapped' => false,
-            ])
         ;
     }
 

@@ -2,22 +2,20 @@
 
 {% block title %}KeepVibz | Uploader un morceau{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user-profile') }}
+{% endblock %}
+
 {% block body %}
     <div class="main">
     
 	    <div class="">
-		    <div class="">
-                <div class="">
-			        <h1 class="">Uploader un morceau</h1>
-                    <div class="">
-                        <div class="">
-                            <div class="">
-                                {{ include('admin/instru/_form.html.twig') }}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <h1 class="">Uploader un morceau</h1>
+            <div class="">
+                {{ include('instrus/_form.html.twig') }}
             </div>
         </div>
+        
     </div>
 {% endblock %}

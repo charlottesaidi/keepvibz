@@ -36,11 +36,18 @@
                 <p class="title_nav">MENU</p>
             </div>
             <ul class="nav_mobile flex col aic">
-                <li class="link_mobile"><a href="{{path('user_new')}}">Inscription</a></li>
-                <li class="link_mobile"><a href="{{path('app_login')}}">Connexion</a></li>
-                <li class="link_mobile"><a href="{{path('user_profile')}}">Profil</a></li>
                 <li class="link_mobile"><a href="{{path('instrus')}}">Instrus</a></li>
                 <li class="link_mobile"><a href="{{path('textes')}}">Textes</a></li>
+            {% if app.user %}
+                <li class="link_mobile"><a href="{{path('user_profile')}}">Profil</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="link_mobile"><a href="{{ path ('admin_dashboard') }}">Admin</a></li>
+                {% endif %}
+                <li><a href="{{ path ('app_logout') }}">Déconnexion</a></li>
+            {% else %}
+                <li class="link_mobile"><a href="{{path('user_new')}}">Inscription</a></li>
+                <li class="link_mobile"><a href="{{path('app_login')}}">Connexion</a></li>
+            {% endif %}
             </ul>
         </div>
         {# NAV MOBILE #}

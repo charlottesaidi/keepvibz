@@ -157,8 +157,10 @@ class InstrusController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete'.$instru->getId(), $request->request->get('_token'))) {
             if($instru->getFile() != null) {
-                $filename = 'uploads/instrus/' . $topline->getFile();
-                unlink($filename);
+                if(is_dir('uploads/images/instrus')) {
+                    $filename = 'uploads/instrus/' . $topline->getFile();
+                    unlink($filename);
+                }
             }
             if($instru->getImage() != null) {
                 if(is_dir('uploads/images/instrus')) {

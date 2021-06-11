@@ -173,6 +173,8 @@ option{background-color: #3d3c3c; border: none;}
 
 /* TOP */
 .instru_show{margin-top: 146px;}
+.up_content_img{height: 300px; width: 300px;}
+.image_content_show_instru{width: 100%;}
 .title_content_show_instru, .author_content_show_instru,.name_author_content_show_instru, .genre_content_show_instru, .bpm_content_show_instru, .key_content_show_instru{color: #fff;}
 
 

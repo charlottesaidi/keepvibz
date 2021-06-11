@@ -5,7 +5,8 @@
 {% block body %}
 <section class="instru_show">
     <div class="top_content flex col">
-        <div class="up_content"><img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru"></div>
+        <div class="up_content_img">
+            <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru"></div>
         <div class="down_content flex col">
             <audio preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_1"></audio>
             <div class="top_down_content_show_instru flex fw">

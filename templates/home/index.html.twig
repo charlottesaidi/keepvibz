@@ -43,134 +43,28 @@
                 </div>
                 {# CUSTOM NAVIGATION #}
                     <ul class="slides">
+                        {% for beat in instrus %}
                         <li class="content_download flex col">
                             <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
                             <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
+                                <a href="{{path('instru_show', {'id': beat.id})}}">
+                                    <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
                                 </a>
                             </div>
                             <div class="btn_play_caroussel btn">
                                     <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
                             </div>
                             <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
+                                <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
+                                {% for genre in beat.genre %}
+                                    {{ genre }}
+                                {% endfor %}
+                                </span></h4>
+                                <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>
                             </div>
                         </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://80.82.229.202/fidelite.mp3" controls id="player_2"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/3.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/4.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                    </li>
-                        <li class="content_download flex col">
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/5.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/6.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="title_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/3.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/4.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </div>
         </div>

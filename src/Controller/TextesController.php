@@ -47,15 +47,13 @@ class TextesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setUser($this->getUser());
-            if($form->get('instru')->getData() != null) {
-                $instru = $instruRepository->findOneByTitle($form->get('instru')->getData());
-                $texte->setInstru($instru);
-            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($texte);
             $entityManager->flush();
 
-            return $this->redirectToRoute('textes');
+            $this->addFlash('text-success', 'Texte publié avec succès');
+
+            return $this->redirectToRoute('user_profile');
         }
 
         return $this->render('textes/new.html.twig', [
@@ -81,8 +79,10 @@ class TextesController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
+            
+            $this->addFlash('text-success', 'Modification prise en compte');
 
-            return $this->redirectToRoute('textes');
+            return $this->redirect('/profile/#textes');
         }
 
         return $this->render('textes/edit.html.twig', [
@@ -99,9 +99,9 @@ class TextesController extends AbstractController
             $entityManager->remove($texte);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre texte a été supprimé');
+            $this->addFlash('text-success', 'Suppression prise en compte');
         }
 
-        return $this->redirectToRoute('profile');
+        return $this->redirectToRoute('user_profile');
     }
 }

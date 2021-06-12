@@ -31,7 +31,7 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
         ;
-        if ($form->isSubmitted()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             dump($form->get('plainPassword')->getData());
             // encode the plain password
             $user->setPassword(
@@ -94,7 +94,7 @@ class RegistrationController extends AbstractController
             return $this->redirectToRoute('app_register');
         }
 
-        $this->addFlash('success', 'Votre inscription est finalisée. Vous pouvez vous connecter');
+        $this->addFlash('success', 'Ton inscription est finalisée. Tu peux te connecter');
 
         return $this->redirectToRoute('app_login');
     }

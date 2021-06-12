@@ -67,6 +67,8 @@ class AvatarController extends AbstractController
             $entityManager->persist($avatar);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Avatar créé avec succès');
+
             return $this->redirectToRoute('avatar_index');
         }
 
@@ -111,6 +113,8 @@ class AvatarController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Modification prise en compte');
+
             return $this->redirectToRoute('avatar_index');
         }
 
@@ -128,10 +132,13 @@ class AvatarController extends AbstractController
             //     $filename = 'uploads/images/users' . $topline->getFile();
             //     unlink($filename);
             // }
+            $avatar->setUser(null);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($avatar);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Suppression confirmée');
 
         return $this->redirectToRoute('avatar_index');
     }

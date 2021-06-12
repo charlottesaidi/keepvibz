@@ -68,6 +68,8 @@ class ToplineController extends AbstractController
             $entityManager->persist($topline);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Topline créée avec succès');
+
             return $this->redirectToRoute('topline_index');
         }
 
@@ -112,6 +114,8 @@ class ToplineController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Modification prise en compte');
+
             return $this->redirectToRoute('topline_index');
         }
 
@@ -133,6 +137,8 @@ class ToplineController extends AbstractController
             $entityManager->remove($topline);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Suppression confirmée');
 
         return $this->redirectToRoute('topline_index');
     }

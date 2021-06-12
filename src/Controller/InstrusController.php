@@ -81,7 +81,9 @@ class InstrusController extends AbstractController
             $entityManager->persist($instru);
             $entityManager->flush();
 
-            return $this->redirectToRoute('instrus');
+            $this->addFlash('instru-success', 'Instru uploadée avec succès');
+
+            return $this->redirectToRoute('user_profile');
         }
 
         return $this->render('instrus/new.html.twig', [
@@ -143,7 +145,9 @@ class InstrusController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('instrus');
+            $this->addFlash('instru-success', 'Modification prise en compte');
+
+            return $this->redirectToRoute('user_profile');
         }
 
         return $this->render('instrus/edit.html.twig', [
@@ -172,9 +176,9 @@ class InstrusController extends AbstractController
             $entityManager->remove($instru);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre morceau a été supprimé');
+            $this->addFlash('instru-success', 'Suppression confirmée');
         }
 
-        return $this->redirectToRoute('profile');
+        return $this->redirectToRoute('user_profile');
     }
 }

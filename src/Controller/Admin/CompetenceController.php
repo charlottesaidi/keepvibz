@@ -46,6 +46,8 @@ class CompetenceController extends AbstractController
             $entityManager->persist($competence);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Compétence créée avec succès');
+
             return $this->redirectToRoute('competence_index');
         }
 
@@ -73,6 +75,8 @@ class CompetenceController extends AbstractController
             $competence->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Modification prise en compte');
+
             return $this->redirectToRoute('competence_index');
         }
 
@@ -90,6 +94,8 @@ class CompetenceController extends AbstractController
             $entityManager->remove($competence);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Suppression confirmée');
 
         return $this->redirectToRoute('competence_index');
     }

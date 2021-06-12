@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class UserProfileType extends AbstractType
 {
@@ -30,7 +31,9 @@ class UserProfileType extends AbstractType
             ->add('avatar', FileType::class, [
                 'mapped' => false,
             ])
-            // ->add('oldPassword', TextType::class)
+            ->add('oldPassword', passwordType::class, [
+                'mapped' => false,
+            ])
             ->add('newPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'mapped' => false,

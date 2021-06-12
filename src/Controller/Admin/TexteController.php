@@ -45,13 +45,11 @@ class TexteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setUser($this->getUser());
-            if($form->get('instru')->getData() != null) {
-                $instru = $instruRepository->findOneByTitle($form->get('instru')->getData());
-                $texte->setInstru($instru);
-            }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($texte);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Texte publié avec succès');
 
             return $this->redirectToRoute('texte_index');
         }
@@ -80,6 +78,8 @@ class TexteController extends AbstractController
             $texte->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Modification prise en compte');
+
             return $this->redirectToRoute('texte_index');
         }
 
@@ -97,6 +97,8 @@ class TexteController extends AbstractController
             $entityManager->remove($texte);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Suppression confirmée');
 
         return $this->redirectToRoute('texte_index');
     }

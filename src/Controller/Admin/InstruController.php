@@ -85,6 +85,8 @@ class InstruController extends AbstractController
             $entityManager->persist($instru);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Instrumentale créée avec succès');
+
             return $this->redirectToRoute('instru_index');
         }
 
@@ -147,6 +149,8 @@ class InstruController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Modification prise en compte');
+
             return $this->redirectToRoute('instru_index');
         }
 
@@ -174,6 +178,8 @@ class InstruController extends AbstractController
             $entityManager->remove($instru);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Suppression confirmée');
 
         return $this->redirectToRoute('instru_index');
     }

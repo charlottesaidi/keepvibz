@@ -1,14 +1,22 @@
+<div class="form-container">
 {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    <div class="mb-3">
-        {{ form_row(form.title) }}
+    <div class="input-group">
+    <label for="form_titre">Titre</label>
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
     </div>
-    <div class="mb-3">
-        {{ form_row(form.instru) }}
+    <div class="input-group">
+    <label for="form_instrus">Pour quel morceau ?</label>
+        {{ form_widget(form.instru) }}
+        {{ form_errors(form.instru) }}
     </div>
-    <div class="mb-3">
-        {{ form_row(form.file) }}
+    <div class="input-group">
+    <label for="form_file">Son</label>
+        {{ form_widget(form.file) }}
+        {{ form_errors(form.file) }}
     </div>
-    <div class="mb-3">
-        <button class="btn app-btn-primary">{{ button_label|default('Valider') }}</button>
+    <div class="input-group">
+        <button class="btn-primary">{{ button_label|default('Upload') }}</button>
     </div>
 {{ form_end(form) }}
+</div>

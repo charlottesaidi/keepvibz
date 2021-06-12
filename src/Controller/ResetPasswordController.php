@@ -50,11 +50,6 @@ class ResetPasswordController extends AbstractController
 
                return $this->redirectToRoute('app_check_email');            
             }
-            
-            // vérifier le mail => erreur ou succès
-
-
-            // si succès => envoie email avec token => redirection, méthode suivante (checkEmail)
         }
         
         return $this->render('reset_password/request.html.twig', [
@@ -64,7 +59,7 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Confirmation page after a user has requested a password reset.
+     * Confirme à l'utilisateur que sa requête est prise en compte.
      */
     #[Route('/check-email', name: 'app_check_email')]
     public function checkEmail(): Response
@@ -73,7 +68,7 @@ class ResetPasswordController extends AbstractController
     }
 
     /**
-     * Validates and process the reset URL that the user clicked in their email.
+     * Vérifie et valide l'url suivi par l'utilisateur dans l'email
      */
     #[Route('/reset/{email}/{token}', name: 'app_reset_password')]
     public function reset(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
@@ -96,6 +91,9 @@ class ResetPasswordController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
 
             // vider la session une fois le mot de passe changé et redirection sur formulaire de connexion.
+            $this->addFlash('success', 'Ton mot de passe est réinitialisé. Tu peux te connecter');
+
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('reset_password/reset.html.twig', [

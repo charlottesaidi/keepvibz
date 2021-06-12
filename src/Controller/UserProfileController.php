@@ -19,46 +19,17 @@ use App\Service\FolderGenerator;
 class UserProfileController extends AbstractController
 {
     #[Route('/', name: 'user_profile', methods: ['GET', 'POST'])]
-    public function index(Request $request,  UserPasswordEncoderInterface $passwordEncoder, AvatarRepository $avatarRepo, FolderGenerator $folderGenerator): Response
+    public function index(Request $request, UserPasswordEncoderInterface $passwordEncoder, AvatarRepository $avatarRepo, FolderGenerator $folderGenerator): Response
     {           
         $user = $this->getUser();
         $form = $this->createForm(UserProfileType::class, $user);
         $avatar = new Avatar();
         $oldPassword = $user->getPassword();
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $user->setModifiedAt(new \dateTime());
-
-            if($form->get('newPassword')->getData() != null) {
-                $user->setPassword(
-                    $passwordEncoder->encodePassword(
-                        $user,
-                        $form->get('newPassword')->getData()
-                    )
-                );
-            }
-            // avatar
-            if($form->get('avatar')->getData() != null) {
-                $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
-                
-                $file = $form->get('avatar')->getData();
-                $fileName =  uniqid(). '.' .$file->guessExtension();
-                try {
-                    $file->move(
-                        $this->getParameter('avatars_directory'), // Le dossier dans lequel le fichier va etre chargé
-                        $fileName
-                    );
-                } catch (FileException $e) {
-                    return new Response($e->getMessage());
-                }
-                if($user->getAvatar() != null) {
-                // $entityManager = $this->getDoctrine()->getManager();
-                // $entityManager->remove($user->getAvatar());
-                // $entityManager->flush();
-                }
-                $avatar->setUser($user);
-                $avatar->setFile($fileName);
-            }
+            $this->changePassword($form, $user, $passwordEncoder);
+            $this->changeAvatar($form, $folderGenerator, $user, $avatar);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->flush();
@@ -77,7 +48,45 @@ class UserProfileController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
+            
+        $this->addFlash('success', 'Ton compte est bien désactivé');
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('app_logout');
+    }
+
+    public function changePassword($form, $user, $passwordEncoder) {
+        if($form->get('newPassword')->getData() != null) {
+            if($form->get('oldPassword')->getData() != null) {
+                $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                        $user,
+                        $form->get('newPassword')->getData()
+                    )
+                );
+                $this->addFlash('profile-success', 'Modification prise en compte');
+            } else {
+                $this->addFlash('error', 'Tu dois renseigner ton ancien mot de passe pour le modifier'); 
+            }
+        } 
+    }
+
+    public function changeAvatar($form, $folderGenerator, $user, $avatar) {
+        if($form->get('avatar')->getData() != null) {
+            $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
+            
+            $file = $form->get('avatar')->getData();
+            $fileName =  uniqid(). '.' .$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('avatars_directory'), // Le dossier dans lequel le fichier va etre chargé
+                    $fileName
+                );
+            } catch (FileException $e) {
+                return new Response($e->getMessage());
+            }
+            $avatar->setUser($user);
+            $avatar->setFile($fileName);
+            $this->addFlash('profile-success', 'Modification prise en compte');
+        }
     }
 }

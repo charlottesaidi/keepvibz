@@ -2,15 +2,19 @@
 
 {% block title %}KeepVibz | Modifier {{texte.title}}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user-profile') }}
+{% endblock %}
+
+
 {% block body %}
     <div class="main">
-
-        <div class="">
-            <h1 class="">Modifier {{texte.title}}</h1>
-            <div class="">
+    <a class="link" href="{{path('user_profile')}}">Retour</a>
+        <div class="form-wrap">
+            <h1 class="main-title">Modifier {{texte.title}}</h1>
             {{ include('textes/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
             {{ include('textes/_delete_form.html.twig') }}
-            </div>
         </div>
         
     </div>

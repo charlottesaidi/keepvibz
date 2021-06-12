@@ -9,12 +9,10 @@
 
 {% block body %}
     <div class="main">
-    
-	    <div class="">
-            <h1 class="">Uploader un morceau</h1>
-            <div class="">
+    <a class="link" href="{{path('user_profile')}}">Retour</a>    
+	    <div class="form-wrap">
+            <h1 class="main-title">Uploader un morceau</h1>
                 {{ include('instrus/_form.html.twig') }}
-            </div>
         </div>
         
     </div>

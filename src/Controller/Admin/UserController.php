@@ -64,6 +64,8 @@ class UserController extends AbstractController
                 ->htmlTemplate('admin/user/account_created_email.html.twig');
             $mailer->send($email);
 
+            $this->addFlash('success', 'Utilisateur enregistré avec succès. En attente de confirmation');
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -104,6 +106,8 @@ class UserController extends AbstractController
             }
             $this->getDoctrine()->getManager()->flush();
 
+            $this->addFlash('success', 'Modification prise en compte');
+
             return $this->redirectToRoute('user_index');
         }
 
@@ -121,6 +125,8 @@ class UserController extends AbstractController
             $entityManager->remove($user);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Suppression confirmée');
 
         return $this->redirectToRoute('user_index');
     }

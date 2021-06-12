@@ -67,8 +67,10 @@ class ToplinesController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($topline);
             $entityManager->flush();
+            
+            $this->addFlash('topline-success', 'Topline uploadée avec succès');
 
-            return $this->redirectToRoute('toplines');
+            return $this->redirectToRoute('user_profile');
         }
 
         return $this->render('toplines/new.html.twig', [
@@ -111,8 +113,10 @@ class ToplinesController extends AbstractController
                 $topline->setFile($fileName);
             }
             $this->getDoctrine()->getManager()->flush();
+            
+            $this->addFlash('topline-success', 'Modification prise en compte');
 
-            return $this->redirectToRoute('toplines');
+            return $this->redirectToRoute('user_profile');
         }
 
         return $this->render('toplines/edit.html.twig', [
@@ -133,9 +137,9 @@ class ToplinesController extends AbstractController
             $entityManager->remove($topline);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Votre topline a été supprimée');
+            $this->addFlash('topline-success', 'Suppression confirmée');
         }
 
-        return $this->redirectToRoute('profile');
+        return $this->redirectToRoute('user_profile');
     }
 }

@@ -5,6 +5,9 @@
 {% block body %}
     <div class="wrap">
         <div>
+            <a class="reset-link" href="{{path('home')}}">Accueil</a>
+        </div>
+        <div>
             <h1>Inscription</h1>
         </div>
         {% for flashError in app.flashes('verify_email_error') %}
@@ -39,7 +42,7 @@
                 <button type="submit" class="btn-primary">S'incrire <span><i class="fas fa-paper-plane"></i></span></button>
             </div>
             <div class="input-group">
-                <p>Vous avez déjà un compte ? <a href="{{path('app_login')}}">Connectez-vous</a>.</p>
+                <p>Tu as déjà un compte ? <a class="link" href="{{path('app_login')}}">Connectes-toi</a>.</p>
             </div>
         {{ form_end(registrationForm) }}
     </div>

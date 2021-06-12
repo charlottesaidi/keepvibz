@@ -4,58 +4,82 @@
 
 {% block body %}
 <section class="instru_show">
-    <div class="top_content flex col">
-        <div class="up_content_img">
-            <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru"></div>
-        <div class="down_content flex col">
-            <audio preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_1"></audio>
-            <div class="top_down_content_show_instru flex fw">
-                <div class="btn_play_caroussel btn_1">
-                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+    <div class="wrap1_instrus_show">
+        <div class="top_container_show">
+            <div class="top_content_instrus_show flex col aic">
+                <div class="up_content_img">
+                    <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru">
                 </div>
-                <p class="title_content_show_instru">{{ instru.title }}</p>
+            </div>
+            <div class="down_content flex col aic">
+                <audio preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_1"></audio>
+                <div class="top_down_content_show_instru flex fw">
+                    <div class="btn_play_caroussel_show_instrus btn_1">
+                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                    </div>
+                    <p class="title_content_show_instru">{{ instru.title }}</p>
+                </div>
                 <p class="author_content_show_instru">par <span class="name_author_content_show_instru">{{ instru.user.name }}</span></p>
-                <div class="details_content_show_instru">
+                <div class="details_content_show_instru flex fw">
                     <p class="genre_content_show_instru">
-                    {% for genre in instru.genre %}
-                        {{ genre }}
-                    {% endfor %}
+                        {% for genre in instru.genre %}
+                            {{ genre }}
+                        {% endfor %}
+                        <span class="genre_separator">|</span>
                     </p>
-                    <p class="bpm_content_show_instru">{{ instru.bpm }} BPM</p>
+                    <p class="bpm_content_show_instru"> {{ instru.bpm }} <span class="bpm_show_instru"> BPM</span></p>
+                    <span class="genre_separator">|</span>
                     <p class="key_content_show_instru">Key: {{ instru.cle }}</p>
-                    <p class="nombre_content_show_instru">(nombres DYNAMIQUE) lectures</p>
+                    {# <p class="nombre_content_show_instru">(nombres DYNAMIQUE) lectures</p> #}
+                </div>
+                <div class="block_link_items_associes">
+                    <ul class="links_textes_toplines flex jcc">
+                        <li class="first_textes"><a href="#">Textes associés</a></li>
+                        <li class="second_topline"><a href="#">Toplines associées</a></li>
+                    </ul>
                 </div>
             </div>
+            <div class="nav_others_textes_toplines">
+            </div>
         </div>
-    </div>
-
-    <div class="bottom_content flex col">
+    </div>   
+    <div class="bottom_container_show">
+        <div class="wrap2_instrus_show flex col">
         {% for beats in instru.user.instrus %}
-        <div class="others_instrus_author">
-            <div class="left_others_instrus_author">
-                <div class="btn_play_caroussel btn_1">
-                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+            <div class="others_instrus_author flex aic pr">
+                <div class="left_others_instrus_author flex aic">
+                    <div class="btn_play_caroussel_show_instrus btn_1 btn_play_hover">
+                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                    </div>
+                    <div class="block_image_instru_author">
+                        <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                    </div>
                 </div>
-                <div class="block_image_instru_author">
-                    <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                <div class="right_others_instrus_author flex col">
+                    <div class="top_right_others_instrus_author">
+                        <p class="title_others_instrus_author">{{ beats.title }}</p>
+                    </div>
+                    <div class="bottom_right_others_instrus_author flex ">
+                        <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
+                        <p class="separator_others_instrus_author grey_text"> | </p>
+                        <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p>
+                        <p class="separator_others_instrus_author grey_text"> | </p>
+                        <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
+                    </div>
+                </div>
+                <div class="top_right_others_instrus_author pa">
+                    <div class="block_downloading pr">
+                        <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                    </div>
                 </div>
             </div>
-            <div class="right_others_instrus_author flex col">
-                <div class="top_right_others_instrus_author">
-                    <p class="title_others_instrus_author">{{ beats.title }}</p>
-                </div>
-                <div class="bottom_right_others_instrus_author flex ">
-                    <p class="user_others_instrus_author">par <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
-                    <p class="separator_others_instrus_author"> | </p>
-                    <p class="bpm_others_instrus_author">{{ beats.bpm }} BPM</p>
-                    <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
-                </div>
-            </div>
-        </div>
         {% endfor %}
     </div>
-
+    </div>
+    {{ include('instrus/_delete_form.html.twig') }};
 </section>
-    {{ include('instrus/_delete_form.html.twig') }}
-</div>
+
 {% endblock %}
+
+
+

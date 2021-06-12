@@ -6,7 +6,7 @@
     {# SECTION 1 #}
     <section id="section_1" class="section_home_1">
         <div class="background_1">
-            <img class="gif_background" src="{{asset('assets/images/background/fond_projet_png.png')}}" alt="image animé en fond d'ecran">
+            <img class="gif_background" src="{{asset('assets/images/background/fond_projet_png.png')}}" alt="image animée en fond d'ecran">
             <div class="gradient"></div>
         </div>
         <div class="background_2">
@@ -32,8 +32,8 @@
     {# SECTION 2 #}
     <section id="section_2" class="section_home_2">
         <div class="wrap4">
-            <h2 id="most_popular" class="most_downloads">Les plus populaires</h2>
-                <div class="flexslider carousel">
+            <h2 id="instrus_populaires" class="most_downloads_beats">Instrus populaires</h2>
+            <div class="flexslider carousel">
                 {# CUSTOM NAVIGATION #}
                 <div class="custom-navigation">
                     <div class="paginate_button flex jcfe">
@@ -45,14 +45,14 @@
                     <ul class="slides">
                         {% for beat in instrus %}
                         <li class="content_download flex col">
-                            <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
+                            <audio preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_1"></audio>
                             <div class="image_downloaded">
                                 <a href="{{path('instru_show', {'id': beat.id})}}">
                                     <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
                                 </a>
                             </div>
                             <div class="btn_play_caroussel btn">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
+                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture et pause audio">
                             </div>
                             <div class="block_info_instrus flex col">
                                 <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
@@ -67,7 +67,68 @@
                         {% endfor %}
                     </ul>
                 </div>
-        </div>
+            </div>
     </section>
     {# FIN SECTION 2 #}
+
+    {# SECTION 3 #}
+    <section id="section_3" class="section_home_3">
+        <div class="wrap4">
+            <div class="background_3">
+                <div class="block_accroche2 tcv">
+                    <h2 class="accroche2">"Poses <span>tes toplines sur leurs instrus !</span>"</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    {# FIN SECTION 3 #}
+
+
+
+    {# SECTION 4 #}
+    <section id="section_4" class="section_home_4">
+        <div class="background_4">
+            <img class="background_section4" src="{{asset('assets/images/background/writter.jpg')}}" alt="image de fond représentant un homme qui écrit un texte destiné à la musique">
+            <div class="gradient_2"></div>
+        </div>
+        <div class="block_accroche3 tcv">
+            <h2 class="accroche3">"Partages <span>tes textes !</span>"</h2>
+        </div>
+    </section>
+    {# FIN SECTION 4 #}
+
+    {# SECTION 4 #}
+    <section id="section_5" class="section_home_5">
+        <div class="wrap4">
+            <h2 id="textes_populaires" class="most_downloads_texts">Textes populaires</h2>
+            <div class="flexslider2 carousel">
+                {# CUSTOM NAVIGATION #}
+                <div class="custom-navigation2 custom-controls-container2">
+                    <div class="paginate_button flex jcfe">
+                            <a href="#" class="flex-prev"><img src="{{asset('assets/images/icons/arrow-92-64.png')}}" alt="icône de navigation (précédent)"></a>
+                            <a href="#" class="flex-next"><img src="{{asset('assets/images/icons/arrow-28-64.png')}}" alt="icône de navigation (suivant)"></a>
+                    </div>
+                </div>
+                {# CUSTOM NAVIGATION #}
+                    <ul class="slides">
+                        {% for beat in instrus %}
+                        <li class="content_download flex col">
+                            <div class="image_downloaded">
+                                <a href="{{path('instru_show', {'id': beat.id})}}">
+                                    <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                                </a>
+                            </div>
+                            <div class="block_info_instrus flex col">
+                                <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+    </section>
+    {# FIN SECTION 4 #}
+
+    
+
 {% endblock %}

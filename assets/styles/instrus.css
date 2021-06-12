@@ -170,17 +170,61 @@ option{background-color: #3d3c3c; border: none;}
 
 
 /* PAGE SHOW INSTRUS */
-
+.wrap1_instrus_show{max-width: 1300px; width: 100%; margin: 0 auto;}
+.wrap2_instrus_show{max-width: 1300px; width: 100%; margin: 0 auto; padding: 0 20px;}
 /* TOP */
 .instru_show{margin-top: 146px;}
-.title_content_show_instru, .author_content_show_instru,.name_author_content_show_instru, .genre_content_show_instru, .bpm_content_show_instru, .key_content_show_instru{color: #fff;}
-
-
-
-/* BOTTOM */
+.top_content_instrus_show{padding-top: 30px;}
+.top_container_show{background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(74,67,75,1) 0%, rgba(68,56,70,1) 6%, rgba(51,27,56,0.9611441988904937) 45%); padding-bottom: 50px; border-bottom: 1px solid hsla(0,0%,100%,.12);}
+.up_content_img{height: 200px ;width: 200px;}
+.image_content_show_instru{width: 100%;}
+.title_content_show_instru,.bpm_content_show_instru ,.name_author_content_show_instru, .genre_content_show_instru, .key_content_show_instru{color: #fff;}
+.title_content_show_instru{margin: 5px 0px 0px 9px; font-size: 24px;}
+.down_content {margin-top: 10px;}
+.author_content_show_instru{color: #828282; margin-top: 10px;}
+.details_content_show_instru{margin: 8px 2px 0px 0px; margin-top: 20px;}
+.genre_separator{color: #828282; }
+.bpm_content_show_instru{margin-left: 4px;}
+.bpm_show_instru{color: #828282; margin-right: 4px;}
+.key_content_show_instru{margin-left: 2px;}
 .bottom_content{border-top: 1px solid #3d3c3c; width: 100%;}
 .title_others_instrus_author, .user_others_instrus_author, .name_others_instrus_author, .separator_others_instrus_author, .bpm_others_instrus_author, .nombre_lecture_others_instrus_author{color: #fff;}
+.btn_play_caroussel_show_instrus{z-index: 3; height: 36px; width: 36px;}
+.btn_play_caroussel_show_instrus:hover{opacity: .5;}
+.btn_play_caroussel_show_instrus:active {transform: scale(120%) ;}
+.img_play_caroussel{width: 100%;}
 
+.block_link_items_associes{margin-top: 20px;}
+.first_textes{cursor: pointer ;margin: 0 20px ;background-color: #3d3c3c; border-radius: 8px; padding: 15px;
+  -webkit-box-shadow: inset 1px 0px 26px 5px #000000; 
+  box-shadow: inset 1px 0px 26px 5px #000000; font-size: .8em;}
+
+.second_topline{cursor: pointer ;margin: 0 20px ;background-color: #3d3c3c; border-radius: 8px; padding: 15px;
+  -webkit-box-shadow: inset 1px 0px 26px 5px #000000; 
+  box-shadow: inset 1px 0px 26px 5px #000000; font-size: .8em;}
+.first_textes:hover{opacity: .7;} 
+.second_topline:hover{opacity: .7;}
+
+/* BOTTOM */
+.others_instrus_author{ padding: 9px 10px; margin-bottom: 20px;}
+.others_instrus_author:hover{ background-color: #313030; border-radius: 4px; }
+.bottom_container_show{margin-top: 30px;}
+.btn_play_hover{width: 30px;}
+.block_image_instru_author{ width: 60px; border: none; margin: 0 20px 0px 15px;}
+.img_instru_author{width: 100%; border-radius: 5px;}
+.bottom_right_others_instrus_author{margin-top: 5px;}
+.title_others_instrus_author{font-size: 18px;}
+.name_others_instrus_author, .bpm_others_instrus_author, .{color: #fff; font-size: 14px;}
+.grey_text{color: #828282; font-size: 14px;}
+
+/* BOUTON DOWNLOAD */
+.top_right_others_instrus_author{right: 20px;}
+.top_right_others_instrus_author:hover{cursor: pointer;}
+.block_downloading{height: 20px; width: 20px; background-color: #2c2a2a; border-radius: 4px; padding: 15px; }
+.block_downloading:hover{background-color: #A27440;}
+.block_downloading:active{transform: scale(120%) }
+.image_downloading{width: 100%; z-index: 3; height: 20px; width: 20px;}
 /* PAGE SHOW INSTRUS */
 
 
@@ -209,18 +253,19 @@ option{background-color: #3d3c3c; border: none;}
 
 @media screen and (max-width: 770px){
   .content_download_instrus{width: 48%;}
+  .others_instrus_author{flex-direction: column;}
 }
 
+
+@media screen and (max-width: 615px){
+  .section_instrus{margin-top: 85px;}
+  .instru_show{margin-top: 85px;}
+}
 
 @media screen and (max-width: 490px){
   .content_download_instrus{width: 100%;}
 }
 
-
-@media screen and (max-width: 615px){
-    .section_instrus{margin-top: 85px;}
-}
-  
 
 
 

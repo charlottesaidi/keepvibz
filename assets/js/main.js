@@ -20,7 +20,7 @@ $(document).ready(function(){
     })
 // ==============================================================
 
-    //CAROUSSEL MOST DOWNLOADED
+    //CAROUSSEL Instrus Populaires
     if (window.matchMedia("(max-width: 550px)").matches) {
         $('.flexslider').flexslider({
             animation: "slide",
@@ -83,31 +83,95 @@ $(document).ready(function(){
     });}
 
 // ==============================================================
+
+    //CAROUSSEL Textes Populaires
+    if (window.matchMedia("(max-width: 550px)").matches) {
+        $('.flexslider2').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 250,
+            itemMargin: 20,
+            minItems: 1,
+            maxItems: 1,
+            controlNav: false,
+            controlsContainer: $(".custom-controls-container2"),
+            customDirectionNav: $(".custom-navigation2 a")
+            });}
+    else if (window.matchMedia("(max-width: 800px)").matches) {
+        $('.flexslider2').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 200,
+            itemMargin: 20,
+            minItems: 2,
+            maxItems: 2,
+            controlNav: false,
+            controlsContainer: $(".custom-controls-container2"),
+            customDirectionNav: $(".custom-navigation2 a")
+            });}
+    else if (window.matchMedia("(max-width: 1100px)").matches) {
+        $('.flexslider2').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 200,
+            itemMargin: 20,
+            minItems: 3,
+            maxItems: 3,
+            controlNav: false,
+            controlsContainer: $(".custom-controls-container2"),
+            customDirectionNav: $(".custom-navigation2 a")
+            });}
+    else if (window.matchMedia("(max-width: 1300px)").matches) {
+        $('.flexslider2').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 200,
+            itemMargin: 20,
+            minItems: 4,
+            maxItems: 4,
+            controlNav: false,
+            controlsContainer: $(".custom-controls-container2"),
+            customDirectionNav: $(".custom-navigation2 a")
+            });}
+    else {
+        $('.flexslider2').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 200,
+            itemMargin: 20,
+            minItems: 5,
+            maxItems: 5,
+            controlNav: false,
+            controlsContainer: $(".custom-controls-container2"),
+            customDirectionNav: $(".custom-navigation2 a")
+    });}
+
+// ==============================================================
     // LECTEUR CAROUSSEL
     // 1
     $(".btn").on('click', function() {
-        // if ($("#player_1")[0].paused == false) {
-        //     $("#player_1")[0].pause();
-        // } else {
-        //     $("#player_2")[0].pause();
-        //     $("#player_1")[0].play();
-        // }
-        if(this[0].paused == false) {
-            this[0].pause();
+        if ($("#player_1")[0].paused == false) {
+            $("#player_1")[0].pause();
         } else {
-            this[0].play();
+            $("#player_2")[0].pause();
+            $("#player_1")[0].play();
         }
+        // if(this[0].paused == false) {
+        //     this[0].pause();
+        // } else {
+        //     this[0].play();
+        // }
     });
     
     // 2
-    // $(".btn_2").on('click', function() {
-    //     if ($("#player_2")[0].paused == false) {
-    //         $("#player_2")[0].pause();
-    //     } else {
-    //         $("#player_1")[0].pause();
-    //         $("#player_2")[0].play();
-    //     }
-    // });
+    $(".btn_2").on('click', function() {
+        if ($("#player_2")[0].paused == false) {
+            $("#player_2")[0].pause();
+        } else {
+            $("#player_1")[0].pause();
+            $("#player_2")[0].play();
+        }
+    });
 
 
 // ==============================================================
@@ -134,5 +198,8 @@ $(document).ready(function(){
     $('.btn_genre').on('click', function(){
         $('.block_genre').slideToggle('slow');
     })
-    
+
+
+// ================================================================
+
 })

@@ -5,33 +5,36 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use App\Service\FolderGenerator;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ProfileEditFunctions 
+class ProfileEditFunctions extends AbstractController
 {
-    private $passwordEncoder;
+    public $passwordEncoder;
 
-    private $folderGenerator;
-
-    public function _construct(FolderGenerator $folderGenerator, UserPasswordEncoderInterface $passwordEncoder) 
+    public function _construct(UserPasswordEncoderInterface $passwordEncoder) 
     {
-        $this->folderGenerator = $folderGenerator;
         $this->passwordEncoder = $passwordEncoder;
     }
 
     public function changePassword($form, $user) {
         if($form->get('newPassword')->getData() != null) {
+            if($form->get('oldPassword')->getData() != null) {
             $user->setPassword(
-                $this->$passwordEncoder->encodePassword(
+                    $this->passwordEncoder->encodePassword(
                     $user,
                     $form->get('newPassword')->getData()
                 )
             );
-        }
+                $this->flushUpdate();
+            } else {
+                $this->addFlash('error', 'Tu dois renseigner ton mot de passe actuel pour le modifier');
+            }
+        } 
     }
 
-    public function changeAvatar($form, $user, $avatar) {
-            $this->$folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
+    public function changeAvatar($form, $user, $avatar, $folderGenerator) {
+        if($form->get('avatar')->getData() != null) {
+            $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
             
             $file = $form->get('avatar')->getData();
             $fileName =  uniqid(). '.' .$file->guessExtension();
@@ -45,6 +48,14 @@ class ProfileEditFunctions
             }
             $avatar->setUser($user);
             $avatar->setFile($fileName);
+            $this->flushUpdate();
+        }
+    }
+
+    public function flushUpdate() {
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->flush();
+        $this->addFlash('success', 'Modification prise en compte');
     }
 }
 ?>

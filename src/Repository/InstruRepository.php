@@ -56,6 +56,15 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findUserInstrus($user) {
+        return $this->createQueryBuilder('i')
+        ->join('i.user', 'u')
+        ->setParameter('val', $user)
+        ->where('i.user = :val')
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * @return Instru[] Returns an array of Instru objects
     //  */

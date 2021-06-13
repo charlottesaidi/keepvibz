@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -47,6 +48,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+    
+    /**
+    * @SecurityAssert\UserPassword(
+    *     message = "Ancien mot de passe invalide"
+    * )
+    */
+   private $oldPassword;
 
     /**
      * @var string The hashed password
@@ -55,7 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *      min = 6,
      *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
      * )
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $password;
 
@@ -209,6 +217,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->roles = $roles;
 
+        return $this;
+    }
+
+    function getOldPassword() {
+        return $this->oldPassword;
+    }
+
+    function setOldPassword($oldPassword) {
+        $this->oldPassword = $oldPassword;
         return $this;
     }
 

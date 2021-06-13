@@ -58,7 +58,7 @@
                             <div class="btn_play_caroussel btn">
                                     <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture et pause audio">
                             </div>
-                            <div class="block_info_instrus flex col">
+                            <div class="block_info_instrus flex col tac">
                                 <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
                                 <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
                                 {% for genre in beat.genre %}
@@ -123,10 +123,9 @@
                                     {# <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ text.instru.image) }}" alt="{{ text.title }}"> #}
                                 </a>
                             </div>
-                            <div class="block_info_instrus flex col">
+                            <div class="block_info_instrus flex col tac">
                                 <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ text.title }}</span></h4>
                                 <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ text.user.name }}</span></h4>
-
                             </div>
                         </li>
                         {% endfor %}

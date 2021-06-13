@@ -4,8 +4,9 @@
 
 {% block body %}
 <section class="instru_show">
+    {# TOP SHOW INSTRU  #}
     <div class="wrap1_instrus_show">
-        <div class="top_container_show">
+        <div class="top_container_show pr">
             <div class="top_content_instrus_show flex col aic">
                 <div class="up_content_img">
                     <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru">
@@ -39,9 +40,17 @@
                         <li class="third_topline tac"><a href="#">Toplines associées</a></li>
                     </ul>
                 </div>
+                <div class="top_show_instru_downloading">
+                    <a href="{{asset('uploads/instrus/' ~ instru.file)}}" download="{{ instru.file }}">
+                        <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                    </a>
+                </div>
+                
             </div>
         </div>
     </div>
+    {# FIN TOP SHOW INSTRU  #}
+
     {# BOTTOM AUTRES INSTRUS AUTEUR  #}
     <div class="bottom_autres_instrus_show">
         <div class="wrap2_instrus_show flex col">

@@ -240,4 +240,19 @@ $(document).ready(function(){
         $('.bottom_toplines_associees_show').show();
     })
 
+    //SHOW TEXTES - DISPLAY NONE / DISPLAY BLOCK - BOTTOM SECTION
+    $('.second_instrus').click(function(){
+        $(this).hide();
+        $('.first_autres_textes').show();
+        $('.bottom_autres_textes_show').hide();
+        $('.bottom_instrus_associees_show').show();
+    })
+
+    $('.first_autres_textes').click(function(){
+        $(this).hide();
+        $('.second_instrus').show();
+        $('.bottom_autres_textes_show').show();
+        $('.bottom_instrus_associees_show').hide();
+    })
+
 })

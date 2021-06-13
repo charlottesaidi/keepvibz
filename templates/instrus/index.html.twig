@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
 {% block title %}KeepVibz | Toutes les instrus !{% endblock %}
 
@@ -46,7 +46,7 @@
                     <h2 class="title_instrus">Instrus</h2>
                     <div class="content_instrus flex sb fw">
                         {% for beat in instrus %}
-                            <li class="content_download_instrus flex col pr">
+                            <li class="content_download_instrus flex col tac pr">
                                 <audio preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_1"></audio>
                                 <div class="image_downloaded">
                                     <a href="{{path('instru_show', {'id': beat.id})}}">

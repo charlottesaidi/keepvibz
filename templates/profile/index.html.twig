@@ -13,8 +13,28 @@
 {% block title %}KeepVibz | Profil{% endblock %}
 
 {% block body %}
+    
+    <div class="mobile-nav">
+        <nav class="hide" id="mobileNav">
+            <ul>
+                <li>
+                    <button href="#!" class="tablinks" id="mob-prof-link">Profil</button>
+                </li>
+                <li>
+                    <button href="#!" class="tablinks" id="mob-instru-link">Mes Instrus</button>
+                </li>
+                <li>
+                    <button href="#!" class="tablinks" id="mob-top-link">Mes Toplines</button>
+                </li>
+                <li>
+                    <button href="#!" class="tablinks" id="mob-text-link">Mes Textes</button>
+                </li>
+            </ul>
+        </nav>
+        <button href="#!" class="tablinks" id="sideNavLink">Menu</button>
+    </div>
 
-    <div class="main">
+    <div class="profile-main">
         <div class="side-nav">
             <nav>
                 <ul>
@@ -38,19 +58,20 @@
             <div id="profil" class="tabcontent" style="display: block">
                 <h2>Profil</h2>
                 <div class="user-block">
-                    {{ form_start(profileForm, {'attr': {'novalidate': 'novalidate'}}) }}
-                    {% for message in app.flashes('profile-success') %}
+                {{ form_start(profileForm, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                    {% for message in app.flashes('success') %}
                         <div class="success">
                             {{ message }}
                         </div>
-                        <div class=".invalid-feedback d-block">
-                            {{ message }}
-                            {{form_errors(profileForm.email)}}
-                            {{form_errors(profileForm.phone)}}
-                            {{form_errors(profileForm.newPassword.first)}}
-                            {{form_errors(profileForm.newPassword.second)}}
+                    {% endfor %}
+                    {% for error in app.flashes('error') %}
+                        <div class="invalid-feedback d-block">
+                            {{ error }}
                         </div>
                     {% endfor %}
+                    {{form_errors(profileForm.email)}}
+                    {{form_errors(profileForm.phone)}}
 
                     <h3>Photo de profil</h3>
                     <div class="attr-block avatar">
@@ -194,7 +215,7 @@
                             </div>
                         </div>
                     </div>
-
+                {{form_end(profileForm)}}
                     <h3>Paramètres</h3>
                     <div class="global-attr-block">
                         
@@ -206,25 +227,28 @@
                                 <a href="" class="btn-secondary formbuttons" id="password-button">Modifier</a>
                             </div>
                             <div class="edit-block profile-block formsection hidden" id="edit-password">
+                            {{ form_start(passwordForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                                {{form_errors(passwordForm.oldPassword)}}
+                                {{form_errors(passwordForm.newPassword.first)}}
+                                {{form_errors(passwordForm.newPassword.second)}}
                                 <div class="input-group">
-                                    <label for="old-password">Mot de passe actuel</label>
-                                    {{form_widget(profileForm.oldPassword)}}
+                                    <label for="password">Mot de passe actuel</label>
+                                    {{form_widget(passwordForm.oldPassword)}}
                                 </div>
                                 <div class="input-group">
                                     <label for="password">Nouveau mot de passe</label>
-                                    {{form_widget(profileForm.newPassword.first)}}
+                                    {{form_widget(passwordForm.newPassword.first)}}
                                 </div>
                                 <div class="input-group">
                                     <label for="password">Confirmer</label>
-                                    {{form_widget(profileForm.newPassword.second)}}
-                                    {{form_errors(profileForm.newPassword.second)}}
+                                    {{form_widget(passwordForm.newPassword.second)}}
                                 </div>
                                 <div class="input-group">
                                     <input type="submit" class="btn-primary" value="Valider">
                                 </div>
+                            {{form_end(passwordForm)}}
                             </div>
                         </div>
-                    {{ form_end(profileForm) }}
 
                         <div class="attr-block account">
                             <div class="title-block profile-block">
@@ -262,7 +286,7 @@
                     <a class="btn-secondary" href="{{ path('instrus_new') }}">Uploader un morceau</a>
                 </div>
                 <div class="listing">
-                    {% for instru in app.user.instrus %}
+                    {% for instru in instrus %}
                         <div>
                             {% if instru.deletedAt %}
                                 <div class="warning">
@@ -305,7 +329,7 @@
                     <a class="btn-secondary" href="{{ path('toplines_new') }}">Uploader une topline</a>
                 </div>
                 <div class="listing">
-                    {% for topline in app.user.toplines %}
+                    {% for topline in toplines %}
                         <div>
                             {% if topline.deletedAt %}
                                 <div class="warning">
@@ -343,7 +367,7 @@
                     <a class="btn-secondary" href="{{ path('textes_new') }}">Publier un texte</a>
                 </div>
                 <ul class="listing">
-                    {% for texte in app.user.textes %}
+                    {% for texte in textes %}
                         {% if texte.deletedAt %}
                             <div class="warning">
                                 L'administrateur a retiré cette publication. Contactes le support pour plus d'infos.

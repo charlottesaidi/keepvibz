@@ -238,6 +238,9 @@ option{background-color: #3d3c3c; border: none;}
 /* BOUTON DOWNLOAD */
 .top_right_others_instrus_author{right: 20px;}
 .top_right_others_instrus_author:hover{cursor: pointer;}
+.top_show_instru_downloading{position: absolute; bottom: 7px; right: 41px ;height: 20px; width: 20px; background-color: #2c2a2a; border-radius: 4px; padding: 15px; }
+.top_show_instru_downloading:hover{background-color: #A27440;}
+.top_show_instru_downloading:active{transform: scale(120%) }
 .block_downloading{height: 20px; width: 20px; background-color: #2c2a2a; border-radius: 4px; padding: 15px; }
 .block_downloading:hover{background-color: #A27440;}
 .block_downloading:active{transform: scale(120%) }

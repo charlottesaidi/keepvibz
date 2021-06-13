@@ -153,4 +153,11 @@ class Topline
 
         return $this;
     }
+
+    public function removeInstru(Instru $instru): self
+    {
+        $this->instrus->removeElement($instru);
+
+        return $this;
+    }
 }

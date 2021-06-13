@@ -68,7 +68,7 @@ class Instru
      *    mimeTypes = {"audio/mpeg", "audio/wma", "audio/flac"},
      *    mimeTypesMessage = "Format de fichier invalide"
      * )
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $file;
 
@@ -93,12 +93,12 @@ class Instru
     private $user;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Texte::class, mappedBy="instrus")
+     * @ORM\ManyToMany(targetEntity=Texte::class, mappedBy="instrus", cascade={"persist", "remove"})
      */
     private $textes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="instru")
+     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="instru", cascade={"persist", "remove"})
      */
     private $toplines;
 

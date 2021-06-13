@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Form\AdminEditUserType;
 use App\Entity\Avatar;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -14,6 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mime\Address;
 use JasonGrimes\Paginator;
 
 #[Route('/admin/user')]
@@ -40,7 +42,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/new', name: 'user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function new(Request $request, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
@@ -84,27 +86,32 @@ class UserController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function edit(Request $request, User $user, UserPasswordEncoderInterface $passwordEncoder, MailerInterface $mailer): Response
     {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
+        $editForm = $this->createForm(AdminEditUserType::class, $user);
+        $editForm->handleRequest($request);
         $avatar = new Avatar();
         $oldPassword = $user->getPassword();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setModifiedAt(new \dateTime());
-            // password
-            if($form->get('password') == null) {
-                $user->setPassword($oldPassword);
+        if ($editForm->isSubmitted()) {
+            if($editForm->get('actif')->getData() == false) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($user);
+                $entityManager->flush();
+
+                $email = (new TemplatedEmail())
+                    ->from(new Address('no-reply@keepvibz.fr', 'Banishment notice'))
+                    ->to($user->getEmail())
+                    ->subject('Tu as été banni(e)')
+                    ->htmlTemplate('admin/user/banishment_notice_email.html.twig');
+                $mailer->send($email);
             } else {
-                $user->setPassword(
-                    $passwordEncoder->encodePassword(
-                        $user,
-                        $form->get('password')->getData()
-                    )
-                );
+                $user->setModifiedAt(new \dateTime());
+                if($editForm->get('roles')->getData() != null) {
+                    $user->addRole($editForm->get('roles')->getData());
+                }
+                $this->getDoctrine()->getManager()->flush();
             }
-            $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'Modification prise en compte');
 
@@ -113,7 +120,7 @@ class UserController extends AbstractController
 
         return $this->render('admin/user/edit.html.twig', [
             'user' => $user,
-            'form' => $form->createView(),
+            'editForm' => $editForm->createView(),
         ]);
     }
 

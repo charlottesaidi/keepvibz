@@ -1,0 +1,25 @@
+{% extends 'error-base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('error-pages') }}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="main">
+    <div class="error_template">
+
+        <div id="error">
+            <div class="error">
+                <div class="error-message">
+                    <h1>403</h1>
+                    <h2>Non Autorisé</h2>
+                </div>
+                <a class="error-link" href="{{path('home')}}">Retour</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

@@ -138,17 +138,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $textes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $toplines;
 
     /**
-     * @ORM\OneToMany(targetEntity=Instru::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Instru::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $instrus;
 

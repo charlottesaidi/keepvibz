@@ -31,7 +31,7 @@
                 </li>
             </ul>
         </nav>
-        <button href="#!" class="tablinks" id="sideNavLink">Menu</button>
+        <button href="#!" class="tablinks" id="sideNavLink"><img class="button_burger" src="{{asset('assets/images/logo_mobile.png')}}" alt="logo sur mobile"></button>
     </div>
 
     <div class="profile-main">
@@ -300,7 +300,10 @@
                             </div>
                             <div>
                                 <p><a href="" class="link">{{instru.title}}</a></p>
-                                <p>{{ instru.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
+                                <p>
+                                    <span class="date">{{ instru.createdAt ? instru.createdAt|date('d/m/Y') : '' }}</span><br>
+                                    <span class="time">{{ instru.createdAt ? instru.createdAt|date('H:i') : '' }}</span>
+                                </p>
                                 {% for genre in instru.genre %}
                                     <p> {{genre}} </p>
                                 {% endfor %}
@@ -341,7 +344,10 @@
                                 {% for instru in topline.instrus %}
                                     <p> {{instrus.title}} </p>
                                 {% endfor %}
-                                <p>{{ topline.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
+                                <p>
+                                    <span class="date">{{ topline.createdAt ? topline.createdAt|date('d/m/Y') : '' }}</span><br>
+                                    <span class="time">{{ topline.createdAt ? topline.createdAt|date('H:i') : '' }}</span>
+                                </p>
                             </div>
                             <div>  
                             {% if topline.file %}

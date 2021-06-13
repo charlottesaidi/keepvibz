@@ -18,9 +18,10 @@ body {
     .title_instrus_associees {
         padding: 10px 0;
     }
-    color: $font-primary;
-    font-family: 'Squada One', cursive; letter-spacing: 3px;
+	font-family: $squada;
+	letter-spacing: $three;
     .profile-main {
+        color: $font-primary;
         padding-top: 0;
         h2, .main-title {
             font-size: 28px;
@@ -117,7 +118,8 @@ body {
             border: none;
             color: $font-primary;
             cursor: pointer;
-            font-family: 'Squada One', cursive; letter-spacing: 3px;
+            font-family: $squada;
+            letter-spacing: $three;
             transition: all .3s;
         }
         button.active {
@@ -138,6 +140,11 @@ body {
             top: 90px;
             left: 0;
             right: 0;
+            .button_burger {
+                width: 20px;
+                height: 20px;
+                transform: rotate(180deg);
+            }
         }
     }
 }

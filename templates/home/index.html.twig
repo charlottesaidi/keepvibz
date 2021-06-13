@@ -32,7 +32,7 @@
     {# SECTION 2 #}
     <section id="section_2" class="section_home_2">
         <div class="wrap4">
-            <h2 id="instrus_populaires" class="most_downloads_beats">Instrus populaires</h2>
+            <h2 id="instrus_populaires" class="most_downloads_beats">Le Top 10 des Instrus</h2>
             <div class="flexslider carousel">
                 {# CUSTOM NAVIGATION #}
                 <div class="custom-navigation">
@@ -47,8 +47,12 @@
                         <li class="content_download flex col">
                             <audio preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_1"></audio>
                             <div class="image_downloaded">
-                                <a href="{{path('instru_show', {'id': beat.id})}}">
-                                    <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                                <a href="{{path('instru_show', {'id': beat.id})}}">                                    
+                                    {%  if beat.image is empty %}
+                                        <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                                    {% else %}
+                                        <img class="img_downloaded" src="{{asset('assets/images/items_sans_image/instru.png')}}" alt="{{ beat.title }}">
+                                    {% endif %}
                                 </a>
                             </div>
                             <div class="btn_play_caroussel btn">
@@ -61,7 +65,8 @@
                                     {{ genre }}
                                 {% endfor %}
                                 </span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>
+                                <h4 class="description_downloaded">CLé : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>
+                                <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ beat.user.name }}</span></h4>
                             </div>
                         </li>
                         {% endfor %}
@@ -111,15 +116,17 @@
                 </div>
                 {# CUSTOM NAVIGATION #}
                     <ul class="slides">
-                        {% for beat in instrus %}
+                        {% for text in textes %}
                         <li class="content_download flex col">
                             <div class="image_downloaded">
-                                <a href="{{path('instru_show', {'id': beat.id})}}">
-                                    <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                                <a href="{{path('instru_show', {'id': text.id})}}">
+                                    {# <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ text.instru.image) }}" alt="{{ text.title }}"> #}
                                 </a>
                             </div>
                             <div class="block_info_instrus flex col">
-                                <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
+                                <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ text.title }}</span></h4>
+                                <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ text.user.name }}</span></h4>
+
                             </div>
                         </li>
                         {% endfor %}

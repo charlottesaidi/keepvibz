@@ -137,6 +137,13 @@ a{text-decoration: none;}
 }
   
 
+@media screen and (max-width: 470px){
+    .link_text{justify-content: center; flex-wrap: wrap;}
+    .instrus_associees{justify-content: center;}
+    .block_instrus_associees{margin-left: 0px ;}
+}
+  
+
 @media screen and (max-width: 450px){
     .instrus_associees {flex-wrap: wrap; margin-top: 15px;}
 	.title_instrus_associees{margin-bottom: 10px;}

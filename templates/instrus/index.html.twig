@@ -64,10 +64,15 @@
                                         {% endfor %}
                                     </h4>
                                     <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>
+                                    <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ beat.user.name }}</span></h4>
+
                                 </div>
                             </li>
                         {% endfor %}
                     </div>
+                    {# PAGINATION #}
+                    {{ paginator }}
+                    {# PAGINATION #}
                 </div>
             </div>
             </div>

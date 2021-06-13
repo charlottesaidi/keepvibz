@@ -11,9 +11,17 @@
 |-------------------------------------
 */
 body {
+    .btn-secondary {
+        display: inline-block;
+        margin: 30px 0;
+    }
+    .title_instrus_associees {
+        padding: 10px 0;
+    }
     color: $font-primary;
     font-family: 'Squada One', cursive; letter-spacing: 3px;
-    .main {
+    .profile-main {
+        padding-top: 0;
         h2, .main-title {
             font-size: 28px;
             text-align: right;
@@ -96,33 +104,45 @@ body {
                 }
             }
         }
-        .side-nav {
-            padding-top: 50px;
-            width: 15%;
-            button.tablinks {
-                text-align: left;
-                width: 100%;
-                display: block;
-                padding: 20px 20px;
-                background: transparent;
-                border: none;
-                color: $font-primary;
-                cursor: pointer;
-                font-family: 'Squada One', cursive; letter-spacing: 3px;
-                transition: all .3s;
-            }
-            button.active {
-                padding-left: 35px;
-                background: $font-secondary;
-            }
-            button.tablinks:hover {
-                padding-left: 35px;
-            }
+    }
+    .side-nav, .mobile-nav {
+        padding-top: 50px;
+        width: 18%;
+        button.tablinks {
+            text-align: left;
+            width: 100%;
+            display: block;
+            padding: 20px 20px;
+            background: transparent;
+            border: none;
+            color: $font-primary;
+            cursor: pointer;
+            font-family: 'Squada One', cursive; letter-spacing: 3px;
+            transition: all .3s;
+        }
+        button.active {
+            padding-left: 35px;
+            background: $font-secondary;
+        }
+        button.tablinks:hover {
+            padding-left: 35px;
+        }
+    }
+    .mobile-nav {
+        width: 100%;
+        padding-top: 139px;
+        button#sideNavLink.tablinks {
+            display: none;
+            text-align: right;
+            position: absolute;
+            top: 90px;
+            left: 0;
+            right: 0;
         }
     }
 }
 @media screen AND (max-width: 850px) {
-    body .main {
+    body .profile-main {
         flex-direction: column;
         .side-nav {
             border-bottom: solid 1px hsla(0,0%,100%,.12);
@@ -135,20 +155,28 @@ body {
             }
         }
     }
-    body .main .side-nav button.tablinks:hover, body .main .side-nav button.active {
+    body .profile-main .side-nav button.tablinks:hover, body .profile-main .side-nav button.active {
         padding-left: 20px;
         background: $font-secondary;
     }
-    body .main .container {
+    body .profile-main .container {
         width: 100%;
     }
 }
 @media screen AND (max-width: 750px) {
-    body .main .container .user-block .attr-block {
+    body .profile-main .container .user-block .attr-block {
         flex-direction: column;
         align-items: flex-start;
-        div {
+        .profile-block {
             width: 100%;
         }
+    }
+}
+@media screen AND (max-width: 520px) {
+    .side-nav {
+        display: none;
+    }
+    body .mobile-nav button#sideNavLink.tablinks {
+        display: block;
     }
 }

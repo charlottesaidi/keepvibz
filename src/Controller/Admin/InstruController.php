@@ -115,7 +115,7 @@ class InstruController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 
                 // fichier
-                if ($instru->getFile() != null) {
+                if ($form->get('file')->getData() != null) {
                     $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/instrus');
                     
                     $file = $form->get('file')->getData();

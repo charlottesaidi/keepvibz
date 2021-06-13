@@ -36,6 +36,15 @@ class CompetenceRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    // public function findUserCompetences($user) {
+    //     return $this->createQueryBuilder('c')
+    //     ->join('c.users', 'u')
+    //     ->setParameter('val', $user)
+    //     ->whereFirst('c.users = :val')
+    //     ->getQuery()
+    //     ->getResult();
+    // }
+
     // /**
     //  * @return Competence[] Returns an array of Competence objects
     //  */

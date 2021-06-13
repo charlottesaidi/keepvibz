@@ -31,23 +31,6 @@ class UserProfileType extends AbstractType
             ->add('avatar', FileType::class, [
                 'mapped' => false,
             ])
-            ->add('oldPassword', passwordType::class, [
-                'mapped' => false,
-            ])
-            ->add('newPassword', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'mapped' => false,
-                'constraints' => [
-                    new Length([
-                        'min' => 6,
-                        'minMessage' => 'Le mot de passe doit contenir au moins {{ limit }} caractères',
-                        'max' => 4096,
-                    ]),
-                ],
-                'first_options'  => ['label' => 'Mot de passe'],
-                'second_options' => ['label' => 'Confirmer le mot de passe'],
-                'invalid_message' => 'Les mots de passe ne correspondent pas.'
-            ])
             ->add('competences', EntityType::class, [
                 'class' => Competence::class,
                 'choice_label' => 'title',
@@ -61,6 +44,7 @@ class UserProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
+            'csrf_token_id' => 'change_password',
         ]);
     }
 }

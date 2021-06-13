@@ -46,6 +46,15 @@ class TexteRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findUserTextes($user) {
+        return $this->createQueryBuilder('t')
+        ->join('t.user', 'u')
+        ->setParameter('val', $user)
+        ->where('t.user = :val')
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * @return Texte[] Returns an array of Texte objects
     //  */

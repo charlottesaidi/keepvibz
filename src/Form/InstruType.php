@@ -43,6 +43,7 @@ class InstruType extends AbstractType
                 'data_class' => null
             ])
             ->add('image', FileType::class, [
+                'required' => false,
                 'label' => 'Image associée',
                 'data_class' => null
             ])

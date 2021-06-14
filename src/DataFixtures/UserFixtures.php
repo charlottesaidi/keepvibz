@@ -51,7 +51,7 @@ class UserFixtures extends Fixture
         $user1->setPassword(random_bytes(10));
         $user1->setName($faker->name);
         $user1->setTown($faker->city);
-        $user1->setPhone('0' . $faker->randomNumber(9, true));
+        //$user1->setPhoneNumber('030390399309');
         $user1->setValid(true);
         $user1->setActif(true);
 
@@ -63,7 +63,7 @@ class UserFixtures extends Fixture
         $user2 ->setPassword(random_bytes(10));
         $user2 ->setName($faker->name);
         $user2 ->setTown($faker->city);
-        $user2 ->setPhone('0' . $faker->randomNumber(9, true));
+        //$user2 ->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user2 ->setValid(true);
         $user2 ->setActif(true);
 
@@ -75,7 +75,7 @@ class UserFixtures extends Fixture
         $user3->setPassword(random_bytes(10));
         $user3->setName($faker->name);
         $user3->setTown($faker->city);
-        $user3->setPhone('0' . $faker->randomNumber(9, true));
+        //$user3->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user3->setValid(true);
         $user3->setActif(true);
 
@@ -87,7 +87,7 @@ class UserFixtures extends Fixture
         $user4->setPassword(random_bytes(10));
         $user4->setName($faker->name);
         $user4->setTown($faker->city);
-        $user4->setPhone('0' . $faker->randomNumber(9, true));
+        //$user4->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user4->setValid(true);
         $user4->setActif(true);
 
@@ -99,7 +99,7 @@ class UserFixtures extends Fixture
         $user5->setPassword(random_bytes(10));
         $user5->setName($faker->name);
         $user5->setTown($faker->city);
-        $user5->setPhone('0' . $faker->randomNumber(9, true));
+        //$user5->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user5->setValid(true);
         $user5->setActif(true);
 
@@ -111,7 +111,7 @@ class UserFixtures extends Fixture
         $user6->setPassword(random_bytes(10));
         $user6->setName($faker->name);
         $user6->setTown($faker->city);
-        $user6->setPhone('0' . $faker->randomNumber(9, true));
+        //$user6->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user6->setValid(true);
         $user6->setActif(true);
 
@@ -123,7 +123,7 @@ class UserFixtures extends Fixture
         $user7->setPassword(random_bytes(10));
         $user7->setName($faker->name);
         $user7->setTown($faker->city);
-        $user7->setPhone('0' . $faker->randomNumber(9, true));
+        //$user7->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user7->setValid(true);
         $user7->setActif(true);
 
@@ -135,7 +135,7 @@ class UserFixtures extends Fixture
         $user8->setPassword(random_bytes(10));
         $user8->setName($faker->name);
         $user8->setTown($faker->city);
-        $user8->setPhone('0' . $faker->randomNumber(9, true));
+        //$user8->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user8->setValid(true);
         $user8->setActif(true);
 
@@ -147,7 +147,7 @@ class UserFixtures extends Fixture
         $user9->setPassword(random_bytes(10));
         $user9->setName($faker->name);
         $user9->setTown($faker->city);
-        $user9->setPhone('0' . $faker->randomNumber(9, true));
+        //$user9->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user9->setValid(true);
         $user9->setActif(true);
 
@@ -159,7 +159,7 @@ class UserFixtures extends Fixture
         $user10->setPassword(random_bytes(10));
         $user10->setName($faker->name);
         $user10->setTown($faker->city);
-        $user10->setPhone('0' . $faker->randomNumber(9, true));
+        //$user10->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user10->setValid(true);
         $user10->setActif(true);
 
@@ -171,7 +171,7 @@ class UserFixtures extends Fixture
         $user11->setPassword(random_bytes(10));
         $user11->setName($faker->name);
         $user11->setTown($faker->city);
-        $user11->setPhone('0' . $faker->randomNumber(9, true));
+        //$user11->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user11->setValid(true);
         $user11->setActif(true);
 
@@ -183,7 +183,7 @@ class UserFixtures extends Fixture
         $user12->setPassword(random_bytes(10));
         $user12->setName($faker->name);
         $user12->setTown($faker->city);
-        $user12->setPhone('0' . $faker->randomNumber(9, true));
+        //$user12->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user12->setValid(true);
         $user12->setActif(true);
 
@@ -195,7 +195,7 @@ class UserFixtures extends Fixture
         $user13->setPassword(random_bytes(10));
         $user13->setName($faker->name);
         $user13->setTown($faker->city);
-        $user13->setPhone('0' . $faker->randomNumber(9, true));
+        //$user13->setPhoneNumber('+0' . $faker->randomNumber(9, true));
         $user13->setValid(true);
         $user13->setActif(true);
 

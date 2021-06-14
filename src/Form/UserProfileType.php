@@ -8,7 +8,8 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TelType;
+use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
+use libphonenumber\PhoneNumberFormat;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -27,7 +28,10 @@ class UserProfileType extends AbstractType
             ->add('name')
             ->add('bio')
             ->add('town')
-            ->add('phone', TelType::class)
+            ->add('phoneNumber', PhoneNumberType::class, [
+                'default_region' => 'FR', 
+                'format' => PhoneNumberFormat::NATIONAL]
+            )
             ->add('avatar', FileType::class, [
                 'mapped' => false,
             ])
@@ -44,7 +48,6 @@ class UserProfileType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => User::class,
-            'csrf_token_id' => 'change_password',
         ]);
     }
 }

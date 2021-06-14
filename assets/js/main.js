@@ -201,6 +201,9 @@ $(document).ready(function(){
     $('.btn_bottom_navigation').on('click', function(){
         $('.submenu_center2').slideToggle('slow');
     })
+    $('.btn_bottom_navigation').on('click', function(){
+        $('.submenu_center3').slideToggle('slow');
+    })
     
 // ================================================================
 

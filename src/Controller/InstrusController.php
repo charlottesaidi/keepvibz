@@ -21,7 +21,7 @@ class InstrusController extends AbstractController
         $totalItems = $instruRepository->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
-        $urlPattern = '/instru?page=(:num)';
+        $urlPattern = '/instrus?page=(:num)';
         $offset = 0;
         if(!empty($_GET['page'])) {
             $currentPage = $_GET['page'];

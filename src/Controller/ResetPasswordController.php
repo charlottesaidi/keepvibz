@@ -44,6 +44,7 @@ class ResetPasswordController extends AbstractController
                 
             }else{
                 $token = $tokenGenerator->generateToken();
+                $user->setResetToken($token);
     
                 $url = $this->generateUrl('app_reset_password', array('token' => $token, 'email' => $email), UrlGeneratorInterface::ABSOLUTE_URL);
 

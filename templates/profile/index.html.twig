@@ -258,17 +258,12 @@
                                 <a href="" class="btn-secondary formbuttons" id="delete-button">Supprimer</a>
                             </div>
                             <div class="delete-block profile-block formsection hidden" id="delete">
-                                <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T'es sûr(e) de toi ? Supprimer ton compte est définitif.');">
                                     <div class="input-group">
-                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
-                                    </div>
-                                    <div class="input-group">
-                                        <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T'es sûr(e) de vouloir faire ça ?');">
+                                        <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T\'es sûr(e) de vouloir faire ça ?');">
                                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
-                                            <button class="btn btn-danger mb-3">Confirmer</button>
+                                            <button type="submit" class="btn btn-danger mb-3">Confirmer</button>
                                         </form>
                                     </div>
-                                </form>
                             </div>
                         </div>
                     </div>

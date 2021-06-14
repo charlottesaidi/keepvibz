@@ -64,4 +64,11 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
     */
+    public function findLatest(){
+        return $this->createQueryBuilder('i')
+        ->orderBy('i.created_at', 'ASC')
+        ->setMaxResults(10)
+        ->getQuery()
+        ->getResult();
+    }
 }

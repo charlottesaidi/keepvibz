@@ -15,6 +15,7 @@
         "fzaninotto/faker": "^1.5",
         "gedmo/doctrine-extensions": "^3.0",
         "jasongrimes/paginator": "^1.0",
+        "odolbeau/phone-number-bundle": "^3.4",
         "phpdocumentor/reflection-docblock": "^5.2",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "5.3.*",

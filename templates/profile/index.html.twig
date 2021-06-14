@@ -13,8 +13,28 @@
 {% block title %}KeepVibz | Profil{% endblock %}
 
 {% block body %}
+    
+    <div class="mobile-nav">
+        <nav class="hide" id="mobileNav">
+            <ul>
+                <li>
+                    <button href="#!" class="tablinks" id="mob-prof-link">Profil</button>
+                </li>
+                <li>
+                    <button href="#!" class="tablinks" id="mob-instru-link">Mes Instrus</button>
+                </li>
+                <li>
+                    <button href="#!" class="tablinks" id="mob-top-link">Mes Toplines</button>
+                </li>
+                <li>
+                    <button href="#!" class="tablinks" id="mob-text-link">Mes Textes</button>
+                </li>
+            </ul>
+        </nav>
+        <button href="#!" class="tablinks" id="sideNavLink"><img class="button_burger" src="{{asset('assets/images/logo_mobile.png')}}" alt="logo sur mobile"></button>
+    </div>
 
-    <div class="main">
+    <div class="profile-main">
         <div class="side-nav">
             <nav>
                 <ul>
@@ -30,9 +50,6 @@
                     <li>
                         <button href="#!" class="tablinks" id="text-link">Mes Textes</button>
                     </li>
-                    <li>
-                        <button href="#!" class="tablinks" id="fav-link">Mes Favoris</button>
-                    </li>
                 </ul>
             </nav>
         </div>
@@ -41,20 +58,34 @@
             <div id="profil" class="tabcontent" style="display: block">
                 <h2>Profil</h2>
                 <div class="user-block">
-                    {{ form_start(profileForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                {{ form_start(profileForm, {'attr': {'novalidate': 'novalidate'}}) }}
+
+                    {% for message in app.flashes('success') %}
+                        <div class="success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    {% for error in app.flashes('error') %}
+                        <div class="invalid-feedback d-block">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                    {{form_errors(profileForm.email)}}
+                    {{form_errors(profileForm.phone)}}
 
                     <h3>Photo de profil</h3>
                     <div class="attr-block avatar">
-                        <div class="title-block">
-                            {% if app.user.avatar %}
-                                    <p> <img src="{# dossier uploads/ => app.user.avatar.file #}"> </p> 
+                        <div class="title-block profile-block">
+                            {% if app.user.avatar != null %}
+                                    <p class="avatar"><img src="{{asset('uploads/images/avatars/' ~ app.user.avatar.file)}}"> </p> 
                                 {% else %}
+                                    <p class="avatar"><img src="{{asset('assets/images/caroussel/1.jpg')}}"> </p>
                             {% endif %}
                         </div>
-                        <div class="edit-button">
+                        <div class="edit-button profile-block">
                             <a href="" class="btn-secondary formbuttons" id="avatar-button">Modifier</a>
                         </div>
-                        <div class="edit-block formsection hidden" id="edit-avatar">
+                        <div class="edit-block profile-block formsection hidden" id="edit-avatar">
                             <div class="input-group">
                                 {{form_widget(profileForm.avatar)}}
                             </div>
@@ -64,15 +95,15 @@
                         </div>
                     </div>
 
-                    <h3>Pseudonyme</h3>
+                    <h3>Pseudo</h3>
                     <div class="attr-block name">
-                        <div class="title-block">
+                        <div class="title-block profile-block">
                             <p> {{app.user.name}} </p>
                         </div>
-                        <div class="edit-button">
+                        <div class="edit-button profile-block">
                             <a href="" class="btn-secondary formbuttons" id="name-button">Modifier</a>
                         </div>
-                        <div class="edit-block formsection hidden" id="edit-name">
+                        <div class="edit-block profile-block formsection hidden" id="edit-name">
                             <div class="input-group">
                                 {{form_widget(profileForm.name)}}
                                 {{form_errors(profileForm.name)}}
@@ -85,18 +116,16 @@
 
                     <h3>Informations personnelles</h3>
                     <div class="global-attr-block">
-                        <p>Adresse e-mail</p>
                         <div class="attr-block global email">
-                            <div class="title-block">
-                                <p> {{app.user.email}} </p>
+                            <div class="title-block profile-block">
+                                <p> <span><i class="fas fa-envelope"></i></span> {{app.user.email}} </p>
                             </div>
-                            <div class="edit-button">
+                            <div class="edit-button profile-block">
                                 <a href="" class="btn-secondary formbuttons" id="email-button">Modifier</a>
                             </div>
-                            <div class="edit-block formsection hidden" id="edit-email">
+                            <div class="edit-block profile-block formsection hidden" id="edit-email">
                                 <div class="input-group">
                                     {{form_widget(profileForm.email)}}
-                                    {{form_errors(profileForm.email)}}
                                 </div>
                                 <div class="input-group">
                                     <input type="submit" class="btn-primary" value="Valider">
@@ -104,15 +133,14 @@
                             </div>
                         </div>
                         
-                        <p>Ville</p>
                         <div class="attr-block global town">
-                            <div class="title-block">
-                                <p> {{app.user.town}} </p>
+                            <div class="title-block profile-block">
+                                <p> <span><i class="fas fa-map-marker-alt"></i></span> {{app.user.town}} </p>
                             </div>
-                            <div class="edit-button">
+                            <div class="edit-button profile-block">
                                 <a href="" class="btn-secondary formbuttons" id="town-button">Modifier</a>
                             </div>
-                            <div class="edit-block formsection hidden" id="edit-town">
+                            <div class="edit-block profile-block formsection hidden" id="edit-town">
                                 <div class="input-group">
                                     {{form_widget(profileForm.town)}}
                                     {{form_errors(profileForm.town)}}
@@ -123,18 +151,16 @@
                             </div>
                         </div>
 
-                        <p>Téléphone</p>
                         <div class="attr-block global phone">
-                            <div class="title-block">
-                                <p> {{app.user.phone}} </p>
+                            <div class="title-block profile-block">
+                                <p> <span><i class="fas fa-phone-alt"></i></span> {{app.user.phone}} </p>
                             </div>
-                            <div class="edit-button">
+                            <div class="edit-button profile-block">
                                 <a href="" class="btn-secondary formbuttons" id="phone-button">Modifier</a>
                             </div>
-                            <div class="edit-block formsection hidden" id="edit-phone">
+                            <div class="edit-block profile-block formsection hidden" id="edit-phone">
                                 <div class="input-group">
                                     {{form_widget(profileForm.phone)}}
-                                    {{form_errors(profileForm.phone)}}
                                 </div>
                                 <div class="input-group">
                                     <input type="submit" class="btn-primary" value="Valider">
@@ -145,16 +171,16 @@
 
                     <h3>A propos de moi</h3>
                     <div class="attr-block description">
-                        <div class="title-block">
+                        <div class="title-block profile-block">
                             {% if app.user.bio %}
                                     <p> {{ app.user.bio|nl2br }} </p>  
                                 {% else %}
                             {% endif %}
                         </div>
-                        <div class="edit-button">
+                        <div class="edit-button profile-block">
                             <a href="" class="btn-secondary formbuttons" id="desc-button">Modifier</a>
                         </div>
-                        <div class="edit-block formsection hidden" id="edit-desc">
+                        <div class="edit-block profile-block formsection hidden" id="edit-desc">
                             <div class="input-group">
                                 {{form_widget(profileForm.bio, {'attr': {'placeholder': 'Courte description...'}})}}
                                 {{form_errors(profileForm.bio)}}
@@ -167,7 +193,7 @@
 
                     <h3>Activités sur le réseau</h3>
                     <div class="attr-block competence">
-                        <div class="title-block">
+                        <div class="title-block profile-block">
                             {% if app.user.competences %}
                                     {% for competence in app.user.competences %}
                                         <p> {{competence.title}} </p>  
@@ -175,10 +201,10 @@
                                 {% else %}
                             {% endif %}
                         </div>
-                        <div class="edit-button">
+                        <div class="edit-button profile-block">
                             <a href="" class="btn-secondary formbuttons" id="competence-button">Modifier</a>
                         </div>
-                        <div class="edit-block formsection hidden" id="edit-competence">
+                        <div class="edit-block profile-block formsection hidden" id="edit-competence">
                             <div class="input-group">
                                 <label for="competences">Ajouter des compétences</label>
                                 {{form_widget(profileForm.competences)}}
@@ -189,84 +215,106 @@
                             </div>
                         </div>
                     </div>
-
+                {{form_end(profileForm)}}
                     <h3>Paramètres</h3>
                     <div class="global-attr-block">
-                        <div class="attr-block global account">
-                            <div class="title-block">
-                                <p> Supprimer mon compte </p>
-                            </div>
-                            <div class="edit-button">
-                                <a href="" class="btn-secondary formbuttons" id="delete-button">Supprimer</a>
-                            </div>
-                            <div class="delete-block formsection hidden" id="delete">
-                                <div class="input-group">
-                                    <label for="delete-message">Motif</label>
-                                    {{form_widget(profileForm.deleteReason)}}
-                                    {{form_errors(profileForm.deleteReason)}}
-                                </div>
-                                <div class="input-group">
-                                    <input type="submit" class="btn-primary" value="Confirmer">
-                                </div>
-                            </div>
-                        </div>
                         
-                        <div class="attr-block account">    
-                            <div class="title-block">
+                        <div class="attr-block global account">    
+                            <div class="title-block profile-block">
                                 <p> Modifier mon mot de passe </p>
                             </div>
-                            <div class="edit-button">
+                            <div class="edit-button profile-block">
                                 <a href="" class="btn-secondary formbuttons" id="password-button">Modifier</a>
                             </div>
-                            <div class="edit-block formsection hidden" id="edit-password">
+                            <div class="edit-block profile-block formsection hidden" id="edit-password">
+                            {{ form_start(passwordForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                                {{form_errors(passwordForm.oldPassword)}}
+                                {{form_errors(passwordForm.newPassword.first)}}
+                                {{form_errors(passwordForm.newPassword.second)}}
                                 <div class="input-group">
-                                    <label for="old-password">Mot de passe actuel</label>
-                                    {# {{form_widget(profileForm.oldPassword)}}
-                                    {{form_errors(profileForm.oldPassword)}} #}
+                                    <label for="password">Mot de passe actuel</label>
+                                    {{form_widget(passwordForm.oldPassword)}}
                                 </div>
                                 <div class="input-group">
                                     <label for="password">Nouveau mot de passe</label>
-                                    {{form_widget(profileForm.newPassword.first)}}
-                                    {{form_errors(profileForm.newPassword.first)}}
+                                    {{form_widget(passwordForm.newPassword.first)}}
                                 </div>
                                 <div class="input-group">
                                     <label for="password">Confirmer</label>
-                                    {{form_widget(profileForm.newPassword.second)}}
-                                    {{form_errors(profileForm.newPassword.second)}}
+                                    {{form_widget(passwordForm.newPassword.second)}}
                                 </div>
                                 <div class="input-group">
                                     <input type="submit" class="btn-primary" value="Valider">
                                 </div>
+                            {{form_end(passwordForm)}}
+                            </div>
+                        </div>
+
+                        <div class="attr-block account">
+                            <div class="title-block profile-block">
+                                <p> Supprimer mon compte </p>
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="delete-button">Supprimer</a>
+                            </div>
+                            <div class="delete-block profile-block formsection hidden" id="delete">
+                                <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T'es sûr(e) de toi ? Supprimer ton compte est définitif.');">
+                                    <div class="input-group">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+                                    </div>
+                                    <div class="input-group">
+                                        <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T'es sûr(e) de vouloir faire ça ?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+                                            <button class="btn btn-danger mb-3">Confirmer</button>
+                                        </form>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
-                    {{ form_end(profileForm) }}
                 </div>
             </div>
 
             <div id="instrus" class="tabcontent" style="display: none">
                 <h2>Mes Instrus</h2>
+                {% for message in app.flashes('instru-success') %}
+                    <div class="success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 <div>
-                    {% for instru in app.user.instrus %}
+                    <a class="btn-secondary" href="{{ path('instrus_new') }}">Uploader un morceau</a>
+                </div>
+                <div class="listing">
+                    {% for instru in instrus %}
                         <div>
+                            {% if instru.deletedAt %}
+                                <div class="warning">
+                                    L'administrateur a retiré cette publication.  Contactes le support pour plus d'infos.
+                                </div>
+                            {% endif %}
                             <div>
-                                <a class="btn-secondary" href="">Uploader un morceau</a>
+                            {% if instru.image %}
+                                <img src="{{asset('uploads/images/instrus/' ~ instru.image)}}">
+                            {% endif %}
                             </div>
                             <div>
-                                <img> {# instru.image #}
-                            </div>
-                            <div>
-                                <p>{{instru.title}}</p>
-                                <p>{{ instru.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
+                                <p><a href="" class="link">{{instru.title}}</a></p>
+                                <p>
+                                    <span class="date">{{ instru.createdAt ? instru.createdAt|date('d/m/Y') : '' }}</span><br>
+                                    <span class="time">{{ instru.createdAt ? instru.createdAt|date('H:i') : '' }}</span>
+                                </p>
                                 {% for genre in instru.genre %}
                                     <p> {{genre}} </p>
                                 {% endfor %}
                             </div>
                             <div> 
-                                {# piste audio, instru.file #} 
+                            {% if instru.file %}
+                                <audio preload src="{{asset('uploads/instrus/' ~ instru.file)}}" controls id="player_1"></audio>
+                            {% endif %} 
                             </div>
                             <div> 
-                                <a class="btn-secondary" href="">Modifier</a>
+                                <a class="link" href="{{ path('instrus_edit', {'id': instru.id}) }}">Modifier</a>
                             </div>
                         </div>
                     {% endfor %}
@@ -275,24 +323,39 @@
 
             <div id="toplines" class="tabcontent" style="display: none">
                 <h2>Mes Toplines</h2>
-                <div>
-                    <div>
-                        <a class="btn-secondary" href="">Uploader une topline</a>
+                {% for message in app.flashes('topline-success') %}
+                    <div class="success">
+                        {{ message }}
                     </div>
-                    {% for topline in app.user.toplines %}
+                {% endfor %}
+                <div>
+                    <a class="btn-secondary" href="{{ path('toplines_new') }}">Uploader une topline</a>
+                </div>
+                <div class="listing">
+                    {% for topline in toplines %}
                         <div>
+                            {% if topline.deletedAt %}
+                                <div class="warning">
+                                    L'administrateur a retiré cette publication. Contactes le support pour plus d'infos.
+                                </div>
+                            {% endif %}
                             <div>
-                                <p>{{topline.title}}</p>
+                                <p><a href="" class="link">{{topline.title}}</a></p>
                                 {% for instru in topline.instrus %}
                                     <p> {{instrus.title}} </p>
                                 {% endfor %}
-                                <p>{{ topline.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
+                                <p>
+                                    <span class="date">{{ topline.createdAt ? topline.createdAt|date('d/m/Y') : '' }}</span><br>
+                                    <span class="time">{{ topline.createdAt ? topline.createdAt|date('H:i') : '' }}</span>
+                                </p>
                             </div>
-                            <div> 
-                                {# piste audio, topline.file #}
+                            <div>  
+                            {% if topline.file %}
+                                <audio preload src="{{asset('uploads/toplines/' ~ topline.file)}}" controls id="player_1"></audio>
+                            {% endif %}
                             </div>
                             <div>
-                                <a href="">Modifier</a>
+                                <a class="link" href="{{ path('toplines_edit', {'id': instru.id}) }}">Modifier</a>
                             </div>
                         </div>
                     {% endfor %}
@@ -301,21 +364,52 @@
 
             <div id="textes" class="tabcontent" style="display: none">
                 <h2>Mes Textes</h2>
+                {% for message in app.flashes('text-success') %}
+                    <div class="success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
                 <div>
-                    {% for texte in app.user.textes %}
-                        <div>
-                            <p>{{texte.title}}</p>
-                            <p>{{ texte.createdAt ? instru.createdAt|date('d/m/Y', 'H:i') : '' }}</p>
-                            <p>{{texte.instru.title}} </p>
-                            <a href="">Modifier</a>
-                        </div>
-                    {% endfor %}
+                    <a class="btn-secondary" href="{{ path('textes_new') }}">Publier un texte</a>
                 </div>
+                <ul class="listing">
+                    {% for texte in textes %}
+                        {% if texte.deletedAt %}
+                            <div class="warning">
+                                L'administrateur a retiré cette publication. Contactes le support pour plus d'infos.
+                            </div>
+                        {% else %}
+                            <li class="block_textes flex sb fw">
+                                <div class="link_text flex aic">
+                                    <div class="flex">
+                                        <a class="link" href="{{ path('textes_edit', {'id': texte.id}) }}">
+                                        <i class="far fa-edit"></i></a>
+                                        <a class="link" href="{{ path('textes_delete', {'id': texte.id}) }}">
+                                        <i class="far fa-trash-alt"></i></a>
+                                    </div>
+                                    <div class="description_textes">
+                                        <h3 class="title_texte"><a href="{{ path('texte_show', {'id': texte.id}) }}">{{texte.title}}</h3></a>
+                                        <h3 class="author_textes">
+                                            <span class="date">{{ texte.createdAt ? texte.createdAt|date('d/m/Y') : '' }}</span><br>
+                                            <span class="time">{{ texte.createdAt ? texte.createdAt|date('H:i') : '' }}</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="instrus_associees flex">
+                                    <p class="title_instrus_associees">Instrus associées: </p>
+                                    <ul class="block_instrus_associees flex aic">
+                                    {% if texte.instrus %}
+                                        {% for texte in texte.instrus %}
+                                            <li class="link_instru_associee"><a href="#" class="titre_instru_associee"> {{texte.title}} </a></li>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endif %}     
+                    {% endfor %}               
+                </ul>
             </div>
-
-            <div id="favoris" class="tabcontent" style="display: none">
-                <h2>Mes Favoris</h2>
-            </div>  
 
         </div>
     </div>

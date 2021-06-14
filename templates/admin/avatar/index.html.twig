@@ -12,6 +12,11 @@
 				    <div class="col-auto">
 			            <h1 class="app-page-title mb-0">Avatars Utilisateurs</h1>
 				    </div>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
 				    <div class="col-auto">
 					     <div class="page-utilities">
 						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
@@ -50,8 +55,16 @@
                                         {% for avatar in avatars %}
                                             <tr>
                                                 <td class="cell">#{{ avatar.id }}</td>
-                                                {# <td class="cell"> <img src="{{asset('uploads/'{avatar.file})}}"> </td> #}
-                                                <td class="cell">{{ avatar.user.name }}</td>
+                                                <td class="cell">{% if avatar.file %}
+                                                 <img src="{{asset('uploads/images/avatars/' ~ avatar.file)}}">
+                                                {% endif %} </td>
+                                                <td class="cell">
+                                                    {% if avatar.user %}
+                                                    <p>{{ avatar.user.name }}</p>
+                                                    {% else %}
+                                                        <p></p>
+                                                    {% endif %}
+                                                </td>
                                                 <td class="cell">
                                                     <span class="cell-data">{{ avatar.createdAt ? avatar.createdAt|date('d/m/Y') : '' }}</span>
                                                     <span class="note">{{ avatar.createdAt ? avatar.createdAt|date('H:i') : '' }}</span>

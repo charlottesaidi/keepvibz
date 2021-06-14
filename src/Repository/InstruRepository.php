@@ -36,6 +36,35 @@ class InstruRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    public function findOneByTitle($value): ?Instru
+    {
+        return $this->createQueryBuilder('i')
+            ->andWhere('i.title = :val')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+    
+    public function findLatest()
+    {
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.created_at', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findUserInstrus($user) {
+        return $this->createQueryBuilder('i')
+        ->join('i.user', 'u')
+        ->setParameter('val', $user)
+        ->where('i.user = :val')
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * @return Instru[] Returns an array of Instru objects
     //  */

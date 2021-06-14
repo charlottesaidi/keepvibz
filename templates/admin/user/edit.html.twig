@@ -12,7 +12,17 @@
                     <div class="col-sm-6">
                         <div class="app-card app-card-settings shadow-sm p-4">
                             <div class="app-card">
-                            {{ include('admin/user/_form.html.twig', {'button_label': 'Enregistrer les modifications'}) }}
+                            {{ form_start(editForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                                <div class="mb-3">
+                                    {{ form_row(editForm.roles)}}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form_row(editForm.actif)}}
+                                </div>
+                                <div class="mb-3">
+                                    <button class="btn app-btn-primary">{{ button_label|default('Enregistrer les modifications') }}</button>
+                                </div>
+                            {{ form_end(editForm) }}
                             {{ include('admin/user/_delete_form.html.twig') }}
                             </div>
                         </div>

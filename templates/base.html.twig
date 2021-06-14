@@ -17,7 +17,7 @@
     </head>
     <body>
     
-        {% if app.request.get('_route') == 'home' %}
+        {% if app.request.get('_route') != 'profile' %}
             {# PAGE DE CHARGEMENT #}
             <div class="chargement">
                 <div id="preloader">
@@ -36,17 +36,24 @@
                 <p class="title_nav">MENU</p>
             </div>
             <ul class="nav_mobile flex col aic">
-                <li class="link_mobile"><a href="{{path('user_new')}}">Inscription</a></li>
-                <li class="link_mobile"><a href="{{path('app_login')}}">Connexion</a></li>
-                <li class="link_mobile"><a href="{{path('user_profile')}}">Profil</a></li>
                 <li class="link_mobile"><a href="{{path('instrus')}}">Instrus</a></li>
                 <li class="link_mobile"><a href="{{path('textes')}}">Textes</a></li>
+            {% if app.user %}
+                <li class="link_mobile"><a href="{{path('user_profile')}}">Profil</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="link_mobile"><a href="{{ path ('admin_dashboard') }}">Admin</a></li>
+                {% endif %}
+                <li><a href="{{ path ('app_logout') }}">Déconnexion</a></li>
+            {% else %}
+                <li class="link_mobile"><a href="{{path('user_new')}}">Inscription</a></li>
+                <li class="link_mobile"><a href="{{path('app_login')}}">Connexion</a></li>
+            {% endif %}
             </ul>
         </div>
         {# NAV MOBILE #}
 
         {# HEADER #}
-        <header id="header" class="header">
+        <header id="header" class="header fixed">
             <h1 class="site">KeepVibz</h1>
             <div class="wrap1 flex sb">
                 <div class="left flex">
@@ -122,7 +129,8 @@
                     <ul class="nav_bottom1">
                         <li><a href="#">Toutes les Instrus</a></li>
                         <li><a href="{{path('textes')}}">Tous les Textes</a></li>
-                        <li><a href="#most_popular">Les plus populaires</a></li>
+                        <li><a href="{{path('home')}}#instrus_populaires">Le Top 10 des Instrus</a></li>
+                        <li><a href="{{path('home')}}#textes_populaires">Textes qui ont la côte</a></li>
                     </ul>
                     {# ====================================================== #}
                     {# SUB MENU NAVIGATION MOBILE #}
@@ -130,7 +138,8 @@
                         <ul class="nav_bottom2">
                             <li><a href="{{path('instrus')}}">Toutes les Instrus</a></li>
                             <li><a href="{{path('textes')}}">Tous les Textes</a></li>
-                            <li><a href="#most_popular">Les plus populaires</a></li>
+                            <li><a href="{{path('home')}}#instrus_populaires">Le Top 10 des Instrus</a></li>
+                            <li><a href="{{path('home')}}#textes_populaires">Textes qui ont la côte</a></li>
                         </ul>
                     </div>
                 </div>

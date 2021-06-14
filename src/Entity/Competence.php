@@ -7,12 +7,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  */
 class Competence
 {
+    /**
+     * Hook SoftDeleteable behavior
+     * updates deletedAt field
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -42,11 +51,6 @@ class Competence
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $modified_at;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $deleted_at;
 
     /**
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="competences")
@@ -97,18 +101,6 @@ class Competence
     public function setModifiedAt(?\DateTimeInterface $modified_at): self
     {
         $this->modified_at = $modified_at;
-
-        return $this;
-    }
-
-    public function getDeletedAt(): ?\DateTimeInterface
-    {
-        return $this->deleted_at;
-    }
-
-    public function setDeletedAt(\DateTimeInterface $deleted_at): self
-    {
-        $this->deleted_at = $deleted_at;
 
         return $this;
     }

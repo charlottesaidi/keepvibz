@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Filesystem;
 use JasonGrimes\Paginator;
+use App\Service\FolderGenerator;
 
 #[Route('/admin/avatar')]
 class AvatarController extends AbstractController
@@ -37,7 +38,7 @@ class AvatarController extends AbstractController
     }
 
     #[Route('/new', name: 'avatar_new', methods: ['GET', 'POST'])]
-    public function new(Request $request): Response
+    public function new(Request $request, FolderGenerator $folderGenerator): Response
     {
         $avatar = new Avatar();
         $form = $this->createForm(AvatarType::class, $avatar);
@@ -45,7 +46,10 @@ class AvatarController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $avatar->setUser($this->getUser());
-            if ($avatar->getFile() !== null) {
+            if ($form->get('picture')->getData() != null) {
+                
+                $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
+
                 $file = $form->get('picture')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
@@ -62,6 +66,8 @@ class AvatarController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($avatar);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Avatar créé avec succès');
 
             return $this->redirectToRoute('avatar_index');
         }
@@ -81,14 +87,33 @@ class AvatarController extends AbstractController
     }
 
     #[Route('/{id}/edit', name: 'avatar_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Avatar $avatar): Response
+    public function edit(Request $request, Avatar $avatar, FolderGenerator $folderGenerator): Response
     {
         $form = $this->createForm(AvatarType::class, $avatar);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $avatar->setModifiedAt(new \dateTime());
+            if ($form->get('picture')->getData() != null) {
+                
+                $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
+
+                $file = $form->get('picture')->getData();
+                $fileName =  uniqid(). '.' .$file->guessExtension();
+                try {
+                    $file->move(
+                        $this->getParameter('images_directory'), // Le dossier dans le quel le fichier va etre charger
+                        $fileName
+                    );
+                } catch (FileException $e) {
+                    return new Response($e->getMessage());
+                }
+
+            $avatar->setFile($fileName);
+            }
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Modification prise en compte');
 
             return $this->redirectToRoute('avatar_index');
         }
@@ -103,14 +128,17 @@ class AvatarController extends AbstractController
     public function delete(Request $request, Avatar $avatar): Response
     {
         if ($this->isCsrfTokenValid('delete'.$avatar->getId(), $request->request->get('_token'))) {
-            if($avatar->getFile() != null) {
-                $filename = 'uploads/images/users' . $topline->getFile();
-                unlink($filename);
-            }
+            // if($avatar->getFile() != null) {
+            //     $filename = 'uploads/images/users' . $topline->getFile();
+            //     unlink($filename);
+            // }
+            $avatar->setUser(null);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($avatar);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Suppression confirmée');
 
         return $this->redirectToRoute('avatar_index');
     }

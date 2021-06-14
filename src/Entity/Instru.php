@@ -7,12 +7,21 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=InstruRepository::class)
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  */
 class Instru
 {
+    /**
+     * Hook SoftDeleteable behavior
+     * updates deletedAt field
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -56,10 +65,10 @@ class Instru
      * @Assert\NotBlank
      * @Assert\File(
      *    maxSize = "10000k",
-     *    mimeTypes = {"application/mpeg-1", "application/wma", "application/flac"},
+     *    mimeTypes = {"audio/mpeg", "audio/wma", "audio/flac"},
      *    mimeTypesMessage = "Format de fichier invalide"
      * )
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $file;
 
@@ -79,30 +88,25 @@ class Instru
     private $modified_at;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $deleted_at;
-
-    /**
-     * @ORM\ManyToMany(targetEntity=Topline::class, inversedBy="instrus")
-     */
-    private $toplines;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="instru")
-     */
-    private $textes;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="instrus")
      */
     private $user;
 
+    /**
+     * @ORM\ManyToMany(targetEntity=Texte::class, mappedBy="instrus", cascade={"persist", "remove"})
+     */
+    private $textes;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="instru", cascade={"persist", "remove"})
+     */
+    private $toplines;
+
     public function __construct()
     {
         $this -> created_at = new \DateTime();
-        $this->toplines = new ArrayCollection();
         $this->textes = new ArrayCollection();
+        $this->toplines = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -162,7 +166,7 @@ class Instru
         return $this->file;
     }
 
-    public function setFile(string $file): self
+    public function setFile(?string $file): self
     {
         $this->file = $file;
 
@@ -205,38 +209,14 @@ class Instru
         return $this;
     }
 
-    public function getDeletedAt(): ?\DateTimeInterface
+    public function getUser(): ?User
     {
-        return $this->deleted_at;
+        return $this->user;
     }
 
-    public function setDeletedAt(?\DateTimeInterface $deleted_at): self
+    public function setUser(?User $user): self
     {
-        $this->deleted_at = $deleted_at;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|Topline[]
-     */
-    public function getToplines(): Collection
-    {
-        return $this->toplines;
-    }
-
-    public function addTopline(Topline $topline): self
-    {
-        if (!$this->toplines->contains($topline)) {
-            $this->toplines[] = $topline;
-        }
-
-        return $this;
-    }
-
-    public function removeTopline(Topline $topline): self
-    {
-        $this->toplines->removeElement($topline);
+        $this->user = $user;
 
         return $this;
     }
@@ -253,7 +233,7 @@ class Instru
     {
         if (!$this->textes->contains($texte)) {
             $this->textes[] = $texte;
-            $texte->setInstru($this);
+            $texte->addInstru($this);
         }
 
         return $this;
@@ -262,23 +242,38 @@ class Instru
     public function removeTexte(Texte $texte): self
     {
         if ($this->textes->removeElement($texte)) {
-            // set the owning side to null (unless already changed)
-            if ($texte->getInstru() === $this) {
-                $texte->setInstru(null);
-            }
+            $texte->removeInstru($this);
         }
 
         return $this;
     }
 
-    public function getUser(): ?User
+    /**
+     * @return Collection|Topline[]
+     */
+    public function getToplines(): Collection
     {
-        return $this->user;
+        return $this->toplines;
     }
 
-    public function setUser(?User $user): self
+    public function addTopline(Topline $topline): self
     {
-        $this->user = $user;
+        if (!$this->toplines->contains($topline)) {
+            $this->toplines[] = $topline;
+            $topline->setInstru($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTopline(Topline $topline): self
+    {
+        if ($this->toplines->removeElement($topline)) {
+            // set the owning side to null (unless already changed)
+            if ($topline->getInstru() === $this) {
+                $topline->setInstru(null);
+            }
+        }
 
         return $this;
     }

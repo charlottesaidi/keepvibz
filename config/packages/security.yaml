@@ -40,5 +40,14 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/instrus/new, roles: ROLE_USER }
+        - { path: ^/instrus/edit, roles: ROLE_USER }
+        - { path: ^/instrus/:id, roles: ROLE_USER }
+        - { path: ^/textes/new, roles: ROLE_USER }
+        - { path: ^/textes/edit, roles: ROLE_USER }
+        - { path: ^/textes/:id, roles: ROLE_USER }
+        - { path: ^/toplines/new, roles: ROLE_USER }
+        - { path: ^/toplines/edit, roles: ROLE_USER }
+        - { path: ^/toplines/:id, roles: ROLE_USER }
     role_hierarchy:
         ROLE_ADMIN: ROLE_USER

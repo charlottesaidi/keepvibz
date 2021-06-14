@@ -4,9 +4,12 @@
 
 {% block body %}
     <div class="wrap">
+        <div class="back-home-link">
+            <a class="reset-link" href="{{path('home')}}">Accueil</a>
+        </div>
         <div class="container">
-            <p>Un e-mail vous a été envoyé. Cliquez sur le lien fourni pour réinitialiser votre mot de passe.</p>
-            <p>Si vous ne recevez pas cet e-mail, vérifiez vos spam ou <a class="reset-link" href="{{ path('app_forgot_password_request') }}">essayez à nouveau</a>.
+            <p>Un e-mail t'a été envoyé. Cliques sur le lien fourni pour réinitialiser ton mot de passe.</p>
+            <p>Si tu ne reçois pas cet e-mail, vérifies tes spam ou <a class="reset-link" href="{{ path('app_forgot_password_request') }}">essayes à nouveau</a>.
         </div>
     </div>
     {% endblock %}

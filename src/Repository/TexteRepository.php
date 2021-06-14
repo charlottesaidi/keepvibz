@@ -35,6 +35,25 @@ class TexteRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+    
+    public function findLatest()
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.created_at', 'ASC')
+            ->setMaxResults(10)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findUserTextes($user) {
+        return $this->createQueryBuilder('t')
+        ->join('t.user', 'u')
+        ->setParameter('val', $user)
+        ->where('t.user = :val')
+        ->getQuery()
+        ->getResult();
+    }
 
     // /**
     //  * @return Texte[] Returns an array of Texte objects

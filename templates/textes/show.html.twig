@@ -1,0 +1,109 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KeepVibz | {{ texte.title }}{% endblock %}
+
+{% block body %}
+<section class="textes_show">
+    {# TOP SHOW TEXTES  #}
+    <div class="wrap1_textes_show">
+        <div class="top_container_show pr">
+            <div class="top_content_textes_show flex col aic">
+                <div class="top_down_content_show_texte flex fw">
+                    <p class="title_content_show_texte">{{ texte.title }}</p>
+                </div>
+                <p class="author_content_show_texte">par <span class="name_author_content_show_texte">{{ texte.user.name }}</span></p>
+                <div class="details_content_show_texte flex jcc fw">
+                    <p class="nombre_content_show_texte">(nombres DYNAMIQUE) lectures</p>
+                </div>
+                {# if #}
+                <div class="full_content_textes">
+                    <p class="couplet_texte_show"><span>Couplet</span>
+                        {{ texte.couplet }}
+                    </p>
+                    <p class="refrain_texte_show"><span>Refrain</span>
+                        {{ texte.refrain }}
+                    </p>
+                </div>
+                <div class="block_link_items_associes">
+                    <ul class="links_textes_toplines flex jcc">
+                        <li class="first_autres_textes tac"><a href="#">Mes autres textes</a></li>
+                        <li class="second_instrus tac"><a href="#">Instrus associées</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    {# FIN TOP SHOW TEXTES  #}
+
+    {# BOTTOM AUTRES TEXTES #}
+    <div class="bottom_autres_textes_show">
+        <div class="wrap2_instrus_show flex col">
+            <div class="content_textes pr">
+                <div class="block_all_textes flex col">
+                {% for text in texte.user.textes %}
+                    <li class="block_textes flex sb fw">
+                        <a class="link_text flex aic" href="{{path('texte_show', {'id': text.id})}}">
+                            <div class="avatar_image_block">
+                                <img src="{{asset('assets/images/icons/avatar.png')}}" alt="avatar du User" class="avatar_image">
+                            </div>
+                            <div class="description_textes">
+                                <h3 class="title_texte">{{text.title}}</h3>
+                                <h3 class="author_textes">Par {{text.user.name}}</h3>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {# BOTTOM AUTRES TEXTES #}
+
+    {# BOTTOM INSTRUS ASSOCIEES #}
+    <div class="bottom_instrus_associees_show">
+        <div class="wrap2_instrus_show flex col">
+        {% for instru in texte.instrus %}
+            <div class="others_instrus_author flex aic pr">
+                <div class="left_others_instrus_author flex aic">
+                    <div class="btn_play_caroussel_show_instrus btn_1 btn_play_hover">
+                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                    </div>
+                    <a href="{{path('instru_show', {'id': instru.id})}}">
+                        <div class="block_image_instru_author">
+                            <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="img_instru_author">
+                        </div>
+                    </a>
+                </div>
+                <a href="{{path('instru_show', {'id': instru.id})}}">
+                    <div class="right_others_instrus_author flex col">
+                        <div class="top_right_others_instrus_author">
+                            <p class="title_others_instrus_author">{{ instru.title }}</p>
+                        </div>
+                        <div class="bottom_right_others_instrus_author flex ">
+                            <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ instru.user.name }}</span></p>
+                            <p class="separator_others_instrus_author grey_text"> | </p>
+                            <p class="bpm_others_instrus_author">{{ instru.bpm }} <span class="grey_text"> BPM</span></p>
+                            <p class="separator_others_instrus_author grey_text"> | </p>
+                            <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="top_right_others_instrus_author pa">
+                    <div class="block_downloading pr">
+                        <a href="{{asset('uploads/instrus/' ~ instru.file)}}" download="{{ instru.file }}">
+                            <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {# FIN BOTTOM INSTRUS ASSOCIEES #}
+
+
+</section>
+{% endblock %}
+
+
+

@@ -1,0 +1,105 @@
+/*
+|-------------------------------------
+| PRESET
+|-------------------------------------
+*/
+@import "preset.scss"; 
+@import "form.scss";
+/*
+|-------------------------------------
+| STYLE
+|-------------------------------------
+*/
+body {
+    .main {
+        padding: 0;
+    }
+    color: $font-primary;
+    font-family: $squada;
+    letter-spacing: $three;
+    background-color: $theme;
+    font-size: 20px;
+    a {
+        color: $font-secondary;
+        text-decoration: none;
+    }
+    .error_template {
+        max-width: 1300px;
+        width: 100%;
+        margin: auto;
+        text-align: center;
+        .error_code {
+            font-size: 50px;
+        }
+    }
+    #error {
+        position: relative;
+        height: 100vh;
+        .error {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            -webkit-transform: translate(-50%,-50%);
+            -ms-transform: translate(-50%,-50%);
+            transform: translate(-50%,-50%);
+            max-width: 767px;
+            width: 100%;
+            line-height: 1.4;
+            text-align: center;
+            .error-message {
+                position: relative;
+                height: 180px;
+                margin-bottom: 20px;
+                z-index: -1;
+                h1 {
+                    font-family: montserrat,sans-serif;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    -webkit-transform: translate(-50%,-50%);
+                    -ms-transform: translate(-50%,-50%);
+                    transform: translate(-50%,-50%);
+                    font-size: 224px;
+                    font-weight: 900;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    margin-left: -12px;
+                    color: #030005;
+                    text-transform: uppercase;
+                    text-shadow: -1px -1px 0 $danger-error, 1px 1px 0 $font-secondary;
+                    letter-spacing: -20px;
+                }
+                h2 {
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    top: 110px;
+                    font-size: 42px;
+                    font-weight: 700;
+                    color: #fff;
+                    text-transform: uppercase;
+                    text-shadow: 0 3px 0 $danger-error;
+                    letter-spacing: 13px;
+                    margin: 0;
+                }
+            }
+            a.error-link {
+                letter-spacing: $three;
+                display: inline-block;
+                text-transform: uppercase;
+                color: $danger-error;
+                text-decoration: none;
+                border: 2px solid;
+                background: 0 0;
+                padding: 10px 40px;
+                font-size: 14px;
+                font-weight: 700;
+                -webkit-transition: .2s all;
+                transition: .2s all;
+            }
+            a.error-link:hover {
+                color: $font-secondary
+            }
+        }
+    }
+}

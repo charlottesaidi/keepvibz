@@ -5,6 +5,14 @@
 {% block body %}
     <div class="wrap">
         <div>
+            <a class="reset-link" href="{{path('home')}}">Accueil</a>
+        </div>
+        {% for message in app.flashes('success') %}
+            <div class="success">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <div>
             <h1>Connexion</h1>
         </div>
         
@@ -22,7 +30,7 @@
                 <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
             </div>   
             <div class="input-group">
-                <p><a href="{{path('app_forgot_password_request')}}">Mot de passe oublié</a></p>
+                <p><a class="link" href="{{path('app_forgot_password_request')}}">Mot de passe oublié</a></p>
             </div>
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
@@ -38,10 +46,10 @@
             </div>
 
             <div class="input-group">
-                <button class="btn btn-lg btn-primary" type="submit">Se connecter <i class="fas fa-sign-in-alt"></i></button>
+                <button class="btn-primary" type="submit">Se connecter <i class="fas fa-sign-in-alt"></i></button>
             </div>
             <div class="input-group">
-                <p>Vous ne disposez pas encore d'un compte ? <a href="{{path('app_register')}}">Inscrivez-vous</a>.</p>
+                <p>Tu ne dispose pas encore d'un compte ? <a class="link" href="{{path('app_register')}}">Inscris-toi</a>.</p>
             </div>
         </form>
     </div>

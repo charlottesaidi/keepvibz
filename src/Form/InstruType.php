@@ -23,7 +23,7 @@ class InstruType extends AbstractType
             ->add('genre', ChoiceType::class, [
                 'label' => 'Genre',
                 'choices'  => [
-                    'Hip-Hop' => 'hip_hop',
+                    'Hip-Hop' => 'Hip Hop',
                     'Trap' => 'trap',
                     'R\'n\'B' => 'r\'n\'b',
                     'Pop' => 'pop',
@@ -43,6 +43,7 @@ class InstruType extends AbstractType
                 'data_class' => null
             ])
             ->add('image', FileType::class, [
+                'required' => false,
                 'label' => 'Image associée',
                 'data_class' => null
             ])

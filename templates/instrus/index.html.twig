@@ -1,275 +1,81 @@
-{% extends 'base.html.twig' %}
+    {% extends 'base.html.twig' %}
 
 {% block title %}KeepVibz | Toutes les instrus !{% endblock %}
 
 {% block body %}
-    <div class="main">
+    <div class="main_instrus">
         <div class="section_instrus flex sb">
             <div class="container_instrus pr">
                 <div class="sidebar_instrus pa">
                     <div class="content_sidebar flex col aic">
-                        <div class="genre">
-                            <h4 class="title_instrus_genre">Genre</h4>
-                            <div class="options_genre_instrus select flex col">
-                                {# <label for="hiphop">Hip Hop</label>
-                                <input type="checkbox" name="hiphop" id="hiphop" value="hiphop">
-                                <label for="trap">Trap</label>
-                                <input type="checkbox" name="trap" id="trap" value="trap">
-                                <label for="rnb">RnB</label>
-                                <input type="checkbox" name="rnb" id="rnb" value="rnb">
-                                <label for="pop">Pop</label>
-                                <input type="checkbox" name="pop" id="pop" value="pop"> #}
-                                <select name="slct" id="slct">
-                                    <option selected disabled>Choisis un genre</option>
-                                    <option value="1">Hip Hop</option>
-                                    <option value="2">Trap</option>
-                                    <option value="3">RnB</option>
-                                    <option value="4">Pop</option>
-                                
+                        <div class="genre flex col aic">
+                            <h4 class="title_instrus_genre">Genre<img class="btn_genre" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu Genre"></h4>
+                            <div class="block_genre_instrus flex col">
+                                <div class="block_genre">
+                                    <div class="submenu_genre flex col">
+                                        <label for="genre_1">Hip Hop</label>
+                                        <input type="checkbox" id="genre_1" name="genre_1" value="genre_1">
+                                        <label for="genre_2">Trap</label>
+                                        <input type="checkbox" id="genre_2" name="genre_2" value="genre_2">
+                                        <label for="genre_3">HRnB</label>
+                                        <input type="checkbox" id="genre_3" name="genre_3" value="genre_3">
+                                        <label for="genre_4">Pop</label>
+                                        <input type="checkbox" id="genre_4" name="genre_4" value="genre_4">
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="keys">
+                        <div class="keys flex col aic">
                             <h4 class="title_instrus_keys">Clés</h4>
-                            <div class="options_key_instrus flex col">
-                                {# <label for="Em">Em</label>
-                                    <input type="checkbox" name="Em" id="Em" value="Em">
-                                <label for="Cm">Cm</label>
-                                    <input type="checkbox" name="Cm" id="Cm" value="Cm">
-                                <label for="Dm">Dm</label>
-                                    <input type="checkbox" name="Dm" id="Dm" value="Dm">
-                                 <label for="Am">Am</label>
-                                    <input type="checkbox" name="Am" id="Am" value="Am">
-                                <label for="Fm">Fm</label>
-                                    <input type="checkbox" name="Fm" id="Fm" value="Fm">
-                                <label for="C#m">C#m</label>
-                                    <input type="checkbox" name="C#m" id="C#m" value="C#m">
-                                <label for="Gm">Gm</label>
-                                    <input type="checkbox" name="Gm" id="Gm" value="Gm">
-                                <label for="Bm">Bm</label>
-                                    <input type="checkbox" name="Bm" id="Bm" value="Bm">
-                                <label for="F#M">F#M</label>
-                                    <input type="checkbox" name="F#M" id="F#M" value="F#M">
-                                <label for="D#M">D#M</label>
-                                    <input type="checkbox" name="D#M" id="D#M" value="D#M">
-                                <label for="G#M">G#M</label>
-                                    <input type="checkbox" name="G#M" id="G#M" value="G#M">
-                                <label for="CM">CM</label>
-                                    <input type="checkbox" name="CM" id="CM" value="CM">
-                                <label for="A#M">A#M</label>
-                                    <input type="checkbox" name="A#M" id="A#M" value="A#M">
-                                <label for="EM">EM</label>
-                                    <input type="checkbox" name="EM" id="EM" value="EM">
-                                <label for="DM">DM</label>
-                                    <input type="checkbox" name="DM" id="DM" value="DM">
-                                <label for="EbM">EbM</label>
-                                    <input type="checkbox" name="EbM" id="EbM" value="EbM">
-                                <label for="AM">AM</label>
-                                    <input type="checkbox" name="AM" id="AM" value="AM">
-                                <label for="key">FM</label>
-                                    <input type="checkbox" name="FM" id="FM" value="FM">
-                                <label for="GM">GM</label>
-                                    <input type="checkbox" name="GM" id="GM" value="GM">
-                                <label for="BbM">BbM</label>
-                                    <input type="checkbox" name="BbM" id="BbM" value="BbM">
-                                <label for="AbM">AbM</label>
-                                    <input type="checkbox" name="AbM" id="AbM" value="AbM">
-                                <label for="BM">BM</label>
-                                    <input type="checkbox" name="BM" id="BM" value="BM">
-                                <label for="EbM">EbM</label>
-                                    <input type="checkbox" name="EbM" id="EbM" value="EbM">
-                                <label for="F#M">F#M</label>
-                                    <input type="checkbox" name="F#M" id="F#M" value="F#M">
-                                <label for="C#M">C#M</label>
-                                    <input type="checkbox" name="C#M" id="C#M" value="C#M">
-                                <label for="AbM">AbM</label>
-                                    <input type="checkbox" name="AbM" id="AbM" value="AbM">
-                                <label for="BbM">BbM</label>
-                                    <input type="checkbox" name="BbM" id="BbM" value="BbM">
-                                <label for="A#M">A#M</label>
-                                    <input type="checkbox" name="A#M" id="A#M" value="A#M">
-                                <label for="DbM">DbM</label>
-                                    <input type="checkbox" name="DbM" id="DbM" value="DbM">
-                                <label for="GbM">GbM</label>
-                                    <input type="checkbox" name="GbM" id="GbM" value="GbM">
-                                <label for="CbM">CbM</label>
-                                    <input type="checkbox" name="CbM" id="CbM" value="CbM"> #}
+                            <div class="select select_instrus_keyz flex col">
+                                <select name="slct1" id="slct1">
+                                    <option selected disabled>Choisis une clé</option>
+                                    <option value="1">Am</option>
+                                    <option value="2">Bm</option>
+                                    <option value="3">Cmin</option>
+                                    <option value="4">E</option>
+                                </select>
+                            </div>
                         </div>
+                        <div class="submit">
+                            <button class="bouton_filter" ><img class="img_bouton_filter" src="{{asset('assets/images/icons/arrow-right-8-64.png')}}" alt="bouton pour filtrer la recherche"></button>
                         </div>
                     </div>
-
-
                 </div>
                 <div class="right_content flex col">
                     <h2 class="title_instrus">Instrus</h2>
                     <div class="content_instrus flex sb fw">
-                        <li class="content_download flex col">
-                            <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_1">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://80.82.229.202/fidelite.mp3" controls id="player_2"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_2">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_1">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://80.82.229.202/fidelite.mp3" controls id="player_2"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_2">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_1">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://80.82.229.202/fidelite.mp3" controls id="player_2"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_2">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_1">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://80.82.229.202/fidelite.mp3" controls id="player_2"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_2">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" controls id="player_1"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_1">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        <li class="content_download flex col">
-                            <audio preload src="http://80.82.229.202/fidelite.mp3" controls id="player_2"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/2.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_2">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                        
+                        {% for beat in instrus %}
+                            <li class="content_download_instrus flex col tac pr">
+                                <audio preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_1"></audio>
+                                <div class="image_downloaded">
+                                    <a href="{{path('instru_show', {'id': beat.id})}}">
+                                        <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                                    </a>
+                                </div>
+                                <div class="btn_play_caroussel btn_1">
+                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                                </div>
+                                <div class="block_info_instrus flex col">
+                                    <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
+                                    <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
+                                        {% for genre in beat.genre %}
+                                            {{ genre }}
+                                        {% endfor %}
+                                    </h4>
+                                    <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>
+                                    <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ beat.user.name }}</span></h4>
+
+                                </div>
+                            </li>
+                        {% endfor %}
                     </div>
+                    {# PAGINATION #}
+                    {{ paginator }}
+                    {# PAGINATION #}
                 </div>
-
             </div>
-
             </div>
         </div>
-
     </div>
 {% endblock %}

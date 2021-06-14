@@ -27,7 +27,9 @@
                                             </tr>
                                             <tr>
                                                 <th class="cell">Fichier</th>
-                                                <td class="cell">{{ avatar.file }}</td>
+                                                <td class="cell">{% if avatar.file %}
+                                                 <img src="{{asset('uploads/images/avatars/' ~ avatar.file)}}">
+                                                {% endif %}</td>
                                             </tr>
                                             <tr>
                                                 <th class="cell">Utilisateur correspondant</th>

@@ -36,6 +36,15 @@ class ToplineRepository extends ServiceEntityRepository
             ->getSingleScalarResult();
     }
 
+    public function findUserToplines($user) {
+        return $this->createQueryBuilder('t')
+        ->join('t.user', 'u')
+        ->setParameter('val', $user)
+        ->where('t.user = :val')
+        ->getQuery()
+        ->getResult();
+    }
+
     // /**
     //  * @return Topline[] Returns an array of Topline objects
     //  */

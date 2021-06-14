@@ -31,10 +31,26 @@ document.querySelector('#instru-link').addEventListener('click', (e) => {
 document.querySelector('#text-link').addEventListener('click', (e) => {
     openSection(e, 'textes', 'tabcontent', 'tablinks')
 })
-document.querySelector('#fav-link').addEventListener('click', (e) => {
-    openSection(e, 'favoris', 'tabcontent', 'tablinks')
+/*
+|---------------------------------
+|   Mobile nav / sections
+|--------------------------------- 
+*/
+$('#sideNavLink').on('click', function(){
+    $('#mobileNav').slideToggle(400);
 })
-
+document.querySelector('#mob-prof-link').addEventListener('click', (e) => {
+    openSection(e, 'profil', 'tabcontent', 'tablinks')
+})
+document.querySelector('#mob-top-link').addEventListener('click', (e) => {
+    openSection(e, 'toplines', 'tabcontent', 'tablinks')
+})
+document.querySelector('#mob-instru-link').addEventListener('click', (e) => {
+    openSection(e, 'instrus', 'tabcontent', 'tablinks')
+})
+document.querySelector('#mob-text-link').addEventListener('click', (e) => {
+    openSection(e, 'textes', 'tabcontent', 'tablinks')
+})
 /*
 |---------------------------------
 |   Edit user infos / section-forms

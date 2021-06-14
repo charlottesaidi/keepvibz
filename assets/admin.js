@@ -6,6 +6,7 @@
  */
 
 // any CSS you import will output into a single css file (app.css in this case)
+import './styles/preset.scss';
 import './admin/css/portal.css';
 // JS
 import './admin/plugins/fontawesome/js/all.min.js';

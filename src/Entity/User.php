@@ -10,14 +10,24 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  * @ORM\Table(name="`user`")
  * @UniqueEntity(fields={"email"}, message="Un utilisateur existe déjà avec cette adresse e-mail")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    /**
+     * Hook SoftDeleteable behavior
+     * updates deletedAt field
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -38,15 +48,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="json")
      */
     private $roles = [];
+    
+    /**
+    * @SecurityAssert\UserPassword(
+    *     message = "Ancien mot de passe invalide"
+    * )
+    */
+   private $oldPassword;
 
     /**
      * @var string The hashed password
-     * @Assert\NotBlank
+     * 
      * @Assert\Length(
      *      min = 6,
      *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
      * )
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $password;
 
@@ -121,17 +138,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $avatar;
 
     /**
-     * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $textes;
 
     /**
-     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $toplines;
 
     /**
-     * @ORM\OneToMany(targetEntity=Instru::class, mappedBy="user")
+     * @ORM\OneToMany(targetEntity=Instru::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $instrus;
 
@@ -200,6 +217,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->roles = $roles;
 
+        return $this;
+    }
+
+    function getOldPassword() {
+        return $this->oldPassword;
+    }
+
+    function setOldPassword($oldPassword) {
+        $this->oldPassword = $oldPassword;
         return $this;
     }
 

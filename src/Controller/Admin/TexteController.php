@@ -36,20 +36,20 @@ class TexteController extends AbstractController
         ]);
     }
 
-    #[Route('/new/{id}', name: 'texte_new', methods: ['GET', 'POST'])]
-    public function new($id, Request $request, InstruRepository $instruRepository): Response
+    #[Route('/new', name: 'texte_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, InstruRepository $instruRepository): Response
     {
-        $instru = $instruRepository->find($id);
         $texte = new Texte();
         $form = $this->createForm(TexteType::class, $texte);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setUser($this->getUser());
-            $texte->setInstru($instru);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($texte);
             $entityManager->flush();
+
+            $this->addFlash('success', 'Texte publié avec succès');
 
             return $this->redirectToRoute('texte_index');
         }
@@ -60,7 +60,7 @@ class TexteController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'texte_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'texte-show', methods: ['GET'])]
     public function show(Texte $texte): Response
     {
         return $this->render('admin/texte/show.html.twig', [
@@ -77,6 +77,8 @@ class TexteController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setModifiedAt(new \dateTime());
             $this->getDoctrine()->getManager()->flush();
+
+            $this->addFlash('success', 'Modification prise en compte');
 
             return $this->redirectToRoute('texte_index');
         }
@@ -95,6 +97,8 @@ class TexteController extends AbstractController
             $entityManager->remove($texte);
             $entityManager->flush();
         }
+
+        $this->addFlash('success', 'Suppression confirmée');
 
         return $this->redirectToRoute('texte_index');
     }

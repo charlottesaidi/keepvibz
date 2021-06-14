@@ -9,6 +9,7 @@
 import './styles/profile.scss';
 
 import './js/profile.js';
+import './admin/plugins/fontawesome/js/all.min.js';
 
 // start the Stimulus application
 import './bootstrap';

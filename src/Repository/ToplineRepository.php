@@ -21,7 +21,7 @@ class ToplineRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('t')
-            ->orderBy('t.title', 'ASC')
+            ->orderBy('t.title', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()

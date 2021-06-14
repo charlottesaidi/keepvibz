@@ -43,34 +43,39 @@ class UserProfileController extends AbstractController
     public function index(Request $request, FolderGenerator $folderGenerator): Response
     {           
         $user = $this->getUser();
+        $avatar = new Avatar();
+        $oldPassword = $user->getPassword();
 
         $form = $this->createForm(UserProfileType::class, $user);
         $changePasswordForm = $this->createForm(ChangeProfilePasswordType::class, $user);
-        $changePasswordForm->handleRequest($request);
 
-        $avatar = new Avatar();
-        $oldPassword = $user->getPassword();
+        if ($request->request->has('form')) {
+            //   
+        }
         $form->handleRequest($request);
+        if ($request->request->has('changePasswordForm')) {
+            $changePasswordForm->handleRequest($request);  
+        }
         if ($form->isSubmitted()) {
+            dd($request);
             $user->setModifiedAt(new \dateTime());
             $this->editFunctions->changeAvatar($form, $user, $avatar, $folderGenerator);
             
             if($form->get('email')->getData() != $user->getEmail()) {
                 $user->setEmail($form->get('email')->getData());
-                $this->editFunctions->flushUpdate();
             }
             if($form->get('phone')->getData() != $user->getPhone()) {
                 $user->setPhone($form->get('phone')->getData());
-                $this->editFunctions->flushUpdate();
             }
             if($form->get('name')->getData() != $user->getName()) {
                 $user->setName($form->get('name')->getData());
-                $this->editFunctions->flushUpdate();
             }
             if($form->get('town')->getData() != $user->getTown()) {
                 $user->setTown($form->get('town')->getData());
-                $this->editFunctions->flushUpdate();
             }
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            $this->addFlash('success', 'Modification prise en compte');
         }
 
         if ($changePasswordForm->isSubmitted() && $changePasswordForm->isValid()) {

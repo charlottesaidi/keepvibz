@@ -56,6 +56,9 @@ table {
 .clear {
   *zoom:1;
 }
+body{
+    font-family: 'Squada One'
+}
 p{
     color: white;
     line-height: 22px;
@@ -79,7 +82,7 @@ h3{
     margin-top: 160px;
     margin-bottom: 30px;
 }
-.wrap{
+.wrap-mentions{
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;

@@ -17,7 +17,6 @@ class AvatarType extends AbstractType
         ->add('file', FileType::class, [
             'label' => 'Avatar utilisateur',
             'required' => false,
-            'data_class' => null,
             'constraints' => [
                 new Image([
                     'mimeTypes' => [
@@ -25,7 +24,7 @@ class AvatarType extends AbstractType
                         'image/gif',
                         'image/png',
                     ],
-                    'message' => 'Format d\'image non valide',
+                    'mimeTypesMessage' => 'Format d\'image non valide',
                 ])
             ]
             ])

@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Avatar;
 use App\Form\UserProfileType;
+use App\Form\HomeSearchType;
 use App\Form\ChangeProfilePasswordType;
 use App\Repository\UserRepository;
 use App\Repository\AvatarRepository;

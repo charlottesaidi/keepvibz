@@ -98,7 +98,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @AssertPhoneNumber
-     * @ORM\Column(type="phone_number", nullable=true)
+     * @ORM\Column(type="string", nullable=true)
      */
     private $phoneNumber;
 
@@ -288,12 +288,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhoneNumber()
+    public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
 
-    public function setPhoneNumber($phoneNumber): self
+    public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
 

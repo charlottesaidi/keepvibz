@@ -95,9 +95,10 @@ class UserController extends AbstractController
 
         if ($editForm->isSubmitted()) {
             if($editForm->get('actif')->getData() == false) {
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->remove($user);
-                $entityManager->flush();
+                $user->setActif(false);
+                // $entityManager = $this->getDoctrine()->getManager();
+                // $entityManager->remove($user);
+                // $entityManager->flush();
 
                 $email = (new TemplatedEmail())
                     ->from(new Address('no-reply@keepvibz.fr', 'Banishment notice'))

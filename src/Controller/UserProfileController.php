@@ -59,8 +59,11 @@ class UserProfileController extends AbstractController
             if ($request->request->has('change_profile_password')) {
                 $changePasswordForm->handleRequest($request);
             }
+        } else {
+            $form->handleRequest($request);
+            $changePasswordForm->handleRequest($request);
         }
-        
+        if ($request->request->has('user_profile')) {
         if ($form->isSubmitted()) {
             $user->setModifiedAt(new \dateTime());
             $this->changeAvatar($form, $user, $avatar, $this->folderGenerator);
@@ -81,10 +84,12 @@ class UserProfileController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Modification prise en compte');
         }
-
+    }
+    if ($request->request->has('change_profile_password')) {
         if ($changePasswordForm->isSubmitted() && $changePasswordForm->isValid()) {
             $this->changePassword($changePasswordForm, $user, $this->passwordEncoder);
         }
+    }
 
         return $this->render('/profile/index.html.twig', [
             'profileForm' => $form->createView(),

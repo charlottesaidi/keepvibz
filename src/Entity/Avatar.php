@@ -30,7 +30,7 @@ class Avatar
     /**
      * @Assert\NotBlank
      * @Assert\File(
-     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png", "image/png"},
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
      *     mimeTypesMessage = "Format de fichier invalide"
      * )
      * @ORM\Column(type="string", length=255)

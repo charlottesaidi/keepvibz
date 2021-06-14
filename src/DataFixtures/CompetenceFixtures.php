@@ -22,15 +22,10 @@ class CompetenceFixtures extends Fixture
         $competence3->setTitle('Parolier');
         $manager->persist($competence3);
 
-        $competence4 = new Competence();
-        $competence4->setTitle('Chanteur');
-        $manager->persist($competence4);
-
         $manager->flush();
 
         $this->addReference('competence1', $competence1);
         $this->addReference('competence2', $competence2);
         $this->addReference('competence3', $competence3);
-        $this->addReference('competence4', $competence4);
     }
 }

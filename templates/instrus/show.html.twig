@@ -4,8 +4,9 @@
 
 {% block body %}
 <section class="instru_show">
+    {# TOP SHOW INSTRU  #}
     <div class="wrap1_instrus_show">
-        <div class="top_container_show">
+        <div class="top_container_show pr">
             <div class="top_content_instrus_show flex col aic">
                 <div class="up_content_img">
                     <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru">
@@ -20,7 +21,7 @@
                     <p class="title_content_show_instru">{{ instru.title }}</p>
                 </div>
                 <p class="author_content_show_instru">par <span class="name_author_content_show_instru">{{ instru.user.name }}</span></p>
-                <div class="details_content_show_instru flex fw">
+                <div class="details_content_show_instru flex jcc fw">
                     <p class="genre_content_show_instru">
                         {% for genre in instru.genre %}
                             {{ genre }}
@@ -30,20 +31,28 @@
                     <p class="bpm_content_show_instru"> {{ instru.bpm }} <span class="bpm_show_instru"> BPM</span></p>
                     <span class="genre_separator">|</span>
                     <p class="key_content_show_instru">Key: {{ instru.cle }}</p>
-                    {# <p class="nombre_content_show_instru">(nombres DYNAMIQUE) lectures</p> #}
+                    <p class="nombre_content_show_instru">(nombres DYNAMIQUE) lectures</p>
                 </div>
                 <div class="block_link_items_associes">
                     <ul class="links_textes_toplines flex jcc">
-                        <li class="first_textes"><a href="#">Textes associés</a></li>
-                        <li class="second_topline"><a href="#">Toplines associées</a></li>
+                        <li class="first_autres_instrus tac"><a href="#">Mes autres instrus</a></li>
+                        <li class="second_textes tac"><a href="#">Textes associés</a></li>
+                        <li class="third_topline tac"><a href="#">Toplines associées</a></li>
                     </ul>
                 </div>
-            </div>
-            <div class="nav_others_textes_toplines">
+                <div class="top_show_instru_downloading">
+                    <a href="{{asset('uploads/instrus/' ~ instru.file)}}" download="{{ instru.file }}">
+                        <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                    </a>
+                </div>
+                
             </div>
         </div>
-    </div>   
-    <div class="bottom_container_show">
+    </div>
+    {# FIN TOP SHOW INSTRU  #}
+
+    {# BOTTOM AUTRES INSTRUS AUTEUR  #}
+    <div class="bottom_autres_instrus_show">
         <div class="wrap2_instrus_show flex col">
         {% for beats in instru.user.instrus %}
             <div class="others_instrus_author flex aic pr">
@@ -51,19 +60,84 @@
                     <div class="btn_play_caroussel_show_instrus btn_1 btn_play_hover">
                         <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
                     </div>
-                    <div class="block_image_instru_author">
-                        <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                    <a href="{{path('instru_show', {'id': beats.id})}}">
+                        <div class="block_image_instru_author">
+                            <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                        </div>
+                    </a>
+                </div>
+                <a href="{{path('instru_show', {'id': beats.id})}}">
+                    <div class="right_others_instrus_author flex col">
+                        <div class="top_right_others_instrus_author">
+                            <p class="title_others_instrus_author">{{ beats.title }}</p>
+                        </div>
+                        <div class="bottom_right_others_instrus_author flex ">
+                            <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
+                            <p class="separator_others_instrus_author grey_text"> | </p>
+                            <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p>
+                            <p class="separator_others_instrus_author grey_text"> | </p>
+                            <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="top_right_others_instrus_author pa">
+                    <div class="block_downloading pr">
+                        <a href="{{asset('uploads/instrus/' ~ beats.file)}}" download="{{ beats.file }}">
+                            <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                        </a>
                     </div>
                 </div>
-                <div class="right_others_instrus_author flex col">
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {# BOTTOM AUTRES INSTRUS AUTEUR  #}
+
+    {# BOTTOM TEXTES ASSOCIES #}
+    <div class="bottom_textes_associees_show">
+        <div class="wrap2_instrus_show flex col">
+            <div class="content_textes pr">
+                <div class="block_all_textes flex col">
+                {% for texte in instru.textes %}
+                    <li class="block_textes flex sb fw">
+                        <a class="link_text flex aic" href="{{path('texte_show', {'id': texte.id})}}">
+                            <div class="avatar_image_block">
+                                <img src="{{asset('assets/images/icons/avatar.png')}}" alt="avatar du User" class="avatar_image">
+                            </div>
+                            <div class="description_textes">
+                                <h3 class="title_texte">{{texte.title}}</h3>
+                                <h3 class="author_textes">Par {{texte.user.name}}</h3>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {# BOTTOM TEXTES ASSOCIES #}
+
+    {# BOTTOM TOPLINES ASSOCIES #}
+    <div class="bottom_toplines_associees_show">
+        <div class="wrap2_instrus_show flex col">
+        {% for topline in instru.toplines %}
+            <div class="others_instrus_author flex aic pr">
+                <div class="left_others_instrus_author flex aic">
+                    <div class="btn_play_caroussel_show_instrus btn_1 btn_play_hover">
+                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                    </div>
+                    {# <div class="block_image_instru_author">
+                        <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                    </div> #}
+                </div>
+                <div class="right_others_instrus_author right_others_topline_author  flex col">
                     <div class="top_right_others_instrus_author">
-                        <p class="title_others_instrus_author">{{ beats.title }}</p>
+                        <p class="title_others_instrus_author">{{ topline.title }}</p>
                     </div>
                     <div class="bottom_right_others_instrus_author flex ">
-                        <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
+                        <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ topline.user.name }}</span></p>
                         <p class="separator_others_instrus_author grey_text"> | </p>
-                        <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p>
-                        <p class="separator_others_instrus_author grey_text"> | </p>
+                        {# <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p> #}
                         <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
                     </div>
                 </div>
@@ -75,6 +149,7 @@
             </div>
         {% endfor %}
     </div>
+    {# BOTTOM TOPLINES ASSOCIES #}
     </div>
     {{ include('instrus/_delete_form.html.twig') }};
 </section>

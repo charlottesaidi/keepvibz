@@ -20,7 +20,7 @@ $(document).ready(function(){
     })
 // ==============================================================
 
-    //CAROUSSEL Instrus Populaires
+    //CAROUSSEL Top 10 des Instrus HOME
     if (window.matchMedia("(max-width: 550px)").matches) {
         $('.flexslider').flexslider({
             animation: "slide",
@@ -84,7 +84,7 @@ $(document).ready(function(){
 
 // ==============================================================
 
-    //CAROUSSEL Textes Populaires
+    //CAROUSSEL Textes Populaires HOME
     if (window.matchMedia("(max-width: 550px)").matches) {
         $('.flexslider2').flexslider({
             animation: "slide",
@@ -147,36 +147,45 @@ $(document).ready(function(){
     });}
 
 // ==============================================================
-    // LECTEUR CAROUSSEL
+    // LECTEUR AUDIO 
     // 1
     $(".btn").on('click', function() {
-        if ($("#player_1")[0].paused == false) {
-            $("#player_1")[0].pause();
-        } else {
-            $("#player_2")[0].pause();
-            $("#player_1")[0].play();
-        }
+        // if ($("#player_1")[0].paused == false) {
+        //     $("#player_1")[0].pause();
+        // } else {
+        //     $("#player_2")[0].pause();
+        //     $("#player_1")[0].play();
+        // }
         // if(this[0].paused == false) {
         //     this[0].pause();
         // } else {
         //     this[0].play();
         // }
+        // if(("#player_" + $id)[0].paused == false) {
+        //     this[0].pause();
+        // } else {
+        //     this[0].play();
+        // }
+        $(function(){
+                var audio = $(this).prev(".audioplayer");
+                audio.get(0).play();
+            });
     });
     
     // 2
-    $(".btn_2").on('click', function() {
-        if ($("#player_2")[0].paused == false) {
-            $("#player_2")[0].pause();
-        } else {
-            $("#player_1")[0].pause();
-            $("#player_2")[0].play();
-        }
-    });
+    // $(".btn_2").on('click', function() {
+    //     if ($("#player_2")[0].paused == false) {
+    //         $("#player_2")[0].pause();
+    //     } else {
+    //         $("#player_1")[0].pause();
+    //         $("#player_2")[0].play();
+    //     }
+    // });
 
 
 // ==============================================================
 
-    //ANCOR SMOOOTH SCROLL
+    //ANCRES SMOOOTH SCROLL FOOTER
     $(document).on('click', 'a[href^="#"]', function(e) {
         e.preventDefault();
         $('html, body').animate({
@@ -193,13 +202,57 @@ $(document).ready(function(){
         $('.submenu_center2').slideToggle('slow');
     })
     
+// ================================================================
 
-    //GENRE INSTRUS
+    //GENRE INSTRUS HOME
     $('.btn_genre').on('click', function(){
         $('.block_genre').slideToggle('slow');
     })
 
 
 // ================================================================
+
+    //SHOW INSTRUS - DISPLAY NONE / DISPLAY BLOCK - BOTTOM SECTION
+    $('.second_textes').click(function(){
+        $(this).hide();
+        $('.first_autres_instrus').show();
+        $('.third_topline').show();
+        $('.bottom_autres_instrus_show').hide();
+        $('.bottom_toplines_associees_show').hide();
+        $('.bottom_textes_associees_show').show();
+    })
+
+    $('.first_autres_instrus').click(function(){
+        $(this).hide();
+        $('.second_textes').show();
+        $('.third_topline').show();
+        $('.bottom_autres_instrus_show').show();
+        $('.bottom_textes_associees_show').hide();
+        $('.bottom_toplines_associees_show').hide();
+    })
+
+    $('.third_topline').click(function(){
+        $(this).hide();
+        $('.second_textes').show();
+        $('.first_autres_instrus').show();
+        $('.bottom_autres_instrus_show').hide();
+        $('.bottom_textes_associees_show').hide();
+        $('.bottom_toplines_associees_show').show();
+    })
+
+    //SHOW TEXTES - DISPLAY NONE / DISPLAY BLOCK - BOTTOM SECTION
+    $('.second_instrus').click(function(){
+        $(this).hide();
+        $('.first_autres_textes').show();
+        $('.bottom_autres_textes_show').hide();
+        $('.bottom_instrus_associees_show').show();
+    })
+
+    $('.first_autres_textes').click(function(){
+        $(this).hide();
+        $('.second_instrus').show();
+        $('.bottom_autres_textes_show').show();
+        $('.bottom_instrus_associees_show').hide();
+    })
 
 })

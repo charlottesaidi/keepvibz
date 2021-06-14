@@ -200,6 +200,7 @@ a{text-decoration: none;}
 
 body{position:"relative"; font-family: 'Squada One', cursive; letter-spacing: 3px; background-color: black; font-weight: 500; }
 h1{position: absolute; left: -50000px;}
+audio{outline: none;}
 
 /* HEADER */
 .fixed {
@@ -255,6 +256,7 @@ a{color: #fff;}
 }
 .block_filters{position: absolute ; background-color: #3d3c3c; padding: 8px 13px; border-radius: 4px; z-index: 2; left: 28vw; top: 55px; display: none; width: 91px;}
 .filter{color: #fff; font-weight: 400; margin: 15px 0;}
+.filter:hover{opacity: .7; cursor: pointer;}
 
 
 /* MOBILE */
@@ -378,11 +380,13 @@ h2{
 #player_2{position: absolute; left: 54393px;}
 
 
-.title_downloaded, .genre_downloaded,.description_downloaded{
+.title_downloaded, .genre_downloaded,.description_downloaded, .author_downloaded{
     color: #A27440;
     margin-top: .4rem;
 }
 .span_downloaded{color: #fff;}
+
+
 /* FIN SECTION 2 */
 
 
@@ -434,8 +438,12 @@ h2{
 
 .accroche3{ font-size: 3em; color: #fff;}
 
+/* FIN SECTION 4 */
 
-/* FIN SECTION 3 */
+
+/* SECTION 5 */
+  
+/* FIN SECTION 5 */
 
 
 

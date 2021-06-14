@@ -10,7 +10,7 @@
                     <div class="block_all_textes flex col">
                     {% for texte in textes %}
                         <li class="block_textes flex sb fw">
-                            <a class="link_text flex aic" href="#">
+                            <a class="link_text flex aic" href="{{path('texte_show', {'id': texte.id})}}">
                                 <div class="avatar_image_block">
                                     <img src="{{asset('assets/images/icons/avatar.png')}}" alt="avatar du User" class="avatar_image">
                                 </div>

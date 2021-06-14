@@ -26,3 +26,5 @@ import './bootstrap';
 // JS perso
 import './js/main.js';
 
+import './styles/mention.css';
+

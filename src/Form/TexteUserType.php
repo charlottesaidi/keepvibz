@@ -13,7 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
-class TexteType extends AbstractType
+class TexteUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -33,16 +33,6 @@ class TexteType extends AbstractType
                 'choice_label' => 'title',
                 'multiple' => true,
                 'expanded' => false,
-            ])
-            ->add('status', ChoiceType::class, [
-                'label' => 'Status',
-                'choices'  => [
-                    'Publier' => 'published',
-                    'Brouillon' => 'draft',
-                    'Refuser' => 'refused'
-                ],
-                'multiple' => false,
-                'expanded' => true,
             ])
         ;
     }

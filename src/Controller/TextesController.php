@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Texte;
-use App\Form\TexteType;
+use App\Form\TexteUserType;
 use App\Entity\Instru;
 use App\Repository\TexteRepository;
 use App\Repository\InstruRepository;
@@ -42,16 +42,17 @@ class TextesController extends AbstractController
     public function new(Request $request, InstruRepository $instruRepository): Response
     {
         $texte = new Texte();
-        $form = $this->createForm(TexteType::class, $texte);
+        $form = $this->createForm(TexteUserType::class, $texte);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setUser($this->getUser());
+            $texte->setStatus('draft');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($texte);
             $entityManager->flush();
 
-            $this->addFlash('text-success', 'Texte publié avec succès');
+            $this->addFlash('text-success', 'Texte posté avec succès. En attente de modération par l\'administrateur');
 
             return $this->redirectToRoute('user_profile');
         }
@@ -73,7 +74,7 @@ class TextesController extends AbstractController
     #[Route('/{id}/edit', name: 'textes_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Texte $texte): Response
     {
-        $form = $this->createForm(TexteType::class, $texte);
+        $form = $this->createForm(TexteUserType::class, $texte);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

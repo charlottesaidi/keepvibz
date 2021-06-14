@@ -76,6 +76,11 @@ class TexteController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setModifiedAt(new \dateTime());
+            if($form->get('status')->getData() == 'refused') {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($texte);
+                $entityManager->flush();
+            }
             $this->getDoctrine()->getManager()->flush();
 
             $this->addFlash('success', 'Modification prise en compte');

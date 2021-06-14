@@ -202,9 +202,6 @@ $(document).ready(function(){
         $('.submenu_center2').slideToggle('slow');
     })
     
-<<<<<<< HEAD
-})
-=======
 // ================================================================
 
     //GENRE INSTRUS HOME
@@ -259,4 +256,3 @@ $(document).ready(function(){
     })
 
 })
->>>>>>> 83b25bdceb93c173aaf8b30629411377369b1026

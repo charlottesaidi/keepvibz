@@ -7,13 +7,15 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class ProfileEditFunctions extends AbstractController
+class ProfileEditFunctions
 {
     public $passwordEncoder;
+    public $abstractController;
 
-    public function _construct(UserPasswordEncoderInterface $passwordEncoder) 
+    public function _construct(UserPasswordEncoderInterface $passwordEncoder, AbstractController $abstractController) 
     {
         $this->passwordEncoder = $passwordEncoder;
+        $this->abstractController = $abstractController;
     }
 
     public function changePassword($form, $user) {
@@ -25,9 +27,11 @@ class ProfileEditFunctions extends AbstractController
                     $form->get('newPassword')->getData()
                 )
             );
-                $this->flushUpdate();
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+                $this->abstractController->addFlash('success', 'Modification prise en compte');
             } else {
-                $this->addFlash('error', 'Tu dois renseigner ton mot de passe actuel pour le modifier');
+                $this->abstractController->addFlash('error', 'Tu dois renseigner ton mot de passe actuel pour le modifier');
             }
         } 
     }
@@ -48,14 +52,7 @@ class ProfileEditFunctions extends AbstractController
             }
             $avatar->setUser($user);
             $avatar->setFile($fileName);
-            $this->flushUpdate();
         }
-    }
-
-    public function flushUpdate() {
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->flush();
-        $this->addFlash('success', 'Modification prise en compte');
     }
 }
 ?>

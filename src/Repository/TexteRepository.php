@@ -21,7 +21,7 @@ class TexteRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('t')
-            ->orderBy('t.title', 'ASC')
+            ->orderBy('t.title', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
@@ -39,7 +39,7 @@ class TexteRepository extends ServiceEntityRepository
     public function findLatest()
     {
         return $this->createQueryBuilder('t')
-            ->orderBy('t.created_at', 'ASC')
+            ->orderBy('t.created_at', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()

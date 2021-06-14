@@ -150,26 +150,34 @@ $(document).ready(function(){
     // LECTEUR AUDIO 
     // 1
     $(".btn").on('click', function() {
+
+
+
+
         // if ($("#player_1")[0].paused == false) {
         //     $("#player_1")[0].pause();
         // } else {
         //     $("#player_2")[0].pause();
         //     $("#player_1")[0].play();
         // }
-        // if(this[0].paused == false) {
-        //     this[0].pause();
-        // } else {
-        //     this[0].play();
-        // }
-        // if(("#player_" + $id)[0].paused == false) {
-        //     this[0].pause();
-        // } else {
-        //     this[0].play();
-        // }
-        $(function(){
-                var audio = $(this).prev(".audioplayer");
-                audio.get(0).play();
-            });
+
+
+        if($(this[0]).paused == false) {
+            $(this[0]).pause();
+        } else {
+            $(this[0]).play();
+        }
+        if(("#player_" + $id)[0].paused == false) {
+            $(this[0]).pause();
+        } else {
+            $(this[0]).play();
+        }
+
+
+        // $(function(){
+        //         var audio = $(this).prev(".audioplayer");
+        //         audio.get(0).play();
+        //     });
     });
     
     // 2

@@ -1,4 +1,4 @@
-    {% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}KeepVibz | Toutes les instrus !{% endblock %}
 
@@ -71,7 +71,8 @@
                         {% endfor %}
                     </div>
                     {# PAGINATION #}
-                    {{ paginator }}
+                    {# {{ paginator }} #}
+                    {{ include('pagination.html.twig') }};
                     {# PAGINATION #}
                 </div>
             </div>

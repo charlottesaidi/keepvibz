@@ -95,7 +95,7 @@ class UserProfileController extends AbstractController
             $entityManager->flush();
         }
             
-        $this->addFlash('success', 'Ton compte est bien désactivé');
+        $this->addFlash('success', 'Ton compte a été supprimé');
 
         return $this->redirectToRoute('app_logout');
     }

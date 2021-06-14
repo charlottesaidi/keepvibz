@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,10 +25,13 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
 
     private UrlGeneratorInterface $urlGenerator;
 
-    public function __construct(UrlGeneratorInterface $urlGenerator, Security $security)
+    public $userRepo;
+
+    public function __construct(UrlGeneratorInterface $urlGenerator, Security $security, UserRepository $userRepo)
     {
         $this->urlGenerator = $urlGenerator;
         $this->security = $security;
+        $this->userRepo = $userRepo;
     }
 
     public function authenticate(Request $request): PassportInterface
@@ -35,7 +39,6 @@ class LoginAuthenticator extends AbstractLoginFormAuthenticator
         $email = $request->request->get('email', '');
 
         $request->getSession()->set(Security::LAST_USERNAME, $email);
-
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),

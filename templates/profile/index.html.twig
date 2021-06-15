@@ -71,7 +71,8 @@
                         </div>
                     {% endfor %}
                     {{form_errors(profileForm.email)}}
-                    {{form_errors(profileForm.phone)}}
+                    {{form_errors(profileForm.name)}}
+                    {{form_errors(profileForm.phoneNumber)}}
 
                     <h3>Photo de profil</h3>
                     <div class="attr-block avatar">
@@ -106,7 +107,6 @@
                         <div class="edit-block profile-block formsection hidden" id="edit-name">
                             <div class="input-group">
                                 {{form_widget(profileForm.name)}}
-                                {{form_errors(profileForm.name)}}
                             </div>
                             <div class="input-group">
                                 <input type="submit" class="btn-primary" value="Valider">
@@ -153,14 +153,14 @@
 
                         <div class="attr-block global phone">
                             <div class="title-block profile-block">
-                                <p> <span><i class="fas fa-phone-alt"></i></span> {{app.user.phone}} </p>
+                                <p> <span><i class="fas fa-phone-alt"></i></span> {{app.user.phoneNumber|phone_number_format('NATIONAL')}} </p>
                             </div>
                             <div class="edit-button profile-block">
                                 <a href="" class="btn-secondary formbuttons" id="phone-button">Modifier</a>
                             </div>
                             <div class="edit-block profile-block formsection hidden" id="edit-phone">
                                 <div class="input-group">
-                                    {{form_widget(profileForm.phone)}}
+                                    {{form_widget(profileForm.phoneNumber)}}
                                 </div>
                                 <div class="input-group">
                                     <input type="submit" class="btn-primary" value="Valider">
@@ -258,12 +258,12 @@
                                 <a href="" class="btn-secondary formbuttons" id="delete-button">Supprimer</a>
                             </div>
                             <div class="delete-block profile-block formsection hidden" id="delete">
-                                    <div class="input-group">
-                                        <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T\'es sûr(e) de vouloir faire ça ?');">
-                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
-                                            <button type="submit" class="btn btn-danger mb-3">Confirmer</button>
-                                        </form>
-                                    </div>
+                                <div class="input-group">
+                                    <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T\'es sûr(e) de vouloir faire ça ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+                                        <button type="submit" class="btn btn-danger mb-3">Confirmer</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>

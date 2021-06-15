@@ -39,6 +39,7 @@ class TexteType extends AbstractType
                 'choices'  => [
                     'Publier' => 'published',
                     'Brouillon' => 'draft',
+                    'Refuser' => 'refused'
                 ],
                 'multiple' => false,
                 'expanded' => true,

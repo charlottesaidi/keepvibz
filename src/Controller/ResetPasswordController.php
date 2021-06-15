@@ -89,17 +89,14 @@ class ResetPasswordController extends AbstractController
         $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
 
-        if($user == null) {
+        if($token != null || $token == $user->getResetToken()) {
 
-            // 404, url invalide
-        
-        } else {
             if($form->isSubmitted() && $form->isValid()) {
                 $encodedPassword = $passwordEncoder->encodePassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 );
-
+                $user->setResetToken(null);
                 $user->setPassword($encodedPassword);
                 $this->getDoctrine()->getManager()->flush();
 
@@ -107,6 +104,8 @@ class ResetPasswordController extends AbstractController
 
                 return $this->redirectToRoute('app_login');
             }
+        } else {
+            return $this->redirectTo('/_erreur/404');
         }
 
         return $this->render('reset_password/reset.html.twig', [

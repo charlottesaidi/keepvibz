@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
+use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -96,16 +97,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $town;
 
     /**
-     * @Assert\Length(
-     *      min = 10,
-     *      max = 10,
-     *      minMessage = "Renseignez un numéro de téléphone valide",
-     *      maxMessage = "Renseignez un numéro de téléphone valide"
-     * )
-     * @Assert\Regex(pattern="/^([123]0|[012][1-9]|31)\/(0[1-9]|1[012])\/(19[0-9]{2}|2[0-9]{3})$/", message="Renseignez un numéro de téléphone valide")
-     * @ORM\Column(type="string", nullable=true)
+     * @AssertPhoneNumber
+     * @ORM\Column(type="phone_number", nullable=true)
      */
-    private $phone;
+    private $phoneNumber;
 
     /**
      * @ORM\Column(type="boolean")
@@ -293,14 +288,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getPhone(): ?string
+    public function getPhoneNumber()
     {
-        return $this->phone;
+        return $this->phoneNumber;
     }
 
-    public function setPhone(string $phone): self
+    public function setPhoneNumber($phoneNumber): self
     {
-        $this->phone = $phone;
+        $this->phoneNumber = $phoneNumber;
 
         return $this;
     }

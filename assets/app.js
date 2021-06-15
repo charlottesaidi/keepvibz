@@ -17,12 +17,18 @@ import './styles/instrus.css';
 import './styles/textes.css';
 
 //HOME
-import './styles/app.css';
 
+import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
 
 // JS perso
 import './js/main.js';
+
+import './styles/mention.css';
+
+import './styles/faq.css';
+
+
 

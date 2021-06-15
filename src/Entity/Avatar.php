@@ -29,9 +29,9 @@ class Avatar
 
     /**
      * @Assert\NotBlank
-     * @Assert\Image(
-     *     allowLandscape = false,
-     *     allowPortrait = true,
+     * @Assert\File(
+     *     mimeTypes = {"image/jpg", "image/jpeg", "image/png"},
+     *     mimeTypesMessage = "Format de fichier invalide"
      * )
      * @ORM\Column(type="string", length=255)
      */

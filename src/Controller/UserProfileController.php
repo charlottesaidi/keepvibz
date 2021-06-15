@@ -19,6 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ProfileEditFunctions;
 use JasonGrimes\Paginator;
 use App\Service\FolderGenerator;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 #[Route('/profile')]
 class UserProfileController extends AbstractController
@@ -28,19 +29,21 @@ class UserProfileController extends AbstractController
     public $instruRepo;
     public $toplineRepo;
     public $competenceRepo;
-    public $editFunctions;
+    public $passwordEncoder;
+    public $folderGenerator;
 
-    public function __construct(ProfileEditFunctions $editFunctions, AvatarRepository $avatarRepo,TexteRepository $texteRepo, ToplineRepository $toplineRepo, InstruRepository $instruRepo, CompetenceRepository $competenceRepo) {
+    public function __construct(AvatarRepository $avatarRepo,TexteRepository $texteRepo, ToplineRepository $toplineRepo, InstruRepository $instruRepo, CompetenceRepository $competenceRepo, FolderGenerator $folderGenerator, UserPasswordEncoderInterface $passwordEncoder) {
         $this->avatarRepo = $avatarRepo;
         $this->texteRepo = $texteRepo;
         $this->instruRepo = $instruRepo;
         $this->toplineRepo = $toplineRepo;
         $this->competenceRepo = $competenceRepo;
-        $this->editFunctions = $editFunctions;
+        $this->passwordEncoder = $passwordEncoder;
+        $this->folderGenerator = $folderGenerator;
     }
 
     #[Route('/', name: 'user_profile', methods: ['GET', 'POST'])]
-    public function index(Request $request, FolderGenerator $folderGenerator): Response
+    public function index(Request $request): Response
     {           
         $user = $this->getUser();
         $avatar = new Avatar();
@@ -49,23 +52,27 @@ class UserProfileController extends AbstractController
         $form = $this->createForm(UserProfileType::class, $user);
         $changePasswordForm = $this->createForm(ChangeProfilePasswordType::class, $user);
 
-        if ($request->request->has('form')) {
-            //   
+        if('POST' === $request->getMethod()) {
+            if ($request->request->has('user_profile')) {
+                $form->handleRequest($request);
+            }
+            if ($request->request->has('change_profile_password')) {
+                $changePasswordForm->handleRequest($request);
+            }
+        } else {
+            $form->handleRequest($request);
+            $changePasswordForm->handleRequest($request);
         }
-        $form->handleRequest($request);
-        if ($request->request->has('changePasswordForm')) {
-            $changePasswordForm->handleRequest($request);  
-        }
+        if ($request->request->has('user_profile')) {
         if ($form->isSubmitted()) {
-            dd($request);
             $user->setModifiedAt(new \dateTime());
-            $this->editFunctions->changeAvatar($form, $user, $avatar, $folderGenerator);
+            $this->changeAvatar($form, $user, $avatar, $this->folderGenerator);
             
             if($form->get('email')->getData() != $user->getEmail()) {
                 $user->setEmail($form->get('email')->getData());
             }
-            if($form->get('phone')->getData() != $user->getPhone()) {
-                $user->setPhone($form->get('phone')->getData());
+            if($form->get('phoneNumber')->getData() != $user->getPhoneNumber()) {
+                $user->setPhoneNumber($form->get('phoneNumber')->getData());
             }
             if($form->get('name')->getData() != $user->getName()) {
                 $user->setName($form->get('name')->getData());
@@ -77,10 +84,12 @@ class UserProfileController extends AbstractController
             $entityManager->flush();
             $this->addFlash('success', 'Modification prise en compte');
         }
-
+    }
+    if ($request->request->has('change_profile_password')) {
         if ($changePasswordForm->isSubmitted() && $changePasswordForm->isValid()) {
-            $this->editFunctions->changePassword($changePasswordForm, $user);
+            $this->changePassword($changePasswordForm, $user, $this->passwordEncoder);
         }
+    }
 
         return $this->render('/profile/index.html.twig', [
             'profileForm' => $form->createView(),
@@ -103,5 +112,42 @@ class UserProfileController extends AbstractController
         $this->addFlash('success', 'Ton compte a été supprimé');
 
         return $this->redirectToRoute('app_logout');
+    }
+
+    public function changePassword($form, $user, $passwordEncoder) {
+        if($form->get('newPassword')->getData() != null) {
+            if($form->get('oldPassword')->getData() != null) {
+            $user->setPassword(
+                    $passwordEncoder->encodePassword(
+                    $user,
+                    $form->get('newPassword')->getData()
+                )
+            );
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+                $this->addFlash('success', 'Modification prise en compte');
+            } else {
+                $this->addFlash('error', 'Tu dois renseigner ton mot de passe actuel pour le modifier');
+            }
+        } 
+    }
+
+    public function changeAvatar($form, $user, $avatar, $folderGenerator) {
+        if($form->get('avatar')->getData() != null) {
+            $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
+            
+            $file = $form->get('avatar')->getData();
+            $fileName =  uniqid(). '.' .$file->guessExtension();
+            try {
+                $file->move(
+                    $this->getParameter('avatars_directory'), // Le dossier dans lequel le fichier va etre chargé
+                    $fileName
+                );
+            } catch (FileException $e) {
+                return new Response($e->getMessage());
+            }
+            $avatar->setUser($user);
+            $avatar->setFile($fileName);
+        }
     }
 }

@@ -223,7 +223,10 @@ a{color: #fff;}
 .right .link_connexion{border: 1px solid transparent; margin-left: 20px; background-color: #A27440; padding: 10px; border-radius: 4px;}
 .right .link_connexion:hover{background-color: transparent; color:#A27440; border: 1px solid #fff; }
 .wrap2{max-width: 1300px; width: 100%; margin: 0 auto 20px auto;padding: 0 20px;}
-.search{position: relative;}
+.search{
+  position: relative;
+  display: none;
+}
 .icon_search{
     position: absolute;
     left: 18px;

@@ -20,7 +20,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru1->setBpm(145);
         $instru1->setCle('Am');
         $instru1->setFile('instru_1.mp3');
-        $instru1->setImage('cover_1.png');
         $instru1->setUser($this->getReference('user3'));
         $manager->persist($instru1);
 
@@ -30,7 +29,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru2->setBpm(145);
         $instru2->setCle('Am');
         $instru2->setFile('instru_2.mp3');
-        $instru2->setImage('cover_2.png');
         $instru2->setUser($this->getReference('user5'));
         $manager->persist($instru2);
 
@@ -40,7 +38,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru3->setBpm(145);
         $instru3->setCle('Am');
         $instru3->setFile('instru_3.mp3');
-        $instru3->setImage('cover_3.png');
         $instru3->setUser($this->getReference('user4'));
         $manager->persist($instru3);
 
@@ -50,7 +47,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru4->setBpm(145);
         $instru4->setCle('Am');
         $instru4->setFile('instru_4.mp3');
-        $instru4->setImage('cover_4.png');
         $instru4->setUser($this->getReference('user6'));
         $manager->persist($instru4);
 
@@ -60,7 +56,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru5->setBpm(145);
         $instru5->setCle('Am');
         $instru5->setFile('instru_5.mp3');
-        $instru5->setImage('cover_5.png');
         $instru5->setUser($this->getReference('user5'));
         $manager->persist($instru5);
 
@@ -70,7 +65,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru6->setBpm(145);
         $instru6->setCle('Am');
         $instru6->setFile('instru_6.mp3');
-        $instru6->setImage('cover_6.png');
         $instru6->setUser($this->getReference('user4'));
         $manager->persist($instru6);
 
@@ -80,7 +74,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru7->setBpm(145);
         $instru7->setCle('Am');
         $instru7->setFile('instru_7.mp3');
-        $instru7->setImage('cover_7.png');
         $instru7->setUser($this->getReference('user4'));
         $manager->persist($instru7);
 
@@ -90,7 +83,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru8->setBpm(145);
         $instru8->setCle('Am');
         $instru8->setFile('instru_8.mp3');
-        $instru8->setImage('cover_8.png');
         $instru8->setUser($this->getReference('user3'));
         $manager->persist($instru8);
 
@@ -100,7 +92,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru9->setBpm(145);
         $instru9->setCle('Am');
         $instru9->setFile('instru_9.mp3');
-        $instru9->setImage('cover_9.png');
         $instru9->setUser($this->getReference('user3'));
         $manager->persist($instru9);
 
@@ -110,7 +101,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru10->setBpm(145);
         $instru10->setCle('Am');
         $instru10->setFile('instru_10.mp3');
-        $instru10->setImage('cover_10.png');
         $instru10->setUser($this->getReference('user7'));
         $manager->persist($instru10);
 
@@ -120,7 +110,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
         $instru11->setBpm(145);
         $instru11->setCle('Am');
         $instru11->setFile('instru_11.mp3');
-        $instru11->setImage('cover_11.png');
         $instru11->setUser($this->getReference('user10'));
         $manager->persist($instru11);
 

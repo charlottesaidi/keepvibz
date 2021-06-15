@@ -1,16 +1,27 @@
 .wrap-faq .submenu_center3{
     color: white;
-    margin-top: 200px;
+    padding-top: 30px;
 }
 .wrap-faq{
     width: 100%;
     max-width: 1300px;
     margin: 0 auto;
+    padding: 0 20px;
+    line-height: 28px;
+    margin-top: 146px;
 }
 .wrap-faq p{
-    color: #9f9f9f;
+    color: white;
     font-size: 1.1em;
+    padding-bottom: 30px;
+
 }
 .wrap-faq h4{ 
     font-size: 2em;
+    color: #A27440;
 }
+
+@media screen and (max-width: 615px){
+    .wrap-faq{margin-top: 85px;}
+  }
+  

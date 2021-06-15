@@ -30,5 +30,7 @@ import './styles/mention.css';
 
 import './styles/faq.css';
 
+import './styles/contact.css';
+
 
 

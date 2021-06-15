@@ -102,7 +102,20 @@ a{text-decoration: none;}
 
 /* FIN DE CLASS PERSO */
 
+/* PAGINATION */
+.block_pagination{margin: 30px 0; }
+/* UL */
+.pagination {position: absolute; right: 0; bottom: 0;}
 
+/* LI PRECEDENT */
+.navigation_prev_pagination{padding: 10px;  background-color: #3d3c3c; border-radius: 4px;}
+.navigation_prev_pagination:hover{opacity: .7;}
+.p-1:active{color: #A27440;}
+
+/* LI SUIVANT */
+.navigation_next_pagination{padding: 10px;  background-color: #3d3c3c; border-radius: 4px;}
+.navigation_next_pagination:hover{opacity: .7;}
+.p-1:active{color: #A27440;}
 
 /* PAGE TOUTES INSTRUS */
 .main_instrus{width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 20px; background-color: #000; }

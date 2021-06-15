@@ -368,7 +368,7 @@ h2{
 .paginate_button a img{width: 22px;}
 .paginate_button a :first-child{margin-right: 6px;}
 .content_download {width: 19%; position: relative;}
-.img_downloaded{object-fit: cover; height: 204px; width: 100%; }
+.img_downloaded{object-fit: cover; height: 204px; width: 100%;}
 .image_downloaded :hover{opacity: .8;}
 
 .btn_play_caroussel{z-index: 3; height: 64px; width: 64px; position: absolute; top: 38%; left: 50%; transform: translate(-50%, -50%);}
@@ -376,9 +376,7 @@ h2{
 .btn_play_caroussel:active {background-color: rgba(255, 255, 255, 0.179); border-radius: 50%; zoom: 1.5;}
 .img_play_caroussel{width: 100%;}
 
-#player_1{position: absolute; left: 3399393px;}
-#player_2{position: absolute; left: 54393px;}
-
+.audio_player{position: absolute; left: 54393px;}
 
 .title_downloaded, .genre_downloaded,.description_downloaded, .author_downloaded{
     color: #A27440;

@@ -102,6 +102,20 @@ a{text-decoration: none;}
 
 /* FIN DE CLASS PERSO */
 
+/* PAGINATION */
+/* UL */
+.pagination {position: absolute; right: 0; bottom: 0; width: 100%; }
+
+/* LI PRECEDENT */
+.navigation_prev_pagination{ width: 103px; padding: 10px;  background-color: #3d3c3c; border-radius: 4px; cursor: pointer;}
+.navigation_prev_pagination:hover{opacity: .7;}
+.p-1:active{color: #A27440;}
+
+/* LI SUIVANT */
+.navigation_next_pagination{ width: 103px; padding: 10px;  background-color: #3d3c3c; border-radius: 4px; cursor: pointer; right: 0; bottom: 0;}
+.navigation_next_pagination:hover{opacity: .7;}
+.p-1:active{color: #A27440;}
+
 
 
 /* PAGE textes */
@@ -109,8 +123,11 @@ a{text-decoration: none;}
 .section_textes{margin-top: 146px;}
 .content_textes{width: 100%; margin-top: 20px; }
 .title_textes{color: #fff; font-size: 2em;}
+.block_all_textes {margin-bottom: 20px;}
 .block_textes{padding: 10px 20px; border-radius: 5px;background-color: #3d3c3c; margin-bottom: 20px;}
 .block_textes:hover{background-color: transparent; outline: 1px solid #fff;}
+.background_avatar_empty{ background-color: transparent; height: 150px;}
+.refrain_caroussel{margin: 10px 0;}
 .avatar_image_block{height: 40px; width: 40px; background-color: #fff; border-radius: 5px;}
 .avatar_image{width: 100%;}
 .description_textes{margin: 4px 0px 4px 20px;}
@@ -158,9 +175,14 @@ a{text-decoration: none;}
   box-shadow: inset 1px 0px 26px 5px #000000; font-size: .8em;}
 
 
-.full_content_textes{ margin: 20px 0;height: 20vh; width: 60%; border-radius: 4px; background-color: #3d3c3c;
+.full_content_textes{ margin: 20px 0; width: 60%; border-radius: 3px; background-color: #b8b3b3;
+  -webkit-box-shadow: inset 3px 3px 4px 0px #000000; 
+  box-shadow: inset 3px 3px 4px 0px #000000;
+
 }
 
+.content_couplet {margin-top: 20px;}
+.content_refrain{margin: 20px 0;}
 
 
 
@@ -202,6 +224,7 @@ a{text-decoration: none;}
 
 @media screen and (max-width: 615px){
     .section_textes{margin-top: 85px;}
+    .textes_show{margin-top: 85px;}
 }
 
 

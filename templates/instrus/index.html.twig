@@ -47,13 +47,13 @@
                     <div class="content_instrus flex sb fw">
                         {% for beat in instrus %}
                             <li class="content_download_instrus flex col tac pr">
-                                <audio preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_1"></audio>
+                                <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_{{ beat.id }}"></audio>
                                 <div class="image_downloaded">
                                     <a href="{{path('instru_show', {'id': beat.id})}}">
                                         <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
                                     </a>
                                 </div>
-                                <div class="btn_play_caroussel btn_1">
+                                <div class="btn_play_caroussel btn"  id="btn_ref_{{ beat.id }}">
                                     <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
                                 </div>
                                 <div class="block_info_instrus flex col">
@@ -70,10 +70,11 @@
                             </li>
                         {% endfor %}
                     </div>
-                    {# PAGINATION #}
-                    {# {{ paginator }} #}
-                    {{ include('pagination.html.twig') }};
-                    {# PAGINATION #}
+                    <div class="block_pagination">
+                        {# PAGINATION #}
+                        {{ include('pagination.html.twig') }};
+                        {# PAGINATION #}
+                    </div>
                 </div>
             </div>
             </div>

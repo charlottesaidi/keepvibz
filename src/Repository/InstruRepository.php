@@ -29,6 +29,18 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
 
+    public function paginateSearch($limit, $offset, $value) {
+        return $this->createQueryBuilder('i')
+            ->orderBy('i.title', 'DESC')
+            ->andWhere('i.genre = :val')
+            ->setParameter('val', $value)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     public function paginateCount() {
         return $this->createQueryBuilder('i')
             ->select('count(i.id)')

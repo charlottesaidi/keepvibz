@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Filesystem\Filesystem;
 use JasonGrimes\Paginator;
 use App\Service\FolderGenerator;
+use Intervention\Image\ImageManager;
 
 #[Route('/admin/avatar')]
 class AvatarController extends AbstractController
@@ -46,11 +47,12 @@ class AvatarController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $avatar->setUser($this->getUser());
-            if ($form->get('picture')->getData() != null) {
+            if ($form->get('file')->getData() != null) {
+                $manager = new ImageManager();
                 
                 $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
 
-                $file = $form->get('picture')->getData();
+                $file = $form->get('file')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
                     $file->move(
@@ -94,11 +96,12 @@ class AvatarController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $avatar->setModifiedAt(new \dateTime());
-            if ($form->get('picture')->getData() != null) {
+            if ($form->get('file')->getData() != null) {
+                $manager = new ImageManager();
                 
                 $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
 
-                $file = $form->get('picture')->getData();
+                $file = $form->get('file')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
                     $file->move(
@@ -127,12 +130,9 @@ class AvatarController extends AbstractController
     #[Route('/{id}', name: 'avatar_delete', methods: ['POST'])]
     public function delete(Request $request, Avatar $avatar): Response
     {
+        $avatarUser = $avatar->getUser();
         if ($this->isCsrfTokenValid('delete'.$avatar->getId(), $request->request->get('_token'))) {
-            // if($avatar->getFile() != null) {
-            //     $filename = 'uploads/images/users' . $topline->getFile();
-            //     unlink($filename);
-            // }
-            $avatar->setUser(null);
+            $avatarUser->setAvatar(null);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($avatar);
             $entityManager->flush();

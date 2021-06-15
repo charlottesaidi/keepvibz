@@ -18,6 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\File;
 
 class UserProfileType extends AbstractType
 {
@@ -32,9 +33,6 @@ class UserProfileType extends AbstractType
                 'default_region' => 'FR', 
                 'format' => PhoneNumberFormat::NATIONAL]
             )
-            ->add('avatar', FileType::class, [
-                'mapped' => false,
-            ])
             ->add('competences', EntityType::class, [
                 'class' => Competence::class,
                 'choice_label' => 'title',

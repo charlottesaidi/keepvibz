@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Service\FolderGenerator;
 use JasonGrimes\Paginator;
+use Intervention\Image\ImageManager;
 
 #[Route('/instrus')]
 class InstrusController extends AbstractController
@@ -63,15 +64,13 @@ class InstrusController extends AbstractController
             }
             // image
             if ($instru->getImage() != null) {
+                $manager = new ImageManager();
                 $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/instrus');
 
                 $file = $form->get('image')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
-                    $file->move(
-                        $this->getParameter('imagesInstrus_directory'), // Le dossier dans lequel le fichier va etre chargé
-                        $fileName
-                    );
+                    $manager->make($file)->fit(500, 500)->save($this->getParameter('imagesInstrus_directory') . '/' . $fileName);
                 } catch (FileException $e) {
                     return new Response($e->getMessage());
                 }
@@ -128,15 +127,13 @@ class InstrusController extends AbstractController
                 }
                 // image
                 if ($instru->getImage() != null) {
+                    $manager = new ImageManager();
                     $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/instrus');
 
                     $file = $form->get('image')->getData();
                     $fileName =  uniqid(). '.' .$file->guessExtension();
                     try {
-                        $file->move(
-                            $this->getParameter('imagesInstrus_directory'), // Le dossier dans lequel le fichier va etre chargé
-                            $fileName
-                        );
+                        $manager->make($file)->fit(500, 500)->save($this->getParameter('imagesInstrus_directory') . '/' . $fileName);
                     } catch (FileException $e) {
                         return new Response($e->getMessage());
                     }

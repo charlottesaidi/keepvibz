@@ -15,6 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use JasonGrimes\Paginator;
 use App\Service\FolderGenerator;
+use Intervention\Image\ImageManager;
 
 #[Route('admin/instru')]
 class InstruController extends AbstractController
@@ -67,15 +68,13 @@ class InstruController extends AbstractController
             }
             // image
             if ($instru->getImage() != null) {
+                $manager = new ImageManager();
                 $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/instrus');
 
                 $file = $form->get('image')->getData();
                 $fileName =  uniqid(). '.' .$file->guessExtension();
                 try {
-                    $file->move(
-                        $this->getParameter('imagesInstrus_directory'), // Le dossier dans lequel le fichier va etre chargé
-                        $fileName
-                    );
+                    $manager->make($file)->fit(500, 500)->save($this->getParameter('imagesInstrus_directory') . '/' . $fileName);
                 } catch (FileException $e) {
                     return new Response($e->getMessage());
                 }
@@ -116,6 +115,7 @@ class InstruController extends AbstractController
                 
                 // fichier
                 if ($form->get('file')->getData() != null) {
+            
                     $folderGenerator->generateFolderSubIfAbsent('uploads', 'uploads/instrus');
                     
                     $file = $form->get('file')->getData();
@@ -132,15 +132,13 @@ class InstruController extends AbstractController
                 }
                 // image
                 if ($instru->getImage() != null) {
+                    $manager = new ImageManager();
                     $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/instrus');
 
                     $file = $form->get('image')->getData();
                     $fileName =  uniqid(). '.' .$file->guessExtension();
                     try {
-                        $file->move(
-                            $this->getParameter('imagesInstrus_directory'), // Le dossier dans lequel le fichier va etre chargé
-                            $fileName
-                        );
+                        $manager->make($file)->fit(500, 500)->save($this->getParameter('imagesInstrus_directory') . '/' . $fileName);
                     } catch (FileException $e) {
                         return new Response($e->getMessage());
                     }

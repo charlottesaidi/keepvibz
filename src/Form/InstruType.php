@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Validator\Constraints\File;
 
 class InstruType extends AbstractType
 {
@@ -45,6 +46,15 @@ class InstruType extends AbstractType
             ->add('image', FileType::class, [
                 'required' => false,
                 'label' => 'Image associée',
+                'constraints' => [
+                    new File([
+                        'mimeTypes' => [
+                            'image/jpeg',
+                            'image/png',
+                        ],
+                        'mimeTypesMessage' => 'Format d\'image non valide',
+                    ])
+                ],
                 'data_class' => null
             ])
         ;

@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Entity\Avatar;
 use App\Form\UserProfileType;
-use App\Form\HomeSearchType;
+use App\Form\AvatarType;
 use App\Form\ChangeProfilePasswordType;
 use App\Repository\UserRepository;
 use App\Repository\AvatarRepository;
@@ -21,6 +21,7 @@ use App\Service\ProfileEditFunctions;
 use JasonGrimes\Paginator;
 use App\Service\FolderGenerator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Intervention\Image\ImageManager;
 
 #[Route('/profile')]
 class UserProfileController extends AbstractController
@@ -52,6 +53,7 @@ class UserProfileController extends AbstractController
 
         $form = $this->createForm(UserProfileType::class, $user);
         $changePasswordForm = $this->createForm(ChangeProfilePasswordType::class, $user);
+        $avatarForm = $this->createForm(AvatarType::class, $avatar);
 
         if('POST' === $request->getMethod()) {
             if ($request->request->has('user_profile')) {
@@ -60,44 +62,59 @@ class UserProfileController extends AbstractController
             if ($request->request->has('change_profile_password')) {
                 $changePasswordForm->handleRequest($request);
             }
-        } else {
-            $form->handleRequest($request);
-            $changePasswordForm->handleRequest($request);
+            if ($request->request->has('avatar')) {
+                $avatarForm->handleRequest($request);
+            }
         }
+
         if ($request->request->has('user_profile')) {
-        if ($form->isSubmitted()) {
-            $user->setModifiedAt(new \dateTime());
-            $this->changeAvatar($form, $user, $avatar, $this->folderGenerator);
-            
-            if($form->get('email')->getData() != $user->getEmail()) {
-                $user->setEmail($form->get('email')->getData());
+            if ($form->isSubmitted()) {
+                $user->setModifiedAt(new \dateTime());
+                
+                if($form->get('email')->getData() != $user->getEmail()) {
+                    $user->setEmail($form->get('email')->getData());
+                }
+                if($form->get('phoneNumber')->getData() != $user->getPhoneNumber()) {
+                    $user->setPhoneNumber($form->get('phoneNumber')->getData());
+                }
+                if($form->get('name')->getData() != $user->getName()) {
+                    $user->setName($form->get('name')->getData());
+                }
+                if($form->get('town')->getData() != $user->getTown()) {
+                    $user->setTown($form->get('town')->getData());
+                }
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->flush();
+                $this->addFlash('success', 'Modification prise en compte');
             }
-            if($form->get('phoneNumber')->getData() != $user->getPhoneNumber()) {
-                $user->setPhoneNumber($form->get('phoneNumber')->getData());
-            }
-            if($form->get('name')->getData() != $user->getName()) {
-                $user->setName($form->get('name')->getData());
-            }
-            if($form->get('town')->getData() != $user->getTown()) {
-                $user->setTown($form->get('town')->getData());
-            }
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
-            $this->addFlash('success', 'Modification prise en compte');
         }
-    }
-    if ($request->request->has('change_profile_password')) {
-        if ($changePasswordForm->isSubmitted() && $changePasswordForm->isValid()) {
-            $this->changePassword($changePasswordForm, $user, $this->passwordEncoder);
+
+        $passwordErrors = [];
+        if ($request->request->has('change_profile_password')) {
+            if ($changePasswordForm->isSubmitted()) {
+                if($changePasswordForm->isValid()) {
+                    $this->changePassword($changePasswordForm, $user, $this->passwordEncoder);
+                } else {  
+                    foreach ($changePasswordForm->getErrors(true, true) as $error) {
+                        $passwordErrors[] = $error->getMessage();
+                    }
+                }
+            }
         }
-    }
+        if ($request->request->has('avatar')) {
+            if ($avatarForm->isSubmitted() && $avatarForm->isValid()) {
+                $this->changeAvatar($avatarForm, $user, $avatar, $this->folderGenerator);
+            }
+        }
 
         return $this->render('/profile/index.html.twig', [
             'profileForm' => $form->createView(),
             'passwordForm' => $changePasswordForm->createView(),
+            'avatarForm' => $avatarForm->createView(),
             'textes' => $this->texteRepo->findUserTextes($user),
             'instrus' => $this->instruRepo->findUserInstrus($user),
             'toplines' => $this->toplineRepo->findUserToplines($user),
+            'passwordErrors' => $passwordErrors,
         ]);
     }
     
@@ -117,38 +134,46 @@ class UserProfileController extends AbstractController
 
     public function changePassword($form, $user, $passwordEncoder) {
         if($form->get('newPassword')->getData() != null) {
-            if($form->get('oldPassword')->getData() != null) {
+            
             $user->setPassword(
                     $passwordEncoder->encodePassword(
                     $user,
                     $form->get('newPassword')->getData()
                 )
             );
-                $entityManager = $this->getDoctrine()->getManager();
-                $entityManager->flush();
-                $this->addFlash('success', 'Modification prise en compte');
-            } else {
-                $this->addFlash('error', 'Tu dois renseigner ton mot de passe actuel pour le modifier');
-            }
-        } 
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->flush();
+            $this->addFlash('success', 'Modification prise en compte');
+        }
     }
 
     public function changeAvatar($form, $user, $avatar, $folderGenerator) {
-        if($form->get('avatar')->getData() != null) {
+        if($form->get('file')->getData() != null) {
+            $manager = new ImageManager();
             $folderGenerator->generateForlderTripleIfAbsent('uploads', 'uploads/images', 'uploads/images/avatars');
             
-            $file = $form->get('avatar')->getData();
+            $file = $form->get('file')->getData();
+
             $fileName =  uniqid(). '.' .$file->guessExtension();
+
             try {
-                $file->move(
-                    $this->getParameter('avatars_directory'), // Le dossier dans lequel le fichier va etre chargé
-                    $fileName
-                );
+                $manager->make($file)->fit(500, 500)->save($this->getParameter('avatars_directory') . '/' . $fileName);
             } catch (FileException $e) {
                 return new Response($e->getMessage());
             }
-            $avatar->setUser($user);
+
+            $entityManager = $this->getDoctrine()->getManager();
+
+            if($user->getAvatar() != null) {
+                $oldAvatar = $user->getAvatar();
+                $entityManager->remove($oldAvatar);
+            }
+
+            $user->setAvatar($avatar);
             $avatar->setFile($fileName);
+            
+            $entityManager->flush();
+            $this->addFlash('success', 'Modification prise en compte');
         }
     }
 }

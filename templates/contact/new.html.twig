@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KeepVibz | Contact{% endblock %}
+
+{% block body %}
+<div class="container">
+<div class="wrap-contact"> 
+  <section class="contact">
+    <h2>Nouveau Contact</h2>
+
+    {{ include('contact/_form.html.twig') }}
+
+    <a href="{{ path('contact_index') }}">back to list</a>
+    </section>
+</div>
+</div>
+{% endblock %}

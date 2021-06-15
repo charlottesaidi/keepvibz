@@ -37,7 +37,7 @@ class InstruRepository extends ServiceEntityRepository
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
-            ->getResult()
+            ->getArrayResult()
         ;
     }
 

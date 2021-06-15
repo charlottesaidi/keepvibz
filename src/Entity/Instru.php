@@ -277,4 +277,21 @@ class Instru
 
         return $this;
     }
+
+    public function getPropriete() {
+        $data = [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'genre' => $this->getGenre(),
+            'bpm' => $this->getBpm(),
+            'cle' => $this->getCle(),
+            'file' => $this->getFile(),
+            'image' => $this->getImage(),
+            'created_at' => $this->getCreatedAt(),
+            'modified_at' => $this->getModifiedAt(),
+            'user' => $this->getUser(),
+            'textes' => $this->getTextes(),
+            'toplines' => $this->getToplines(),            
+        ];
+    }
 }

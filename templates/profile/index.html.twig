@@ -6,6 +6,7 @@
 {% endblock %}
 
 {% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
     {{ parent() }}
     {{ encore_entry_script_tags('user-profile') }}
 {% endblock %}
@@ -300,7 +301,37 @@
                     <a class="btn-secondary" href="{{ path('instrus_new') }}">Uploader un morceau</a>
                 </div>
                 <div class="listing">
-                    {% for instru in instrus %}
+                    <div class="right_content flex col">
+                    <h2 class="title_instrus">Instrus</h2>
+                    <div class="content_instrus flex sb fw">
+                        {% for instru in instrus %}
+                            <li class="content_download_instrus flex col tac pr">
+                                <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_{{ instru.id }}"></audio>
+                                <div class="image_downloaded">
+                                    <a href="{{path('instru_show', {'id': instru.id})}}">
+                                        <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}">
+                                    </a>
+                                </div>
+                                <div class="btn_play_caroussel btn"  id="btn_ref_{{ instru.id }}">
+                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                                </div>
+                                <div class="block_info_instrus flex col">
+                                    <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ instru.title }}</span></h4>
+                                    <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
+                                        {% for genre in instru.genre %}
+                                            {{ genre }}
+                                        {% endfor %}
+                                    </h4>
+                                    <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ instru.cle }}</span> - <span class="span_downloaded">{{ instru.bpm }}</span> BPM</h4>
+                                    <div> 
+                                        <a class="link" href="{{ path('instrus_edit', {'id': instru.id}) }}">Modifier</a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </div>
+                </div>
+                    {# {% for instru in instrus %}
                         <div>
                             {% if instru.deletedAt %}
                                 <div class="warning">
@@ -308,8 +339,10 @@
                                 </div>
                             {% endif %}
                             <div>
-                            {% if instru.image %}
+                            {% if instru.image != null %}
                                 <img src="{{asset('uploads/images/instrus/' ~ instru.image)}}">
+                                {% else %}
+                                    <img class="img_downloaded" src="{{asset('assets/images/items_sans_image/instru.png')}}" alt="{{ beat.title }}">
                             {% endif %}
                             </div>
                             <div>
@@ -331,7 +364,7 @@
                                 <a class="link" href="{{ path('instrus_edit', {'id': instru.id}) }}">Modifier</a>
                             </div>
                         </div>
-                    {% endfor %}
+                    {% endfor %} #}
                 </div>
             </div>
 
@@ -340,34 +373,37 @@
                 <div>
                     <a class="btn-secondary" href="{{ path('toplines_new') }}">Uploader une topline</a>
                 </div>
+                
                 <div class="listing">
-                    {% for topline in toplines %}
-                        <div>
-                            {% if topline.deletedAt %}
-                                <div class="warning">
-                                    L'administrateur a retiré cette publication. Contactes le support pour plus d'infos.
+                    <div class="wrap2_instrus_show flex col">
+                        {% for topline in toplines %}
+                            <div class="others_instrus_author flex aic pr">
+                                <div class="left_others_instrus_author flex aic">
+                                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ topline.file) }}" controls id="player_{{ topline.id }}"></audio>
+                                    <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ topline.id }}">
+                                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                                    </div>
                                 </div>
-                            {% endif %}
-                            <div>
-                                <p><a href="{{ path('instru_show', {'id': topline.instru.id}) }}" class="link">{{topline.title}}</a></p>
-                                {% if topline.instru %}
-                                    <p>{{topline.instru.title}} </p>
-                                {% endif %}
-                                <p>
-                                    <span class="date">{{ topline.createdAt ? topline.createdAt|date('d/m/Y') : '' }}</span><br>
-                                    <span class="time">{{ topline.createdAt ? topline.createdAt|date('H:i') : '' }}</span>
-                                </p>
+                                <div class="right_others_instrus_author right_others_topline_author  flex col">
+                                    <div class="top_right_others_instrus_author">
+                                        <p class="title_others_instrus_author">{{ topline.title }}</p>
+                                    </div>
+                                    <div class="bottom_right_others_instrus_author flex ">
+                                        <p class="user_others_instrus_author grey_text">Instru associée <span class="name_others_instrus_author">{{ topline.instru.title }}</span></p>
+                                        <p class="separator_others_instrus_author grey_text"> | </p>
+                                    </div>
+                                </div>
+                                <div class="top_right_others_instrus_author pa">
+                                    <div class="flex">
+                                        <a class="link" href="{{ path('toplines_edit', {'id': topline.id}) }}">
+                                        <i class="far fa-edit"></i></a>
+                                        <a class="link" href="{{ path('toplines_delete', {'id': topline.id}) }}">
+                                        <i class="far fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
                             </div>
-                            <div>  
-                            {% if topline.file %}
-                                <audio preload src="{{asset('uploads/toplines/' ~ topline.file)}}" controls id="player_1"></audio>
-                            {% endif %}
-                            </div>
-                            <div>
-                                <a class="link" href="{{ path('toplines_edit', {'id': topline.id}) }}">Modifier</a>
-                            </div>
-                        </div>
-                    {% endfor %}
+                        {% endfor %}
+                    </div>
                 </div>
             </div>
 
@@ -414,13 +450,7 @@
                     {% endfor %}               
                 </ul>
             </div>
-
         </div>
-    </div>
-    <div id="sidebar">
-        {{ render(controller(
-            'App\\Controller\\HomeController::searchInstrus'
-        )) }}
-    </div>
 
+    </div>
 {% endblock %}

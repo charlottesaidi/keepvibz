@@ -34,3 +34,8 @@ body{
 .wrap-mentions .articles{
     margin-bottom: 50px;
 }
+
+@media screen and (max-width: 615px){
+    .wrap-mentions{margin-top: 85px;}
+  }
+  

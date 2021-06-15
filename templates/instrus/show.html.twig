@@ -38,6 +38,7 @@
                         <li class="first_autres_instrus tac"><a href="#">Mes autres instrus</a></li>
                         <li class="second_textes tac"><a href="#">Textes associés</a></li>
                         <li class="third_topline tac"><a href="#">Toplines associées</a></li>
+                        <li class="fourth_auteur tac"><a href="#">Infos perso</a></li>
                     </ul>
                 </div>
                 <div class="top_show_instru_downloading">
@@ -54,6 +55,7 @@
     {# BOTTOM AUTRES INSTRUS AUTEUR  #}
     <div class="bottom_autres_instrus_show">
         <div class="wrap2_instrus_show flex col">
+        <h2 class="les_autres_instrus_auteur">Autres instrus de l'auteur</h2>
         {% for beats in instru.user.instrus %}
             <div class="others_instrus_author flex aic pr">
                 <div class="left_others_instrus_author flex aic">
@@ -124,7 +126,7 @@
         {% for topline in instru.toplines %}
             <div class="others_instrus_author flex aic pr">
                 <div class="left_others_instrus_author flex aic">
-                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ topline.file) }}" controls id="player_{{ topline.id }}"></audio>
+                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/toplines/' ~ topline.file) }}" controls id="player_{{ topline.id }}"></audio>
                     <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ topline.id }}">
                         <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
                     </div>
@@ -141,14 +143,24 @@
                 </div>
                 <div class="top_right_others_instrus_author pa">
                     <div class="block_downloading pr">
-                        <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                        <a href="{{asset('uploads/toplines/' ~ topline.file)}}" download="{{ topline.file }}">
+                            <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                        </a>
                     </div>
+                    
                 </div>
             </div>
         {% endfor %}
     </div>
     {# BOTTOM TOPLINES ASSOCIES #}
+
+    {# BOTTOM INFOS AUTEUR #}
+    <div class="bottom_informations_auteur_show bgl">
+        <div>
+            <p class="fhejkhf">fffgff</p>
+        </div>
     </div>
+    {# BOTTOM INFOS AUTEUR #}
 </section>
 
 {% endblock %}

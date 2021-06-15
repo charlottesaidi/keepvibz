@@ -13,9 +13,9 @@
                 </div>
             </div>
             <div class="down_content flex col aic">
-                <audio preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_1"></audio>
+                <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_{{ instru.id }}"></audio>
                 <div class="top_down_content_show_instru flex fw">
-                    <div class="btn_play_caroussel_show_instrus btn_1">
+                    <div class="btn_play_caroussel_show_instrus btn" id="btn_ref_{{ instru.id }}">
                         <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
                     </div>
                     <p class="title_content_show_instru">{{ instru.title }}</p>
@@ -57,7 +57,8 @@
         {% for beats in instru.user.instrus %}
             <div class="others_instrus_author flex aic pr">
                 <div class="left_others_instrus_author flex aic">
-                    <div class="btn_play_caroussel_show_instrus btn_1 btn_play_hover">
+                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beats.file) }}" controls id="player_{{ beats.id }}"></audio>
+                    <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ beats.id }}">
                         <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
                     </div>
                     <a href="{{path('instru_show', {'id': beats.id})}}">
@@ -123,12 +124,10 @@
         {% for topline in instru.toplines %}
             <div class="others_instrus_author flex aic pr">
                 <div class="left_others_instrus_author flex aic">
-                    <div class="btn_play_caroussel_show_instrus btn_1 btn_play_hover">
+                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ topline.file) }}" controls id="player_{{ topline.id }}"></audio>
+                    <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ topline.id }}">
                         <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
                     </div>
-                    {# <div class="block_image_instru_author">
-                        <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
-                    </div> #}
                 </div>
                 <div class="right_others_instrus_author right_others_topline_author  flex col">
                     <div class="top_right_others_instrus_author">
@@ -137,7 +136,6 @@
                     <div class="bottom_right_others_instrus_author flex ">
                         <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ topline.user.name }}</span></p>
                         <p class="separator_others_instrus_author grey_text"> | </p>
-                        {# <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p> #}
                         <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
                     </div>
                 </div>
@@ -151,7 +149,6 @@
     </div>
     {# BOTTOM TOPLINES ASSOCIES #}
     </div>
-    {{ include('instrus/_delete_form.html.twig') }};
 </section>
 
 {% endblock %}

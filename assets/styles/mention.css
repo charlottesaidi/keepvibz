@@ -59,26 +59,26 @@ table {
 body{
     font-family: 'Squada One'
 }
-p{
+.wrap-mentions p{
     color: white;
     line-height: 22px;
     margin-bottom: 30px;
 }
-h2{
+.wrap-mentions h2{
     color: #A27440;
     font-size: 2em;
     padding-bottom: 10px;
     padding-top: 10px;
     font-weight: bold;
 }
-h3{
+.wrap-mentions h3{
     color: #A27440;
     font-size: 1.2em;
     padding-bottom: 10px;
     padding-top: 10px; 
     font-weight:600  ;
 }
-.mentions{
+.wrap-mentions .mentions{
     margin-top: 160px;
     margin-bottom: 30px;
 }
@@ -88,6 +88,6 @@ h3{
     margin: 0 auto;
     padding: 0 20px;
 }
-.articles{
+.wrap-mentions .articles{
     margin-bottom: 50px;
 }

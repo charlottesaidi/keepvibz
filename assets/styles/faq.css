@@ -1,4 +1,4 @@
-.submenu_center3{
+.wrap-faq .submenu_center3{
     color: white;
     margin-top: 200px;
 }
@@ -7,10 +7,10 @@
     max-width: 1300px;
     margin: 0 auto;
 }
-p{
+.wrap-faq p{
     color: #9f9f9f;
     font-size: 1.1em;
 }
-h4{
+.wrap-faq h4{ 
     font-size: 2em;
 }

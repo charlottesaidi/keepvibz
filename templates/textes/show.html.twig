@@ -15,15 +15,22 @@
                 <div class="details_content_show_texte flex jcc fw">
                     <p class="nombre_content_show_texte">(nombres DYNAMIQUE) lectures</p>
                 </div>
-                {# if #}
+
+
                 <div class="full_content_textes">
-                    <p class="couplet_texte_show"><span>Couplet</span>
-                        {{ texte.couplet }}
-                    </p>
-                    <p class="refrain_texte_show"><span>Refrain</span>
-                        {{ texte.refrain }}
-                    </p>
+                    <div class="content_couplet">
+                        <p class="couplet_texte_show tac"><span>Couplet</span>
+                            {{ texte.couplet }}
+                        </p>
+                    </div>
+                    <div class="content_refrain">
+                        <p class="refrain_texte_show tac"><span>Refrain</span>
+                            {{ texte.refrain }}
+                        </p>
+                    </div>
                 </div>
+
+
                 <div class="block_link_items_associes">
                     <ul class="links_textes_toplines flex jcc">
                         <li class="first_autres_textes tac"><a href="#">Mes autres textes</a></li>
@@ -65,7 +72,8 @@
         {% for instru in texte.instrus %}
             <div class="others_instrus_author flex aic pr">
                 <div class="left_others_instrus_author flex aic">
-                    <div class="btn_play_caroussel_show_instrus btn_1 btn_play_hover">
+                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_{{ instru.id }}"></audio>
+                    <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ instru.id }}">
                         <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
                     </div>
                     <a href="{{path('instru_show', {'id': instru.id})}}">

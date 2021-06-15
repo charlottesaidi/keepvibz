@@ -45,17 +45,17 @@
                     <ul class="slides">
                         {% for beat in instrus %}
                         <li class="content_download flex col">
-                            <audio preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_1"></audio>
+                            <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_{{ beat.id }}"></audio>
                             <div class="image_downloaded">
                                 <a href="{{path('instru_show', {'id': beat.id})}}">                                    
-                                    {%  if beat.image is empty %}
+                                    {% if beat.image is empty %}
                                         <img class="img_downloaded" src="{{asset('assets/images/items_sans_image/instru.png')}}" alt="{{ beat.title }}">
                                     {% else %}
                                         <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
                                     {% endif %}
                                 </a>
                             </div>
-                            <div class="btn_play_caroussel btn">
+                            <div class="btn_play_caroussel btn" id="btn_ref_{{ beat.id }}">
                                     <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture et pause audio">
                             </div>
                             <div class="block_info_instrus flex col tac">
@@ -119,8 +119,14 @@
                         {% for text in textes %}
                         <li class="content_download flex col">
                             <div class="image_downloaded">
-                                <a href="{{path('instru_show', {'id': text.id})}}">
-                                    {# <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ text.instru.image) }}" alt="{{ text.title }}"> #}
+                                <a href="{{path('texte_show', {'id': text.id})}}">
+                                {% if text.user.avatar is empty  %}
+                                    <div class="background_avatar_empty">
+                                        <p class="refrain_caroussel tac" style="color:#fff"> {{ text.refrain }}</p>
+                                    </div>
+                                {% else %}
+                                    <img class="img_downloaded" src="{{ asset('uploads/images/avatars/' ~ text.user.avatar.file) }}" alt="{{ text.title }}">
+                                {% endif %}
                                 </a>
                             </div>
                             <div class="block_info_instrus flex col tac">

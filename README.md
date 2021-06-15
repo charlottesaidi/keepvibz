@@ -13,6 +13,9 @@ __Webpack Compile__
 npm run dev-server  
 npm run watch
 ```  
+__Intervention/image__  
+Redimension d'image.  
+Après 'composer install', activer l'extension "gd" dans le fichier php.ini  
 
 ##
 

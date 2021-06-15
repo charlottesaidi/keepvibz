@@ -6,6 +6,7 @@ use App\Entity\Texte;
 use App\Entity\Instru;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,6 +27,11 @@ class TexteUserType extends AbstractType
             ])
             ->add('couplet', TextareaType::class, [
                 'label' => 'Couplet',
+            ])
+            ->add('status', HiddenType::class, [
+                'attr' => [
+                    'value' => 'draft'
+                ],
             ])
             ->add('instrus', EntityType::class, [
                 'class' => Instru::class,

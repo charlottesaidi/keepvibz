@@ -149,29 +149,38 @@ $(document).ready(function(){
 // ==============================================================
     // LECTEUR AUDIO 
     // 1
-    $(".btn").on('click', function() {
-        // if ($("#player_1")[0].paused == false) {
-        //     $("#player_1")[0].pause();
-        // } else {
-        //     $("#player_2")[0].pause();
-        //     $("#player_1")[0].play();
-        // }
-        // if(this[0].paused == false) {
-        //     this[0].pause();
-        // } else {
-        //     this[0].play();
-        // }
-        // if(("#player_" + $id)[0].paused == false) {
-        //     this[0].pause();
-        // } else {
-        //     this[0].play();
-        // }
-        $(function(){
-                var audio = $(this).prev(".audioplayer");
-                audio.get(0).play();
-            });
-    });
+    // $(".btn").on('click', function() {
+    //    const id = $(this).attr('id'); 
+    //    const words = id.split('_');
+        // $('.player_audio_selected').each(function() {
+        //     $(this).get(0).pause();
+        // });
+
+    //     $('#player_'+ words[2])[0].play();
+    // });
     
+    $('.btn').click(function(){
+        $('.player_audio_selected').toggleClass('active').each(function() {
+            $(this).get(0).pause();
+            this.currentTime = 0;
+        });
+
+        var $this = $(this);
+        const id = $(this).attr('id');
+        const words = id.split('_');
+        if(!$this.hasClass('active')){
+            $('#player_'+ words[2])[0].play();        
+        } else {
+            $('#player_'+ words[2])[0].pause();
+        }
+        // $this.toggleClass('active');
+    });
+
+
+    
+
+
+
     // 2
     // $(".btn_2").on('click', function() {
     //     if ($("#player_2")[0].paused == false) {

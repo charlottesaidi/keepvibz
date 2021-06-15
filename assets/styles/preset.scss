@@ -89,6 +89,7 @@ img {
 	height: 70px;
 }
 .link, .reset-link {
+	display: inline-block;
 	color: $font-secondary;
 	text-decoration: none;
 	padding-top: 10px;
@@ -110,6 +111,11 @@ img {
 		padding-top: 10px;
 		color: $font-secondary;
 	}
+}
+.container {
+	padding: 30px 20px;
+    width: 80%;
+	margin: 0 auto;
 }
 .btn-secondary {
 	color: $font-secondary;

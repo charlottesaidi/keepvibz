@@ -48,7 +48,6 @@ class Texte
     private $title;
 
     /**
-     * @Assert\NotBlank
      * @Assert\Length(
      *      min = 10,
      *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",

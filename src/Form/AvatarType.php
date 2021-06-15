@@ -7,7 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\Image;
+use Symfony\Component\Validator\Constraints\File;
 
 class AvatarType extends AbstractType
 {
@@ -15,21 +15,17 @@ class AvatarType extends AbstractType
     {
         $builder
         ->add('file', FileType::class, [
-            'label' => 'Avatar utilisateur',
-            'required' => false,
-            'data_class' => null,
             'constraints' => [
-                new Image([
+                new File([
                     'mimeTypes' => [
                         'image/jpeg',
-                        'image/gif',
                         'image/png',
                     ],
-                    'message' => 'Format d\'image non valide',
+                    'mimeTypesMessage' => 'Format d\'image non valide',
                 ])
-            ]
-            ])
-        ;
+            ],
+            'data_class' => null
+        ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

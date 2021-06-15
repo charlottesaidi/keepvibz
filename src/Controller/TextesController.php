@@ -47,14 +47,13 @@ class TextesController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $texte->setUser($this->getUser());
-            $texte->setStatus('draft');
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($texte);
             $entityManager->flush();
 
             $this->addFlash('text-success', 'Texte posté avec succès. En attente de modération par l\'administrateur');
 
-            return $this->redirectToRoute('user_profile');
+            return $this->redirectToRoute('user_profile', ['_fragment' => 'textes']);
         }
 
         return $this->render('textes/new.html.twig', [

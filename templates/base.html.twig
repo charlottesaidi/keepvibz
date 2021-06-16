@@ -93,8 +93,10 @@
             <div class="wrap2 flex fs">
                 <div class="search flex fs">
                     <img class="icon_search" src="{{asset('assets/images/icons/icon_search.svg')}}" alt="icon search">
-                    <input type="text" name="search" id="search" placeholder="Tapes ta recherche">
-                    <button class="btn_search">Filtres</button>
+                    <form id="search_form" action="{{path('filter_instru')}}" methods="post" novalidate>
+                        <input type="text" name="search" id="search" placeholder="Tapes ta recherche">
+                        <button type="submit" class="btn_search">Filtres</button>
+                    </form>
                     <img class="icon_arrow" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="icon arrow">
                     <div class="block_filters">
                         <ul class="filters">
@@ -160,29 +162,9 @@
                     </div>
                 </div>
                 <div class="right_bottom flex col">
-                    <h4 class="title_bottom">Statistiques</h4>
-                    <div class="block_statistiques flex sb wrap">
-                        <div class="left_block_statistiques flex col">
-                            <div class="left1 flex col">
-                                <h5 class="visites">Visites</h5>
-                                <p class="number">0</p>
-                            </div>
-                            <div class="left2 flex col">
-                                <h5 class="posts">Posts</h5>
-                                <p class="number">0</p>
-                            </div>
-                        </div>
-                        <div class="right_block_statistiques flex col">
-                            <div class="right1 flex col">
-                                <h5 class="membres">Membres</h5>
-                                <p class="number">0</p>
-                            </div>
-                            <div class="right2 flex col">
-                                <h5 class="en_ligne">En ligne</h5>
-                                <p class="number">0</p>
-                            </div>
-                        </div>
-                    </div>
+                    {{ render(controller(
+                        'App\\Controller\\HomeController::getStats',
+                    )) }}
                 </div>
                     <iframe src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" height="200" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>                    
             </div>
@@ -201,5 +183,19 @@
         {# FOOTER #}
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+        <script>
+            $('#search_form').submit(function(e) {
+                e.preventDefault();
+                $.ajax({
+                    type: "POST",
+                    url: "/instrus/filter",
+                    // data: formData,
+                    dataType: "json",
+                    success: function(response) {
+                        console.log(response);
+                    }
+                });
+            }) 
+        </script>
     </body>
 </html>

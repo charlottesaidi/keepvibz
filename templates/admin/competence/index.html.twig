@@ -69,8 +69,14 @@
                                                     <span class="note">{{ competence.modifiedAt ? competence.modifiedAt|date('H:i') : '' }}</span>
                                                 </td>
                                                 <td class="cell">
-                                                    <a href="{{ path('competence_show', {'id': competence.id}) }}" class="btn-sm app-btn-secondary">Détails</a>
-                                                    <a href="{{ path('competence_edit', {'id': competence.id}) }}" class="btn-sm app-btn-secondary">Modifier</a>
+                                                    <div class="d-flex align-center">
+                                                        <a href="{{ path('competence_show', {'id': competence.id}) }}" class="btn-sm app-btn-secondary"><i class="far fa-eye"></i></a>
+                                                        <a href="{{ path('competence_edit', {'id': competence.id}) }}" class="btn-sm app-btn-secondary"><i class="far fa-edit"></i></a>
+                                                        <form method="post" action="{{ path('competence_delete', {'id': competence.id}) }}" onsubmit="return confirm('Confirmer la suppression?');">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ competence.id) }}">
+                                                            <button class="btn-sm app-btn-secondary"><i class="far fa-trash-alt"></i></button>
+                                                        </form>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         {% else %}
@@ -80,7 +86,7 @@
                                         {% endfor %}
                                         </tbody>
                                     </table>
-                                    {{include('pagination.html.twig')}}
+                                    {{include('admin/admin_pagination.html.twig')}}
                                 </div>
                             </div>
                         </div>

@@ -21,7 +21,7 @@ class TexteRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('t')
-            ->orderBy('t.title', 'DESC')
+            ->orderBy('t.created_at', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()

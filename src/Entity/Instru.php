@@ -51,6 +51,11 @@ class Instru
     /**
      * @Assert\NotBlank
      * @Assert\Positive
+     * @Assert\Range(
+     *      min = 70,
+     *      max = 180,
+     *      notInRangeMessage = "Cette valeur doit être un nombre entre {{ min }} et {{ max }}",
+     * )
      * @ORM\Column(type="integer")
      */
     private $bpm;

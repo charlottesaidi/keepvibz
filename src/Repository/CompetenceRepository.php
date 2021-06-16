@@ -21,7 +21,7 @@ class CompetenceRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('c')
-            ->orderBy('c.title', 'ASC')
+            ->orderBy('c.created_at', 'ASC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()

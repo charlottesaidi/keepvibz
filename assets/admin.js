@@ -19,3 +19,14 @@ import './admin/js/app.js'
 
 // start the Stimulus application
 import './bootstrap';
+
+function openForm(form, evt) {
+    evt.preventDefault();
+    var element = document.getElementById(form);
+    element.classList.toggle("show");
+    evt.currentTarget.className += " hide";
+}
+
+document.querySelector('#reply_btn').addEventListener('click', (e) => {
+    openForm('reply_form', e);
+})

@@ -195,6 +195,21 @@ img {
     border: 1px solid transparent;
     border-radius: .25rem;
 }
+.envelope {
+	// margin-left: 20px;
+	margin: 0;
+	padding: 5px 0;
+	.fa-envelope-open, .fa-envelope {
+		display: inline-block;
+		font-size: 20px;
+		text-align: center;
+	}
+}
+textarea#message {
+	width: 100%;
+	height: 150px;
+}
+  
 /*
 |---------------------------
 | ANIMATION CHARGEMENT PAGE

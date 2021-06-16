@@ -302,7 +302,6 @@
                 </div>
                 <div class="listing">
                     <div class="right_content flex col">
-                    <h2 class="title_instrus">Instrus</h2>
                     <div class="content_instrus flex sb fw">
                         {% for instru in instrus %}
                             <li class="content_download_instrus flex col tac pr">
@@ -330,41 +329,7 @@
                             </li>
                         {% endfor %}
                     </div>
-                </div>
-                    {# {% for instru in instrus %}
-                        <div>
-                            {% if instru.deletedAt %}
-                                <div class="warning">
-                                    L'administrateur a retiré cette publication.  Contactes le support pour plus d'infos.
-                                </div>
-                            {% endif %}
-                            <div>
-                            {% if instru.image != null %}
-                                <img src="{{asset('uploads/images/instrus/' ~ instru.image)}}">
-                                {% else %}
-                                    <img class="img_downloaded" src="{{asset('assets/images/items_sans_image/instru.png')}}" alt="{{ beat.title }}">
-                            {% endif %}
-                            </div>
-                            <div>
-                                <p><a href="" class="link">{{instru.title}}</a></p>
-                                <p>
-                                    <span class="date">{{ instru.createdAt ? instru.createdAt|date('d/m/Y') : '' }}</span><br>
-                                    <span class="time">{{ instru.createdAt ? instru.createdAt|date('H:i') : '' }}</span>
-                                </p>
-                                {% for genre in instru.genre %}
-                                    <p> {{genre}} </p>
-                                {% endfor %}
-                            </div>
-                            <div> 
-                            {% if instru.file %}
-                                <audio preload src="{{asset('uploads/instrus/' ~ instru.file)}}" controls id="player_1"></audio>
-                            {% endif %} 
-                            </div>
-                            <div> 
-                                <a class="link" href="{{ path('instrus_edit', {'id': instru.id}) }}">Modifier</a>
-                            </div>
-                        </div>
-                    {% endfor %} #}
+                    </div>
                 </div>
             </div>
 
@@ -439,8 +404,8 @@
                                     <p class="title_instrus_associees">Instrus associées: </p>
                                     <ul class="block_instrus_associees flex aic">
                                     {% if texte.instrus %}
-                                        {% for texte in texte.instrus %}
-                                            <li class="link_instru_associee"><a href="#" class="titre_instru_associee"> {{texte.title}} </a></li>
+                                        {% for instru in texte.instrus %}
+                                            <li class="link_instru_associee"><a href="{{path('instru_show', {'id': instru.id})}}" class="titre_instru_associee"> {{instru.title}} </a></li>
                                         {% endfor %}
                                     {% endif %}
                                     </ul>

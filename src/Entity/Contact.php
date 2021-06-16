@@ -18,14 +18,14 @@ class Contact
      *Hook SoftDeleteable behavior
      *updates deletedAt field
      */
-    use SoftDeleteableEntity;
+    use SoftDeleteableEntity ;
 
     /**
      *@ORM\Id
      *@ORM\GeneratedValue
      *@ORM\Column(type="integer")
      */
-    private $id;
+    private $id ;
 
     /**
      *@Assert\NotBlank

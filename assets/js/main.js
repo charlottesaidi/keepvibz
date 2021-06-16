@@ -267,4 +267,5 @@ $(document).ready(function(){
         $('.bottom_instrus_associees_show').hide();
     })
 
+    $('.widgetHeader-2Hz_Ln').css('background-color', 'lime'); /////
 })

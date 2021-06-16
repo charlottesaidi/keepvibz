@@ -141,7 +141,6 @@
                             <li><a href="{{path('instrus')}}">Toutes les Instrus</a></li>
                             <li><a href="{{path('textes')}}">Tous les Textes</a></li>
                             <li><a href="{{path('home')}}#instrus_populaires">Le Top 10 des Instrus</a></li>
-                            <li><a href="{{path('home')}}#textes_populaires">Textes qui ont la côte</a></li>
                         </ul>
                     </div>
                 </div>
@@ -166,7 +165,10 @@
                         'App\\Controller\\HomeController::getStats',
                     )) }}
                 </div>
-                    <iframe src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" height="60" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>                    
+                <div class="top_right">
+                    <iframe src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" height="60" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                    </iframe>     
+                </div>               
             </div>
         </section>
         {# SECTION FIXE AVANT FOOTER #}

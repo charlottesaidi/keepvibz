@@ -38,7 +38,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('u')
-            ->orderBy('u.name', 'ASC')
+            ->orderBy('u.created_at', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()

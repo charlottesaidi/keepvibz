@@ -50,7 +50,13 @@
                                 <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_{{ beat.id }}"></audio>
                                 <div class="image_downloaded">
                                     <a href="{{path('instru_show', {'id': beat.id})}}">
-                                        <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                                        {% if beat.image == null %}
+                                            <img class="img_downloaded" src="{{asset('assets/images/items_sans_image/instru.png')}}" alt="{{ beat.title }}">
+                                        {% else %}
+                                            <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                                        {% endif %}
+
+                                        {# <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}"> #}
                                     </a>
                                 </div>
                                 <div class="btn_play_caroussel btn"  id="btn_ref_{{ beat.id }}">

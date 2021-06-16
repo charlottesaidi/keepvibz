@@ -7,13 +7,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="Portal - Bootstrap 5 Admin Dashboard Template For Developers">
-        <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
-        <link rel="shortcut icon" href="favicon.ico"> 
+        <meta name="author" content="Xiaoying Riley at 3rd Wave Media"> 
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
             {{ encore_entry_link_tags('admin') }}
-			<style>.app-nav .nav-link.active {color: #A27440; border-left: 3px solid #A27440} .app-nav .nav-link:hover {color: #A27440} .app-btn-secondary:hover {color: #A27440; border: 1px solid #A27440} a.p-1 {color: #A27440}</style>
+			<style>.app-nav .nav-link.active {color: #A27440; border-left: 3px solid #A27440} .app-nav .nav-link:hover {color: #A27440} .app-btn-secondary {display: inline-block; margin: 2px} .app-btn-secondary:hover {color: #A27440; border: 1px solid #A27440} a.p-1 {color: #A27440}</style>
         {% endblock %}
 
         {% block javascripts %}
@@ -92,6 +91,15 @@
 									</svg>
 									</span>
 									<span class="nav-link-text">Tableau de bord</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'contact_index' ? 'active' }}" href="{{path('contact_index')}}">
+									<span class="nav-icon">
+										<i class="fas fa-mail-bulk"></i>
+									</span>
+									<span class="nav-link-text">Messages</span>
 								</a><!--//nav-link-->
 							</li><!--//nav-item-->
 

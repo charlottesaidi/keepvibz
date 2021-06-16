@@ -4,12 +4,22 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass=ContactRepository::class)
+ * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
  */
 class Contact
 {
+    /**
+     * Hook SoftDeleteable behavior
+     * updates deletedAt field
+     */
+    use SoftDeleteableEntity;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -18,16 +28,16 @@ class Contact
     private $id;
 
     /**
-     * @ORM\Column(type="integer")
-     */
-    private $id_user;
-
-    /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=255)
      */
     private $Name;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Email(
+     *     message = "Renseignez une adresse e-mail valide"
+     * )
      * @ORM\Column(type="string", length=255)
      */
     private $Email;
@@ -38,25 +48,29 @@ class Contact
     private $Subject;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="text")
      */
     private $Message;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $created_at;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $unread = true;
+
+    public function __construct()
+    {
+        $this->created_at = new \DateTime();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdUser(): ?int
-    {
-        return $this->id_user;
-    }
-
-    public function setIdUser(int $id_user): self
-    {
-        $this->id_user = $id_user;
-
-        return $this;
     }
 
     public function getName(): ?string
@@ -103,6 +117,30 @@ class Contact
     public function setMessage(string $Message): self
     {
         $this->Message = $Message;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->created_at;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $created_at): self
+    {
+        $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    public function getUnread(): ?bool
+    {
+        return $this->unread;
+    }
+
+    public function setUnread(bool $unread): self
+    {
+        $this->unread = $unread;
 
         return $this;
     }

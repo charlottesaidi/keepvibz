@@ -21,7 +21,7 @@ class ToplineRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('t')
-            ->orderBy('t.title', 'DESC')
+            ->orderBy('t.created_at', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
@@ -40,6 +40,15 @@ class ToplineRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('t')
         ->join('t.user', 'u')
         ->setParameter('val', $user)
+        ->where('t.user = :val')
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function findInstruToplines($instru) {
+        return $this->createQueryBuilder('t')
+        ->join('t.instru', 'u')
+        ->setParameter('val', $instru)
         ->where('t.user = :val')
         ->getQuery()
         ->getResult();

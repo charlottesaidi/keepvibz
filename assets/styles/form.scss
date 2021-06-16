@@ -60,7 +60,7 @@ form {
             padding: 10px 0 10px 10px;
         }
         // custom checkbox
-        .container {
+        .checkbox-container {
             display: flex;
             align-items: center;
             position: relative;
@@ -73,7 +73,7 @@ form {
             -ms-user-select: none;
             user-select: none;
         }
-        .container input {
+        .checkbox-container input {
             position: absolute;
             opacity: 0;
             cursor: pointer;
@@ -88,7 +88,7 @@ form {
             background-color: transparent;
             border: 2px solid $font-secondary;
         }
-        .container input:checked ~ .checkmark {
+        .checkbox-container input:checked ~ .checkmark {
             background-color: $font-secondary;
         }
         .checkmark:after {
@@ -96,10 +96,10 @@ form {
             position: absolute;
             display: none;
         }
-        .container input:checked ~ .checkmark:after {
+        .checkbox-container input:checked ~ .checkmark:after {
             display: block;
         }
-        .container .checkmark:after {
+        .checkbox-container .checkmark:after {
             left: 5px;
             top: 1px;
             width: 5px;

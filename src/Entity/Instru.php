@@ -51,6 +51,11 @@ class Instru
     /**
      * @Assert\NotBlank
      * @Assert\Positive
+     * @Assert\Range(
+     *      min = 70,
+     *      max = 180,
+     *      notInRangeMessage = "Cette valeur doit être un nombre entre {{ min }} et {{ max }}",
+     * )
      * @ORM\Column(type="integer")
      */
     private $bpm;
@@ -276,5 +281,22 @@ class Instru
         }
 
         return $this;
+    }
+
+    public function getPropriete() {
+        $data = [
+            'id' => $this->getId(),
+            'title' => $this->getTitle(),
+            'genre' => $this->getGenre(),
+            'bpm' => $this->getBpm(),
+            'cle' => $this->getCle(),
+            'file' => $this->getFile(),
+            'image' => $this->getImage(),
+            'created_at' => $this->getCreatedAt(),
+            'modified_at' => $this->getModifiedAt(),
+            'user' => $this->getUser(),
+            'textes' => $this->getTextes(),
+            'toplines' => $this->getToplines(),            
+        ];
     }
 }

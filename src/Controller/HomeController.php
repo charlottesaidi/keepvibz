@@ -25,8 +25,8 @@ class HomeController extends AbstractController
         // listing sliders accueil
         $instrus = $instruRepo->findLatest();
         $textes = $texteRepo->findLatest();
-        $lastUpload = $texteRepo->findLastUpload();
-
+        $lastUpload = $instruRepo->findOneLatestUpload();
+        
         return $this->render('home/index.html.twig', [
             'instrus' => $instrus,
             'textes' => $textes,
@@ -99,27 +99,27 @@ class HomeController extends AbstractController
         $key = 0;
         foreach($instruRepo->findAll() as $instru) { //faire une fonction
             // dd($instru->getId());
-           $data = [
-            'id' => $instru->getId(),
-            'title' => $instru->getTitle(),
-            'genre' => $instru->getGenre(),
-            'bpm' => $instru->getBpm(),
-            'cle' => $instru->getCle(),
-            'file' => $instru->getFile(),
-            'image' => $instru->getImage(),
-            'created_at' => $instru->getCreatedAt(),
-            'modified_at' => $instru->getModifiedAt(),
-            'user' => $instru->getUser(),
-            'textes' => $instru->getTextes(),
-            'toplines' => $instru->getToplines(),            
-            ];
-            $jsonInstrus[$key++] = $data;
+           $this->getInstruInfos($jsonInstrus, $key, $instru);
         }
         // dd($instrus);
         return new JsonResponse($jsonInstrus);
     }
 
-    public function getInfos() {
-
+    public function getInstruInfos($array, $key, $entity) {
+        $data = [
+            'id' => $entity->getId(),
+            'title' => $entity->getTitle(),
+            'genre' => $entity->getGenre(),
+            'bpm' => $entity->getBpm(),
+            'cle' => $entity->getCle(),
+            'file' => $entity->getFile(),
+            'image' => $entity->getImage(),
+            'created_at' => $entity->getCreatedAt(),
+            'modified_at' => $entity->getModifiedAt(),
+            'user' => $entity->getUser(),
+            'textes' => $entity->getTextes(),
+            'toplines' => $entity->getToplines(),            
+        ];
+        $array[$key++] = $data;
     }
 }

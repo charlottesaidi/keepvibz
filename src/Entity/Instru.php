@@ -283,7 +283,7 @@ class Instru
         return $this;
     }
 
-    public function getEntityInfo() {
+    public function getEntityInfos($array, $key) {
         $data = [
             'id' => $this->getId(),
             'title' => $this->getTitle(),

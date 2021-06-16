@@ -196,10 +196,10 @@
                     // data: formData,
                     dataType: "json",
                     success: function(response) {
-                        // for (var item in response) {
-                        //     console.log(response[item].title)
-                        //     $('#ajaxTest').append('<p>' + response[item].title + '</p>')
-                        // }
+                        for (var item in response) {
+                            console.log(response[item].title)
+                            $('#ajaxTest').append('<p>' + response[item].title + '</p>')
+                        }
                         console.log(response);
                     }
                 });

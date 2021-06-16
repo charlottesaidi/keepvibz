@@ -58,8 +58,7 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
 
-    public function findLastUpload(): ?Instru
-    {
+    public function findOneLatestUpload() {
         return $this->createQueryBuilder('i')
             ->orderBy('i.created_at', 'DESC')
             ->setMaxResults(1)

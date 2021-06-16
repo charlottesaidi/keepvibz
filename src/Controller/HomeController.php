@@ -19,40 +19,30 @@ use JasonGrimes\Paginator;
 
 class HomeController extends AbstractController
 {
-    public $texteRepo;
-    public $instruRepo;
-    public $toplineRepo;
-    public $userRepo;
-
-    public function __construct(TexteRepository $texteRepo, ToplineRepository $toplineRepo, InstruRepository $instruRepo, UserRepository $userRepo) {
-        $this->texteRepo = $texteRepo;
-        $this->instruRepo = $instruRepo;
-        $this->toplineRepo = $toplineRepo;
-        $this->userRepo = $userRepo;
-    }
-
     #[Route('/', name: 'home')]
-    public function index(): Response
+    public function index(TexteRepository $texteRepo, InstruRepository $instruRepo): Response
     {
         // listing sliders accueil
-        $instrus = $this->instruRepo->findLatest();
-        $textes = $this->texteRepo->findLatest();
+        $instrus = $instruRepo->findLatest();
+        $textes = $texteRepo->findLatest();
+        $lastUpload = $texteRepo->findLastUpload();
 
         return $this->render('home/index.html.twig', [
             'instrus' => $instrus,
             'textes' => $textes,
+            'lastUpload' => $lastUpload,
         ]);
     }
 
-    public function getStats(): Response
+    public function getStats(ToplineRepository $toplineRepo, UserRepository $userRepo, TexteRepository $texteRepo, InstruRepository $instruRepo): Response
     {
         // counting footer stats
             // total users
-        $countUsers = $this->userRepo->paginateCount();
+        $countUsers = $userRepo->paginateCount();
             // total posts
-        $countTextes = $this->texteRepo->paginateCount();
-        $countinstrus = $this->instruRepo->paginateCount();
-        $countToplines = $this->toplineRepo->paginateCount();
+        $countTextes = $texteRepo->paginateCount();
+        $countinstrus = $instruRepo->paginateCount();
+        $countToplines = $toplineRepo->paginateCount();
         
         $countPosts = $countTextes + $countinstrus + $countToplines; 
 
@@ -83,9 +73,9 @@ class HomeController extends AbstractController
     }
 
     #[Route('/instrus/filter', name: 'filter_instru', methods: ['GET', 'POST'])]
-    public function searchInstrus(Request $request)
+    public function searchInstrus(Request $request, InstruRepository $instruRepo)
     {
-        $totalItems = $this->instruRepo->paginateCount();
+        $totalItems = $instruRepo->paginateCount();
         $itemsPerPage = 10;
         $currentPage = 1;
         $urlPattern = '/instrus?page=(:num)';
@@ -94,20 +84,20 @@ class HomeController extends AbstractController
             $currentPage = $_GET['page'];
             $offset = ($currentPage - 1) * $itemsPerPage;
         }
-        // $instrus = $this->instruRepo->paginateSearch($itemsPerPage, $offset, '["Trap"]');
+        // $instrus = $instruRepo->paginateSearch($itemsPerPage, $offset, '["Trap"]');
 
         // $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
 
         // return $this->render('instrus/index.html.twig', [
-        //     'instrus' => $this->instruRepo->paginateSearch($itemsPerPage, $offset, $filter),
+        //     'instrus' => $instruRepo->paginateSearch($itemsPerPage, $offset, $filter),
         //     'paginator' => $paginator
         // ]);
 
         $filter = $request->get('search');
 
-        $instrus = [];
+        $jsonInstrus = [];
         $key = 0;
-        foreach($this->instruRepo->findAll() as $instru) {
+        foreach($instruRepo->findAll() as $instru) { //faire une fonction
             // dd($instru->getId());
            $data = [
             'id' => $instru->getId(),
@@ -123,9 +113,13 @@ class HomeController extends AbstractController
             'textes' => $instru->getTextes(),
             'toplines' => $instru->getToplines(),            
             ];
-            $instrus[$key++] = $data;
+            $jsonInstrus[$key++] = $data;
         }
         // dd($instrus);
-        return new JsonResponse($instrus);
+        return new JsonResponse($jsonInstrus);
+    }
+
+    public function getInfos() {
+
     }
 }

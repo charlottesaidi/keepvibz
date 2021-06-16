@@ -283,7 +283,7 @@ class Instru
         return $this;
     }
 
-    public function getPropriete() {
+    public function getEntityInfo() {
         $data = [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
@@ -298,5 +298,6 @@ class Instru
             'textes' => $this->getTextes(),
             'toplines' => $this->getToplines(),            
         ];
+        $array[$key++] = $data;
     }
 }

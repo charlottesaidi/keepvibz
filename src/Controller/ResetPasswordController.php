@@ -45,6 +45,9 @@ class ResetPasswordController extends AbstractController
             }else{
                 $token = $tokenGenerator->generateToken();
                 $user->setResetToken($token);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($user);
+                $entityManager->flush();
     
                 $url = $this->generateUrl('app_reset_password', array('token' => $token, 'email' => $email), UrlGeneratorInterface::ABSOLUTE_URL);
 
@@ -84,12 +87,12 @@ class ResetPasswordController extends AbstractController
     #[Route('/reset/{token}/{email}', name: 'app_reset_password')]
     public function reset($token, $email, Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepo): Response
     {
-        $user = $userRepo->findOneByEmail($email);
+        $user = $userRepo->verifyToken($email, $token); // fonction repo cherche user email+token
 
         $form = $this->createForm(ChangePasswordFormType::class);
         $form->handleRequest($request);
 
-        if($token != null || $token == $user->getResetToken()) {
+        if($user || $token != null) {
 
             if($form->isSubmitted() && $form->isValid()) {
                 $encodedPassword = $passwordEncoder->encodePassword(

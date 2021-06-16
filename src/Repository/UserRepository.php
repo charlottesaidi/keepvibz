@@ -70,11 +70,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
     */
 
-    public function findOneByEmail($value): ?User
+    public function verifyToken($email, $token): ?User
     {
         return $this->createQueryBuilder('u')
-            ->andWhere('u.email = :val')
-            ->setParameter('val', $value)
+            ->where('u.email = :email')
+            ->andWhere('u.reset_token = :token')
+            ->setParameters(array('email'=> $email, 'token' => $token))
             ->getQuery()
             ->getOneOrNullResult()
         ;

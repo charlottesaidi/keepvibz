@@ -286,6 +286,8 @@ a{color: #fff;}
     letter-spacing: .2px;
     color: #9f9f9f!important;
 }
+
+
 /* FIN FOOTER */
 
 /* ================================================================================================================ */
@@ -485,7 +487,7 @@ h2{
 
 
 
-@media screen and (max-width: 1565px ){
+/* @media screen and (max-width: 1565px ){
   .btn_search{display: none;}
   .search input{padding: 0px 2.5vw 0px 50px; }
 }
@@ -494,7 +496,7 @@ h2{
   .icon_arrow {left: 31.5vw}
   .search input{padding: 0px 3vw 0px 50px; }
 
-}
+} */
 
 @media screen and (max-width: 1195px ){
   .content_player{margin-top: 112px;}

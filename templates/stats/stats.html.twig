@@ -1,0 +1,28 @@
+
+    <h4 class="title_bottom">Statistiques</h4>
+    <div class="block_statistiques flex sb wrap">
+        <div class="left_block_statistiques flex col">
+            <div class="left1 flex col">
+                <h5 class="visites">Visites</h5>
+                <p class="number"> 
+                    {{ render(controller(
+                        'App\\Controller\\HomeController::getVisits',
+                    )) }} 
+                </p>
+            </div>
+            <div class="left2 flex col">
+                <h5 class="posts">Posts</h5>
+                <p class="number"> {{total_posts}} </p>
+            </div>
+        </div>
+        <div class="right_block_statistiques flex col">
+            <div class="right1 flex col">
+                <h5 class="membres">Membres</h5>
+                <p class="number"> {{total_users}} </p>
+            </div>
+            <div class="right2 flex col">
+                <h5 class="en_ligne">En ligne</h5>
+                <p class="number">0</p>
+            </div>
+        </div>
+    </div>

@@ -300,6 +300,7 @@ $(document).ready(function(){
         $('.bottom_informations_auteur_show_textes').show();
     })
 
+    $('.widgetHeader-2Hz_Ln').css('background-color', 'lime'); /////
 })
 
 

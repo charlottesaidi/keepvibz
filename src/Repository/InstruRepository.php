@@ -21,7 +21,7 @@ class InstruRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('i')
-            ->orderBy('i.title', 'DESC')
+            ->orderBy('i.created_at', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
@@ -31,13 +31,13 @@ class InstruRepository extends ServiceEntityRepository
 
     public function paginateSearch($limit, $offset, $value) {
         return $this->createQueryBuilder('i')
-            ->orderBy('i.title', 'DESC')
-            ->andWhere('i.genre = :val')
+            ->orderBy('i.created_at', 'DESC')
+            ->andWhere('i.genre = [:val]')
             ->setParameter('val', $value)
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
-            ->getResult()
+            ->getArrayResult()
         ;
     }
 

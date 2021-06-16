@@ -18,7 +18,8 @@
     color: #A27440;
 }
 
-.btn_faq{width: 10px;}
+.btn_faq{width: 10px; cursor: pointer;}
+.btn_faq:hover{opacity: .5;}
 
 .submenu_center3,
 .submenu_center4,

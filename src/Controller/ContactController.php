@@ -25,7 +25,7 @@ class ContactController extends AbstractController
             $entityManager->persist($contact);
             $entityManager->flush();
 
-            // $this->addFlash('success', 'Ton message a été transmis. On te répondra dans les plus brefs délais.');
+            $this->addFlash('success', 'Ton message a été transmis. On te répondra dans les plus brefs délais.');
         }
 
         return $this->render('contact/new.html.twig', [

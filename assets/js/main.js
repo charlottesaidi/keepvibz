@@ -230,10 +230,10 @@ $(document).ready(function(){
         $('.first_autres_instrus').show();
         $('.third_topline').show();
         $('.fourth_auteur').show();
-        $('.bottom_autres_instrus_show').hide();
-        $('.bottom_toplines_associees_show').hide();
-        $('.bottom_textes_associees_show').show();
-        $('.bottom_informations_auteur_show').hide();
+        $('.bottom_autres_instrus_show_instrus').hide();
+        $('.bottom_toplines_associees_show_instrus').hide();
+        $('.bottom_textes_associees_show_instrus').show();
+        $('.bottom_informations_auteur_show_instrus').hide();
 
     })
 
@@ -242,10 +242,10 @@ $(document).ready(function(){
         $('.second_textes').show();
         $('.third_topline').show();
         $('.fourth_auteur').show();
-        $('.bottom_autres_instrus_show').show();
-        $('.bottom_textes_associees_show').hide();
-        $('.bottom_toplines_associees_show').hide();
-        $('.bottom_informations_auteur_show').hide();
+        $('.bottom_autres_instrus_show_instrus').show();
+        $('.bottom_textes_associees_show_instrus').hide();
+        $('.bottom_toplines_associees_show_instrus').hide();
+        $('.bottom_informations_auteur_show_instrus').hide();
 
     })
 
@@ -254,10 +254,10 @@ $(document).ready(function(){
         $('.second_textes').show();
         $('.first_autres_instrus').show();
         $('.fourth_auteur').show();
-        $('.bottom_autres_instrus_show').hide();
-        $('.bottom_textes_associees_show').hide();
-        $('.bottom_toplines_associees_show').show();
-        $('.bottom_informations_auteur_show').hide();
+        $('.bottom_autres_instrus_show_instrus').hide();
+        $('.bottom_textes_associees_show_instrus').hide();
+        $('.bottom_toplines_associees_show_instrus').show();
+        $('.bottom_informations_auteur_show_instrus').hide();
 
     })
 
@@ -266,10 +266,10 @@ $(document).ready(function(){
         $('.first_autres_instrus').show();
         $('.second_textes').show();
         $('.third_topline').show();
-        $('.bottom_autres_instrus_show').hide();
-        $('.bottom_textes_associees_show').hide();
-        $('.bottom_toplines_associees_show').hide();
-        $('.bottom_informations_auteur_show').show();
+        $('.bottom_autres_instrus_show_instrus').hide();
+        $('.bottom_textes_associees_show_instrus').hide();
+        $('.bottom_toplines_associees_show_instrus').hide();
+        $('.bottom_informations_auteur_show_instrus').show();
     })
 
     //SHOW TEXTES - DISPLAY NONE / DISPLAY BLOCK - BOTTOM SECTION
@@ -277,28 +277,61 @@ $(document).ready(function(){
         $(this).hide();
         $('.first_autres_textes').show();
         $('.fourth_auteur').show();
-        $('.bottom_autres_textes_show').hide();
-        $('.bottom_instrus_associees_show').show();
-        $('.bottom_informations_auteur_show').hide();
+        $('.bottom_autres_textes_show_textes').hide();
+        $('.bottom_instrus_associees_show_textes').show();
+        $('.bottom_informations_auteur_show_textes').hide();
     })
 
     $('.first_autres_textes').click(function(){
         $(this).hide();
         $('.second_instrus').show();
         $('.fourth_auteur').show();
-        
-        $('.bottom_autres_textes_show').show();
-        $('.bottom_instrus_associees_show').hide();
-        $('.bottom_informations_auteur_show').hide();
+        $('.bottom_autres_textes_show_textes').show();
+        $('.bottom_instrus_associees_show_textes').hide();
+        $('.bottom_informations_auteur_show_textes').hide();
     })
 
     $('.fourth_auteur').click(function(){
         $(this).hide();
         $('.second_instrus').show();
         $('.first_autres_textes').show();
-        $('.bottom_autres_textes_show').hide();
-        $('.bottom_instrus_associees_show').hide();
-        $('.bottom_informations_auteur_show').show();
+        $('.bottom_autres_textes_show_textes').hide();
+        $('.bottom_instrus_associees_show_textes').hide();
+        $('.bottom_informations_auteur_show_textes').show();
     })
 
 })
+
+
+// ==============================================================
+
+    //SECTION FAQ
+    $('.btn_bottom_3').on('click', function(){
+        $('.submenu_center3').slideToggle('slow');
+    })
+    
+    $('.btn_bottom_4').on('click', function(){
+        $('.submenu_center4').slideToggle('slow');
+    })
+    
+    $('.btn_bottom_5').on('click', function(){
+        $('.submenu_center5').slideToggle('slow');
+    })
+    
+    $('.btn_bottom_6').on('click', function(){
+        $('.submenu_center6').slideToggle('slow');
+    })
+    
+    $('.btn_bottom_7').on('click', function(){
+        $('.submenu_center7').slideToggle('slow');
+    })
+    
+    $('.btn_bottom_8').on('click', function(){
+        $('.submenu_center8').slideToggle('slow');
+    })
+    
+    $('.btn_bottom_9').on('click', function(){
+        $('.submenu_center9').slideToggle('slow');
+    })
+    
+// ================================================================

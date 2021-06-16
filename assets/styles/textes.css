@@ -197,6 +197,9 @@ a{text-decoration: none;}
 
 
 /* BOTTOM */
+.title_groupe_bottom{color: lightgray; font-size: 18px; text-decoration: underline #3d3c3c; text-underline-offset: 5px;}
+
+
 .others_instrus_author{ padding: 9px 10px; margin-bottom: 20px;}
 .others_instrus_author:hover{ background-color: #313030; border-radius: 4px; }
 .right_others_topline_author{margin-left: 20px;}
@@ -209,12 +212,23 @@ a{text-decoration: none;}
 .name_others_instrus_author, .bpm_others_instrus_author{color: #fff; font-size: 14px;}
 .grey_text{color: #828282; font-size: 14px;}
 
-.bottom_autres_textes_show{margin-top: 30px;}
-.bottom_instrus_associees_show{display: none; margin-top: 30px;}
-.bottom_toplines_associees_show{display: none; margin-top: 30px;}
-.bottom_informations_auteur_show{display: none ; margin-top: 30px; height: 300px; width: 300%;}
+.bottom_autres_textes_show_textes{margin-top: 30px;}
+.bottom_instrus_associees_show_textes{display: none; margin-top: 30px;}
+.bottom_informations_auteur_show_textes{display: none ; margin-top: 30px;}
 
 /* PAGE SHOW INSTRUS */
+
+
+/* INFOS AUTEUR */
+.left_block_image_infos{width: 60px; height: 60px;}
+.img_infos_show{width: 100%;}
+.right_block_image_infos{margin-left: 30px;}
+.pseudo_infos_show{color: #fff;}
+.second_block_infos{margin-top: 20px;}
+.email_infos_show, .town_infos_show, .number_infos_show, .details_infos_show, .activite_infos_show{color: #fff; margin-bottom: 10px; line-height: 22px;}
+.third_block_infos{margin-top: 20px;}
+.grey_text_bottom_description{color: #828282; font-size: 17px;}
+/* INFOS AUTEUR */
 
 
 
@@ -227,6 +241,9 @@ a{text-decoration: none;}
 @media screen and (max-width: 615px){
     .section_textes{margin-top: 85px;}
     .textes_show{margin-top: 85px;}
+    .les_autres_textes_auteur{text-align: center;}
+    .title_groupe_bottom{text-align: center;}
+
 }
 
 

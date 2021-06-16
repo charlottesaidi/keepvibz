@@ -4,41 +4,41 @@ namespace App\Entity;
 
 use App\Repository\ContactRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
-use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
+use Symfony\Component\Validator\Constraints as Assert ;
+use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity; 
 use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
- * @ORM\Entity(repositoryClass=ContactRepository::class)
- * @Gedmo\SoftDeleteable(fieldName="deletedAt", timeAware=false, hardDelete=true)
+ * @ORM\Entity (repositoryClass=ContactRepository::class)
+ * @Gedmo\SoftDeleteable (fieldName="deletedAt", timeAware=false, hardDelete=true)
  */
 class Contact
 {
     /**
-     * Hook SoftDeleteable behavior
-     * updates deletedAt field
+     *Hook SoftDeleteable behavior
+     *updates deletedAt field
      */
-    use SoftDeleteableEntity;
+    use SoftDeleteableEntity ;
 
     /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     *@ORM\Id
+     *@ORM\GeneratedValue
+     *@ORM\Column(type="integer")
      */
-    private $id;
+    private $id ;
 
     /**
-     * @Assert\NotBlank
-     * @ORM\Column(type="string", length=255)
+     *@Assert\NotBlank
+     *@ORM\Column(type="string", length=255)
      */
     private $Name;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Email(
-     *     message = "Renseignez une adresse e-mail valide"
+     *@Assert\NotBlank
+     *@Assert\Email(
+     *    message = "Renseignez une adresse e-mail valide"
      * )
-     * @ORM\Column(type="string", length=255)
+     *@ORM\Column(type="string", length=255)
      */
     private $Email;
 
@@ -48,41 +48,41 @@ class Contact
     private $Subject;
 
     /**
-     * @Assert\NotBlank
-     * @ORM\Column(type="text")
+     *@Assert\NotBlank
+     *@ORM\Column(type="text")
      */
     private $Message;
 
     /**
-     * @ORM\Column(type="datetime")
+     *@ORM\Column(type="datetime")
      */
     private $created_at;
 
     /**
-     * @ORM\Column(type="boolean")
+     *@ORM\Column(type="boolean")
      */
-    private $unread = true;
+    private $unread =true;
 
-    public function __construct()
+   public function __construct()
     {
-        $this->created_at = new \DateTime();
+      $this->created_at = new \DateTime();
     }
 
-    public function getId(): ?int
+   public function getId(): ?int
     {
-        return $this->id;
+       return $this->id;
     }
 
-    public function getName(): ?string
+   public function getName(): ?string
     {
-        return $this->Name;
+       return $this->Name;
     }
 
-    public function setName(string $Name): self
+   public function setName(string $Name): self
     {
-        $this->Name = $Name;
+       $this->Name = $Name;
 
-        return $this;
+       return $this;
     }
 
     public function getEmail(): ?string
@@ -121,27 +121,27 @@ class Contact
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+   public function getCreatedAt(): ?\DateTimeInterface
     {
-        return $this->created_at;
+       return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeInterface $created_at): self
+   public function setCreatedAt(\DateTimeInterface $created_at): self
     {
-        $this->created_at = $created_at;
+       $this->created_at = $created_at;
 
-        return $this;
+       return $this;
     }
 
-    public function getUnread(): ?bool
+   public function getUnread(): ?bool
     {
-        return $this->unread;
+       return $this->unread;
     }
 
-    public function setUnread(bool $unread): self
+   public function setUnread(bool $unread): self
     {
-        $this->unread = $unread;
+       $this->unread = $unread;
 
-        return $this;
+       return $this;
     }
 }

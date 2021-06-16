@@ -120,11 +120,8 @@ a{text-decoration: none;}
 /* PAGE TOUTES INSTRUS */
 .main_instrus{width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 20px; background-color: #000; }
 .section_instrus{margin-top: 146px;}
-.sidebar_instrus{top: 20px; border-radius: 20px; background-color: #3d3c3c; padding: 10px 20px 20px 20px;
-}
-.right_content{width: 80%; float: right; margin-top: 20px;}
 .title_instrus{color: #fff; font-size: 2em; float: left; padding-bottom: 20px;}
-.content_download_instrus {width: 19%; margin-bottom: 50px;}
+.content_download_instrus {width: 30%; margin-bottom: 50px;}
 /* .img_downloaded{width: 100%;} */
 .genre{margin: 10px 0px 30px 0px;}
 .title_instrus_genre, .title_instrus_keys{color: #fff; font-size: 1.4em; margin-bottom: 10px;}
@@ -237,7 +234,8 @@ option{background-color: #3d3c3c; border: none;}
 
 
 /* BOTTOM */
-.les_autres_instrus_auteur{color: lightgray; font-size: 18px; text-decoration: underline #3d3c3c; text-underline-offset: 5px;}
+.title_groupe_bottom{color: lightgray; font-size: 18px; text-decoration: underline #3d3c3c; text-underline-offset: 5px; margin-bottom: 20px;}
+
 .others_instrus_author{ padding: 9px 10px; margin-bottom: 20px;}
 .others_instrus_author:hover{ background-color: #313030; border-radius: 4px; }
 .right_others_topline_author{margin-left: 20px;}
@@ -250,14 +248,22 @@ option{background-color: #3d3c3c; border: none;}
 .name_others_instrus_author, .bpm_others_instrus_autho{color: #fff; font-size: 14px;}
 .grey_text{color: #828282; font-size: 14px;}
 
-.bottom_autres_instrus_show{margin-top: 30px;}
-.bottom_textes_associees_show{display: none; margin-top: 30px;}
-.bottom_toplines_associees_show{display: none; margin-top: 30px;}
-.bottom_informations_auteur_show{margin-top: 30px; height: 300px; width: 300%;}
+.bottom_autres_instrus_show_instrus{margin-top: 30px;}
+.bottom_textes_associees_show_instrus{display: none; margin-top: 30px;}
+.bottom_toplines_associees_show_instrus{display: none; margin-top: 30px;}
+.bottom_informations_auteur_show_instrus{display: none; margin-top: 30px;}
+
+/* INFOS AUTEUR */
+.left_block_image_infos{width: 60px; height: 60px;}
+.img_infos_show{width: 100%;}
+.right_block_image_infos{margin-left: 30px;}
+.pseudo_infos_show{color: #fff;}
+.second_block_infos{margin-top: 20px;}
+.email_infos_show, .town_infos_show, .number_infos_show, .details_infos_show, .activite_infos_show{color: #fff; margin-bottom: 10px; line-height: 22px;}
+.third_block_infos{margin-top: 20px;}
+.grey_text_bottom_description{color: #828282; font-size: 17px;}
 
 
-
-.fhejkhf{color: #fff;}
 
 /* BOUTON DOWNLOAD */
 .top_right_others_instrus_author{right: 20px;}
@@ -269,30 +275,27 @@ option{background-color: #3d3c3c; border: none;}
 .block_downloading:hover{background-color: #A27440;}
 .block_downloading:active{transform: scale(120%) }
 .image_downloading{width: 100%; z-index: 3; height: 20px; width: 20px;}
+
 /* PAGE SHOW INSTRUS */
 
 
 
 
-
-
-
-
-
 @media screen and (max-width: 1315px){
-    .sidebar_instrus{ display: none;}
-    .right_content{width: 100%;}
+  .sidebar_instrus{ display: none;}
+  .right_content{width: 100%;}
 }
 
 
 @media screen and (max-width: 1125px){
-  .content_download_instrus{width: 23%;}
+.content_download_instrus{width: 23%;}
 }
 
 
 @media screen and (max-width: 1000px){
-  .content_download_instrus{width: 31%;}
+.content_download_instrus{width: 31%;}
 }
+
 
 
 @media screen and (max-width: 770px){
@@ -308,13 +311,12 @@ option{background-color: #3d3c3c; border: none;}
 @media screen and (max-width: 615px){
   .section_instrus{margin-top: 85px;}
   .instru_show{margin-top: 85px;}
-  .les_autres_instrus_auteur{text-align: center;}
+  .title_groupe_bottom{text-align: center;}
 }
 
 @media screen and (max-width: 490px){
   .content_download_instrus{width: 100%;}
 }
-
 
 
 

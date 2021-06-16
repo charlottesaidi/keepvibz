@@ -1,7 +1,4 @@
-.wrap-faq .submenu_center3{
-    color: white;
-    padding-top: 30px;
-}
+.title_page{font-size: 2.5em; color: #A27440; margin-bottom: 40px;}
 .wrap-faq{
     width: 100%;
     max-width: 1300px;
@@ -12,15 +9,30 @@
 }
 .wrap-faq p{
     color: white;
-    font-size: 1.1em;
-    padding-bottom: 30px;
+    font-size: 1em;
+    padding-bottom: 6px;
 
 }
 .wrap-faq h4{ 
-    font-size: 2em;
+    font-size: 1.5em;
     color: #A27440;
 }
 
+.btn_faq{width: 10px; cursor: pointer;}
+.btn_faq:hover{opacity: .5;}
+
+.submenu_center3,
+.submenu_center4,
+.submenu_center5,
+.submenu_center6,
+.submenu_center7,
+.submenu_center8,
+.submenu_center9{display: none;}
+
+@media screen and (max-width: 660px){
+    .wrap-faq h4{font-size: 1.3em;}
+  }
+  
 @media screen and (max-width: 615px){
     .wrap-faq{margin-top: 85px;}
   }

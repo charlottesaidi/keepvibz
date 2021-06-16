@@ -53,10 +53,10 @@
     {# FIN TOP SHOW INSTRU  #}
 
     {# BOTTOM AUTRES INSTRUS AUTEUR  #}
-    <div class="bottom_autres_instrus_show">
+    <div class="bottom_autres_instrus_show_instrus">
         <div class="wrap2_instrus_show flex col">
-        <h2 class="les_autres_instrus_auteur">Autres instrus de l'auteur</h2>
-        {% for beats in instru.user.instrus %}
+            <h2 class="title_groupe_bottom">Autres instrus de l'auteur</h2>
+            {% for beats in instru.user.instrus %}
             <div class="others_instrus_author flex aic pr">
                 <div class="left_others_instrus_author flex aic">
                     <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beats.file) }}" controls id="player_{{ beats.id }}"></audio>
@@ -91,14 +91,15 @@
                     </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
         </div>
     </div>
     {# BOTTOM AUTRES INSTRUS AUTEUR  #}
 
     {# BOTTOM TEXTES ASSOCIES #}
-    <div class="bottom_textes_associees_show">
+    <div class="bottom_textes_associees_show_instrus">
         <div class="wrap2_instrus_show flex col">
+            <h2 class="title_groupe_bottom tac">Textes associées à l'instru</h2>
             <div class="content_textes pr">
                 <div class="block_all_textes flex col">
                 {% for texte in instru.textes %}
@@ -121,9 +122,10 @@
     {# BOTTOM TEXTES ASSOCIES #}
 
     {# BOTTOM TOPLINES ASSOCIES #}
-    <div class="bottom_toplines_associees_show">
+    <div class="bottom_toplines_associees_show_instrus">
         <div class="wrap2_instrus_show flex col">
-        {% for topline in instru.toplines %}
+            <h2 class="title_groupe_bottom tac">Toplines associées à l'instru</h2>
+            {% for topline in instru.toplines %}
             <div class="others_instrus_author flex aic pr">
                 <div class="left_others_instrus_author flex aic">
                     <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/toplines/' ~ topline.file) }}" controls id="player_{{ topline.id }}"></audio>
@@ -150,14 +152,42 @@
                     
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
     {# BOTTOM TOPLINES ASSOCIES #}
 
     {# BOTTOM INFOS AUTEUR #}
-    <div class="bottom_informations_auteur_show bgl">
-        <div>
-            <p class="fhejkhf">fffgff</p>
+    <div class="bottom_informations_auteur_show_instrus">
+        <div class="wrap2_instrus_show">
+            <h2 class="title_groupe_bottom tac">Informations sur l'auteur</h2>
+            {# {% for topline in instru.toplines %} #}
+                <div class="block_infos_perso flex col aic">
+                    <div class="first_block_infos flex fw aic">
+                        {% if instru.user.avatar != null %}
+                        <div class="left_block_image_infos">
+                            <img src="{{asset('uploads/images/avatars/' ~ instru.user.avatar.file)}}" alt="avatar de l'utilisateur" class="img_infos_show">
+                        </div>
+                        {% else %}
+                        <div class="left_block_image_infos">
+                            <img src="{{asset('assets/images/caroussel/1.jpg')}}" alt="avatar par défaut" class="img_infos_show">
+                        </div>
+                        {% endif %}
+                        <div class="right_block_image_infos">
+                            <p class="pseudo_infos_show"><span class="grey_text_bottom_description">Pseudo: </span>{{instru.user.name}} </p>
+                        </div>
+                    </div>
+                    <div class="second_block_infos flex col aic">
+                        <p class="email_infos_show"> <span><i class="fas fa-envelope"></i></span> {{instru.user.email}} </p>
+                        <p class="town_infos_show"><span class="grey_text_bottom_description">Ville:</span>  {{ instru.user.town }} </p>
+                        <p class="number_infos_show tac"> {{ instru.user.phoneNumber }} </p>
+                    </div>
+                    <div class="third_block_infos flex col aic">
+                        <p class="details_infos_show tac"> {{ instru.user.bio }} </p>
+                        {# <p class="activite_infos_show tac"> {{ instru.user.user_competence }} </p> #}
+                    </div>
+                </div>
+            {# {% endfor %} #}
         </div>
     </div>
     {# BOTTOM INFOS AUTEUR #}

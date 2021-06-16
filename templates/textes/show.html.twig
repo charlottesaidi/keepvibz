@@ -42,8 +42,9 @@
     {# FIN TOP SHOW TEXTES  #}
 
     {# BOTTOM AUTRES TEXTES #}
-    <div class="bottom_autres_textes_show">
+    <div class="bottom_autres_textes_show_textes">
         <div class="wrap2_instrus_show flex col">
+            <h2 class="title_groupe_bottom">Autres textes de l'auteur</h2>
             <div class="content_textes pr">
                 <div class="block_all_textes flex col">
                 {% for text in texte.user.textes %}
@@ -66,9 +67,10 @@
     {# BOTTOM AUTRES TEXTES #}
 
     {# BOTTOM INSTRUS ASSOCIEES #}
-    <div class="bottom_instrus_associees_show">
+    <div class="bottom_instrus_associees_show_textes">
         <div class="wrap2_instrus_show flex col">
-        {% for instru in texte.instrus %}
+            <h2 class="title_groupe_bottom tac">Instrus associées au texte</h2>
+            {% for instru in texte.instrus %}
             <div class="others_instrus_author flex aic pr">
                 <div class="left_others_instrus_author flex aic">
                     <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_{{ instru.id }}"></audio>
@@ -103,15 +105,42 @@
                     </div>
                 </div>
             </div>
-        {% endfor %}
+            {% endfor %}
         </div>
     </div>
     {# FIN BOTTOM INSTRUS ASSOCIEES #}
 
     {# BOTTOM INFOS AUTEUR #}
-    <div class="bottom_informations_auteur_show bgl">
-        <div>
-            <p class="fhejkhf">fffgff</p>
+    <div class="bottom_informations_auteur_show_textes">
+        <div class="wrap2_instrus_show">
+            <h2 class="title_groupe_bottom tac">Informations sur l'auteur</h2>
+            {# {% for topline in instru.toplines %} #}
+                <div class="block_infos_perso flex col aic">
+                    <div class="first_block_infos flex fw aic">
+                        {% if texte.user.avatar != null %}
+                        <div class="left_block_image_infos">
+                            <img src="{{asset('uploads/images/avatars/' ~ texte.user.avatar.file)}}" alt="avatar de l'utilisateur" class="img_infos_show">
+                        </div>
+                        {% else %}
+                        <div class="left_block_image_infos">
+                            <img src="{{asset('assets/images/caroussel/1.jpg')}}" alt="avatar par défaut" class="img_infos_show">
+                        </div>
+                        {% endif %}
+                        <div class="right_block_image_infos">
+                            <p class="pseudo_infos_show"><span class="grey_text_bottom_description">Pseudo: </span>{{texte.user.name}} </p>
+                        </div>
+                    </div>
+                    <div class="second_block_infos flex col aic">
+                        <p class="email_infos_show"> <span><i class="fas fa-envelope"></i></span> {{texte.user.email}} </p>
+                        <p class="town_infos_show"><span class="grey_text_bottom_description">Ville:</span>  {{ texte.user.town }} </p>
+                        <p class="number_infos_show tac"> {{ texte.user.phoneNumber }} </p>
+                    </div>
+                    <div class="third_block_infos flex col aic">
+                        <p class="details_infos_show tac"> {{ texte.user.bio }} </p>
+                        {# <p class="activite_infos_show tac"> {{ instru.user.user_competence }} </p> #}
+                    </div>
+                </div>
+            {# {% endfor %} #}
         </div>
     </div>
     {# BOTTOM INFOS AUTEUR #}

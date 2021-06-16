@@ -9,8 +9,10 @@
     padding: 10px 0;
     border-radius: 4px;
     background-color: #3d3c3c;
+    color: white;
     border: none;
-    
+    outline: none;
+    text-indent: 10px;
 }
 .wrap-contact{
     width: 100%;
@@ -57,10 +59,13 @@
 
  #contact_Message{
      background-color:#3d3c3c;
+     color: white;
      border: none;
      border-radius: 4px;
      width: 50%;
      height: 100px;
+     outline: none;
+     text-indent: 10px;
  }
  .contact a{
      font-size: 1.5em;
@@ -70,4 +75,9 @@
  .contact a:hover{
      opacity: .6;
  }
+
+ @media screen and (max-width: 1100px){
+    .contact input{width: 70%;}
+    #contact_Message{width: 70%;}
+  }
  

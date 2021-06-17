@@ -93,10 +93,10 @@
             <div class="wrap2 flex fs">
                 <div class="search flex fs">
                     <img class="icon_search" src="{{asset('assets/images/icons/icon_search.svg')}}" alt="icon search">
-                    <form id="search_form" action="{{path('filter_instru')}}" methods="post" novalidate>
+                    {# <form id="search_form" action="{{path('filter_instru')}}" methods="post" novalidate>
                         <input type="text" name="search" id="search" placeholder="Tapes ta recherche">
                         <button type="submit" class="btn_search">Filtres</button>
-                    </form>
+                    </form> #}
                     <img class="icon_arrow" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="icon arrow">
                     <div class="block_filters">
                         <ul class="filters">
@@ -184,29 +184,7 @@
             </div>
         </footer>
         {# FOOTER #}
-{# 
-        <div id="ajaxTest">
-
-        </div> #}
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
-        <script>
-            $('#search_form').submit(function(e) {
-                e.preventDefault();
-                $.ajax({
-                    type: "POST",
-                    url: "/instrus/filter",
-                    // data: formData,
-                    dataType: "json",
-                    success: function(response) {
-                        for (var item in response) {
-                            console.log(response[item].title)
-                            $('#ajaxTest').append('<p>' + response[item].title + '</p>')
-                        }
-                        console.log(response);
-                    }
-                });
-            }) 
-        </script>
     </body>
 </html>

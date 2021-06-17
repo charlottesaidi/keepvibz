@@ -32,6 +32,7 @@ body {
         justify-content: space-between;
         align-items: stretch;
         .container {
+            margin-top: 98px;
             .listing {
                 padding-top: 30px;
             }
@@ -80,10 +81,7 @@ body {
                         }
                     }
                 }
-                .global-attr-block {
-                    border-bottom: solid 1px hsla(0,0%,100%,.12);
-                }
-                .global {
+                .global, .attr-block.account {
                     border: none;
                 }
             }
@@ -104,9 +102,9 @@ body {
             }
         }
     }
-    .side-nav, .mobile-nav {
-        padding-top: 50px;
-        width: 18%;
+    .side-nav{
+        padding-top: 200px;
+        width: 20%;
         button.tablinks {
             font-size: 16px;
             text-align: left;
@@ -129,35 +127,27 @@ body {
             padding-left: 35px;
         }
     }
-    .mobile-nav {
-        width: 100%;
-        padding-top: 139px;
-        button#sideNavLink.tablinks {
-            display: none;
-            text-align: right;
-            position: absolute;
-            top: 90px;
-            left: 0;
-            right: 0;
-            .button_burger {
-                width: 20px;
-                height: 20px;
-                transform: rotate(180deg);
-            }
-        }
-    }
 }
 @media screen AND (max-width: 850px) {
     body .profile-main {
         flex-direction: column;
         .side-nav {
             border-bottom: solid 1px hsla(0,0%,100%,.12);
-            padding-top: 0;
             width: 100%;
+            padding-top: 98px;
             ul {
                 display: flex;
+                flex-flow: row wrap;
                 justify-content: space-between;
-
+                li {
+                    width: 25%;
+                    button {
+                        text-align: center;
+                    }
+                }
+            }
+            .button.tablinks {
+                width: 50%;
             }
         }
     }
@@ -167,6 +157,7 @@ body {
     }
     body .profile-main .container {
         width: 100%;
+        margin-top: 0;
     }
 }
 @media screen AND (max-width: 750px) {
@@ -177,12 +168,19 @@ body {
             width: 100%;
         }
     }
+    body .profile-main .container .user-block .global, body .profile-main .container .user-block .attr-block.account {
+        form {
+            margin-top: 10px;
+        }
+    }
 }
-@media screen AND (max-width: 520px) {
-    .side-nav {
-        display: none;
-    }
-    body .mobile-nav button#sideNavLink.tablinks {
-        display: block;
-    }
+@media screen AND (max-width: 650px) {
+    body .profile-main .side-nav {
+        padding-top: 78px;
+        ul {
+            li {
+                width: 50%;
+            }
+        }
+    } 
 }

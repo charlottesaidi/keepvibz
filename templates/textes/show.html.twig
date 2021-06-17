@@ -47,18 +47,20 @@
             <h2 class="title_groupe_bottom">Autres textes de l'auteur</h2>
             <div class="content_textes pr">
                 <div class="block_all_textes flex col">
-                {% for text in texte.user.textes %}
+                {% for userText in texte.user.textes %}
+                            {% if userText.title != texte.title %}
                     <li class="block_textes flex sb fw">
-                        <a class="link_text flex aic" href="{{path('texte_show', {'id': text.id})}}">
+                        <a class="link_text flex aic" href="{{path('texte_show', {'id': userText.id})}}">
                             <div class="avatar_image_block">
                                 <img src="{{asset('assets/images/icons/avatar.png')}}" alt="avatar du User" class="avatar_image">
                             </div>
                             <div class="description_textes">
-                                <h3 class="title_texte">{{text.title}}</h3>
-                                <h3 class="author_textes">Par {{text.user.name}}</h3>
+                                <h3 class="title_texte">{{userText.title}}</h3>
+                                <h3 class="author_textes">Par {{userText.user.name}}</h3>
                             </div>
                         </a>
                     </li>
+                            {% endif %}
                 {% endfor %}
                 </div>
             </div>

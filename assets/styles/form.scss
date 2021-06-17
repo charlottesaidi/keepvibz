@@ -7,6 +7,18 @@
         margin: 0 auto;
     }
 }
+.ui-widget-content {
+    width: 100%;
+    background: #3d3c3c;
+    color: $font-primary;
+    .ui-menu-item-wrapper {
+        cursor: pointer;
+        font-family: $squada;
+    }
+    .ui-menu-item-wrapper:hover {
+        background: $font-secondary;
+    }
+}
 form {
     .pass-group {
         display: flex;
@@ -49,7 +61,7 @@ form {
                 margin-right: 10px;
             }
         }
-        input, textarea, select {
+        input, textarea, select, .ui-autocomplete-input {
             background: #3d3c3c; 
             outline: none; 
             border-radius: 3px; 

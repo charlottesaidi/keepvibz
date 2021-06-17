@@ -33,7 +33,10 @@
                                         <tbody>
                                             <tr class="cell">
                                                 <th class="cell">
-                                                    <p>De: {{ contact.Email }}</p>
+                                                    <p>
+                                                        De: {{ contact.Name }} <br>
+                                                        {{ contact.Email }}
+                                                    </p>
                                                     <span class="cell-data">Le: {{ contact.createdAt ? contact.createdAt|date('d/m/Y') : '' }}</span>
                                                     <span class="note">A: {{ contact.createdAt ? contact.createdAt|date('H:i') : '' }}</span>
                                                 </th>

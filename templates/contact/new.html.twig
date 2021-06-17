@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}KeepVibz | Contact{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user-profile') }}
+{% endblock %}
 
 {% block body %}
 <div class="container">
@@ -8,7 +12,7 @@
   <section class="contact">
 
   {% for message in app.flashes('success') %}
-      <div class="alert alert-success">
+      <div class="success">
           {{ message }}
       </div>
   {% endfor %}

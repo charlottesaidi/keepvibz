@@ -57,40 +57,42 @@
         <div class="wrap2_instrus_show flex col">
             <h2 class="title_groupe_bottom">Autres instrus de l'auteur</h2>
             {% for beats in instru.user.instrus %}
-            <div class="others_instrus_author flex aic pr">
-                <div class="left_others_instrus_author flex aic">
-                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beats.file) }}" controls id="player_{{ beats.id }}"></audio>
-                    <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ beats.id }}">
-                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
-                    </div>
-                    <a href="{{path('instru_show', {'id': beats.id})}}">
-                        <div class="block_image_instru_author">
-                            <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                {% if beats.id != instru.id %}
+                    <div class="others_instrus_author flex aic pr">
+                        <div class="left_others_instrus_author flex aic">
+                            <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beats.file) }}" controls id="player_{{ beats.id }}"></audio>
+                            <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ beats.id }}">
+                                <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                            </div>
+                            <a href="{{path('instru_show', {'id': beats.id})}}">
+                                <div class="block_image_instru_author">
+                                    <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                <a href="{{path('instru_show', {'id': beats.id})}}">
-                    <div class="right_others_instrus_author flex col">
-                        <div class="top_right_others_instrus_author">
-                            <p class="title_others_instrus_author">{{ beats.title }}</p>
-                        </div>
-                        <div class="bottom_right_others_instrus_author flex ">
-                            <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
-                            <p class="separator_others_instrus_author grey_text"> | </p>
-                            <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p>
-                            <p class="separator_others_instrus_author grey_text"> | </p>
-                            <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
-                        </div>
-                    </div>
-                </a>
-                <div class="top_right_others_instrus_author pa">
-                    <div class="block_downloading pr">
-                        <a href="{{asset('uploads/instrus/' ~ beats.file)}}" download="{{ beats.file }}">
-                            <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                        <a href="{{path('instru_show', {'id': beats.id})}}">
+                            <div class="right_others_instrus_author flex col">
+                                <div class="top_right_others_instrus_author">
+                                    <p class="title_others_instrus_author">{{ beats.title }}</p>
+                                </div>
+                                <div class="bottom_right_others_instrus_author flex ">
+                                    <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
+                                    <p class="separator_others_instrus_author grey_text"> | </p>
+                                    <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p>
+                                    <p class="separator_others_instrus_author grey_text"> | </p>
+                                    <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
+                                </div>
+                            </div>
                         </a>
+                        <div class="top_right_others_instrus_author pa">
+                            <div class="block_downloading pr">
+                                <a href="{{asset('uploads/instrus/' ~ beats.file)}}" download="{{ beats.file }}">
+                                    <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
@@ -180,7 +182,11 @@
                     <div class="second_block_infos flex col aic">
                         <p class="email_infos_show"> <span><i class="fas fa-envelope"></i></span> {{instru.user.email}} </p>
                         <p class="town_infos_show"><span class="grey_text_bottom_description">Ville:</span>  {{ instru.user.town }} </p>
-                        <p class="number_infos_show tac"> {{ instru.user.phoneNumber }} </p>
+                        <p class="number_infos_show tac"> 
+                            {% if instru.user.phoneNumber %}
+                                {{ instru.user.phoneNumber|phone_number_format('NATIONAL') }}
+                            {% endif %}
+                        </p>
                     </div>
                     <div class="third_block_infos flex col aic">
                         <p class="details_infos_show tac"> {{ instru.user.bio }} </p>

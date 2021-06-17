@@ -46,7 +46,7 @@
 
                 <div class="right_content flex col">
                     <h2 class="title_instrus">Instrus</h2>
-                    <div class="content_instrus flex sb fw">
+                    <div class="content_instrus flex fs fw">
                         {% for beat in instrus %}
                             <li class="content_download_instrus flex col tac pr">
                                 <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_{{ beat.id }}"></audio>
@@ -57,8 +57,6 @@
                                         {% else %}
                                             <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
                                         {% endif %}
-
-                                        {# <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}"> #}
                                     </a>
                                 </div>
                                 <div class="btn_play_caroussel btn"  id="btn_ref_{{ beat.id }}">

@@ -198,9 +198,10 @@ a{text-decoration: none;}
 
 
 
-body{position:"relative"; font-family: 'Squada One', cursive; letter-spacing: 3px; background-color: black; font-weight: 500; }
+body{position:"relative"; font-family: 'Squada One', cursive; letter-spacing: 3px; background-color: black; font-weight: 500; overflow-x: hidden;}
 h1{position: absolute; left: -50000px;}
 audio{outline: none;}
+.flexslider, .flexslider2{margin-top: 20px;}
 
 /* HEADER */
 .fixed {
@@ -265,7 +266,7 @@ a{color: #fff;}
 /* MOBILE */
 .top_header{display: none;}
 .block_burger{width: 20px; margin-top: 2px;}
-.button_burger{width: 100%;}
+.button_burger{width: 100%; transform: rotate(0.5turn);}
 .logo_mobile{width: 27px; margin-top: 10px;}
 .logo_mobile :hover{opacity: .8;}
 .img_logo_mobile{width: 100%;}
@@ -284,7 +285,7 @@ a{color: #fff;}
     font-weight: 300;
     line-height: 1.5;
     letter-spacing: .2px;
-    color: #9f9f9f!important;
+    color: #9f9f9f;
 }
 
 
@@ -302,7 +303,7 @@ a{color: #fff;}
     width: 100%;
     opacity: .3;
     filter: blur(2px);
-    margin-top: 146px;
+    margin-top: 94px;
 }
 .gradient{position: absolute; bottom: 0;background: transparent linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,1) 85%); height: 20vh; width: 100%; z-index: 4;
 }
@@ -415,10 +416,6 @@ h2{
 
 
 
-
-
-
-
 /* SECTION 4 */
 .section_home_4{position: relative;}
 
@@ -444,14 +441,6 @@ h2{
 /* FIN SECTION 4 */
 
 
-/* SECTION 5 */
-  
-/* FIN SECTION 5 */
-
-
-
-
-
 
 /* HOME */
 
@@ -472,7 +461,8 @@ h2{
 .nav_bottom1 li a:hover{opacity: .6;}
 .nav_bottom2 li a{color: #9f9f9f;}
 .nav_bottom2 li a:hover{opacity: .6;}
-.left_block_statistiques{margin-right: 15px;}
+.top_block_statistiques{margin-right: 15px;}
+.left1{margin-right: 12px;}
 .visites, .posts, .membres, .en_ligne {color: #fff; font-size: .8em; margin-bottom: 3px;}
 .number{color: #9f9f9f; margin-bottom: 3px;}
 .submenu_center1, .submenu_center2{display: none; background-color: transparent; padding: 0px 20px 5px 20px;}
@@ -485,18 +475,6 @@ h2{
 
 
 
-
-
-/* @media screen and (max-width: 1565px ){
-  .btn_search{display: none;}
-  .search input{padding: 0px 2.5vw 0px 50px; }
-}
-
-@media screen and (max-width: 1242px ){
-  .icon_arrow {left: 31.5vw}
-  .search input{padding: 0px 3vw 0px 50px; }
-
-} */
 
 @media screen and (max-width: 1195px ){
   .content_player{margin-top: 112px;}
@@ -537,7 +515,6 @@ h2{
 
 
 @media screen and (max-width: 615px){
-  /* html{overflow-x: hidden;} */
   /* HEADER */
   .header{display: flex;}
   .top_header{display: flex; align-items: center;}
@@ -550,7 +527,7 @@ h2{
   .icon_arrow{left: 79vw;}
   .block_filters{right: 0; left: auto;}
   /* =========================================== */
-  .navigation_mobile{position: fixed; bottom: 0; left: 0; z-index: 10000; background-color: #000; width: 100vw; height: calc(100vh - 85px); opacity: .97;}
+  .navigation_mobile{position: fixed; bottom: 0; left: 0; z-index: 10000; background-color: #000; width: 100vw; height: calc(100vh - 84.08px); opacity: .97;}
   .top_block_menu{background-color: #3d3c3c;}
   .title_nav{ color: #A27440; text-align: center; font-size: 2em; padding: 10px 0;}
   .nav_mobile{padding: 70px;}
@@ -574,6 +551,25 @@ h2{
   /* SECTION 4 */
 .block_accroche3{display: none;}
 }
+.btn-discord{
+  width: 20px;
+  height: 20px;
+  margin-bottom: 18px;
+  margin-left: 5px;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.btn-discord:hover{
+  opacity: .5;
+}
+.little-discord{
+  height: 60px;
+}
+li a{
+     display:block;
+     height:100%;
+  }
+
 
 
 @media screen and (max-width: 570px){
@@ -613,4 +609,19 @@ h2{
 }
 .widgetHeader-2Hz_Ln{
   background-color: #A27440;
+}
+@media screen and (max-width: 1050px){
+  /* HEADER */
+  .btn-discord{margin-top: 15px;}
+}
+.invalid-feedback.d-block {
+  border: 1px darkred solid;
+  display: inline-block;
+  color: darkred;
+  border-radius: 3px;
+  padding: 10px 20px;
+  margin: 8px 0;
+  font-weight: bold;
+  font-size: 16px;
+  width: 50%;
 }

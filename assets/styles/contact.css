@@ -1,5 +1,5 @@
 .contact{
-    margin-top: 146px;
+    margin-top: 94px;
     color: white;
     text-align: center;
 }
@@ -38,7 +38,7 @@
      color: white;
      border: 1px solid #A27440;
      transition: all 0.3s;
-     border-radius: 2px;
+     border-radius: 4px;
      font-size: 14px;
      height: 36px;
      line-height: 36px;

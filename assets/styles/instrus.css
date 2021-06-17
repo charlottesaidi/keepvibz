@@ -119,7 +119,7 @@ a{text-decoration: none;}
 
 /* PAGE TOUTES INSTRUS */
 .main_instrus{width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 20px; background-color: #000; }
-.section_instrus{margin-top: 146px;}
+.section_instrus{margin-top: 113px;}
 .title_instrus{color: #fff; font-size: 2em; float: left; padding-bottom: 20px;}
 .content_download_instrus {width: 30%; margin-bottom: 50px;}
 /* .img_downloaded{width: 100%;} */
@@ -185,7 +185,7 @@ option{background-color: #3d3c3c; border: none;}
 .wrap1_instrus_show{max-width: 1300px; width: 100%; margin: 0 auto;}
 .wrap2_instrus_show{max-width: 1300px; width: 100%; margin: 0 auto; padding: 0 20px;}
 /* TOP */
-.instru_show{margin-top: 146px;}
+/* .instru_show{margin-top: 93px;} */
 .top_content_instrus_show{padding-top: 30px;}
 .top_container_show{background: rgb(255,255,255);
   background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(74,67,75,1) 0%, rgba(68,56,70,1) 6%, rgba(51,27,56,0.9611441988904937) 45%); padding-bottom: 50px; border-bottom: 1px solid hsla(0,0%,100%,.12);}
@@ -248,6 +248,9 @@ option{background-color: #3d3c3c; border: none;}
 .name_others_instrus_author, .bpm_others_instrus_autho{color: #fff; font-size: 14px;}
 .grey_text{color: #828282; font-size: 14px;}
 
+.links_textes_toplines li:hover{opacity: .7;}
+
+
 .bottom_autres_instrus_show_instrus{margin-top: 30px;}
 .bottom_textes_associees_show_instrus{display: none; margin-top: 30px;}
 .bottom_toplines_associees_show_instrus{display: none; margin-top: 30px;}
@@ -309,13 +312,19 @@ option{background-color: #3d3c3c; border: none;}
 
 
 @media screen and (max-width: 615px){
-  .section_instrus{margin-top: 85px;}
-  .instru_show{margin-top: 85px;}
+  /* .section_instrus{margin-top: 105px;}
+  .instru_show{margin-top: 85px;} */
   .title_groupe_bottom{text-align: center;}
 }
 
 @media screen and (max-width: 490px){
   .content_download_instrus{width: 100%;}
+}
+
+
+@media screen and (max-width: 450px){
+  .links_textes_toplines{flex-direction: column;}
+  .links_textes_toplines li{margin: 7px 0;}
 }
 
 

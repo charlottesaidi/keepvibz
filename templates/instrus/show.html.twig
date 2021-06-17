@@ -31,7 +31,7 @@
                     <p class="bpm_content_show_instru"> {{ instru.bpm }} <span class="bpm_show_instru"> BPM</span></p>
                     <span class="genre_separator">|</span>
                     <p class="key_content_show_instru">Key: {{ instru.cle }}</p>
-                    <p class="nombre_content_show_instru">(nombres DYNAMIQUE) lectures</p>
+                    {# <p class="nombre_content_show_instru">Nombre de lecture: <span class="resultat_nbre_lectures"></span>  </p> #}
                 </div>
                 <div class="block_link_items_associes">
                     <ul class="links_textes_toplines flex jcc">
@@ -79,7 +79,7 @@
                             <p class="separator_others_instrus_author grey_text"> | </p>
                             <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p>
                             <p class="separator_others_instrus_author grey_text"> | </p>
-                            <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
+                            {# <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p> #}
                         </div>
                     </div>
                 </a>
@@ -140,7 +140,7 @@
                     <div class="bottom_right_others_instrus_author flex ">
                         <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ topline.user.name }}</span></p>
                         <p class="separator_others_instrus_author grey_text"> | </p>
-                        <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p>
+                        {# <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p> #}
                     </div>
                 </div>
                 <div class="top_right_others_instrus_author pa">
@@ -161,7 +161,6 @@
     <div class="bottom_informations_auteur_show_instrus">
         <div class="wrap2_instrus_show">
             <h2 class="title_groupe_bottom tac">Informations sur l'auteur</h2>
-            {# {% for topline in instru.toplines %} #}
                 <div class="block_infos_perso flex col aic">
                     <div class="first_block_infos flex fw aic">
                         {% if instru.user.avatar != null %}
@@ -184,10 +183,11 @@
                     </div>
                     <div class="third_block_infos flex col aic">
                         <p class="details_infos_show tac"> {{ instru.user.bio }} </p>
-                        {# <p class="activite_infos_show tac"> {{ instru.user.user_competence }} </p> #}
+                        {% for competence in instru.user.competences %}
+                            <p class="activite_infos_show tac"> {{ competence.title }} </p>
+                        {% endfor %}
                     </div>
                 </div>
-            {# {% endfor %} #}
         </div>
     </div>
     {# BOTTOM INFOS AUTEUR #}

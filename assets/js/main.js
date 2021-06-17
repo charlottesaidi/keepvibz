@@ -177,7 +177,6 @@ $(document).ready(function(){
         $('html, body').animate({
             scrollTop: $($('#instrus_populaires')).offset().top
         }, 1500);
-        console.log('dede');
     });
 
 // ==============================================================

@@ -121,7 +121,7 @@ a{text-decoration: none;}
 .main_instrus{width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 20px; background-color: #000; }
 .section_instrus{margin-top: 113px;}
 .title_instrus{color: #fff; font-size: 2em; float: left; padding-bottom: 20px;}
-.content_download_instrus {width: 30%; margin-bottom: 50px;}
+.content_download_instrus {width: 30%; margin-bottom: 50px; margin-right: 2%;}
 /* .img_downloaded{width: 100%;} */
 .genre{margin: 10px 0px 30px 0px;}
 .title_instrus_genre, .title_instrus_keys{color: #fff; font-size: 1.4em; margin-bottom: 10px;}

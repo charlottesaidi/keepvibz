@@ -170,8 +170,9 @@
                     )) }}
                 </div>
                 <div class="top_right">
-                    <iframe src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" height="60" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-                    </iframe>     
+                    <iframe id="discord" class="little-discord" src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                    </iframe>   
+                    <img class="btn-discord" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="">
                 </div>               
             </div>
         </section>
@@ -194,6 +195,10 @@
             </div>
         </footer>
         {# FOOTER #}
+{# 
+        <div id="ajaxTest">
+
+        </div> #}
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
         <script>
@@ -205,6 +210,10 @@
                     // data: formData,
                     dataType: "json",
                     success: function(response) {
+                        for (var item in response) {
+                            console.log(response[item].title)
+                            $('#ajaxTest').append('<p>' + response[item].title + '</p>')
+                        }
                         console.log(response);
                     }
                 });

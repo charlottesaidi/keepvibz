@@ -301,6 +301,17 @@ $(document).ready(function(){
     })
 
     $('.widgetHeader-2Hz_Ln').css('background-color', 'lime'); /////
+
+    $('.btn-discord').on('click', function(){
+        if($('#discord').hasClass('open')){
+            $('#discord').removeClass('open');
+            $('#discord').css('height', '200px');
+        } else {
+            $('#discord').addClass('open');
+            $('#discord').css('height', '60px');
+        }
+    })
+ 
 })
 
 

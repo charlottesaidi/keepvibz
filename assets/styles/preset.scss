@@ -88,11 +88,18 @@ img {
 	width: 80px;
 	height: 70px;
 }
-.link, .reset-link {
+.link, .reset-link, button.link {
 	display: inline-block;
+	border: none;
+	background: transparent;
 	color: $font-secondary;
 	text-decoration: none;
 	padding-top: 10px;
+	cursor: pointer;
+	transition: all .3s;
+}
+button.link:hover {
+	color: $danger-error;
 }
 .main-profile, .main, .auth {
 	font-family: $squada;

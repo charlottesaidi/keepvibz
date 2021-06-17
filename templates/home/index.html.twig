@@ -19,11 +19,13 @@
                     <div class="top_block_accroche">
                         <h2 class="accroche">"Ensemble <span>on est plus fort !</span>"</h2>
                     </div>
-                    <h2 class="latest_upload">Derniers uploads</h2>
+                    <h2 class="latest_upload">Dernier upload</h2>
                     <audio preload controls>
-                        <source src="http://generationfm.ice.infomaniak.ch/generationfm-high.mp3" type="audio/mpeg">
+                    {% for audio in lastUpload %}   
+                        <source src="{{asset('uploads/instrus/' ~ audio.file)}}" type="audio/mpeg">
                     </audio>
-                    <h3 class="title_player">Titre (Artiste - BPM)</h3>
+                    <h3 class="title_player">{{audio.title}} (Par {{audio.user.name}} - BPM {{audio.bpm}})</h3>
+                    {% endfor %}
                 </div>
             </div>
     </section>
@@ -32,7 +34,7 @@
     {# SECTION 2 #}
     <section id="section_2" class="section_home_2">
         <div class="wrap4">
-            <h2 id="instrus_populaires" class="most_downloads_beats">Le Top 10 des Instrus</h2>
+            <h2 id="instrus_populaires" class="most_downloads_beats">Les 10 dernières instrus</h2>
             <div class="flexslider carousel">
                 {# CUSTOM NAVIGATION #}
                 <div class="custom-navigation">
@@ -105,7 +107,7 @@
     {# SECTION 4 #}
     <section id="section_5" class="section_home_5">
         <div class="wrap4">
-            <h2 id="textes_populaires" class="most_downloads_texts">Textes qui ont la côte !</h2>
+            <h2 class="most_downloads_texts">Les 10 derniers textes</h2>
             <div class="flexslider2 carousel">
                 {# CUSTOM NAVIGATION #}
                 <div class="custom-navigation2 custom-controls-container2">
@@ -136,33 +138,14 @@
                         </li>
                         {% endfor %}
                     </ul>
-                        // REFAIRE TOUT CA DANS HOME
-                    {# {% for instru in instrus %}
-                        <ul class="slides">
-                        <li class="content_download flex col">
-                            <audio preload src="{{asset('uploads/instrus' ~ instru.file)}}" controls id="player_1"></audio>
-                            <div class="image_downloaded">
-                                <a href="">
-                                    <img class="img_downloaded" src="{{asset('assets/images/caroussel/1.jpg')}}" alt="">
-                                </a>
-                            </div>
-                            <div class="btn_play_caroussel btn_1">
-                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="">
-                            </div>
-                            <div class="block_info_instrus flex col">
-                                <h4 class="date_ajout_downloaded">Titre : <span class="span_downloaded">Safari</span></h4>
-                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">Trap</span></h4>
-                                <h4 class="description_downloaded">Key : <span class="span_downloaded">Am</span> - <span class="span_downloaded">145</span> BPM</h4>
-                            </div>
-                        </li>
-                    </ul>
-                    {% endfor %} #}
-                    
                 </div>
             </div>
     </section>
     {# FIN SECTION 4 #}
 
     
+        <div id="ajaxTest">
+
+        </div>
 
 {% endblock %}

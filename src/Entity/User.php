@@ -52,7 +52,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     
     /**
     * @SecurityAssert\UserPassword(
-    *     message = "Ancien mot de passe invalide"
+    *     message = "Ancien mot de passe invalide",
+    *     groups={"profile-changePass"}
     * )
     */
    private $oldPassword;
@@ -70,6 +71,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      * @Assert\Length(
      *      min = 2,
      *      max = 100,
@@ -81,6 +83,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $name;
 
     /**
+     * @Assert\Regex("/^\w+/")
      * @Assert\Length(
      *      min = 2,
      *      max = 255,
@@ -92,6 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $bio;
 
     /**
+     * @Assert\Regex("/^\w+/")
      * @ORM\Column(type="string", nullable=true)
      */
     private $town;

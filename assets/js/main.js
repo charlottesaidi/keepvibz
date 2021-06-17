@@ -15,9 +15,9 @@ $(document).ready(function(){
 // ==============================================================
 
     //SEARCH
-    $(".btn_search, .icon_arrow").on('click', function(){
-        $(".block_filters").slideToggle('slow');
-    })
+    // $(".btn_search, .icon_arrow").on('click', function(){
+    //     $(".block_filters").slideToggle('slow');
+    // })
 // ==============================================================
 
     //CAROUSSEL Top 10 des Instrus HOME
@@ -147,80 +147,50 @@ $(document).ready(function(){
     });}
 
 // ==============================================================
-    // LECTEUR AUDIO 
-    // 1
-    // $(".btn").on('click', function() {
-    //    const id = $(this).attr('id'); 
-    //    const words = id.split('_');
-        // $('.player_audio_selected').each(function() {
-        //     $(this).get(0).pause();
-        // });
-
-    //     $('#player_'+ words[2])[0].play();
-    // });
     
     $('.btn').click(function(){
-        $('.player_audio_selected').toggleClass('active').each(function() {
+        const id = $(this).attr('id');
+        const words = id.split('_');
+
+        $('.player_audio_selected').not(this).each(function() {
             $(this).get(0).pause();
             this.currentTime = 0;
         });
 
-        var $this = $(this);
-        const id = $(this).attr('id');
-        const words = id.split('_');
-        if(!$this.hasClass('active')){
-            $('#player_'+ words[2])[0].play();        
+        $('.btn').not(this).each(function() {
+            $(this).removeClass('audioactive')
+        });
+        if($(this).hasClass('audioactive')){
+            $('#player_'+ words[2])[0].pause(); 
+            $(this).removeClass('audioactive')
         } else {
-            $('#player_'+ words[2])[0].pause();
+            $('#player_'+ words[2])[0].play(); 
+            $(this).addClass('audioactive')
         }
-        // $this.toggleClass('active');
     });
-
-
-    
-
-
-
-    // 2
-    // $(".btn_2").on('click', function() {
-    //     if ($("#player_2")[0].paused == false) {
-    //         $("#player_2")[0].pause();
-    //     } else {
-    //         $("#player_1")[0].pause();
-    //         $("#player_2")[0].play();
-    //     }
-    // });
-
 
 // ==============================================================
 
     //ANCRES SMOOOTH SCROLL FOOTER
-    $(document).on('click', 'a[href^="#"]', function(e) {
+    $('#anchor_instrus_pop').on('click', function(e) {
         e.preventDefault();
         $('html, body').animate({
-            scrollTop: $($.attr(this, 'href')).offset().top
-        }, 1000);
+            scrollTop: $($('#instrus_populaires')).offset().top
+        }, 1500);
     });
+
 // ==============================================================
 
     //SECTION BOTTOM
     $('.btn_bottom_keepvibz').on('click', function(){
         $('.submenu_center1').slideToggle('slow');
+        console.log('dede')
+
     })
     $('.btn_bottom_navigation').on('click', function(){
         $('.submenu_center2').slideToggle('slow');
     })
-    $('.btn_bottom_navigation').on('click', function(){
-        $('.submenu_center3').slideToggle('slow');
-    })
     
-// ================================================================
-
-    //GENRE INSTRUS HOME
-    $('.btn_genre').on('click', function(){
-        $('.block_genre').slideToggle('slow');
-    })
-
 
 // ================================================================
 
@@ -301,6 +271,17 @@ $(document).ready(function(){
     })
 
     $('.widgetHeader-2Hz_Ln').css('background-color', 'lime'); /////
+
+    $('.btn-discord').on('click', function(){
+        if($('#discord').hasClass('open')){
+            $('#discord').removeClass('open');
+            $('#discord').css('height', '200px');
+        } else {
+            $('#discord').addClass('open');
+            $('#discord').css('height', '60px');
+        }
+    })
+ 
 })
 
 
@@ -336,3 +317,12 @@ $(document).ready(function(){
     })
     
 // ================================================================
+// COMPTEUR LECTURES
+    // var count = 0;
+    // $(".btn").on("click", function(e){
+    //     e.preventDefault();
+    //     count++;
+    //     $('.resultat_nbre_lectures').html(
+    //        count 
+    //     )
+    // });

@@ -55,7 +55,7 @@
         {# HEADER #}
         <header id="header" class="header fixed">
             <h1 class="site">KeepVibz</h1>
-            <div class="wrap1 flex sb">
+            <div class="wrap2 flex sb">
                 <div class="left flex">
                     <div class="logo">
                         <a href="{{path('home')}}"><img class="img_logo" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
@@ -68,7 +68,7 @@
                     </nav>
                 </div>
                 {# MOBILE A PARTIR DE 615px #}
-                <div class="top_header flex col">
+                <div class="top_header flex sb">
                     <div class="logo_mobile">
                         <a href="/"><img class="img_logo_mobile" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo sur mobile"></a>
                     </div>
@@ -77,6 +77,7 @@
                     </div>
                 </div>
                 {# MOBILE A PARTIR DE 615px #}
+                
                 <div class="right">
                 {% if app.user %}
                         <a href="{{ path ('user_profile') }}">Profil</a>
@@ -90,7 +91,7 @@
                 {% endif %}
                 </div>
             </div>
-            <div class="wrap2 flex fs">
+            {# <div class="wrap2 flex fs">
                 <div class="search flex fs">
                     <img class="icon_search" src="{{asset('assets/images/icons/icon_search.svg')}}" alt="icon search">
                     <form id="search_form" action="{{path('filter_instru')}}" methods="post" novalidate>
@@ -107,7 +108,7 @@
                         </ul>
                     </div>
                 </div>
-            </div>
+            </div> #}
         </header>
         {# HEADER #}
         {% block body %}
@@ -140,7 +141,7 @@
                         <ul class="nav_bottom2">
                             <li><a href="{{path('instrus')}}">Toutes les Instrus</a></li>
                             <li><a href="{{path('textes')}}">Tous les Textes</a></li>
-                            <li><a href="{{path('home')}}#instrus_populaires">Le Top 10 des Instrus</a></li>
+                            <li id="anchor_instrus_pop"><a href="{{path('home')}}#instrus_populaires">Le Top 10 des Instrus</a></li>
                         </ul>
                     </div>
                 </div>
@@ -149,6 +150,7 @@
                     <h4 class="title_bottom">Keepvibz<img class="btn_bottom_keepvibz" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu KeepVibz"></h4>
                     <ul class="nav_bottom1">
                         <li><a href="{{path('home')}}">Accueil</a></li>
+                        <li><a href="{{path('contact_new')}}">Nous contacter</a></li>
                         <li><a href="{{path('mention')}}">Mentions légales</a></li>
                         <li><a href="{{path('faq')}}">F.A.Q.</a></li>
                     </ul>
@@ -157,6 +159,7 @@
                     <div class="submenu_center1">
                         <ul class="nav_bottom2">
                             <li><a href="{{path('home')}}">Accueil</a></li>
+                            <li><a href="{{path('contact_new')}}">Nous contacter</a></li>
                             <li><a href="{{path('mention')}}">Mentions légales</a></li>
                             <li><a href="{{path('faq')}}">F.A.Q.</a></li>
                     </div>
@@ -179,8 +182,15 @@
         <footer>
             <div id="footer" class="footer flex aic sb">
                 <div class="wrap4 flex wrap jcc">
-                    <p class="copyright" style="color: #fff">© 2021 KeepVibz</p>
-                    
+                        {% set startYear = 2021 %}
+                        {% set currentYear = "now"|date("Y") %}
+
+                        {% if startYear == currentYear %}
+                            {% set copyrightYears = startYear %}
+                        {% else %}
+                            {% set copyrightYears = startYear ~ ' - ' ~ currentYear %}
+                        {% endif %}
+                    <p class="copyright">© {{ copyrightYears }} Keepvibz</p>
                 </div>
             </div>
         </footer>

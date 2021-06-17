@@ -206,12 +206,11 @@ $(document).ready(function(){
     //SECTION BOTTOM
     $('.btn_bottom_keepvibz').on('click', function(){
         $('.submenu_center1').slideToggle('slow');
+        console.log('dede')
+
     })
     $('.btn_bottom_navigation').on('click', function(){
         $('.submenu_center2').slideToggle('slow');
-    })
-    $('.btn_bottom_navigation').on('click', function(){
-        $('.submenu_center3').slideToggle('slow');
     })
     
 // ================================================================
@@ -299,19 +298,6 @@ $(document).ready(function(){
         $('.bottom_instrus_associees_show_textes').hide();
         $('.bottom_informations_auteur_show_textes').show();
     })
-
-    $('.widgetHeader-2Hz_Ln').css('background-color', 'lime'); /////
-
-    $('.btn-discord').on('click', function(){
-        if($('#discord').hasClass('open')){
-            $('#discord').removeClass('open');
-            $('#discord').css('height', '200px');
-        } else {
-            $('#discord').addClass('open');
-            $('#discord').css('height', '60px');
-        }
-    })
- 
 })
 
 

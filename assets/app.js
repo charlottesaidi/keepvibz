@@ -24,13 +24,14 @@ import './styles/app.css';
 import './bootstrap';
 
 // JS perso
-import './js/main.js';
 
 import './styles/mention.css';
 
 import './styles/faq.css';
 
 import './styles/contact.css';
+
+import './js/main.js';
 
 
 

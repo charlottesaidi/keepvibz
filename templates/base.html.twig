@@ -151,6 +151,7 @@
                         <li><a href="{{path('home')}}">Accueil</a></li>
                         <li><a href="{{path('mention')}}">Mentions légales</a></li>
                         <li><a href="{{path('faq')}}">F.A.Q.</a></li>
+                    </ul>
                     {# ====================================================== #}
                     {# SUB MENU KEEPVIBZ MOBILE #}
                     <div class="submenu_center1">
@@ -184,6 +185,10 @@
             </div>
         </footer>
         {# FOOTER #}
+{# 
+        <div id="ajaxTest">
+
+        </div> #}
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
         <script>
@@ -195,6 +200,10 @@
                     // data: formData,
                     dataType: "json",
                     success: function(response) {
+                        for (var item in response) {
+                            console.log(response[item].title)
+                            $('#ajaxTest').append('<p>' + response[item].title + '</p>')
+                        }
                         console.log(response);
                     }
                 });

@@ -53,7 +53,7 @@
                                 <div class="image_downloaded">
                                     <a href="{{path('instru_show', {'id': beat.id})}}">
                                         {% if beat.image == null %}
-                                            <img class="img_downloaded" src="{{asset('assets/images/items_sans_image/instru.png')}}" alt="{{ beat.title }}">
+                                            <img class="img_downloaded" src="{{asset('uploads/images/instrus/instru.jpg')}}" alt="{{ beat.title }}">
                                         {% else %}
                                             <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
                                         {% endif %}

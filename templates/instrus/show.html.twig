@@ -9,7 +9,11 @@
         <div class="top_container_show pr">
             <div class="top_content_instrus_show flex col aic">
                 <div class="up_content_img">
+                    {% if instru.image %}
                     <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru">
+                    {% else %}
+                    <img src="{{asset('uploads/images/instrus/instru.jpg')}}" class="image_content_show_instru">
+                    {% endif %}
                 </div>
             </div>
             <div class="down_content flex col aic">
@@ -68,6 +72,8 @@
                         <div class="block_image_instru_author">
                         {% if beats.image != null %}
                         <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                            {% else %}
+                                <img src="{{asset('uploads/images/instrus/instru.jpg')}}" class="img_instru_author">
                         {% endif %}
                         </div>
                     </a>

@@ -439,7 +439,10 @@ h2{
 .accroche3{ font-size: 3em; color: #fff;}
 
 /* FIN SECTION 4 */
-
+.image_downloaded_index_texte {
+    overflow: hidden;
+    margin-bottom: 10px;
+}
 
 
 /* HOME */

@@ -81,6 +81,11 @@
                     </div>
                     <a href="{{path('instru_show', {'id': instru.id})}}">
                         <div class="block_image_instru_author">
+                            {% if instru.image %}
+                                <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="img_instru_author">
+                            {% else %}
+                                <img src="{{asset('uploads/images/instrus/instru.jpg')}}" class="img_instru_author">
+                            {% endif %}
                             <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="img_instru_author">
                         </div>
                     </a>

@@ -21,7 +21,7 @@ class TexteFixtures extends Fixture implements DependentFixtureInterface
 
         $manager->persist($texte1);
 
-        for($i = 0; $i < 20; $i++) {
+        for($i = 0; $i < 5; $i++) {
             $texte = new Texte();
             $texte->setTitle('Texte'.$i);
             $texte->setUser($this->getReference('admin'));

@@ -24,7 +24,7 @@
                                             <tr>
                                                 <th class="cell">Avatar</th>
                                                 <td class="cell">
-                                                {% if user.avatar.file %}
+                                                {% if user.avatar %}
                                                     <img src="{{asset('uploads/images/avatars/' ~ user.avatar.file)}}">
                                                 {% endif %}
                                                 </td> 

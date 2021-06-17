@@ -6,7 +6,7 @@
     {# SECTION 1 #}
     <section id="section_1" class="section_home_1">
         <div class="background_1">
-            <img class="gif_background" src="{{asset('assets/images/background/fond_projet.gif')}}" alt="image animée en fond d'ecran">
+            <img class="gif_background" src="{{asset('assets/images/background/fond_projet_png.png')}}" alt="image animée en fond d'ecran">
             <div class="gradient"></div>
         </div>
         <div class="background_2">
@@ -51,7 +51,7 @@
                             <div class="image_downloaded">
                                 <a href="{{path('instru_show', {'id': beat.id})}}">               
                                     {% if beat.image is empty %}
-                                        <img class="img_downloaded" src="{{asset('uploads/images/instrus/vcRZLnbBT5Yhd.jpg')}}" alt="{{ beat.title }}">
+                                        <img class="img_downloaded" src="{{asset('uploads/images/instrus/instru.jpg')}}" alt="{{ beat.title }}">
                                     {% else %}
                                         <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
                                     {% endif %}
@@ -120,7 +120,7 @@
                     <ul class="slides">
                         {% for text in textes %}
                         <li class="content_download flex col">
-                            <div class="image_downloaded">
+                            <div class="image_downloaded_index_texte">
                                 <a href="{{path('texte_show', {'id': text.id})}}">
                                 {% if text.user.avatar is empty  %}
                                     <div class="background_avatar_empty">

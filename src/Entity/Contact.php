@@ -29,12 +29,14 @@ class Contact
 
     /**
      *@Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      *@ORM\Column(type="string", length=255)
      */
     private $Name;
 
     /**
      *@Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      *@Assert\Email(
      *    message = "Renseignez une adresse e-mail valide"
      * )
@@ -43,12 +45,14 @@ class Contact
     private $Email;
 
     /**
+     * @Assert\Regex("/^\w+/")
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $Subject;
 
     /**
      *@Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      *@ORM\Column(type="text")
      */
     private $Message;

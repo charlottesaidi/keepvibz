@@ -72,7 +72,7 @@
                                                 <td class="cell"><span class="cell-data">{{ avatar.modifiedAt ? avatar.modifiedAt|date('d/m/Y') : '' }}</span>
                                                     <span class="note">{{ avatar.modifiedAt ? avatar.modifiedAt|date('H:i') : '' }}</span>
                                                 </td>
-                                                <td class="cell d-flex align-center">
+                                                <td class="cell">
                                                     <div class="d-flex align-center">
                                                         <a href="{{ path('avatar_show', {'id': avatar.id}) }}" class="btn-sm app-btn-secondary"><i class="far fa-eye"></i></a>
                                                         <a href="{{ path('avatar_edit', {'id': avatar.id}) }}" class="btn-sm app-btn-secondary"><i class="far fa-edit"></i></a>

@@ -22,6 +22,7 @@ use JasonGrimes\Paginator;
 use App\Service\FolderGenerator;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Intervention\Image\ImageManager;
+use Symfony\Component\HttpClient\HttpClient;
 
 #[Route('/profile')]
 class UserProfileController extends AbstractController
@@ -46,11 +47,12 @@ class UserProfileController extends AbstractController
 
     #[Route('/', name: 'user_profile', methods: ['GET', 'POST'])]
     public function index(Request $request): Response
-    {           
+    {   
         $user = $this->getUser();
         $avatar = new Avatar();
         $oldPassword = $user->getPassword();
-
+        $passwordErrors = [];
+        $profileErrors = [];
         $form = $this->createForm(UserProfileType::class, $user);
         $changePasswordForm = $this->createForm(ChangeProfilePasswordType::class, $user);
         $avatarForm = $this->createForm(AvatarType::class, $avatar);
@@ -68,20 +70,22 @@ class UserProfileController extends AbstractController
         }
 
         if ($request->request->has('user_profile')) {
-            if ($form->isSubmitted()) {
+            if($form->isSubmitted() && $form->isValid()) {
                 $user->setModifiedAt(new \dateTime());
-                
-                if($form->get('email')->getData() != $user->getEmail()) {
+                if($form->get('email')->getData() != null) {
                     $user->setEmail($form->get('email')->getData());
                 }
-                if($form->get('phoneNumber')->getData() != $user->getPhoneNumber()) {
+                if($form->get('phoneNumber')->getData() != null) {
                     $user->setPhoneNumber($form->get('phoneNumber')->getData());
                 }
-                if($form->get('name')->getData() != $user->getName()) {
+                if($form->get('name')->getData() != null) {
                     $user->setName($form->get('name')->getData());
                 }
-                if($form->get('town')->getData() != $user->getTown()) {
+                if($form->get('town')->getData() != null) {
                     $user->setTown($form->get('town')->getData());
+                }
+                if($form->get('bio')->getData() != null) {
+                    $user->setBio($form->get('bio')->getData());
                 }
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
@@ -89,7 +93,6 @@ class UserProfileController extends AbstractController
             }
         }
 
-        $passwordErrors = [];
         if ($request->request->has('change_profile_password')) {
             if ($changePasswordForm->isSubmitted()) {
                 if($changePasswordForm->isValid()) {
@@ -115,6 +118,7 @@ class UserProfileController extends AbstractController
             'instrus' => $this->instruRepo->findUserInstrus($user),
             'toplines' => $this->toplineRepo->findUserToplines($user),
             'passwordErrors' => $passwordErrors,
+            'profileErrors' => $profileErrors
         ]);
     }
     

@@ -31,6 +31,7 @@ class Instru
 
     /**
      * @Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      * @Assert\Length(
      *      min = 2,
      *      max = 100,
@@ -62,6 +63,7 @@ class Instru
 
     /**
      * @Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      * @ORM\Column(type="string", length=255)
      */
     private $cle;
@@ -283,8 +285,8 @@ class Instru
         return $this;
     }
 
-    public function getEntityInfos($array, $key) {
-        $data = [
+    public function getInfos() {
+        return $data = [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
             'genre' => $this->getGenre(),
@@ -298,6 +300,5 @@ class Instru
             'textes' => $this->getTextes(),
             'toplines' => $this->getToplines(),            
         ];
-        $array[$key++] = $data;
     }
 }

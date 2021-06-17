@@ -42,6 +42,7 @@ class Topline
 
     /**
      * @Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      * @Assert\Length(
      *      min = 2,
      *      max = 100,

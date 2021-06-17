@@ -37,6 +37,7 @@ class Texte
 
     /**
      * @Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      * @Assert\Length(
      *      min = 2,
      *      max = 100,
@@ -48,6 +49,7 @@ class Texte
     private $title;
 
     /**
+     * @Assert\Regex("/^\w+/")
      * @Assert\Length(
      *      min = 10,
      *      minMessage = "Ce champ doit comporter {{ limit }} caractères au minimum",
@@ -57,6 +59,7 @@ class Texte
     private $couplet;
 
     /**
+     * @Assert\Regex("/^\w+/")
      * @Assert\NotBlank
      * @Assert\Length(
      *      min = 10,

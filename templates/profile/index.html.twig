@@ -3,6 +3,8 @@
 {% block stylesheets %}
     {{ parent() }}
     {{ encore_entry_link_tags('user-profile') }}
+    
+{# <link rel="stylesheet" href="https://code.jquery.com/ui/1.7.3/themes/base/jquery-ui.css"> #}
 {% endblock %}
 
 {% block javascripts %}
@@ -14,26 +16,6 @@
 {% block title %}KeepVibz | Profil{% endblock %}
 
 {% block body %}
-    
-    <div class="mobile-nav">
-        <nav class="hide" id="mobileNav">
-            <ul>
-                <li>
-                    <button href="#!" class="tablinks" id="mob-prof-link">Profil</button>
-                </li>
-                <li>
-                    <button href="#!" class="tablinks" id="mob-instru-link">Mes Instrus</button>
-                </li>
-                <li>
-                    <button href="#!" class="tablinks" id="mob-top-link">Mes Toplines</button>
-                </li>
-                <li>
-                    <button href="#!" class="tablinks" id="mob-text-link">Mes Textes</button>
-                </li>
-            </ul>
-        </nav>
-        <button href="#!" class="tablinks" id="sideNavLink"><img class="button_burger" src="{{asset('assets/images/logo_mobile.png')}}" alt="logo sur mobile"></button>
-    </div>
 
     <div class="profile-main">
         <div class="side-nav">
@@ -87,7 +69,13 @@
                         {{ error }}
                     </div>
                 {% endfor %} 
+                {% for error in profileErrors %}
+                    <div class="invalid-feedback d-block">
+                        {{ error }}
+                    </div>
+                {% endfor %}
             </div>
+
             <div id="profil" class="tabcontent" style="display: block">
                 <h2>Profil</h2>
                 <div class="user-block">
@@ -119,7 +107,7 @@
                     {{ form_start(profileForm, {'attr': {'novalidate': 'novalidate'}}) }}
                         {{form_errors(profileForm.email)}}
                         {{form_errors(profileForm.name)}}
-                        {{form_errors(profileForm.email)}}
+                        {{form_errors(profileForm.bio)}}
                         {{form_errors(profileForm.phoneNumber)}}
 
                         <h3>Pseudo</h3>
@@ -169,10 +157,9 @@
                                 <div class="edit-block profile-block formsection hidden" id="edit-town">
                                     <div class="input-group">
                                         {{form_widget(profileForm.town)}}
-                                        {{form_errors(profileForm.town)}}
                                     </div>
                                     <div class="input-group">
-                                        <input type="submit" class="btn-primary" value="Valider">
+                                        <button type="input" id='form_city' class="btn-primary">Valider</button>
                                     </div>
                                 </div>
                             </div>
@@ -389,8 +376,10 @@
                                     <div class="flex">
                                         <a class="link" href="{{ path('textes_edit', {'id': texte.id}) }}">
                                         <i class="far fa-edit"></i></a>
-                                        <a class="link" href="{{ path('textes_delete', {'id': texte.id}) }}">
-                                        <i class="far fa-trash-alt"></i></a>
+                                        <form method="post" action="{{ path('textes_delete', {'id': texte.id}) }}" onsubmit="return confirm('Confirmer la suppression?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ texte.id) }}">
+                                            <button class="link"><i class="far fa-trash-alt"></i></button>
+                                        </form>
                                     </div>
                                     <div class="description_textes">
                                         <h3 class="title_texte"><a href="{{ path('texte_show', {'id': texte.id}) }}">{{texte.title}}</h3></a>
@@ -418,4 +407,32 @@
         </div>
 
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        // API Base d'adresses nationale gouvernement (adrien.poupa.fr)
+        $("#user_profile_town").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='ville']").val(),
+                    data: { q: request.term },
+                    dataType: "json",
+                    success: function (data) {
+                        var cities = [];
+                        response($.map(data.features, function (item) {
+                            // Ici on est obligé d'ajouter les villes dans un array pour ne pas avoir plusieurs fois la même
+                            if ($.inArray(item.properties.postcode, cities) == -1) {
+                                cities.push(item.properties.postcode);
+                                return { label: item.properties.postcode + " - " + item.properties.city, 
+                                        postcode: item.properties.postcode,
+                                        value: item.properties.city
+                                };
+                            }
+                        }));
+                    }
+                });
+            },
+        });
+    </script>
 {% endblock %}

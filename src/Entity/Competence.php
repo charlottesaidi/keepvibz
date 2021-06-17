@@ -31,6 +31,7 @@ class Competence
 
     /**
      * @Assert\NotBlank
+     * @Assert\Regex("/^\w+/")
      * @Assert\Length(
      *      min = 2,
      *      max = 50,
@@ -42,7 +43,6 @@ class Competence
     private $title;
 
     /**
-     * @Assert\Unique
      * @ORM\Column(type="datetime")
      */
     private $created_at;

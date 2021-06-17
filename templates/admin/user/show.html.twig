@@ -23,7 +23,11 @@
                                         <tbody>
                                             <tr>
                                                 <th class="cell">Avatar</th>
-                                                <td class="cell">{# balise <img>, src "user.avatar.file" #}</td> 
+                                                <td class="cell">
+                                                {% if user.avatar.file %}
+                                                    <img src="{{asset('uploads/images/avatars/' ~ user.avatar.file)}}">
+                                                {% endif %}
+                                                </td> 
                                             </tr>
                                             <tr>
                                                 <th class="cell">Identifiant</th>
@@ -66,7 +70,11 @@
                                             </tr>
                                             <tr>
                                                 <th class="cell">Phone</th>
-                                                <td class="cell">{{ user.phoneNumber }}</td>
+                                                <td class="cell">
+                                                    {% if user.phoneNumber %}
+                                                        {{ user.phoneNumber|phone_number_format('NATIONAL') }}
+                                                    {% endif %}
+                                                </td>
                                             </tr>
                                             <tr>
                                                 <th class="cell">Inscription confirmée</th>

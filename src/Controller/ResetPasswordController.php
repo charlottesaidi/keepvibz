@@ -107,8 +107,6 @@ class ResetPasswordController extends AbstractController
 
                 return $this->redirectToRoute('app_login');
             }
-        } else {
-            return $this->redirectTo('/_erreur/404');
         }
 
         return $this->render('reset_password/reset.html.twig', [

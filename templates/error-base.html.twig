@@ -18,18 +18,6 @@
     </head>
     <body>
     
-        {% if app.request.get('_route') != 'profile' %}
-            {# PAGE DE CHARGEMENT #}
-            <div class="chargement">
-                <div id="preloader">
-                    <div class="logo_chargement pa">
-                        <img class="img_logo_chargement" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo">
-                    </div>
-                    <div class="loader">Please wait...</div>
-                </div>
-            </div>
-            {# PAGE DE CHARGEMENT #}
-        {% endif %}
 
         {% block body %}
         

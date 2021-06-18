@@ -3,6 +3,7 @@
 {% block title %}KeepVibz | Ensemble on est plus fort !{% endblock %}
 
 {% block body %}
+
     {# SECTION 1 #}
     <section id="section_1" class="section_home_1">
         <div class="background_1">
@@ -119,23 +120,25 @@
                 {# CUSTOM NAVIGATION #}
                     <ul class="slides">
                         {% for text in textes %}
-                        <li class="content_download flex col">
-                            <div class="image_downloaded_index_texte">
-                                <a href="{{path('texte_show', {'id': text.id})}}">
-                                {% if text.user.avatar is empty  %}
-                                    <div class="background_avatar_empty">
-                                        <p class="refrain_caroussel tac" style="color:#fff"> {{ text.refrain }}</p>
+                            {% if text.status == 'published' %}
+                                <li class="content_download flex col">
+                                    <div class="image_downloaded_index_texte">
+                                        <a href="{{path('texte_show', {'id': text.id})}}">
+                                        {% if text.user.avatar is empty  %}
+                                            <div class="background_avatar_empty">
+                                                <p class="refrain_caroussel tac" style="color:#fff"> {{ text.refrain }}</p>
+                                            </div>
+                                        {% else %}
+                                            <img class="img_downloaded" src="{{ asset('uploads/images/avatars/' ~ text.user.avatar.file) }}" alt="{{ text.title }}">
+                                        {% endif %}
+                                        </a>
                                     </div>
-                                {% else %}
-                                    <img class="img_downloaded" src="{{ asset('uploads/images/avatars/' ~ text.user.avatar.file) }}" alt="{{ text.title }}">
-                                {% endif %}
-                                </a>
-                            </div>
-                            <div class="block_info_instrus flex col tac">
-                                <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ text.title }}</span></h4>
-                                <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ text.user.name }}</span></h4>
-                            </div>
-                        </li>
+                                    <div class="block_info_instrus flex col tac">
+                                        <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ text.title }}</span></h4>
+                                        <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ text.user.name }}</span></h4>
+                                    </div>
+                                </li>
+                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>

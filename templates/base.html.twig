@@ -18,7 +18,7 @@
     </head>
     <body>
     
-        {% if app.request.get('_route') != 'profile' %}
+        {% if app.request.get('_route') == 'home' %}
             {# PAGE DE CHARGEMENT #}
             <div class="chargement">
                 <div id="preloader">

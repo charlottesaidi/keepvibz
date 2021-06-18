@@ -27,7 +27,9 @@ class UserChecker implements UserCheckerInterface
         if (!$user instanceof AppUser) {
             return;
         }
-
+        if ($user->getValid() == false) {
+            throw new CustomUserMessageAccountStatusException('Tu n\'as pas encore confirmé ton inscription');
+        }
         // user account is expired, the user may be notified
         if ($user->getActif() == false) {
             throw new CustomUserMessageAccountStatusException('Tu as été banni(e). Contact le support pour plus d\'infos');

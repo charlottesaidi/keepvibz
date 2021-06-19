@@ -1,3 +1,15 @@
+## KeepVibz | Projet final de soutenance  
+
+### Contexte  
+Formation Développeur Codeur Web - ESCCI Normandie - WebForce3  
+Projet final de groupe - 3 collaborateurs  
+
+### Structure Répo  
+- Master:  
+Branche principale | installation du projet  
+- Dev  
+Branche de développement | projet abouti  
+
 ### Installation
 
 __Bundles et dépendances Vendor__  

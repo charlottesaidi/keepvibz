@@ -1,6 +1,18 @@
-### Installation
+## KeepVibz | Projet final de soutenance  
 
-#### Projet
+### Contexte  
+Formation Développeur Codeur Web - ESCCI Normandie - WebForce3  
+Projet final de groupe - 3 collaborateurs  
+
+### Structure Répo  
+- Master:  
+Branche principale | installation du projet  
+- Dev  
+Branche de développement | projet abouti  
+
+### Installation  
+
+#### Projet  
 Vendor:  
 ```bash
 composer install
@@ -13,14 +25,3 @@ Dépendance Webpack PopperJS:
 ```bash
 npm i @popperjs/core
 ```  
-#### Base de données
-Créer la base de données:  
-```bash
-doctrine:database:create
-```  
-Migration des tables:  
-```bash  
-doctrine:migrations:migrate 
-```  
-
-http://localhost:8000/admin

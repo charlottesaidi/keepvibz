@@ -8,7 +8,7 @@ Projet final de groupe - 3 collaborateurs
 - Master:  
 Branche principale | installation du projet  
 - Dev  
-Branche de développement | projet abouti  
+Branche de développement commune    
 
 ### Installation  
 

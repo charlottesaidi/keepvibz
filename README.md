@@ -8,7 +8,9 @@ Projet final de groupe - 3 collaborateurs
 - Master:  
 Branche principale | installation du projet  
 - Dev  
-Branche de développement | projet abouti  
+Branche de développement  
+- Filtre-recherche  
+Fonctionnalité de recherche par filtre, test ajax 
 
 ### Installation
 

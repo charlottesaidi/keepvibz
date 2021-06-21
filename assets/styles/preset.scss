@@ -326,14 +326,3 @@ textarea#message {
         padding-top: 90px;
     }
 }
-@media screen AND (max-width: 450px) {
-	body .auth footer .wrap {
-		flex-direction: column-reverse;
-		div:not(.logo) {
-			padding: 15px 0;
-		}
-		.logo {
-			order: 2
-		}
-	}
-}

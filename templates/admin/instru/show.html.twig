@@ -37,7 +37,7 @@
                                                 <th class="cell">Textes associés</th>
                                                 <td class="cell"> 
                                                 {% for texte in instru.textes %}
-                                                    <span><a href="{{ path('texte_show', {'id': texte.id}) }}">{{ texte.title }}</a></span><br>
+                                                    <span><a href="{{ path('texte-show', {'id': texte.id}) }}">{{ texte.title }}</a></span><br>
                                                 {% endfor %}
                                                 </td>
                                             </tr>

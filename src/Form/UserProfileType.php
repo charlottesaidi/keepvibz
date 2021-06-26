@@ -7,6 +7,7 @@ use App\Entity\Competence;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Misd\PhoneNumberBundle\Form\Type\PhoneNumberType;
 use libphonenumber\PhoneNumberFormat;
@@ -27,6 +28,15 @@ class UserProfileType extends AbstractType
             ->add('email', EmailType::class)
             ->add('name', TextType::class)
             ->add('bio', TextareaType::class)
+            ->add('visible', ChoiceType::class, [
+                'label' => 'Visibilité sur le site',
+                'choices'  => [
+                    'Privée' => false,
+                    'Publique' => true
+                ],
+                'multiple' => false,
+                'expanded' => true,
+            ])
             ->add('town', TextType::class, [
                 'attr' => [
                     'class' => 'ui-autocomplete-input',

@@ -1,3 +1,8 @@
+/*
+|---------------------------------
+|   Side nav / sections
+|--------------------------------- 
+*/
 function openSection(evt, sectionName, tab, links) {
     var i, tabcontent, tablinks, tab;
 
@@ -14,11 +19,6 @@ function openSection(evt, sectionName, tab, links) {
     document.getElementById(sectionName).style.display = "block";
     evt.currentTarget.className += " active";
 }
-/*
-|---------------------------------
-|   Side nav / sections
-|--------------------------------- 
-*/
 document.querySelector('#prof-link').addEventListener('click', (e) => {
     openSection(e, 'profil', 'tabcontent', 'tablinks')
 })
@@ -63,6 +63,9 @@ document.querySelector('#town-button').addEventListener('click', (e) => {
 })
 document.querySelector('#phone-button').addEventListener('click', (e) => {
     openForm('edit-phone', e)
+})
+document.querySelector('#visibility-button').addEventListener('click', (e) => {
+    openForm('edit-visibility', e)
 })
 document.querySelector('#delete-button').addEventListener('click', (e) => {
     openForm('delete', e)

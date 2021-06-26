@@ -19,13 +19,15 @@
 
                 <div class="full_content_textes">
                     <div class="content_couplet">
-                        <p class="couplet_texte_show tac"><span>Couplet</span>
-                            {{ texte.couplet }}
+                        <p class="couplet_texte_show tac">Couplet</p>
+                        <p class="couplet_texte_show tac">
+                            {{ texte.couplet|nl2br }}
                         </p>
                     </div>
                     <div class="content_refrain">
-                        <p class="refrain_texte_show tac"><span>Refrain</span>
-                            {{ texte.refrain }}
+                        <p class="couplet_texte_show tac">Refrain</p>
+                        <p class="refrain_texte_show tac">
+                            {{ texte.refrain|nl2br }}
                         </p>
                     </div>
                 </div>
@@ -86,7 +88,6 @@
                             {% else %}
                                 <img src="{{asset('uploads/images/instrus/instru.jpg')}}" class="img_instru_author">
                             {% endif %}
-                            <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="img_instru_author">
                         </div>
                     </a>
                 </div>
@@ -106,7 +107,7 @@
                 </a>
                 <div class="top_right_others_instrus_author pa">
                     <div class="block_downloading pr">
-                        <a href="{{asset('uploads/instrus/' ~ instru.file)}}" download="{{ instru.file }}">
+                        <a class="download_btn" href="{{asset('uploads/instrus/' ~ instru.file)}}" download="{{ instru.file }}">
                             <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
                         </a>
                     </div>
@@ -121,7 +122,6 @@
     <div class="bottom_informations_auteur_show_textes">
         <div class="wrap2_instrus_show">
             <h2 class="title_groupe_bottom tac">Informations sur l'auteur</h2>
-            {# {% for topline in instru.toplines %} #}
                 <div class="block_infos_perso flex col aic">
                     <div class="first_block_infos flex fw aic">
                         {% if texte.user.avatar != null %}
@@ -138,16 +138,21 @@
                         </div>
                     </div>
                     <div class="second_block_infos flex col aic">
+                    {% if texte.user.visible == true %}
                         <p class="email_infos_show"> <span><i class="fas fa-envelope"></i></span> {{texte.user.email}} </p>
                         <p class="town_infos_show"><span class="grey_text_bottom_description">Ville:</span>  {{ texte.user.town }} </p>
                         <p class="number_infos_show tac"> {{ texte.user.phoneNumber }} </p>
+                    {% endif %}
                     </div>
                     <div class="third_block_infos flex col aic">
                         <p class="details_infos_show tac"> {{ texte.user.bio }} </p>
-                        {# <p class="activite_infos_show tac"> {{ instru.user.user_competence }} </p> #}
+                        <p class="activite_infos_show tac"> 
+                        {% for competence in texte.user.competences %}
+                            {{competence}}
+                        {% endfor %}
+                        </p>
                     </div>
                 </div>
-            {# {% endfor %} #}
         </div>
     </div>
     {# BOTTOM INFOS AUTEUR #}

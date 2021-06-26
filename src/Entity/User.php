@@ -109,12 +109,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $valid;
+    private $valid = false;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $actif = false;
+    private $actif = true;
 
     /**
      * @ORM\Column(type="datetime")
@@ -155,6 +155,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $reset_token;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $visible = false;
 
     public function __construct()
     {
@@ -486,6 +491,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setResetToken(?string $reset_token): self
     {
         $this->reset_token = $reset_token;
+
+        return $this;
+    }
+
+    public function getVisible(): ?bool
+    {
+        return $this->visible;
+    }
+
+    public function setVisible(bool $visible): self
+    {
+        $this->visible = $visible;
 
         return $this;
     }

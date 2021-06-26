@@ -87,6 +87,9 @@ class UserProfileController extends AbstractController
                 if($form->get('bio')->getData() != null) {
                     $user->setBio($form->get('bio')->getData());
                 }
+                if($form->get('visible')->getData() != null) {
+                    $user->setVisible($form->get('visible')->getData());
+                }
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->flush();
                 $this->addFlash('success', 'Modification prise en compte');

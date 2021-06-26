@@ -63,8 +63,8 @@
                     </div>
                     <nav class="navigation">
                         <ul class="nav flex">
-                            <li class="link"><a href="{{path('instrus')}}">Instrus</a></li>
-                            <li class="link"><a href="{{path('textes')}}">Textes</a></li>
+                            <li class="link nav_link"><a href="{{path('instrus')}}">Instrus</a></li>
+                            <li class="link nav_link"><a href="{{path('textes')}}">Textes</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -81,14 +81,14 @@
                 
                 <div class="right">
                 {% if app.user %}
-                        <a href="{{ path ('user_profile') }}">Profil</a>
+                        <a class="nav_link" href="{{ path ('user_profile') }}">Profil</a>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <span><a href="{{ path ('admin_dashboard') }}">Admin</a></span>
+                            <span><a class="nav_link" href="{{ path ('admin_dashboard') }}">Admin</a></span>
                         {% endif %}
-                        <a href="{{ path ('app_logout') }}">Déconnexion</a>
+                        <a class="link_connexion nav_link" href="{{ path ('app_logout') }}">Déconnexion</a>
                     {% else %}
-                        <a href="{{ path ('app_register') }}">Inscription</a>
-                        <a class="link_connexion" href="{{ path ('app_login') }}">Connexion</a>
+                        <a class="nav_link" href="{{ path ('app_register') }}">Inscription</a>
+                        <a class="link_connexion nav_link" href="{{ path ('app_login') }}">Connexion</a>
                 {% endif %}
                 </div>
             </div>

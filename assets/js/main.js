@@ -6,147 +6,51 @@ $(document).ready(function(){
         $(".logo_chargement").fadeOut();
         $("#preloader").delay(500).fadeOut("slow").scrollTop();
     });
-// ==============================================================
+    // ==============================================================
 
     //BURGER
     $('.btn_burger').on('click', function(){
         $('.navigation_mobile').slideToggle('slow');
     })
-// ==============================================================
-
-    //SEARCH
-    // $(".btn_search, .icon_arrow").on('click', function(){
-    //     $(".block_filters").slideToggle('slow');
-    // })
-// ==============================================================
+    // ==============================================================
 
     //CAROUSSEL Top 10 des Instrus HOME
     if (window.matchMedia("(max-width: 550px)").matches) {
-        $('.flexslider').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 250,
-            itemMargin: 20,
-            minItems: 1,
-            maxItems: 1,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container"),
-            customDirectionNav: $(".custom-navigation a")
-            });}
+        flexSliderInit('.flexslider', 250, 20, 1, 1, ".custom-controls-container", ".custom-navigation a");
+    }
     else if (window.matchMedia("(max-width: 800px)").matches) {
-        $('.flexslider').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 200,
-            itemMargin: 20,
-            minItems: 2,
-            maxItems: 2,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container"),
-            customDirectionNav: $(".custom-navigation a")
-            });}
+        flexSliderInit('.flexslider', 200, 20, 2, 2, ".custom-controls-container", ".custom-navigation a");
+    }
     else if (window.matchMedia("(max-width: 1100px)").matches) {
-        $('.flexslider').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 200,
-            itemMargin: 20,
-            minItems: 3,
-            maxItems: 3,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container"),
-            customDirectionNav: $(".custom-navigation a")
-            });}
+        flexSliderInit('.flexslider', 200, 20, 3, 3, ".custom-controls-container", ".custom-navigation a");
+    }
     else if (window.matchMedia("(max-width: 1300px)").matches) {
-        $('.flexslider').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 200,
-            itemMargin: 20,
-            minItems: 4,
-            maxItems: 4,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container"),
-            customDirectionNav: $(".custom-navigation a")
-            });}
+        flexSliderInit('.flexslider', 200, 20, 4, 4, ".custom-controls-container", ".custom-navigation a");
+    }
     else {
-        $('.flexslider').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 200,
-            itemMargin: 20,
-            minItems: 5,
-            maxItems: 5,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container"),
-            customDirectionNav: $(".custom-navigation a")
-    });}
+        flexSliderInit('.flexslider', 200, 20, 5, 5, ".custom-controls-container", ".custom-navigation a");
+    }
 
-// ==============================================================
+    // ==============================================================
 
     //CAROUSSEL Textes Populaires HOME
     if (window.matchMedia("(max-width: 550px)").matches) {
-        $('.flexslider2').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 250,
-            itemMargin: 20,
-            minItems: 1,
-            maxItems: 1,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container2"),
-            customDirectionNav: $(".custom-navigation2 a")
-            });}
+        flexSliderInit('.flexslider2', 250, 20, 1, 1, ".custom-controls-container2", ".custom-navigation2 a");
+    }
     else if (window.matchMedia("(max-width: 800px)").matches) {
-        $('.flexslider2').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 200,
-            itemMargin: 20,
-            minItems: 2,
-            maxItems: 2,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container2"),
-            customDirectionNav: $(".custom-navigation2 a")
-            });}
+        flexSliderInit('.flexslider2', 200, 20, 2, 2, ".custom-controls-container2", ".custom-navigation2 a");
+    }
     else if (window.matchMedia("(max-width: 1100px)").matches) {
-        $('.flexslider2').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 200,
-            itemMargin: 20,
-            minItems: 3,
-            maxItems: 3,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container2"),
-            customDirectionNav: $(".custom-navigation2 a")
-            });}
+        flexSliderInit('.flexslider2', 200, 20, 3, 3, ".custom-controls-container2", ".custom-navigation2 a");
+    }
     else if (window.matchMedia("(max-width: 1300px)").matches) {
-        $('.flexslider2').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 200,
-            itemMargin: 20,
-            minItems: 4,
-            maxItems: 4,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container2"),
-            customDirectionNav: $(".custom-navigation2 a")
-            });}
+        flexSliderInit('.flexslider2', 200, 20, 4, 4, ".custom-controls-container2", ".custom-navigation2 a");
+    }
     else {
-        $('.flexslider2').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 200,
-            itemMargin: 20,
-            minItems: 5,
-            maxItems: 5,
-            controlNav: false,
-            controlsContainer: $(".custom-controls-container2"),
-            customDirectionNav: $(".custom-navigation2 a")
-    });}
+        flexSliderInit('.flexslider2', 200, 20, 5, 5, ".custom-controls-container2", ".custom-navigation2 a");
+    }
 
-// ==============================================================
+    // ==============================================================
     
     $('.btn').click(function(){
         const id = $(this).attr('id');
@@ -169,7 +73,7 @@ $(document).ready(function(){
         }
     });
 
-// ==============================================================
+    // ==============================================================
 
     //ANCRES SMOOOTH SCROLL FOOTER
     $('#anchor_instrus_pop').on('click', function(e) {
@@ -179,7 +83,7 @@ $(document).ready(function(){
         }, 1500);
     });
 
-// ==============================================================
+    // ==============================================================
 
     //SECTION BOTTOM
     $('.btn_bottom_keepvibz').on('click', function(){
@@ -192,7 +96,7 @@ $(document).ready(function(){
     })
     
 
-// ================================================================
+    // ================================================================
 
     //SHOW INSTRUS - DISPLAY NONE / DISPLAY BLOCK - BOTTOM SECTION
     $('.second_textes').click(function(){
@@ -281,11 +185,12 @@ $(document).ready(function(){
             $('#discord').css('height', '60px');
         }
     })
- 
-})
+    // ==============================================================
 
-
-// ==============================================================
+    // DISABLE BTNS ON DOWNLOAD
+    $('.download_btn').one('click', function() {
+        $(this).hide();
+    })
 
     //SECTION FAQ
     $('.btn_bottom_3').on('click', function(){
@@ -315,14 +220,19 @@ $(document).ready(function(){
     $('.btn_bottom_9').on('click', function(){
         $('.submenu_center9').slideToggle('slow');
     })
-    
-// ================================================================
-// COMPTEUR LECTURES
-    // var count = 0;
-    // $(".btn").on("click", function(e){
-    //     e.preventDefault();
-    //     count++;
-    //     $('.resultat_nbre_lectures').html(
-    //        count 
-    //     )
-    // });
+ 
+})
+// FUNCTIONS
+function flexSliderInit(flexslider, itemWidth, itemMargin, minItems, maxItems, controls, navigation) {
+    $(flexslider).flexslider({
+        animation: "slide",
+        animationLoop: false,
+        itemWidth: itemWidth,
+        itemMargin: itemMargin,
+        minItems: minItems,
+        maxItems: maxItems,
+        controlNav: false,
+        controlsContainer: $(controls),
+        customDirectionNav: $(navigation)
+    })
+}

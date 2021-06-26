@@ -223,7 +223,25 @@
                                 <div class="input-group">
                                     <label for="competences">Ajouter des compétences</label>
                                     {{form_widget(profileForm.competences)}}
-                                    {{form_errors(profileForm.competences)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Visibilité</h3>
+                        <div class="attr-block visibility">
+                            <div class="title-block profile-block">
+                                <p>Tu peux choisir de rendre tes infos personnelles (comme ton email, ton numéro de téléphone...) accessibles aux membres de la communauté.</p>
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="visibility-button">Modifier</a>
+                            </div>
+                            <div class="edit-block profile-block formsection hidden" id="edit-visibility">
+                                <div class="input-group">
+                                    <label for="visible"></label>
+                                    {{form_widget(profileForm.visible)}}
                                 </div>
                                 <div class="input-group">
                                     <input type="submit" class="btn-primary" value="Valider">

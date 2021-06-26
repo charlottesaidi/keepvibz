@@ -46,7 +46,7 @@
                     </ul>
                 </div>
                 <div class="top_show_instru_downloading">
-                    <a href="{{asset('uploads/instrus/' ~ instru.file)}}" download="{{ instru.file }}">
+                    <a class="download_btn" href="{{asset('uploads/instrus/' ~ instru.file)}}" download="{{ instru.file }}">
                         <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
                     </a>
                 </div>
@@ -92,7 +92,7 @@
                         </div>
                         <div class="top_right_others_instrus_author pa">
                             <div class="block_downloading pr">
-                                <a href="{{asset('uploads/instrus/' ~ beats.file)}}" download="{{ beats.file }}">
+                                <a class="download_btn" href="{{asset('uploads/instrus/' ~ beats.file)}}" download="{{ beats.file }}">
                                     <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
                                 </a>
                             </div>
@@ -154,7 +154,7 @@
                 </div>
                 <div class="top_right_others_instrus_author pa">
                     <div class="block_downloading pr">
-                        <a href="{{asset('uploads/toplines/' ~ topline.file)}}" download="{{ topline.file }}">
+                        <a class="download_btn" href="{{asset('uploads/toplines/' ~ topline.file)}}" download="{{ topline.file }}">
                             <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
                         </a>
                     </div>
@@ -186,6 +186,7 @@
                         </div>
                     </div>
                     <div class="second_block_infos flex col aic">
+                    {% if instru.user.visible == true %}
                         <p class="email_infos_show"> <span><i class="fas fa-envelope"></i></span> {{instru.user.email}} </p>
                         <p class="town_infos_show"><span class="grey_text_bottom_description">Ville:</span>  {{ instru.user.town }} </p>
                         <p class="number_infos_show tac"> 
@@ -193,6 +194,7 @@
                                 {{ instru.user.phoneNumber|phone_number_format('NATIONAL') }}
                             {% endif %}
                         </p>
+                    {% endif %}
                     </div>
                     <div class="third_block_infos flex col aic">
                         <p class="details_infos_show tac"> {{ instru.user.bio }} </p>

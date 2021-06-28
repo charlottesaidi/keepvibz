@@ -72,35 +72,35 @@ class HomeController extends AbstractController
         ]);
     }
 
-    // #[Route('/instrus/filter', name: 'filter_instru', methods: ['GET', 'POST'])]
-    // public function searchInstrus(Request $request, InstruRepository $instruRepo)
-    // {
-    //     $totalItems = $instruRepo->paginateCount();
-    //     $itemsPerPage = 10;
-    //     $currentPage = 1;
-    //     $urlPattern = '/instrus?page=(:num)';
-    //     $offset = 0;
-    //     if(!empty($_GET['page'])) {
-    //         $currentPage = $_GET['page'];
-    //         $offset = ($currentPage - 1) * $itemsPerPage;
-    //     }
-        // $instrus = $instruRepo->paginateSearch($itemsPerPage, $offset, '["Trap"]');
+    #[Route('/instrus/filter', name: 'filter_instru', methods: ['GET', 'POST'])]
+    public function searchInstrus(Request $request, InstruRepository $instruRepo)
+    {
+        $totalItems = $instruRepo->paginateCount();
+        $itemsPerPage = 10;
+        $currentPage = 1;
+        $urlPattern = '/instrus?page=(:num)';
+        $offset = 0;
+        if(!empty($_GET['page'])) {
+            $currentPage = $_GET['page'];
+            $offset = ($currentPage - 1) * $itemsPerPage;
+        }
+        $instrus = $instruRepo->paginateSearch($itemsPerPage, $offset, '["Trap"]');
 
-        // $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
+        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
 
-        // return $this->render('instrus/index.html.twig', [
-        //     'instrus' => $instruRepo->paginateSearch($itemsPerPage, $offset, $filter),
-        //     'paginator' => $paginator
-        // ]);
+        return $this->render('instrus/index.html.twig', [
+            'instrus' => $instruRepo->paginateSearch($itemsPerPage, $offset, $filter),
+            'paginator' => $paginator
+        ]);
 
-    //     $filter = $request->get('search');
+        $filter = $request->get('search');
 
-    //     $jsonInstrus = [];
-    //     $key = 0;
-    //     foreach($instruRepo->findAll() as $instru) { 
-    //        $jsonInstrus[$key++] = $instru->getInfos();
-    //     }
+        $jsonInstrus = [];
+        $key = 0;
+        foreach($instruRepo->findAll() as $instru) { 
+           $jsonInstrus[$key++] = $instru->getInfos();
+        }
 
-    //     return new JsonResponse($jsonInstrus);
-    // }
+        return new JsonResponse($jsonInstrus);
+    }
 }

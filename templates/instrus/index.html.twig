@@ -4,42 +4,52 @@
 
 {% block body %}
     <div class="main_instrus">
-        <div class="section_instrus flex sb">
+        <div class="section_instrus">
             <div class="container_instrus pr">
 
-                <div class="sidebar_instrus pa">
+                <div class="sidebar_instrus">
                     <div class="content_sidebar flex col aic">
-                        <div class="genre flex col aic">
-                            <h4 class="title_instrus_genre">Genre<img class="btn_genre" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu Genre"></h4>
-                            <div class="block_genre_instrus flex col">
-                                <div class="block_genre">
-                                    <div class="submenu_genre flex col">
-                                        <label for="genre_1">Hip Hop</label>
-                                        <input type="checkbox" id="genre_1" name="genre_1" value="genre_1">
-                                        <label for="genre_2">Trap</label>
-                                        <input type="checkbox" id="genre_2" name="genre_2" value="genre_2">
-                                        <label for="genre_3">HRnB</label>
-                                        <input type="checkbox" id="genre_3" name="genre_3" value="genre_3">
-                                        <label for="genre_4">Pop</label>
-                                        <input type="checkbox" id="genre_4" name="genre_4" value="genre_4">
-                                    </div>
+                        <div class="genre">
+                            <div class="wrap2">
+                                <div class="search flex fs">
+                                    <form id="search_form" class="search_form" action="{{path('filter_instru')}}">
+                                        <div class="input-group flex sb aic">
+                                            <div id="filter_btn" class="filtres" style="cursor: pointer">
+                                                <p>Genre <i class="fas fa-chevron-down"></i></p>
+                                            </div>
+                                            <input type="text" name="search" id="search" placeholder="Tapes ta recherche">
+                                            <button type="submit" class="btn_search" style="cursor: pointer"><i class="fas fa-search"></i></button>
+                                        </div>
+                                        <div id="filter_block" class="block_filters">
+                                            <div class="filters">
+                                                    <div id="instru_genre" class="flex sb">
+                                                        <div class="form-check">
+                                                            <input type="checkbox" id="instru_genre_0" name="instru[genre][]" class="form-check-input" value="Hip Hop" />
+                                                            <label class="form-check-label" for="instru_genre_0">Hip-Hop</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" id="instru_genre_1" name="instru[genre][]" class="form-check-input" value="trap" />
+                                                            <label class="form-check-label" for="instru_genre_1">Trap</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" id="instru_genre_2" name="instru[genre][]" class="form-check-input" value="r&#039;n&#039;b" />
+                                                            <label class="form-check-label" for="instru_genre_2">R&#039;n&#039;B</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" id="instru_genre_3" name="instru[genre][]" class="form-check-input" value="pop" />
+                                                            <label class="form-check-label" for="instru_genre_3">Pop</label>
+                                                        </div>
+                                                        <div class="form-check">
+                                                            <input type="checkbox" id="instru_genre_4" name="instru[genre][]" class="form-check-input" value="autre" />
+                                                            <label class="form-check-label" for="instru_genre_4">Autre</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
-                        </div>
-                        <div class="keys flex col aic">
-                            <h4 class="title_instrus_keys">Clés</h4>
-                            <div class="select select_instrus_keyz flex col">
-                                <select name="slct1" id="slct1">
-                                    <option selected disabled>Choisis une clé</option>
-                                    <option value="1">Am</option>
-                                    <option value="2">Bm</option>
-                                    <option value="3">Cmin</option>
-                                    <option value="4">E</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="submit">
-                            <button class="bouton_filter" ><img class="img_bouton_filter" src="{{asset('assets/images/icons/arrow-right-8-64.png')}}" alt="bouton pour filtrer la recherche"></button>
                         </div>
                     </div>
                 </div>

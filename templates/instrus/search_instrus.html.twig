@@ -1,0 +1,38 @@
+<div class="right_content flex col">
+    <h2 class="title_instrus">Instrus</h2>
+    <div class="content_instrus flex fs fw">
+        {% for beat in instrus %}
+            <li class="content_download_instrus flex col tac pr">
+                <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_{{ beat.id }}"></audio>
+                <div class="image_downloaded">
+                    <a href="{{path('instru_show', {'id': beat.id})}}">
+                        {% if beat.image == null %}
+                            <img class="img_downloaded" src="{{asset('uploads/images/instrus/instru.jpg')}}" alt="{{ beat.title }}">
+                        {% else %}
+                            <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="btn_play_caroussel btn"  id="btn_ref_{{ beat.id }}">
+                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                </div>
+                <div class="block_info_instrus flex col">
+                    <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
+                    <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
+                        {% for genre in beat.genre %}
+                            {{ genre }}
+                        {% endfor %}
+                    </h4>
+                    <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>
+                    <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ beat.user.name }}</span></h4>
+
+                </div>
+            </li>
+        {% endfor %}
+    </div>
+    <div class="block_pagination">
+        {# PAGINATION #}
+        {{ include('pagination.html.twig') }};
+        {# PAGINATION #}
+    </div>
+</div>

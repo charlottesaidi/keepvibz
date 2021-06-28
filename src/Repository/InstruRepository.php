@@ -31,21 +31,32 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
 
-    public function paginateSearch($limit, $offset, $value) {
+    public function filteredInstru($value, $limit, $offset) {
         return $this->createQueryBuilder('i')
+            ->select('i, u')
+            ->join('i.user', 'u')
             ->orderBy('i.created_at', 'DESC')
-            ->andWhere('i.genre = [:val]')
-            ->setParameter('val', $value)
+            ->andWhere('i.title LIKE :val')
+            ->setParameter('val', '%'.$value.'%')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
-            ->getArrayResult()
+            ->getResult()
         ;
     }
 
     public function paginateCount() {
         return $this->createQueryBuilder('i')
             ->select('count(i.id)')
+            ->getQuery()
+            ->getSingleScalarResult();
+    }
+
+    public function searchCount($value) {
+        return $this->createQueryBuilder('i')
+            ->select('count(i.id)')
+            ->andWhere('i.title LIKE :val')
+            ->setParameter('val', '%'.$value.'%')
             ->getQuery()
             ->getSingleScalarResult();
     }

@@ -225,39 +225,16 @@ a{color: #fff;}
 .wrap2{max-width: 1300px; width: 100%; margin: 0 auto 20px auto;padding: 0 20px;}
 .search{
   position: relative;
-  /* display: none; */
 }
-.icon_search{
-    position: absolute;
-    left: 18px;
-    top: 14px;
-    height: 19px;
-}
-.search input{background: #3d3c3c; height: 48px; width: 34vw; outline: none; border-radius: 30px; border: none; color: #fff; font-family: 'Pathway Gothic One', cursive; letter-spacing: 3px; padding: 0px 6.5vw 0px 50px; }
-.search .btn_search{
-    position: absolute;
-    height: 41px;
-    width: 70px;
-    left: 28vw;
-    top: 4px;
-    border: none;
-    background: transparent;
-    z-index: 2;
-    font-weight: 400;
-    font-family: 'Pathway Gothic One', cursive;
-    letter-spacing: 3px;
-    font-size: 18px;
-    color: #fff;
-    cursor: pointer;
-}
-.icon_arrow{
-    position: absolute;
-    left: 32.5vw;
-    top: 20px;
-    height: 13px;
-    cursor: pointer;
-}
-.block_filters{position: absolute ; background-color: #3d3c3c; padding: 8px 13px; border-radius: 4px; z-index: 2; left: 28vw; top: 55px; display: none; width: 91px;}
+.genre {width: 50%;}
+.genre form {width: 100%;}
+.search .input-group{background: #3d3c3c; height: 48px; width: 100%; border-radius: 30px; border: none; color: #fff; font-family: 'Pathway Gothic One', cursive; letter-spacing: 3px; padding: 0 10px 0 20px;}
+.search .input-group input {width: 70%}
+.search input, .search button {background: transparent; border: none; outline: none; color: #fff; }
+.search .fa-chevron-down, .search .fa-search {color: rgb(194, 190, 190)}
+.search .fa-search {font-size: 20px;}
+.search .form-check-label {color: #fff}
+.block_filters{position: absolute ; background-color: #3d3c3c; padding: 8px 13px; border-radius: 4px; z-index: 2; left: 20px; top: 55px; display: none;}
 .filter{color: #fff; font-weight: 400; margin: 15px 0;}
 .filter:hover{opacity: .7; cursor: pointer;}
 

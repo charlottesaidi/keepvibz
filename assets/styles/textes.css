@@ -234,7 +234,7 @@ a{text-decoration: none;}
 
 
 @media screen and (max-width: 730px){
-    .block_textes{flex-direction: column; align-content: center;}
+    .block_textes{align-content: center;}
 }
   
 

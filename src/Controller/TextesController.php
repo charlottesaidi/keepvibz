@@ -33,7 +33,7 @@ class TextesController extends AbstractController
         $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
 
         return $this->render('textes/index.html.twig', [
-            'textes' => $texteRepository->paginateAll($itemsPerPage, $offset),
+            'textes' => $texteRepository->paginateAllPublished($itemsPerPage, $offset),
             'paginator' => $paginator
         ]);
     }

@@ -13,7 +13,7 @@
     color: $font-primary;
     .ui-menu-item-wrapper {
         cursor: pointer;
-        font-family: $squada;
+        font-family: $font-style;
     }
     .ui-menu-item-wrapper:hover {
         background: $font-secondary;
@@ -67,7 +67,7 @@ form {
             border-radius: 3px; 
             border: none; 
             color: $font-primary; 
-            font-family: 'Squada One', cursive; 
+            font-family: $font-style, cursive; 
             letter-spacing: 3px; 
             padding: 10px 0 10px 10px;
         }

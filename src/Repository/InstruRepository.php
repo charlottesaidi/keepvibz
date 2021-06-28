@@ -21,6 +21,8 @@ class InstruRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('i')
+            ->select('i, u')
+            ->join('i.user', 'u')
             ->orderBy('i.created_at', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
@@ -51,6 +53,10 @@ class InstruRepository extends ServiceEntityRepository
     public function findOneByTitle($value): ?Instru
     {
         return $this->createQueryBuilder('i')
+            ->select('i, t, to, u')
+            ->join('i.textes', 't')
+            ->join('i.toplines', 'to')
+            ->join('i.user', 'u')
             ->andWhere('i.title = :val')
             ->setParameter('val', $value)
             ->getQuery()
@@ -60,6 +66,8 @@ class InstruRepository extends ServiceEntityRepository
 
     public function findOneLatestUpload() {
         return $this->createQueryBuilder('i')
+            ->select('i, u')
+            ->join('i.user', 'u')
             ->orderBy('i.created_at', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
@@ -70,6 +78,8 @@ class InstruRepository extends ServiceEntityRepository
     public function findLatest()
     {
         return $this->createQueryBuilder('i')
+            ->select('i, u')
+            ->join('i.user', 'u')
             ->orderBy('i.created_at', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
@@ -79,6 +89,7 @@ class InstruRepository extends ServiceEntityRepository
 
     public function findUserInstrus($user) {
         return $this->createQueryBuilder('i')
+        ->select('i, u')
         ->join('i.user', 'u')
         ->setParameter('val', $user)
         ->where('i.user = :val')

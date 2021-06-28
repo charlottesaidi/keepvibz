@@ -139,7 +139,7 @@ a{text-decoration: none;}
  transform: translate(-50%, -50%);
  text-transform: uppercase;
  font-weight: 900;
- font-family: 'Squada One', cursive;
+ font-family: 'Pathway Gothic One', cursive;
  color: #fff;
  letter-spacing: 0.2em;
 }
@@ -198,7 +198,7 @@ a{text-decoration: none;}
 
 
 
-body{position:"relative"; font-family: 'Squada One', cursive; letter-spacing: 3px; background-color: black; font-weight: 500; overflow-x: hidden;}
+body{position:"relative"; font-family: 'Pathway Gothic One', cursive; letter-spacing: 3px; background-color: black; font-weight: 500; overflow-x: hidden;}
 h1{position: absolute; left: -50000px;}
 audio{outline: none;}
 .flexslider, .flexslider2{margin-top: 20px;}
@@ -233,7 +233,7 @@ a{color: #fff;}
     top: 14px;
     height: 19px;
 }
-.search input{background: #3d3c3c; height: 48px; width: 34vw; outline: none; border-radius: 30px; border: none; color: #fff; font-family: 'Squada One', cursive; letter-spacing: 3px; padding: 0px 6.5vw 0px 50px; }
+.search input{background: #3d3c3c; height: 48px; width: 34vw; outline: none; border-radius: 30px; border: none; color: #fff; font-family: 'Pathway Gothic One', cursive; letter-spacing: 3px; padding: 0px 6.5vw 0px 50px; }
 .search .btn_search{
     position: absolute;
     height: 41px;
@@ -244,7 +244,7 @@ a{color: #fff;}
     background: transparent;
     z-index: 2;
     font-weight: 400;
-    font-family: 'Squada One', cursive;
+    font-family: 'Pathway Gothic One', cursive;
     letter-spacing: 3px;
     font-size: 18px;
     color: #fff;

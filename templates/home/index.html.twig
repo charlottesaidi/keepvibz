@@ -120,7 +120,6 @@
                 {# CUSTOM NAVIGATION #}
                     <ul class="slides">
                         {% for text in textes %}
-                            {% if text.status == 'published' %}
                                 <li class="content_download flex col">
                                     <div class="image_downloaded_index_texte">
                                         <a href="{{path('texte_show', {'id': text.id})}}">
@@ -138,7 +137,6 @@
                                         <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ text.user.name }}</span></h4>
                                     </div>
                                 </li>
-                            {% endif %}
                         {% endfor %}
                     </ul>
                 </div>

@@ -18,7 +18,7 @@ body {
     .title_instrus_associees {
         padding: 10px 0;
     }
-	font-family: $squada;
+	font-family: $font-style;
 	letter-spacing: $three;
     .profile-main {
         color: $font-primary;
@@ -33,6 +33,7 @@ body {
         align-items: stretch;
         .container {
             margin-top: 98px;
+            padding-right: 40px; 
             .listing {
                 padding-top: 30px;
             }
@@ -115,7 +116,7 @@ body {
             border: none;
             color: $font-primary;
             cursor: pointer;
-            font-family: $squada;
+            font-family: $font-style;
             letter-spacing: $three;
             transition: all .3s;
         }

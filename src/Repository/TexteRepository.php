@@ -21,7 +21,25 @@ class TexteRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('t')
+            ->select('t, i, u')
             ->orderBy('t.created_at', 'DESC')
+            ->innerJoin('t.instrus', 'i')
+            ->innerJoin('t.user', 'u')
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function paginateAllPublished($limit, $offset) {
+        return $this->createQueryBuilder('t')
+            ->select('t, i, u')
+            ->orderBy('t.created_at', 'DESC')
+            ->setParameter('val', 'published')
+            ->where('t.status = :val')
+            ->innerJoin('t.instrus', 'i')
+            ->innerJoin('t.user', 'u')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
             ->getQuery()
@@ -39,7 +57,12 @@ class TexteRepository extends ServiceEntityRepository
     public function findLatest()
     {
         return $this->createQueryBuilder('t')
+            ->select('t, i, u')
             ->orderBy('t.created_at', 'DESC')
+            ->setParameter('val', 'published')
+            ->where('t.status = :val')
+            ->innerJoin('t.instrus', 'i')
+            ->innerJoin('t.user', 'u')
             ->setMaxResults(10)
             ->getQuery()
             ->getResult()
@@ -48,7 +71,9 @@ class TexteRepository extends ServiceEntityRepository
 
     public function findUserTextes($user) {
         return $this->createQueryBuilder('t')
-        ->join('t.user', 'u')
+        ->select('t, i, u')
+        ->innerJoin('t.instrus', 'i')
+        ->innerJoin('t.user', 'u')
         ->setParameter('val', $user)
         ->where('t.user = :val')
         ->getQuery()

@@ -146,11 +146,9 @@
                     </div>
                     <div class="third_block_infos flex col aic">
                         <p class="details_infos_show tac"> {{ texte.user.bio }} </p>
-                        <p class="activite_infos_show tac"> 
                         {% for competence in texte.user.competences %}
-                            {{competence}}
+                            <p class="activite_infos_show tac"> {{ competence.title }} </p>
                         {% endfor %}
-                        </p>
                     </div>
                 </div>
         </div>

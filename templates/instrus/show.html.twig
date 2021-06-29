@@ -118,7 +118,8 @@
                                 <img src="{{asset('assets/images/icons/avatar.png')}}" alt="avatar du User" class="avatar_image">
                             </div>
                             <div class="description_textes">
-                                <h3 class="title_texte">{{userText.title}}</h3>
+                                <h3 class="title_texte">{{userText.title}} | </h3>
+                                {# <span class="read_count"></span> vues #}
                                 <h3 class="author_textes">Par {{userText.user.name}}</h3>
                             </div>
                         </a>
@@ -149,7 +150,7 @@
                     <div class="bottom_right_others_instrus_author flex ">
                         <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ topline.user.name }}</span></p>
                         <p class="separator_others_instrus_author grey_text"> | </p>
-                        {# <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p> #}
+                        {# <p class="nombre_lecture_others_instrus_author"><span class="read_count">0</span> lectures</p> #}
                     </div>
                 </div>
                 <div class="top_right_others_instrus_author pa">

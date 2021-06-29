@@ -38,17 +38,17 @@
                 <p class="title_nav">MENU</p>
             </div>
             <ul class="nav_mobile flex col aic">
-                <li class="link_mobile"><a href="{{path('instrus')}}">Instrus</a></li>
-                <li class="link_mobile"><a href="{{path('textes')}}">Textes</a></li>
+                <li class="link_mobile"><a class="nav_link" href="{{path('instrus')}}">Instrus</a></li>
+                <li class="link_mobile"><a class="nav_link" href="{{path('textes')}}">Textes</a></li>
             {% if app.user %}
-                <li class="link_mobile"><a href="{{path('user_profile')}}">Profil</a></li>
+                <li class="link_mobile"><a class="nav_link" href="{{path('user_profile')}}">Profil</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
-                    <li class="link_mobile"><a href="{{ path ('admin_dashboard') }}">Admin</a></li>
+                    <li class="link_mobile"><a class="nav_link" href="{{ path ('admin_dashboard') }}">Admin</a></li>
                 {% endif %}
                 <li><a href="{{ path ('app_logout') }}">Déconnexion</a></li>
             {% else %}
-                <li class="link_mobile"><a href="{{path('user_new')}}">Inscription</a></li>
-                <li class="link_mobile"><a href="{{path('app_login')}}">Connexion</a></li>
+                <li class="link_mobile"><a class="nav_link" href="{{path('user_new')}}">Inscription</a></li>
+                <li class="link_mobile"><a class="nav_link" href="{{path('app_login')}}">Connexion</a></li>
             {% endif %}
             </ul>
         </div>
@@ -64,8 +64,8 @@
                     </div>
                     <nav class="navigation">
                         <ul class="nav flex">
-                            <li class="link nav_link"><a href="{{path('instrus')}}">Instrus</a></li>
-                            <li class="link nav_link"><a href="{{path('textes')}}">Textes</a></li>
+                            <li class="link"><a class="nav_link" href="{{path('instrus')}}">Instrus</a></li>
+                            <li class="link"><a class="nav_link" href="{{path('textes')}}">Textes</a></li>
                         </ul>
                     </nav>
                 </div>
@@ -80,37 +80,21 @@
                 </div>
                 {# MOBILE A PARTIR DE 615px #}
                 
-                <div class="right">
+                <nav class="right">
+                    <ul class="flex sb aic">
                 {% if app.user %}
-                        <a class="nav_link" href="{{ path ('user_profile') }}">Profil</a>
+                        <li><a class="nav_link" href="{{ path ('user_profile') }}">Profil</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <span><a class="nav_link" href="{{ path ('admin_dashboard') }}">Admin</a></span>
+                            <li><a class="nav_link" href="{{ path ('admin_dashboard') }}">Admin</a></li>
                         {% endif %}
-                        <a class="link_connexion nav_link" href="{{ path ('app_logout') }}">Déconnexion</a>
+                        <li><a class="link_connexion" href="{{ path ('app_logout') }}">Déconnexion</a></li>
                     {% else %}
-                        <a class="nav_link" href="{{ path ('app_register') }}">Inscription</a>
-                        <a class="link_connexion nav_link" href="{{ path ('app_login') }}">Connexion</a>
+                        <li><a class="nav_link" href="{{ path ('app_register') }}">Inscription</a></li>
+                        <li><a class="link_connexion" href="{{ path ('app_login') }}">Connexion</a></li>
                 {% endif %}
-                </div>
+                    </ul>
+                </nav>
             </div>
-            {# <div class="wrap2 flex fs">
-                <div class="search flex fs">
-                    <img class="icon_search" src="{{asset('assets/images/icons/icon_search.svg')}}" alt="icon search">
-                    <form id="search_form" action="{{path('filter_instru')}}" methods="post" novalidate>
-                        <input type="text" name="search" id="search" placeholder="Tapes ta recherche">
-                        <button type="submit" class="btn_search">Filtres</button>
-                    </form>
-                    <img class="icon_arrow" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="icon arrow">
-                    <div class="block_filters">
-                        <ul class="filters">
-                            <li class="filter">Hip hop</li>
-                            <li class="filter">Trap</li>
-                            <li class="filter">Rnb</li>
-                            <li class="filter">Pop</li>
-                        </ul>
-                    </div>
-                </div>
-            </div> #}
         </header>
         {# HEADER #}
         {% block body %}
@@ -171,9 +155,10 @@
                     )) }}
                 </div>
                 <div class="top_right">
-                    <iframe id="discord" class="little-discord" src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
-                    </iframe>   
-                    <img class="btn-discord" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="">
+                    <iframe id="discord" src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                    </iframe> 
+                    <button id="btn-up"><i class="fas fa-chevron-up"></i></button>
+                    <button class="btn-discord"><i class="fas fa-chevron-down"></i></button>
                 </div>               
             </div>
         </section>
@@ -191,7 +176,7 @@
                         {% else %}
                             {% set copyrightYears = startYear ~ ' - ' ~ currentYear %}
                         {% endif %}
-                    <p class="copyright">© {{ copyrightYears }} Keepvibz</p>
+                    <p class="copyright">&copy; {{ copyrightYears }} Keepvibz</p>
                 </div>
             </div>
         </footer>

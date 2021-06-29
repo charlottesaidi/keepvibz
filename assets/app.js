@@ -22,6 +22,7 @@ import './styles/app.css';
 
 // start the Stimulus application
 import './bootstrap';
+import './admin/plugins/fontawesome/js/all.min.js';
 
 // JS perso
 

@@ -177,13 +177,14 @@ $(document).ready(function(){
     $('.widgetHeader-2Hz_Ln').css('background-color', 'lime'); /////
 
     $('.btn-discord').on('click', function(){
-        if($('#discord').hasClass('open')){
-            $('#discord').removeClass('open');
-            $('#discord').css('height', '200px');
-        } else {
-            $('#discord').addClass('open');
-            $('#discord').css('height', '60px');
-        }
+        $(this).css('display', 'none');
+        $('#discord').css('height', '200px');
+        $('#btn-up').css('display', 'inline-block');
+    })
+    $('#btn-up').on('click', function(){
+        $(this).css('display', 'none');
+        $('#discord').css('height', '60px');
+        $('.btn-discord').css('display', 'inline-block');
     })
     // ==============================================================
 
@@ -220,7 +221,16 @@ $(document).ready(function(){
     $('.btn_bottom_9').on('click', function(){
         $('.submenu_center9').slideToggle('slow');
     })
- 
+    
+    // compte lectures textes
+    // $( "link_text" ).each(function() {
+    //     var $thisLink = $( this );
+    //     var count = 0;
+    //     $thisLink.click(function() {
+    //       count++;
+    //       $( ".read_count" ).text( count );
+    //     });
+    //   });
 })
 // FUNCTIONS
 function flexSliderInit(flexslider, itemWidth, itemMargin, minItems, maxItems, controls, navigation) {

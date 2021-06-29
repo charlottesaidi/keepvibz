@@ -9,7 +9,7 @@ Projet final de groupe - 3 collaborateurs
 Branche principale | installation du projet  
 - Dev  
 Branche de développement  
-- Filtre-recherche  
+- Filter    
 Fonctionnalité de recherche par filtre, test ajax 
 
 ### Installation

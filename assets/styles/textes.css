@@ -126,8 +126,8 @@ a{text-decoration: none;}
 .block_all_textes {margin-bottom: 20px;}
 .block_textes{padding: 10px 20px; border-radius: 5px;background-color: #3d3c3c; margin-bottom: 20px;}
 .block_textes:hover{background-color: transparent; outline: 1px solid #fff;}
-.background_avatar_empty{ background-color: transparent; height: 150px;}
-.refrain_caroussel{margin: 10px 0;}
+.background_avatar_empty{ background-color: transparent; height: 150px; display: flex; overflow: hidden; padding: 10px 0}
+.refrain_caroussel{margin: auto; }
 .avatar_image_block{height: 40px; width: 40px; background-color: #fff; border-radius: 5px;}
 .avatar_image{width: 100%;}
 .description_textes{margin: 4px 0px 4px 20px;}

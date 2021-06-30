@@ -32,7 +32,7 @@ import './styles/faq.css';
 
 import './styles/contact.css';
 
-// import './js/filtered_instrus.js';
+import './js/clamp.js';
 import './js/main.js';
 
 

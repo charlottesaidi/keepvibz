@@ -231,6 +231,8 @@ $(document).ready(function(){
     //       $( ".read_count" ).text( count );
     //     });
     //   });
+    var module = document.getElementsByClassName("refrain_caroussel");
+    module.forEach(element => $clamp(element, {clamp: 5}));
 })
 // FUNCTIONS
 function flexSliderInit(flexslider, itemWidth, itemMargin, minItems, maxItems, controls, navigation) {

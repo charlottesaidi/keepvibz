@@ -14,6 +14,7 @@ use Symfony\Component\Security\Core\Validator\Constraints as SecurityAssert;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
@@ -127,26 +128,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $modified_at;
 
     /**
+     * @Ignore
      * @ORM\ManyToMany(targetEntity=Competence::class, inversedBy="users")
      */
     private $competences;
 
     /**
+     * @Ignore
      * @ORM\OneToOne(targetEntity=Avatar::class, inversedBy="user", cascade={"persist", "remove"})
      */
     private $avatar;
 
     /**
+     * @Ignore
      * @ORM\OneToMany(targetEntity=Texte::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $textes;
 
     /**
+     * @Ignore
      * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $toplines;
 
     /**
+     * @Ignore
      * @ORM\OneToMany(targetEntity=Instru::class, mappedBy="user", cascade={"persist", "remove"})
      */
     private $instrus;

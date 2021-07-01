@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -69,6 +70,7 @@ class Instru
     private $cle;
 
     /**
+     * @Ignore
      * @Assert\NotBlank
      * @Assert\File(
      *    maxSize = "10000k",
@@ -80,6 +82,7 @@ class Instru
     private $file;
 
     /**
+     * @Ignore
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
@@ -95,16 +98,19 @@ class Instru
     private $modified_at;
 
     /**
+     * @Ignore
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="instrus")
      */
     private $user;
 
     /**
+     * @Ignore
      * @ORM\ManyToMany(targetEntity=Texte::class, mappedBy="instrus", cascade={"persist", "remove"})
      */
     private $textes;
 
     /**
+     * @Ignore
      * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="instru", cascade={"persist", "remove"})
      */
     private $toplines;

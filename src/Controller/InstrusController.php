@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use App\Service\FolderGenerator;
 use JasonGrimes\Paginator;
 use Intervention\Image\ImageManager;
@@ -35,60 +34,6 @@ class InstrusController extends AbstractController
             'instrus' => $instruRepository->paginateAll($itemsPerPage, $offset),
             'paginator' => $paginator
         ]);
-    }
-    
-    #[Route('/filter', name: 'filter_instru', methods: ['GET', 'POST'])]
-    public function searchInstrus(Request $request, InstruRepository $instruRepo)
-    {
-        if($request->isXmlHttpRequest())
-        {
-            $motcle = '';
-            $motcle = $request->get('search');
-
-            if($motcle != '')
-            {
-                $totalItems = $instruRepository->searchCount($motcle);
-                $itemsPerPage = 10;
-                $currentPage = 1;
-                $urlPattern = '/instrus/filter?page=(:num)';
-                $offset = 0;
-                if(!empty($_GET['page'])) {
-                    $currentPage = $_GET['page'];
-                    $offset = ($currentPage - 1) * $itemsPerPage;
-                }
-
-                $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
-                $filteredInstrus = $instruRepo->filteredInstru($motcle, $itemsPerPage, $offset);
-            }
-            else {
-                $totalItems = $instruRepo->paginateCount();
-                $itemsPerPage = 10;
-                $currentPage = 1;
-                $urlPattern = '/instrus?page=(:num)';
-                $offset = 0;
-                if(!empty($_GET['page'])) {
-                    $currentPage = $_GET['page'];
-                    $offset = ($currentPage - 1) * $itemsPerPage;
-                }
-
-                $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
-                $filteredInstrus = $instruRepo->paginateAll($itemsPerPage, $offset);
-            }
-
-            return $this->render('instrus/search_instrus.html.twig', array(
-                'instrus' => $filteredInstrus,
-                'paginator' => $paginator
-            ));
-        }
-        else {
-            return $this->index();
-        }
-        // $jsonInstrus = [];
-        // $key = 0;
-        // foreach($instruRepo->findAll() as $instru) { 
-        //    $jsonInstrus[$key++] = $instru->getInfos();
-        // }
-        return new JsonResponse($request);
     }
 
     #[Route('/new', name: 'instrus_new', methods: ['GET', 'POST'])]

@@ -1,0 +1,53 @@
+<div class="right_content flex col">
+    <h2 class="title_instrus">Instrus</h2>
+    <div id="instrus_ajax_blocks" class="content_instrus flex fs fw">
+    </div>
+
+    <div class="block_pagination">
+        
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+<script>
+var instrus = [];
+html = '';
+$.ajax({
+    type: 'GET',
+    url: '/api/instrus',
+    data: {
+        instrus, 
+        html
+    },
+    success: function(res) {
+        instrus = res;
+        instrus.forEach(function(e) { 
+            html += '<li class="content_download_instrus flex col tac pr">';
+            html += "<audio class=\"player_audio_selected audio_player\" preload src=\"../uploads/instrus/"+ e.file+"\" controls id=\"player_'+ e.id +'\"></audio>";
+            html += '<div class="image_downloaded">';
+            html += "<a href=\"{{path('instru_show', {'id':"+ e.id+"})}}\">";
+            if(e.image == null) {
+                html += "<img class=\"img_downloaded\" src=\"{{asset('uploads/images/instrus/instru.jpg')}}\" alt=\"{{"+ e.title +"}}\">";
+            } else {
+                html += "<img class=\"img_downloaded\" src=\"../uploads/images/instrus/" + e.image + "\" alt=\""+ e.title + "\">";
+            }
+            html += '</a></div>';
+            html += '<div class="btn_play_caroussel btn"  id="btn_ref_'+ e.id +'">';
+            html += "<img class=\"img_play_caroussel\" src=\"{{asset('assets/images/icons/play.png')}}\" alt=\"bouton de lecture audio\">";    
+            html += '</div><div class="block_info_instrus flex col">';     
+            html += '<h4 class="title_downloaded">Titre : <span class="span_downloaded">'+ e.title +'</span></h4>';   
+            html += '<h4 class="genre_downloaded">Genre : <span class="span_downloaded">';    
+            e.genre.forEach(genre =>
+                html += genre
+            );    
+            html += '</h4>';  
+            html += '<h4 class="description_downloaded">Key : <span class="span_downloaded">'+ e.cle +'</span> - <span class="span_downloaded">'+ e.bpm +'</span> BPM</h4>';     
+            html += '<h4 class="author_downloaded">Auteur : <span class="span_downloaded">'+ e.user.name +'</span></h4>';        
+            html += '</div>';        
+            html += '</li>';  
+        });
+        
+        console.log(res);
+        $('#instrus_ajax_blocks').html(html);
+    }
+})
+</script>

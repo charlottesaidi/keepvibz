@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * @ORM\Entity(repositoryClass=CompetenceRepository::class)
@@ -53,6 +54,7 @@ class Competence
     private $modified_at;
 
     /**
+     * @Ignore
      * @ORM\ManyToMany(targetEntity=User::class, mappedBy="competences")
      */
     private $users;

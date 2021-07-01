@@ -12,10 +12,6 @@ $('#search_form').on('submit', function(e) {
         dataType: "json",
         success: function(response) {
             console.log(response)
-            for (var item in response) {
-                // console.log(response[item].user) (vide)
-                
-            }
         }
     });
 }) 

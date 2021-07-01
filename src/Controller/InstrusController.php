@@ -88,7 +88,7 @@ class InstrusController extends AbstractController
         // foreach($instruRepo->findAll() as $instru) { 
         //    $jsonInstrus[$key++] = $instru->getInfos();
         // }
-        // return new JsonResponse($jsonInstrus);
+        return new JsonResponse($request);
     }
 
     #[Route('/new', name: 'instrus_new', methods: ['GET', 'POST'])]

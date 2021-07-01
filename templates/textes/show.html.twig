@@ -140,7 +140,11 @@
                     {% if texte.user.visible == true %}
                         <p class="email_infos_show"> <span><i class="fas fa-envelope"></i></span> {{texte.user.email}} </p>
                         <p class="town_infos_show"><span class="grey_text_bottom_description">Ville:</span>  {{ texte.user.town }} </p>
-                        <p class="number_infos_show tac"> {{ texte.user.phoneNumber }} </p>
+                        <p class="number_infos_show tac"> 
+                        {% if texte.user.phoneNumber %}
+                            {{ texte.user.phoneNumber|phone_number_format('NATIONAL') }}
+                        {% endif %}
+                        </p>
                     {% endif %}
                     </div>
                     <div class="third_block_infos flex col aic">

@@ -512,4 +512,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function getInfos() {
+        return $data = [
+            'id' => $this->getId(),
+            'name' => $this->getName(),       
+        ];
+    }
 }

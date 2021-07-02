@@ -551,6 +551,7 @@ li a {
 
 .invalid-feedback.d-block {
   border: 1px darkred solid;
+  background-color: rgb(233, 102, 102);
   display: inline-block;
   color: darkred;
   border-radius: 3px;

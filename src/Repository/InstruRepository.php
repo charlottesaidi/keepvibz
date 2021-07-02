@@ -31,15 +31,48 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
 
-    public function filteredInstru($value, $limit, $offset) {
+    public function instrusList() {
+        return $this->createQueryBuilder('i')
+            ->select('i, u')
+            ->join('i.user', 'u')
+            ->orderBy('i.created_at', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filteredInstrusByKeyWord($value) {
         return $this->createQueryBuilder('i')
             ->select('i, u')
             ->join('i.user', 'u')
             ->orderBy('i.created_at', 'DESC')
             ->andWhere('i.title LIKE :val')
             ->setParameter('val', '%'.$value.'%')
-            ->setMaxResults($limit)
-            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filteredInstrusByGenre($value) {
+        return $this->createQueryBuilder('i')
+            ->select('i, u')
+            ->join('i.user', 'u')
+            ->orderBy('i.created_at', 'DESC')
+            ->andWhere('i.genre LIKE :val')
+            ->setParameter('val', '%'.$value.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filteredInstrusByBoth($genre, $keyword) {
+        return $this->createQueryBuilder('i')
+            ->select('i, u')
+            ->join('i.user', 'u')
+            ->orderBy('i.created_at', 'DESC')
+            ->where('i.title LIKE :keyword')
+            ->andWhere('i.genre LIKE :genre')
+            ->setParameters(['keyword' => $keyword, 'genre' => '%'.$genre.'%'])
             ->getQuery()
             ->getResult()
         ;

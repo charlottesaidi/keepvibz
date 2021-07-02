@@ -7,6 +7,7 @@ $theme: #000;
 $font-primary: #fff;
 $font-secondary: #A27440;
 $danger-error: rgb(182, 4, 4);
+$bg-error: rgb(233, 102, 102);
 $font-success: #376b47;
 $bg-success: #aaf0c1;
 $font-style: 'Pathway Gothic One', cursive;
@@ -179,6 +180,7 @@ button.link:hover {
 	}
 	.invalid-feedback.d-block {
 		border: 1px $danger-error solid;
+		background-color: $bg-error;
 		display: inline-block;
 		color: $danger-error;
 		border-radius: 3px;

@@ -302,7 +302,7 @@ class Instru
             'image' => $this->getImage(),
             'created_at' => $this->getCreatedAt(),
             'modified_at' => $this->getModifiedAt(),
-            'user' => $this->getUser(),
+            'user' => $this->getUser()->getInfos(),
             'textes' => $this->getTextes(),
             'toplines' => $this->getToplines(),            
         ];

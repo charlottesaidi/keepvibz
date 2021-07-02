@@ -32,7 +32,7 @@ import './styles/faq.css';
 import './styles/contact.css';
 
 import './admin/plugins/fontawesome/js/all.min.js';
-import './js/filtered_instrus.js';
+import './js/pagination.min.js';
 import './js/main.js';
 
 

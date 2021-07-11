@@ -27,25 +27,24 @@ class APIController extends AbstractController
 
         if('POST' === $request->getMethod()) {
             if(!empty($request->get('search'))) {
-                $search = $request->get('search');
-                $instrus = $instruRepository->filteredInstrusByKeyWord($search);
-                if(empty($instrus)) {
-                    $this->addFlash('result', 'La recherche n\'a donné aucun résultat');
-                }
+                $keyword = $request->get('search');
+                $instrus = $instruRepository->filteredInstrusByKeyWord($keyword);
             } elseif(!empty($request->get('instru'))) {
-                $search = $request->get('instru')['genre'];
-                foreach($search as $value) {
+                $genre = $request->get('instru')['genre'];
+                foreach($genre as $value) {
                     $instrus = $instruRepository->filteredInstrusByGenre($value);
                 }
-                if(empty($instrus)) {
-                    $this->addFlash('result', 'La recherche n\'a donné aucun résultat');
+                if(in_array('tous', $genre)) {
+                    $instrus = $instruRepository->instrusList();
                 }
             } elseif(!empty($request->get('instru')) && !empty($search->get('search'))) {
                 $keyword = $request->get('search');
                 $genre = $request->get('instru')['genre'];
-                $instrus = $instruRepository->filteredInstrusByBoth($genre, $keyword);
-                if(empty($instrus)) {
-                    $this->addFlash('result', 'La recherche n\'a donné aucun résultat');
+                foreach($genre as $value) {
+                    $instrus = $instruRepository->filteredInstrusByBoth($value, $keyword);
+                }
+                if(in_array('tous', $genre)) {
+                    $instrus = $instruRepository->filteredInstrusByKeyWord($keyword);
                 }
             }
         } else {

@@ -70,9 +70,9 @@ class InstruRepository extends ServiceEntityRepository
             ->select('i, u')
             ->join('i.user', 'u')
             ->orderBy('i.created_at', 'DESC')
-            ->where('i.title LIKE :keyword')
             ->andWhere('i.genre LIKE :genre')
-            ->setParameters(['keyword' => $keyword, 'genre' => '%'.$genre.'%'])
+            ->andWhere('i.title LIKE :keyword')
+            ->setParameters([ 'genre' => $genre, 'keyword' => $keyword])
             ->getQuery()
             ->getResult()
         ;

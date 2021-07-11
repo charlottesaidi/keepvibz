@@ -38,6 +38,10 @@
                                                         <input type="checkbox" id="instru_genre_4" name="instru[genre][]" class="form-check-input" value="autre" />
                                                         <label class="form-check-label" for="instru_genre_4">Autre</label>
                                                     </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" id="instru_genre_5" name="instru[genre][]" class="form-check-input" value="tous" />
+                                                        <label class="form-check-label" for="instru_genre_5">Tous</label>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -52,11 +56,11 @@
             <div class="right_content flex col">
                 <h2 class="title_instrus">Instrus</h2>
                 <div id="instrus_ajax_blocks" class="content_instrus flex fs fw">
-                    
+                    {# listing ajax instrumentales #}
                 </div>
 
                 <div id="block_pagination" class="js_pagination">
-                    
+                    {# pagination js #}
                 </div>
             </div>
         </div>
@@ -71,6 +75,7 @@
 
     var instrus = [];
     var htmlInstru = '';
+
     $.ajax({
         type: 'GET',
         url: '/api/instrus',
@@ -82,10 +87,12 @@
             instrus = res;
             $('#block_pagination').pagination({
                 dataSource: instrus,
-                prevText: "Précédent",
-                nextText: "Suivant",
+                pageSize: 9,
+                showPageNumbers: false,
                 autoHidePrevious: true,
                 autoHideNext: true,
+                prevText: 'Précédent',
+                nextText: 'Suivant',
                 callback: function(data, pagination) {
                     htmlInstru = instrusTemplate(data);;
                     $('#instrus_ajax_blocks').html(htmlInstru);
@@ -96,8 +103,6 @@
 
     $('#search_form').on('submit', function(e) {
         e.preventDefault();
-        var form = $('#search_form');
-        var search = $('#search').val();
         var formData = new FormData(document.getElementById('search_form'));
         $.ajax({
             type: "POST",
@@ -108,16 +113,24 @@
             data: formData,
             success: function(response) {
                 instrus = response;
+                console.log(response);
                 if(instrus.length > 0) {
                     $('#block_pagination').pagination({
                             dataSource: instrus,
+                            pageSize: 9,
+                            showPageNumbers: false, 
+                            autoHidePrevious: true,
+                            autoHideNext: true,
+                            prevText: 'Précédent',
+                            nextText: 'Suivant',
                             callback: function(data, pagination) {
                             htmlInstru = instrusTemplate(data);;
                             $('#instrus_ajax_blocks').html(htmlInstru);
                         }
                     })
                 } else {
-                    noResultTemplate(htmlInstru);
+                    htmlInstru = noResultTemplate();
+                    $('#instrus_ajax_blocks').html(htmlInstru);
                 };
             }
         });
@@ -142,7 +155,7 @@
             html += '<h4 class="title_downloaded">Titre : <span class="span_downloaded">'+ e.title +'</span></h4>';   
             html += '<h4 class="genre_downloaded">Genre : <span class="span_downloaded">';    
             e.genre.forEach(genre =>
-                html += genre
+                html += genre + ' '
             );    
             html += '</h4>';  
             html += '<h4 class="description_downloaded">Key : <span class="span_downloaded">'+ e.cle +'</span> - <span class="span_downloaded">'+ e.bpm +'</span> BPM</h4>';     
@@ -153,10 +166,11 @@
         return html;
     } 
 
-    function noResultTemplate(html) {
+    function noResultTemplate() {
+        var html = '';
         html += '<div class="invalid-feedback d-block">';
         html += '<p>La recherche n\'a donné aucun résultat</p>';
         html += '</div>';
-        $('#instrus_ajax_blocks').html(html);
+        return html; 
     }
 </script>

@@ -34,6 +34,18 @@ class HomeController extends AbstractController
         ]);
     }
 
+    #[Route('/mention', name: 'mention')]
+    public function policyIndex(): Response
+    {
+        return $this->render('mention/index.html.twig');
+    }
+
+    #[Route('/faq', name: 'faq')]
+    public function faqIndex(): Response
+    {
+        return $this->render('faq/index.html.twig');
+    }
+
     public function getStats(ToplineRepository $toplineRepo, UserRepository $userRepo, TexteRepository $texteRepo, InstruRepository $instruRepo): Response
     {
         // counting footer stats
@@ -71,36 +83,4 @@ class HomeController extends AbstractController
             'visits' => $counter,
         ]);
     }
-
-    // #[Route('/instrus/filter', name: 'filter_instru', methods: ['GET', 'POST'])]
-    // public function searchInstrus(Request $request, InstruRepository $instruRepo)
-    // {
-    //     $totalItems = $instruRepo->paginateCount();
-    //     $itemsPerPage = 10;
-    //     $currentPage = 1;
-    //     $urlPattern = '/instrus?page=(:num)';
-    //     $offset = 0;
-    //     if(!empty($_GET['page'])) {
-    //         $currentPage = $_GET['page'];
-    //         $offset = ($currentPage - 1) * $itemsPerPage;
-    //     }
-        // $instrus = $instruRepo->paginateSearch($itemsPerPage, $offset, '["Trap"]');
-
-        // $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
-
-        // return $this->render('instrus/index.html.twig', [
-        //     'instrus' => $instruRepo->paginateSearch($itemsPerPage, $offset, $filter),
-        //     'paginator' => $paginator
-        // ]);
-
-    //     $filter = $request->get('search');
-
-    //     $jsonInstrus = [];
-    //     $key = 0;
-    //     foreach($instruRepo->findAll() as $instru) { 
-    //        $jsonInstrus[$key++] = $instru->getInfos();
-    //     }
-
-    //     return new JsonResponse($jsonInstrus);
-    // }
 }

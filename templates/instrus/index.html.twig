@@ -4,12 +4,12 @@
 
 {% block body %}
     <div class="main_instrus">
-        <div class="section_instrus flex sb">
+        <div class="section_instrus">
             <div class="container_instrus pr">
 
-                <div class="right_content flex col">
+                <div class="right_content">
                     <h2 class="title_instrus">Instrus</h2>
-                    <div class="content_instrus flex fs fw">
+                    <div class="content_instrus flex fw">
                         {% for beat in instrus %}
                             <li class="content_download_instrus flex col tac pr">
                                 <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_{{ beat.id }}"></audio>

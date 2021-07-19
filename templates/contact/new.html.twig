@@ -8,20 +8,20 @@
 
 {% block body %}
 <div class="container">
-<div class="wrap-contact"> 
-  <section class="contact">
+    <div class="wrap-contact"> 
+        <section class="contact">
 
-  {% for message in app.flashes('success') %}
-      <div class="success">
-          {{ message }}
-      </div>
-  {% endfor %}
-  
-    <h2>Nous Contacter</h2>
+            {% for message in app.flashes('success') %}
+                <div class="success">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        
+            <h2>Nous Contacter</h2>
 
-    {{ include('contact/_form.html.twig') }}
+            {{ include('contact/_form.html.twig') }}
 
-    </section>
-</div>
+        </section>
+    </div>
 </div>
 {% endblock %}

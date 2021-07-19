@@ -19,12 +19,6 @@ class APIController extends AbstractController
     #[Route('/instrus', name: 'api_instrus')]
     public function index(InstruRepository $instruRepository, Request $request): Response
     {
-        $totalItems = $instruRepository->paginateCount();
-        $itemsPerPage = 10;
-        $currentPage = 1;
-        $offset = 0;
-        $instrus = [];
-
         if('POST' === $request->getMethod()) {
             if(!empty($request->get('search'))) {
                 $keyword = $request->get('search');
@@ -51,10 +45,10 @@ class APIController extends AbstractController
             $instrus = $instruRepository->instrusList();
         }
 
-        $jsonContent = [];
-        foreach($instrus as $instru) {
-            $jsonContent[] = $instru->getInfos();
-        }
+        $jsonContent = $request->get('instru')['genre'];
+        // foreach($instrus as $instru) {
+        //     $jsonContent[] = $instru->getInfos();
+        // }
 
         $response = new JsonResponse($jsonContent);
 

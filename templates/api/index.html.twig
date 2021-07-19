@@ -19,27 +19,27 @@
                                         <div class="filters">
                                                 <div id="instru_genre" class="flex sb">
                                                     <div class="form-check">
-                                                        <input type="checkbox" id="instru_genre_0" name="instru[genre][]" class="form-check-input" value="Hip Hop" />
+                                                        <input type="checkbox" id="instru_genre_0" name="instru[genre][0]" class="form-check-input" value="Hip Hop" />
                                                         <label class="form-check-label" for="instru_genre_0">Hip-Hop</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input type="checkbox" id="instru_genre_1" name="instru[genre][]" class="form-check-input" value="trap" />
+                                                        <input type="checkbox" id="instru_genre_1" name="instru[genre][1]" class="form-check-input" value="trap" />
                                                         <label class="form-check-label" for="instru_genre_1">Trap</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input type="checkbox" id="instru_genre_2" name="instru[genre][]" class="form-check-input" value="r&#039;n&#039;b" />
+                                                        <input type="checkbox" id="instru_genre_2" name="instru[genre][2]" class="form-check-input" value="r&#039;n&#039;b" />
                                                         <label class="form-check-label" for="instru_genre_2">R&#039;n&#039;B</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input type="checkbox" id="instru_genre_3" name="instru[genre][]" class="form-check-input" value="pop" />
+                                                        <input type="checkbox" id="instru_genre_3" name="instru[genre][3]" class="form-check-input" value="pop" />
                                                         <label class="form-check-label" for="instru_genre_3">Pop</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input type="checkbox" id="instru_genre_4" name="instru[genre][]" class="form-check-input" value="autre" />
+                                                        <input type="checkbox" id="instru_genre_4" name="instru[genre][4]" class="form-check-input" value="autre" />
                                                         <label class="form-check-label" for="instru_genre_4">Autre</label>
                                                     </div>
                                                     <div class="form-check">
-                                                        <input type="checkbox" id="instru_genre_5" name="instru[genre][]" class="form-check-input" value="tous" />
+                                                        <input type="checkbox" id="instru_genre_5" name="instru[genre][5]" class="form-check-input" value="tous" />
                                                         <label class="form-check-label" for="instru_genre_5">Tous</label>
                                                     </div>
                                                 </div>
@@ -69,10 +69,13 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-    $('#filter_btn').on('click', function() {
-        $('#filter_block').slideToggle('slow');
+    
+    $(document).ready(function() {
+        $('#filter_btn').on('click', function() {
+            $('#filter_block').slideToggle('slow');
+        })
     })
-
+    
     var instrus = [];
     var htmlInstru = '';
 
@@ -87,7 +90,7 @@
             instrus = res;
             $('#block_pagination').pagination({
                 dataSource: instrus,
-                pageSize: 9,
+                pageSize: 10,
                 showPageNumbers: false,
                 autoHidePrevious: true,
                 autoHideNext: true,
@@ -96,6 +99,7 @@
                 callback: function(data, pagination) {
                     htmlInstru = instrusTemplate(data);;
                     $('#instrus_ajax_blocks').html(htmlInstru);
+                    window.scrollTo(0,0);
                 }
             })
         }
@@ -103,6 +107,7 @@
 
     $('#search_form').on('submit', function(e) {
         e.preventDefault();
+        var genres = $('#instru_genre').val();
         var formData = new FormData(document.getElementById('search_form'));
         $.ajax({
             type: "POST",
@@ -112,12 +117,12 @@
             processData: false,
             data: formData,
             success: function(response) {
+                console.log(response)
                 instrus = response;
-                console.log(response);
                 if(instrus.length > 0) {
                     $('#block_pagination').pagination({
                             dataSource: instrus,
-                            pageSize: 9,
+                            pageSize: 10,
                             showPageNumbers: false, 
                             autoHidePrevious: true,
                             autoHideNext: true,

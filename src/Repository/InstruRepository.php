@@ -31,14 +31,33 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
 
-    public function instrusList() {
-        return $this->createQueryBuilder('i')
-            ->select('i, u')
-            ->join('i.user', 'u')
-            ->orderBy('i.created_at', 'DESC')
-            ->getQuery()
-            ->getResult()
-        ;
+    public function instrusList($filter = NULL, $filterTwo = NULL) {
+        // return $this->createQueryBuilder('i')
+        //     ->select('i, u')
+        //     ->join('i.user', 'u')
+        //     ->orderBy('i.created_at', 'DESC')
+        //     ->getQuery()
+        //     ->getResult()
+        // ;
+        $qb = $this->createQueryBuilder('i')
+                ->select('i, u')
+                ->join('i.user', 'u')
+                ->orderBy('i.created_at', 'DESC');
+        if ($filter) {
+            $qb->andWhere('i.title LIKE :filter')
+                ->setParameter('filter', '%'.$filter.'%');
+        }
+        if ($filterTwo) {
+            $qb->andWhere('i.genre IN (:filterTwo)')
+                ->setParameter('filterTwo', [$filterTwo]);
+        }
+        if ($filter && $filterTwo) {
+            $qb->andWhere('i.title LIKE :filter')
+            ->andWhere('i.genre IN (:filterTwo)')
+            ->setParameters([ 'filter' => $filter, 'filterTwo' => $filterTwo]);
+        }
+        return $qb->getQuery()
+                ->getResult();
     }
 
     public function filteredInstrusByKeyWord($value) {
@@ -58,8 +77,8 @@ class InstruRepository extends ServiceEntityRepository
             ->select('i, u')
             ->join('i.user', 'u')
             ->orderBy('i.created_at', 'DESC')
-            ->andWhere('i.genre LIKE :val')
-            ->setParameter('val', '%'.$value.'%')
+            ->andWhere('i.genre IN (:val)')
+            ->setParameter('val', $value)
             ->getQuery()
             ->getResult()
         ;
@@ -70,7 +89,7 @@ class InstruRepository extends ServiceEntityRepository
             ->select('i, u')
             ->join('i.user', 'u')
             ->orderBy('i.created_at', 'DESC')
-            ->where('i.genre LIKE :genre')
+            ->andWhere('i.genre LIKE :genre')
             ->andWhere('i.title LIKE :keyword')
             ->setParameters([ 'genre' => $genre, 'keyword' => $keyword])
             ->getQuery()
@@ -81,15 +100,6 @@ class InstruRepository extends ServiceEntityRepository
     public function paginateCount() {
         return $this->createQueryBuilder('i')
             ->select('count(i.id)')
-            ->getQuery()
-            ->getSingleScalarResult();
-    }
-
-    public function searchCount($value) {
-        return $this->createQueryBuilder('i')
-            ->select('count(i.id)')
-            ->andWhere('i.title LIKE :val')
-            ->setParameter('val', '%'.$value.'%')
             ->getQuery()
             ->getSingleScalarResult();
     }

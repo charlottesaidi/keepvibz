@@ -19,39 +19,58 @@ class APIController extends AbstractController
     #[Route('/instrus', name: 'api_instrus')]
     public function index(InstruRepository $instruRepository, Request $request): Response
     {
+        // if('POST' === $request->getMethod()) {
+        //     if(!empty($request->get('search'))) {
+        //         $keyword = $request->get('search');
+        //         $instrus = $instruRepository->filteredInstrusByKeyWord($keyword);
+        //     } elseif(!empty($request->get('instru'))) {
+        //         $genre = $request->get('instru')['genre'];
+        //         foreach($genre as $value) {
+        //             $instrus = $instruRepository->filteredInstrusByGenre($value);
+        //         }
+        //         if(in_array('tous', $genre)) {
+        //             $instrus = $instruRepository->instrusList();
+        //         }
+        //     } elseif(!empty($request->get('instru')) && !empty($request->get('search'))) {
+        //         $keyword = $request->get('search');
+        //         $genre = $request->get('instru')['genre'];
+        //         foreach($genre as $value) {
+        //             $instrus = $instruRepository->filteredInstrusByBoth($value, $keyword);
+        //         }
+        //         if(in_array('tous', $genre)) {
+        //             $instrus = $instruRepository->filteredInstrusByKeyWord($keyword);
+        //         }
+        //     }
+        // } else {
+        //     $instrus = $instruRepository->instrusList();
+        // }
         if('POST' === $request->getMethod()) {
-            if(!empty($request->get('search'))) {
-                $keyword = $request->get('search');
-                $instrus = $instruRepository->filteredInstrusByKeyWord($keyword);
-            } elseif(!empty($request->get('instru'))) {
-                $genre = $request->get('instru')['genre'];
-                foreach($genre as $value) {
-                    $instrus = $instruRepository->filteredInstrusByGenre($value);
-                }
-                if(in_array('tous', $genre)) {
-                    $instrus = $instruRepository->instrusList();
-                }
-            } elseif(!empty($request->get('instru')) && !empty($search->get('search'))) {
-                $keyword = $request->get('search');
-                $genre = $request->get('instru')['genre'];
-                foreach($genre as $value) {
+            $keyword = $request->get('search');
+            $genre = $request->get('instru');
+            if(!empty($keyword)) {
+                $instrus = $instruRepository->instrusList($keyword, NULL);
+            }
+            if(!empty($genre['genre'])) {
+                // foreach($genre['genre'] as $value) {
+                    $instrus = $instruRepository->instrusList(NULL, $genre['genre']);
+                // }
+            }
+            if(!empty($genre['genre']) && !empty($keyword)) {
+                foreach($genre['genre'] as $value) {
                     $instrus = $instruRepository->filteredInstrusByBoth($value, $keyword);
-                }
-                if(in_array('tous', $genre)) {
-                    $instrus = $instruRepository->filteredInstrusByKeyWord($keyword);
                 }
             }
         } else {
             $instrus = $instruRepository->instrusList();
         }
-
-        $jsonContent = $request->get('instru')['genre'];
-        // foreach($instrus as $instru) {
-        //     $jsonContent[] = $instru->getInfos();
-        // }
+        
+        $jsonContent = [];
+        foreach($instrus as $instru) {
+            $jsonContent[] = $instru->getInfos();
+        }
 
         $response = new JsonResponse($jsonContent);
-
+        
         $response->headers->set('Content-Type', 'application/json');
 
         return $response;

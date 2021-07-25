@@ -35,7 +35,15 @@
             <footer>
                 <div class="wrap">
                     <div>
-                        <p>© 2021 KeepVibz</p>
+                        {% set startYear = 2021 %}
+                        {% set currentYear = "now"|date("Y") %}
+
+                        {% if startYear == currentYear %}
+                            {% set copyrightYears = startYear %}
+                        {% else %}
+                            {% set copyrightYears = startYear ~ ' - ' ~ currentYear %}
+                        {% endif %}
+                        <p>&copy; {{ copyrightYears }} KeepVibz</p>
                     </div>
                     <div class="logo">
                         <a href="{{path('home')}}">
@@ -44,10 +52,10 @@
                     </div>
                     <div class="social-nav">
                         <ul>
-                            <li><a href=""><i class="fab fa-facebook"></i></a></li>
-                            <li><a href=""><i class="fab fa-linkedin-in"></i></a></li>
-                            <li><a href=""><i class="fab fa-instagram"></i></a></li>
-                            <li><a href=""><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="https://www.facebook.com/"><i class="fab fa-facebook"></i></a></li>
+                            <li><a href="https://www.youtube.com/"><i class="fab fa-youtube"></i></a></li>
+                            <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
+                            <li><a href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
                         </ul>
                     </div>
                 </div>

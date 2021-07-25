@@ -5,31 +5,18 @@
             <div class="left1 flex col">
                 <h5 class="visites">Visites</h5>
                 <p class="number"> 
-                    {{ render(controller(
-                        'App\\Controller\\HomeController::getVisits',
-                    )) }} 
+                    {# {{stats.getVisits}}  #}
                 </p>
             </div>
             <div class="left2 flex col">
                 <h5 class="posts">Posts</h5>
-                <p class="number"> {{total_posts}} </p>
+                <p class="number"> {{stats.getAllPostsCount}} </p>
             </div>
         </div>
         <div class="bottom_block_statistiques flex col">
             <div class="right1 flex col">
                 <h5 class="membres">Membres</h5>
-                <p class="number"> {{total_users}} </p>
+                <p class="number"> {{stats.getMembersCount}} </p>
             </div>
         </div>
     </div>
-
-
-
-
-
-
-
-                {# <div class="right2 flex col">
-                <h5 class="en_ligne">En ligne</h5>
-                <p class="number">0</p>
-            </div> #}

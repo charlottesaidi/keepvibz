@@ -107,14 +107,15 @@ button.link:hover {
 	color: $font-primary;
 }
 .main {
-	padding: 146px 10px 0 10px;
+	padding: 146px 20px 0 20px;
 	max-width: 1300px;
 	width: 100%;
 	margin: auto;
 	.main-title {
 		position: relative;
 		left: 0;
-		font-size: 20px;
+		font-size: 25px;
+		text-align: right;
 		padding-top: 10px;
 		color: $font-secondary;
 	}

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -85,7 +85,7 @@ class ResetPasswordController extends AbstractController
      * Vérifie et valide l'url suivi par l'utilisateur dans l'email
      */
     #[Route('/reset/{token}/{email}', name: 'app_reset_password')]
-    public function reset($token, $email, Request $request, UserPasswordEncoderInterface $passwordEncoder, UserRepository $userRepo): Response
+    public function reset($token, $email, Request $request, UserPasswordHasherInterface $passwordEncoder, UserRepository $userRepo): Response
     {
         $user = $userRepo->verifyToken($email, $token); // fonction repo cherche user email+token
 
@@ -95,7 +95,7 @@ class ResetPasswordController extends AbstractController
         if($user || $token != null) {
 
             if($form->isSubmitted() && $form->isValid()) {
-                $encodedPassword = $passwordEncoder->encodePassword(
+                $encodedPassword = $passwordEncoder->hashPassword(
                     $user,
                     $form->get('plainPassword')->getData()
                 );

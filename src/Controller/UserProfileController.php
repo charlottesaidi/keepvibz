@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\ProfileEditFunctions;
 use JasonGrimes\Paginator;
 use App\Service\FolderGenerator;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Intervention\Image\ImageManager;
 use Symfony\Component\HttpClient\HttpClient;
 
@@ -35,7 +35,7 @@ class UserProfileController extends AbstractController
     public $passwordEncoder;
     public $folderGenerator;
 
-    public function __construct(AvatarRepository $avatarRepo,TexteRepository $texteRepo, ToplineRepository $toplineRepo, InstruRepository $instruRepo, CompetenceRepository $competenceRepo, FolderGenerator $folderGenerator, UserPasswordEncoderInterface $passwordEncoder) {
+    public function __construct(AvatarRepository $avatarRepo,TexteRepository $texteRepo, ToplineRepository $toplineRepo, InstruRepository $instruRepo, CompetenceRepository $competenceRepo, FolderGenerator $folderGenerator, UserPasswordHasherInterface $passwordEncoder) {
         $this->avatarRepo = $avatarRepo;
         $this->texteRepo = $texteRepo;
         $this->instruRepo = $instruRepo;
@@ -143,7 +143,7 @@ class UserProfileController extends AbstractController
         if($form->get('newPassword')->getData() != null) {
             
             $user->setPassword(
-                    $passwordEncoder->encodePassword(
+                    $passwordEncoder->hashPassword(
                     $user,
                     $form->get('newPassword')->getData()
                 )

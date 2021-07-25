@@ -48,6 +48,8 @@
                 <li class="link_mobile"><a class="nav_link" href="{{path('instrus')}}">Instrus</a></li>
                 <li class="link_mobile"><a class="nav_link" href="{{path('textes')}}">Textes</a></li>
                 <li class="link_mobile"><a class="nav_link" href="{{path('contact_new')}}">Nous contacter</a></li>
+            </ul>
+            <ul class="nav_mobile2 flex col aic">
             {% if app.user %}
                 <li class="link_mobile"><a class="nav_link" href="{{path('user_profile')}}">Profil</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
@@ -65,12 +67,12 @@
         {# HEADER #}
         <header id="header" class="header fixed">
             <h1 class="site">KeepVibz</h1>
-            <div class="wrap2 flex sb">
-                <div class="left flex">
+            <div class="wrap2 flex sb aic">
+                <div class="left flex sb aic">
                     <div class="logo">
                         <a href="{{path('home')}}"><img class="img_logo" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
                     </div>
-                    <nav class="navigation">
+                    <nav class="navigation flex aic">
                         <ul class="nav flex">
                             <li class="link"><a class="nav_link" href="{{path('instrus')}}">Instrus</a></li>
                             <li class="link"><a class="nav_link" href="{{path('textes')}}">Textes</a></li>
@@ -92,14 +94,14 @@
                 <nav class="right">
                     <ul class="flex sb aic">
                 {% if app.user %}
-                        <li><a class="nav_link" href="{{ path ('user_profile') }}">Profil</a></li>
+                        <li class="link"><a class="nav_link" href="{{ path ('user_profile') }}">Profil</a></li>
                         {% if is_granted('ROLE_ADMIN') %}
-                            <li><a class="nav_link" href="{{ path ('admin_dashboard') }}">Admin</a></li>
+                            <li class="link"><a class="nav_link" href="{{ path ('admin_dashboard') }}">Admin</a></li>
                         {% endif %}
-                        <li><a class="link_connexion" href="{{ path ('app_logout') }}">Déconnexion</a></li>
+                        <li class="link"><a class="link_connexion" href="{{ path ('app_logout') }}">Déconnexion</a></li>
                     {% else %}
-                        <li><a class="nav_link" href="{{ path ('app_register') }}">Inscription</a></li>
-                        <li><a class="link_connexion" href="{{ path ('app_login') }}">Connexion</a></li>
+                        <li class="link"><a class="nav_link" href="{{ path ('app_register') }}">Inscription</a></li>
+                        <li class="link"><a class="link_connexion" href="{{ path ('app_login') }}">Connexion</a></li>
                 {% endif %}
                     </ul>
                 </nav>
@@ -115,10 +117,10 @@
                 <div class="left_bottom flex col aic">
                     <a class="link_img_logo_bottom" href="/"><img class="img_logo_bottom" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
                     <div class="block_social_icons flex sb wrap">
-                        <a href="#!" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/facebook-3-64.png')}}" alt="icone facebook"></a>
-                        <a href="#!" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/instagram-3-64.png')}}" alt="icone instagram"></a>
-                        <a href="#!" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/linkedin-3-64.png')}}" alt="icone linkedin"></a>
-                        <a href="#!" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/twitter-3-64.png')}}" alt="icone twitter"></a>
+                        <a href="https://www.facebook.com/" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/facebook-3-64.png')}}" alt="icone facebook"></a>
+                        <a href="https://www.instagram.com/" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/instagram-3-64.png')}}" alt="icone instagram"></a>
+                        <a href="https://www.youtube.com/" class="social_icon youtube"><img src="{{asset('assets/images/icons/social_blanc/youtube1.svg')}}" alt="icone linkedin"></a>
+                        <a href="https://twitter.com/" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/twitter-3-64.png')}}" alt="icone twitter"></a>
                     </div>
                 </div>
                 {# ====================================================== #}
@@ -159,11 +161,9 @@
                     </div>
                 </div>
                 <div class="right_bottom flex col">
-                    {{ render(controller(
-                        'App\\Controller\\HomeController::getStats',
-                    )) }}
+                    {{include('stats/stats.html.twig')}}
                 </div>
-                <div class="top_right">
+                <div class="top_right flex aic sb">
                     <iframe id="discord" src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
                     </iframe> 
                     <button id="btn-up"><i class="fas fa-chevron-up"></i></button>
@@ -185,7 +185,7 @@
                         {% else %}
                             {% set copyrightYears = startYear ~ ' - ' ~ currentYear %}
                         {% endif %}
-                    <p class="copyright">&copy; {{ copyrightYears }} Keepvibz</p>
+                    <p class="copyright">&copy; {{ copyrightYears }} KeepVibz</p>
                 </div>
             </div>
         </footer>

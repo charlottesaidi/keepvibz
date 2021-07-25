@@ -45,42 +45,4 @@ class HomeController extends AbstractController
     {
         return $this->render('faq/index.html.twig');
     }
-
-    public function getStats(ToplineRepository $toplineRepo, UserRepository $userRepo, TexteRepository $texteRepo, InstruRepository $instruRepo): Response
-    {
-        // counting footer stats
-            // total users
-        $countUsers = $userRepo->paginateCount();
-            // total posts
-        $countTextes = $texteRepo->paginateCount();
-        $countinstrus = $instruRepo->paginateCount();
-        $countToplines = $toplineRepo->paginateCount();
-        
-        $countPosts = $countTextes + $countinstrus + $countToplines; 
-
-        return $this->render('stats/stats.html.twig', [
-            'total_users' => $countUsers,
-            'total_posts' => $countPosts,
-        ]);
-    }
-
-    public function getVisits(): Response
-    {
-        // count visits site
-        $handle = fopen($this->getParameter('counter_directory').'/counter.txt', "r"); 
-        if(!$handle){ 
-            echo "could not open the file"; 
-        } else { 
-            $counter = ( int )fread($handle,20); 
-            fclose($handle); 
-            $counter++; 
-            $handle = fopen($this->getParameter('counter_directory').'/counter.txt', "w" ); 
-            fwrite($handle,$counter); 
-            fclose($handle); 
-        }
-
-        return $this->render('stats/visits.html.twig', [
-            'visits' => $counter,
-        ]);
-    }
 }

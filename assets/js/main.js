@@ -99,7 +99,8 @@ $(document).ready(function(){
     // ================================================================
 
     //SHOW INSTRUS - DISPLAY NONE / DISPLAY BLOCK - BOTTOM SECTION
-    $('.second_textes').click(function(){
+    $('.second_textes').click(function(e){
+        e.preventDefault();
         $(this).hide();
         $('.first_autres_instrus').show();
         $('.third_topline').show();
@@ -111,7 +112,8 @@ $(document).ready(function(){
 
     })
 
-    $('.first_autres_instrus').click(function(){
+    $('.first_autres_instrus').click(function(e){
+        e.preventDefault();
         $(this).hide();
         $('.second_textes').show();
         $('.third_topline').show();
@@ -123,7 +125,8 @@ $(document).ready(function(){
 
     })
 
-    $('.third_topline').click(function(){
+    $('.third_topline').click(function(e){
+        e.preventDefault();
         $(this).hide();
         $('.second_textes').show();
         $('.first_autres_instrus').show();
@@ -135,7 +138,8 @@ $(document).ready(function(){
 
     })
 
-    $('.fourth_auteur').click(function(){
+    $('.fourth_auteur').click(function(e){
+        e.preventDefault();
         $(this).hide();
         $('.first_autres_instrus').show();
         $('.second_textes').show();
@@ -147,7 +151,8 @@ $(document).ready(function(){
     })
 
     //SHOW TEXTES - DISPLAY NONE / DISPLAY BLOCK - BOTTOM SECTION
-    $('.second_instrus').click(function(){
+    $('.second_instrus').click(function(e){
+        e.preventDefault();
         $(this).hide();
         $('.first_autres_textes').show();
         $('.fourth_auteur').show();
@@ -156,7 +161,8 @@ $(document).ready(function(){
         $('.bottom_informations_auteur_show_textes').hide();
     })
 
-    $('.first_autres_textes').click(function(){
+    $('.first_autres_textes').click(function(e){
+        e.preventDefault();
         $(this).hide();
         $('.second_instrus').show();
         $('.fourth_auteur').show();
@@ -165,7 +171,8 @@ $(document).ready(function(){
         $('.bottom_informations_auteur_show_textes').hide();
     })
 
-    $('.fourth_auteur').click(function(){
+    $('.fourth_auteur').click(function(e){
+        e.preventDefault();
         $(this).hide();
         $('.second_instrus').show();
         $('.first_autres_textes').show();

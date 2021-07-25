@@ -35,21 +35,6 @@ class DashboardController extends AbstractController
     #[Route('/', name: 'admin_dashboard')]
     public function index(): Response
     {
-        // counting dashboard stats
-            // total users
-            $countUsers = $this->userRepo->paginateCount();
-            // total posts
-        $countTextes = $this->texteRepo->paginateCount();
-        $countinstrus = $this->instruRepo->paginateCount();
-        $countToplines = $this->toplineRepo->paginateCount();
-
-        $countPosts = $countTextes + $countinstrus + $countToplines;
-
-        return $this->render('admin/index.html.twig', [
-            'total_users' => $countUsers,
-            'total_instrus' => $countinstrus,
-            'total_toplines' => $countToplines,
-            'total_textes' => $countTextes,
-        ]);
+        return $this->render('admin/index.html.twig');
     }
 }

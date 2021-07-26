@@ -52,8 +52,8 @@
                                             <tr>
                                                 <th class="cell">Genre</th>
                                                 <td class="cell">
-                                                    {% for genre in instru.genre %}
-                                                        <span>{{ genre }}</span><br>
+                                                    {% for genre in instru.genres %}
+                                                        <span>{{ genre.label }}</span><br>
                                                     {% endfor %}
                                                 </td>
                                             </tr>

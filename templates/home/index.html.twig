@@ -52,7 +52,7 @@
                             <div class="image_downloaded">
                                 <a href="{{path('instru_show', {'id': beat.id})}}">               
                                     {% if beat.image is empty %}
-                                        <img class="img_downloaded" src="{{asset('uploads/images/instrus/instru.jpg')}}" alt="{{ beat.title }}">
+                                        <img class="img_downloaded" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="{{ beat.title }}">
                                     {% else %}
                                         <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
                                     {% endif %}
@@ -64,8 +64,8 @@
                             <div class="block_info_instrus flex col tac">
                                 <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
                                 <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
-                                {% for genre in beat.genre %}
-                                    {{ genre }}
+                                {% for genre in beat.genres %}
+                                    {{ genre.label }},
                                 {% endfor %}
                                 </span></h4>
                                 <h4 class="description_downloaded">CLé : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>

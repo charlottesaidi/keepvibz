@@ -12,7 +12,7 @@
                     {% if instru.image %}
                     <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru">
                     {% else %}
-                    <img src="{{asset('uploads/images/instrus/instru.jpg')}}" class="image_content_show_instru">
+                    <img src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" class="image_content_show_instru">
                     {% endif %}
                 </div>
             </div>
@@ -27,8 +27,8 @@
                 <p class="author_content_show_instru">par <span class="name_author_content_show_instru">{{ instru.user.name }}</span></p>
                 <div class="details_content_show_instru flex jcc fw">
                     <p class="genre_content_show_instru">
-                        {% for genre in instru.genre %}
-                            {{ genre }}
+                        {% for genre in instru.genres %}
+                            {{ genre.label }}
                         {% endfor %}
                         <span class="genre_separator">|</span>
                     </p>
@@ -73,7 +73,7 @@
                         {% if beats.image != null %}
                         <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
                             {% else %}
-                                <img src="{{asset('uploads/images/instrus/instru.jpg')}}" class="img_instru_author">
+                                <img src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" class="img_instru_author">
                         {% endif %}
                         </div>
                     </a>

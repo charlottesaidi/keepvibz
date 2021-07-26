@@ -150,7 +150,7 @@
             html += '<div class="image_downloaded">';
             html += "<a href=\"/instrus/show/" + e.id + "\">";
             if(e.image == null) {
-                html += "<img class=\"img_downloaded\" src=\"{{asset('uploads/images/instrus/instru.jpg')}}\" alt=\"{{"+ e.title +"}}\">";
+                html += "<img class=\"img_downloaded\" src=\"{{asset('assets/images/logo2Fichier_4_svg.svg')}}\" alt=\"{{"+ e.title +"}}\">";
             } else {
                 html += "<img class=\"img_downloaded\" src=\"../uploads/images/instrus/" + e.image + "\" alt=\""+ e.title + "\">";
             }
@@ -161,7 +161,7 @@
             html += '<h4 class="title_downloaded">Titre : <span class="span_downloaded">'+ e.title +'</span></h4>';   
             html += '<h4 class="genre_downloaded">Genre : <span class="span_downloaded">';    
             e.genre.forEach(genre =>
-                html += genre + ' '
+                html += genre.label + ', '
             );    
             html += '</h4>';  
             html += '<h4 class="description_downloaded">Key : <span class="span_downloaded">'+ e.cle +'</span> - <span class="span_downloaded">'+ e.bpm +'</span> BPM</h4>';     

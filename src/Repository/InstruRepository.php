@@ -21,8 +21,9 @@ class InstruRepository extends ServiceEntityRepository
 
     public function paginateAll($limit, $offset) {
         return $this->createQueryBuilder('i')
-            ->select('i, u')
+            ->select('i, u, g')
             ->join('i.user', 'u')
+            ->join('i.genres', 'g')
             ->orderBy('i.created_at', 'DESC')
             ->setMaxResults($limit)
             ->setFirstResult($offset)
@@ -31,15 +32,54 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
 
-    public function paginateSearch($limit, $offset, $value) {
+    public function instrusList() {
         return $this->createQueryBuilder('i')
+            ->select('i, u, g')
+            ->join('i.user', 'u')
+            ->join('i.genres', 'g')
             ->orderBy('i.created_at', 'DESC')
-            ->andWhere('i.genre = [:val]')
-            ->setParameter('val', $value)
-            ->setMaxResults($limit)
-            ->setFirstResult($offset)
             ->getQuery()
-            ->getArrayResult()
+            ->getResult()
+        ;
+    }
+
+    public function filteredInstrusByKeyWord($value) {
+        return $this->createQueryBuilder('i')
+            ->select('i, u, g')
+            ->join('i.user', 'u')
+            ->join('i.genres', 'g')
+            ->orderBy('i.created_at', 'DESC')
+            ->andWhere('i.title LIKE :val')
+            ->setParameter('val', '%'.$value.'%')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filteredInstrusByGenre($value) {
+        return $this->createQueryBuilder('i')
+            ->select('i, u, g')
+            ->join('i.user', 'u')
+            ->join('i.genres', 'g')
+            ->orderBy('i.created_at', 'DESC')
+            ->andWhere('g.label IN (:val)')
+            ->setParameter('val', $value)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function filteredInstrusByBoth($genre, $keyword) {
+        return $this->createQueryBuilder('i')
+            ->select('i, u, g')
+            ->join('i.user', 'u')
+            ->join('i.genres', 'g')
+            ->orderBy('i.created_at', 'DESC')
+            ->andWhere('g.label IN (:genre)')
+            ->andWhere('i.title LIKE :keyword')
+            ->setParameters([ 'genre' =>  $genre, 'keyword' =>  '%'.$keyword.'%'])
+            ->getQuery()
+            ->getResult()
         ;
     }
 
@@ -66,8 +106,9 @@ class InstruRepository extends ServiceEntityRepository
 
     public function findOneLatestUpload() {
         return $this->createQueryBuilder('i')
-            ->select('i, u')
+            ->select('i, u, g')
             ->join('i.user', 'u')
+            ->join('i.genres', 'g')
             ->orderBy('i.created_at', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
@@ -78,8 +119,9 @@ class InstruRepository extends ServiceEntityRepository
     public function findLatest()
     {
         return $this->createQueryBuilder('i')
-            ->select('i, u')
+            ->select('i, u, g')
             ->join('i.user', 'u')
+            ->join('i.genres', 'g')
             ->orderBy('i.created_at', 'DESC')
             ->setMaxResults(10)
             ->getQuery()
@@ -89,8 +131,9 @@ class InstruRepository extends ServiceEntityRepository
 
     public function findUserInstrus($user) {
         return $this->createQueryBuilder('i')
-        ->select('i, u')
+        ->select('i, u, g')
         ->join('i.user', 'u')
+        ->join('i.genres', 'g')
         ->setParameter('val', $user)
         ->where('i.user = :val')
         ->getQuery()

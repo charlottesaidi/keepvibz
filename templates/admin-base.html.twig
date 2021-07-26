@@ -139,6 +139,16 @@
 
 							<li class="nav-item">
 								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'genre_index' ? 'active' }}" href="{{path('genre_index')}}">
+									<span class="nav-icon">
+										<i class="fas fa-music"></i>
+									</span>
+									<span class="nav-link-text">Genres</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
 								<a class="nav-link {{ app.request.get('_route') == 'instru_index' ? 'active' }}" href="{{path('instru_index')}}">
 									<span class="nav-icon">
 										<i class="fas fa-music"></i>

@@ -27,6 +27,6 @@ function openForm(form, evt) {
     evt.currentTarget.className += " hide";
 }
 
-document.querySelector('#reply_btn').addEventListener('click', (e) => {
+document.getElementById('reply_btn').addEventListener('click', (e) => {
     openForm('reply_form', e);
 })

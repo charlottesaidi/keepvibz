@@ -16,7 +16,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
 
         $instru1 = new Instru();
         $instru1->setTitle('Instrumentale 1');
-        $instru1->setGenre(['Trap']);
         $instru1->setBpm(145);
         $instru1->setCle('Am');
         $instru1->setUser($this->getReference('user3'));
@@ -24,7 +23,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
 
         $instru2 = new Instru();
         $instru2->setTitle('Instrumentale 2');
-        $instru2->setGenre(['Rap']);
         $instru2->setBpm(145);
         $instru2->setCle('Am');
         $instru2->setUser($this->getReference('user5'));
@@ -32,7 +30,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
 
         $instru3 = new Instru();
         $instru3->setTitle('Instrumentale 3');
-        $instru3->setGenre(['Trap']);
         $instru3->setBpm(145);
         $instru3->setCle('Am');
         $instru3->setUser($this->getReference('user4'));
@@ -40,7 +37,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
 
         $instru4 = new Instru();
         $instru4->setTitle('Instrumentale 4');
-        $instru4->setGenre(['Trap']);
         $instru4->setBpm(145);
         $instru4->setCle('Am');
         $instru4->setUser($this->getReference('user6'));
@@ -48,7 +44,6 @@ class InstruFixtures extends Fixture implements DependentFixtureInterface
 
         $instru5 = new Instru();
         $instru5->setTitle('Instrumentale 5');
-        $instru5->setGenre(['R\'n\'B']);
         $instru5->setBpm(145);
         $instru5->setCle('Am');
         $instru5->setUser($this->getReference('user5'));

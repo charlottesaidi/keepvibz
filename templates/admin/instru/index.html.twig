@@ -67,8 +67,8 @@
                                                 <td class="cell">{{ instru.title }}</td>
                                                 <td class="cell">{{ instru.user.name }}</td>
                                                 <td class="cell">
-                                                    {% for genre in instru.genre %}
-                                                        <span>{{ genre }}</span><br>
+                                                    {% for genre in instru.genres %}
+                                                        <span>{{ genre.label }}</span><br>
                                                     {% endfor %}
                                                 </td>
                                                 <td class="cell">{{ instru.bpm }}</td>

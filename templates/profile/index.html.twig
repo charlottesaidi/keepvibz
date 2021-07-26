@@ -323,8 +323,8 @@
                                 <div class="block_info_instrus flex col">
                                     <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ instru.title }}</span></h4>
                                     <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
-                                        {% for genre in instru.genre %}
-                                            {{ genre }}
+                                        {% for genre in instru.genres %}
+                                            {{ genre.label }},
                                         {% endfor %}
                                     </h4>
                                     <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ instru.cle }}</span> - <span class="span_downloaded">{{ instru.bpm }}</span> BPM</h4>

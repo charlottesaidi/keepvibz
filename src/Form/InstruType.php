@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Instru;
+use App\Entity\Genre;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -21,15 +22,10 @@ class InstruType extends AbstractType
             ->add('title', TextType::class, [
                 'label' => 'Titre',
             ])
-            ->add('genre', ChoiceType::class, [
-                'label' => 'Genre',
-                'choices'  => [
-                    'Hip-Hop' => 'Hip Hop',
-                    'Trap' => 'trap',
-                    'R\'n\'B' => 'r\'n\'b',
-                    'Pop' => 'pop',
-                    'Autre' => 'autre'
-                ],
+            ->add('genres', EntityType::class, [
+                'class' => Genre::class,
+                'label' => 'Genres',
+                'choice_label' => 'label',
                 'multiple' => true,
                 'expanded' => true,
             ])

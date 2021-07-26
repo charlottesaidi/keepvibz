@@ -12,28 +12,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Service\FolderGenerator;
 use JasonGrimes\Paginator;
 use Intervention\Image\ImageManager;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 
 #[Route('/instrus')]
 class InstrusController extends AbstractController
 {
-    #[Route('/', name: 'instrus')]
-    public function index(InstruRepository $instruRepository): Response
+    #[Route('/', name: 'instrus', methods: ['GET', 'POST'])]
+    public function index(): Response
     {
-        $totalItems = $instruRepository->paginateCount();
-        $itemsPerPage = 10;
-        $currentPage = 1;
-        $urlPattern = '/instrus?page=(:num)';
-        $offset = 0;
-        if(!empty($_GET['page'])) {
-            $currentPage = $_GET['page'];
-            $offset = ($currentPage - 1) * $itemsPerPage;
-        }
-
-        $paginator = new Paginator($totalItems, $itemsPerPage, $currentPage, $urlPattern);
-        return $this->render('instrus/index.html.twig', [
-            'instrus' => $instruRepository->paginateAll($itemsPerPage, $offset),
-            'paginator' => $paginator
-        ]);
+        return $this->render('instrus/index.html.twig');
     }
 
     #[Route('/new', name: 'instrus_new', methods: ['GET', 'POST'])]
@@ -91,7 +81,7 @@ class InstrusController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'instru_show', methods: ['GET'])]
+    #[Route('/show/{id}', name: 'instru_show', methods: ['GET'])]
     public function show(Instru $instru): Response
     {
         return $this->render('instrus/show.html.twig', [

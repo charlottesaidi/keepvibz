@@ -1,0 +1,182 @@
+<div class="main_instrus">
+    <div class="section_instrus">
+        <div class="container_instrus pr">
+
+            <div class="sidebar_instrus">
+                <div class="content_sidebar flex col aic">
+                    <div class="genre">
+                        <div class="wrap2">
+                            <div class="search flex fs">
+                                <form enctype="multipart/form-data" id="search_form" class="search_form">
+                                    <div class="input-group flex sb aic">
+                                        <div id="filter_btn" class="filtres" style="cursor: pointer">
+                                            <p>Genre <i class="fas fa-chevron-down"></i></p>
+                                        </div>
+                                        <input type="text" name="search" id="search" placeholder="Tapes ta recherche">
+                                        <button type="submit" class="btn_search" style="cursor: pointer"><i class="fas fa-search"></i></button>
+                                    </div>
+                                    <div id="filter_block" class="block_filters">
+                                        <div class="filters">
+                                                <div id="instru_genre" class="flex sb">
+                                                    <div class="form-check">
+                                                        <input type="checkbox" id="instru_genre_0" name="instru[genre][0]" class="form-check-input" value="Hip Hop" />
+                                                        <label class="form-check-label" for="instru_genre_0">Hip-Hop</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" id="instru_genre_1" name="instru[genre][1]" class="form-check-input" value="trap" />
+                                                        <label class="form-check-label" for="instru_genre_1">Trap</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" id="instru_genre_2" name="instru[genre][2]" class="form-check-input" value="r&#039;n&#039;b" />
+                                                        <label class="form-check-label" for="instru_genre_2">R&#039;n&#039;B</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" id="instru_genre_3" name="instru[genre][3]" class="form-check-input" value="pop" />
+                                                        <label class="form-check-label" for="instru_genre_3">Pop</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" id="instru_genre_4" name="instru[genre][4]" class="form-check-input" value="autre" />
+                                                        <label class="form-check-label" for="instru_genre_4">Autre</label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input type="checkbox" id="instru_genre_5" name="instru[genre][5]" class="form-check-input" value="tous" />
+                                                        <label class="form-check-label" for="instru_genre_5">Tous</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="right_content flex col">
+                <h2 class="title_instrus">Instrus</h2>
+                <div id="instrus_ajax_blocks" class="content_instrus flex fs fw">
+                    {# listing ajax instrumentales #}
+                </div>
+
+                <div id="block_pagination" class="js_pagination">
+                    {# pagination js #}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    
+    $(document).ready(function() {
+        $('#filter_btn').on('click', function() {
+            $('#filter_block').slideToggle('slow');
+        })
+    })
+    
+    var instrus = [];
+    var htmlInstru = '';
+
+    $.ajax({
+        type: 'GET',
+        url: '/api/instrus',
+        data: {
+            instrus, 
+            htmlInstru,
+        },
+        success: function(res) {
+                console.log(res)
+            instrus = res;
+            $('#block_pagination').pagination({
+                dataSource: instrus,
+                pageSize: 10,
+                showPageNumbers: false,
+                autoHidePrevious: true,
+                autoHideNext: true,
+                prevText: 'Précédent',
+                nextText: 'Suivant',
+                callback: function(data, pagination) {
+                    htmlInstru = instrusTemplate(data);;
+                    $('#instrus_ajax_blocks').html(htmlInstru);
+                    window.scrollTo(0,0);
+                }
+            })
+        }
+    })
+
+    $('#search_form').on('submit', function(e) {
+        e.preventDefault();
+        var genres = $('#instru_genre').val();
+        var formData = new FormData(document.getElementById('search_form'));
+        $.ajax({
+            type: "POST",
+            url: "/api/instrus",
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function(response) {
+                console.log(response)
+                instrus = response;
+                if(instrus.length > 0) {
+                    $('#block_pagination').pagination({
+                            dataSource: instrus,
+                            pageSize: 10,
+                            showPageNumbers: false, 
+                            autoHidePrevious: true,
+                            autoHideNext: true,
+                            prevText: 'Précédent',
+                            nextText: 'Suivant',
+                            callback: function(data, pagination) {
+                            htmlInstru = instrusTemplate(data);;
+                            $('#instrus_ajax_blocks').html(htmlInstru);
+                        }
+                    })
+                } else {
+                    htmlInstru = noResultTemplate();
+                    $('#instrus_ajax_blocks').html(htmlInstru);
+                };
+            }
+        });
+    }) 
+
+    function instrusTemplate(instrus) {
+        var html = '';
+        instrus.forEach(function(e) { 
+            html += '<li class="content_download_instrus flex col tac pr">';
+            html += "<audio class=\"player_audio_selected audio_player\" preload src=\"../uploads/instrus/"+ e.file+"\" controls id=\"player_"+ e.id +"\"></audio>";
+            html += '<div class="image_downloaded">';
+            html += "<a href=\"/instrus/show/" + e.id + "\">";
+            if(e.image == null) {
+                html += "<img class=\"img_downloaded\" src=\"{{asset('assets/images/logo2Fichier_4_svg.svg')}}\" alt=\"{{"+ e.title +"}}\">";
+            } else {
+                html += "<img class=\"img_downloaded\" src=\"../uploads/images/instrus/" + e.image + "\" alt=\""+ e.title + "\">";
+            }
+            html += '</a></div>';
+            html += "<div class=\"btn_play_caroussel btn\"  id=\"btn_ref_"+ e.id +"\">";
+            html += "<img class=\"img_play_caroussel\" src=\"{{asset('assets/images/icons/play.png')}}\" alt=\"bouton de lecture audio\">";    
+            html += '</div><div class="block_info_instrus flex col">';     
+            html += '<h4 class="title_downloaded">Titre : <span class="span_downloaded">'+ e.title +'</span></h4>';   
+            html += '<h4 class="genre_downloaded">Genre : <span class="span_downloaded">';    
+            e.genre.forEach(genre =>
+                html += genre.label + ', '
+            );    
+            html += '</h4>';  
+            html += '<h4 class="description_downloaded">Key : <span class="span_downloaded">'+ e.cle +'</span> - <span class="span_downloaded">'+ e.bpm +'</span> BPM</h4>';     
+            html += '<h4 class="author_downloaded">Auteur : <span class="span_downloaded">'+ e.user.name +'</span></h4>';        
+            html += '</div>';        
+            html += '</li>';  
+        });
+        return html;
+    } 
+
+    function noResultTemplate() {
+        var html = '';
+        html += '<div class="invalid-feedback d-block">';
+        html += '<p>La recherche n\'a donné aucun résultat</p>';
+        html += '</div>';
+        return html; 
+    }
+</script>

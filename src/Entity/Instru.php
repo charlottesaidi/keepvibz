@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Annotation\Ignore;
 use Gedmo\SoftDeleteable\Traits\SoftDeleteableEntity;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -44,13 +45,6 @@ class Instru
 
     /**
      * @Assert\NotBlank
-     * @Assert\Unique
-     * @ORM\Column(type="json")
-     */
-    private $genre = [];
-
-    /**
-     * @Assert\NotBlank
      * @Assert\Positive
      * @Assert\Range(
      *      min = 70,
@@ -69,6 +63,7 @@ class Instru
     private $cle;
 
     /**
+     * @Ignore
      * @Assert\NotBlank
      * @Assert\File(
      *    maxSize = "10000k",
@@ -80,6 +75,7 @@ class Instru
     private $file;
 
     /**
+     * @Ignore
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $image;
@@ -95,25 +91,34 @@ class Instru
     private $modified_at;
 
     /**
+     * @Ignore
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="instrus")
      */
     private $user;
 
     /**
+     * @Ignore
      * @ORM\ManyToMany(targetEntity=Texte::class, mappedBy="instrus", cascade={"persist", "remove"})
      */
     private $textes;
 
     /**
+     * @Ignore
      * @ORM\OneToMany(targetEntity=Topline::class, mappedBy="instru", cascade={"persist", "remove"})
      */
     private $toplines;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="instrus")
+     */
+    private $genres;
 
     public function __construct()
     {
         $this -> created_at = new \DateTime();
         $this->textes = new ArrayCollection();
         $this->toplines = new ArrayCollection();
+        $this->genres = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,18 +134,6 @@ class Instru
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getGenre(): ?array
-    {
-        return $this->genre;
-    }
-
-    public function setGenre(array $genre): self
-    {
-        $this->genre = $genre;
 
         return $this;
     }
@@ -285,18 +278,50 @@ class Instru
         return $this;
     }
 
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenres(): Collection
+    {
+        return $this->genres;
+    }
+
+    public function addGenre(Genre $genre): self
+    {
+        if (!$this->genres->contains($genre)) {
+            $this->genres[] = $genre;
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        $this->genres->removeElement($genre);
+
+        return $this;
+    }
+
+    public function genresInfos() {
+        $genres = [];
+        foreach($this->getGenres() as $genre) {
+            $genres[] = $genre->getInfos();
+        }
+        return $genres;
+    }
+
     public function getInfos() {
         return $data = [
             'id' => $this->getId(),
             'title' => $this->getTitle(),
-            'genre' => $this->getGenre(),
+            'genre' => $this->genresInfos(),
             'bpm' => $this->getBpm(),
             'cle' => $this->getCle(),
             'file' => $this->getFile(),
             'image' => $this->getImage(),
             'created_at' => $this->getCreatedAt(),
             'modified_at' => $this->getModifiedAt(),
-            'user' => $this->getUser(),
+            'user' => $this->getUser()->getInfos(),
             'textes' => $this->getTextes(),
             'toplines' => $this->getToplines(),            
         ];

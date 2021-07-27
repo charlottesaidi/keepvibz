@@ -22,12 +22,16 @@
                         <h2 class="accroche">"Ensemble <span>on est plus fort !</span>"</h2>
                     </div>
                     <h2 class="latest_upload">Dernier upload</h2>
-                    <audio preload controls>
-                    {% for audio in lastUpload %}   
-                        <source src="{{asset('uploads/instrus/' ~ audio.file)}}" type="audio/mpeg">
+                    {# {% for audio in lastUpload %} #}
+                    <audio preload controls>   
+                        {% if lastUpload.file %}
+                            <source src="{{asset('uploads/instrus/' ~ lastUpload.file)}}" type="audio/mpeg">
+                        {% else %}
+                            <source src="http://icecast.skyrock.net/s/natio_mp3_128k" type="audio/mpeg">
+                        {% endif %}
                     </audio>
-                    <h3 class="title_player">{{audio.title}} (Par {{audio.user.name}} - BPM {{audio.bpm}})</h3>
-                    {% endfor %}
+                    <h3 class="title_player">{{lastUpload.title}} (Par {{lastUpload.user.name}} - BPM {{lastUpload.bpm}})</h3>
+                    {# {% endfor %} #}
                 </div>
             </div>
     </section>
@@ -41,15 +45,21 @@
                 {# CUSTOM NAVIGATION #}
                 <div class="custom-navigation">
                     <div class="paginate_button flex jcfe">
-                            <a href="#" class="flex-prev"><img src="{{asset('assets/images/icons/arrow-92-64.png')}}" alt="icône de navigation (précédent)"></a>
-                            <a href="#" class="flex-next"><img src="{{asset('assets/images/icons/arrow-28-64.png')}}" alt="icône de navigation (suivant)"></a>
+                        <a href="#" class="flex-prev"><img src="{{asset('assets/images/icons/arrow-92-64.png')}}" alt="icône de navigation (précédent)"></a>
+                        <a href="#" class="flex-next"><img src="{{asset('assets/images/icons/arrow-28-64.png')}}" alt="icône de navigation (suivant)"></a>
                     </div>
                 </div>
                 {# CUSTOM NAVIGATION #}
                     <ul class="slides">
                         {% for beat in instrus %}
                         <li class="content_download flex col">
-                            <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beat.file) }}" controls id="player_{{ beat.id }}"></audio>
+                            <audio class="player_audio_selected audio_player" preload controls id="player_{{ beat.id }}">   
+                                {% if beat.file %}
+                                    <source src="{{asset('uploads/instrus/' ~ beat.file)}}" type="audio/mpeg">
+                                {% else %}
+                                    <source src="http://icecast.skyrock.net/s/natio_mp3_128k" type="audio/mpeg">
+                                {% endif %}
+                            </audio>
                             <div class="image_downloaded">
                                 <a href="{{path('instru_show', {'id': beat.id})}}">               
                                     {% if beat.image is empty %}

@@ -112,7 +112,7 @@ class InstruRepository extends ServiceEntityRepository
             ->orderBy('i.created_at', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
-            ->getResult()
+            ->getOneOrNullResult()
         ;
     }
     

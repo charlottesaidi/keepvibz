@@ -33,6 +33,7 @@ import './styles/faq.css';
 import './styles/contact.css';
 
 import './js/clamp.js';
+import './js/pagination.min.js';
 import './js/main.js';
 
 

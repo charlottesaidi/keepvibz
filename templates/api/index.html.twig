@@ -146,7 +146,13 @@
         var html = '';
         instrus.forEach(function(e) { 
             html += '<li class="content_download_instrus flex col tac pr">';
-            html += "<audio class=\"player_audio_selected audio_player\" preload src=\"../uploads/instrus/"+ e.file+"\" controls id=\"player_"+ e.id +"\"></audio>";
+            html += "<audio class=\"player_audio_selected audio_player\" preload controls id=\"player_"+ e.id +"\">";
+            if(e.file == null) {
+                html += "<source src=\"http://icecast.skyrock.net/s/natio_mp3_128k\">";
+            } else {
+                html += "<source src=\"../uploads/instrus/"+ e.file+"\">";
+            }
+            html += "</audio>";
             html += '<div class="image_downloaded">';
             html += "<a href=\"/instrus/show/" + e.id + "\">";
             if(e.image == null) {

@@ -12,14 +12,22 @@
                                         <div id="filter_btn" class="filtres" style="cursor: pointer">
                                             <p>Genre <i class="fas fa-chevron-down"></i></p>
                                         </div>
-                                        <input type="text" name="search" id="search" placeholder="Tapes ta recherche">
+                                        <input type="text" name="search[title]" id="search_title" placeholder="Renseignes le titre d'un morceau">
+                                        <input class="hidden" type="text" name="search[author]" id="search_author" placeholder="Renseignes un pseudo">
                                         <button type="submit" class="btn_search" style="cursor: pointer"><i class="fas fa-search"></i></button>
+                                    </div>
+                                    <div style="color: #fff; display: inline">
+                                        <input type="radio" id="auteur" name="search_type" value="auteur">
+                                        <label for="auteur">Par auteur</label>
+
+                                        <input type="radio" id="title" name="search_type" value="title">
+                                        <label for="title">Par titre</label>
                                     </div>
                                     <div id="filter_block" class="block_filters">
                                         <div class="filters">
                                                 <div id="instru_genre" class="flex sb">
                                                     <div class="form-check">
-                                                        <input type="checkbox" id="instru_genre_0" name="instru[genre][0]" class="form-check-input" value="Hip Hop" />
+                                                        <input type="checkbox" id="instru_genre_0" name="instru[genre][0]" class="form-check-input" value="Hip-Hop" />
                                                         <label class="form-check-label" for="instru_genre_0">Hip-Hop</label>
                                                     </div>
                                                     <div class="form-check">

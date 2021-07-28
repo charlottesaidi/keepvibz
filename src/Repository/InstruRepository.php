@@ -32,15 +32,36 @@ class InstruRepository extends ServiceEntityRepository
         ;
     }
 
-    public function instrusList() {
-        return $this->createQueryBuilder('i')
+    public function instrusList($genre = '', $title = '', $author = '') {
+        $query = $this->createQueryBuilder('i')
             ->select('i, u, g')
             ->join('i.user', 'u')
             ->join('i.genres', 'g')
-            ->orderBy('i.created_at', 'DESC')
-            ->getQuery()
-            ->getResult()
-        ;
+            ->orderBy('i.created_at', 'DESC');
+            if($title) {
+                $query->andWhere('i.title LIKE :title')
+                ->setParameter('title', '%'.$title.'%');
+            } 
+            if($genre) {
+                $query->andWhere('g.label IN (:genre)')
+                ->setParameter('genre', $genre);
+            }
+            if($author) {
+                $query->andWhere('u.name LIKE :author')
+                ->setParameter('author', '%'.$author.'%');
+            }
+            if($genre && $title) {
+                $query->andWhere('g.label IN (:genre)')
+                ->andWhere('i.title LIKE :title')
+                ->setParameters(['genre' =>  $genre, 'title' =>  '%'.$title.'%']);
+            }
+            if($genre && $author) {
+                $query->andWhere('g.label IN (:genre)')
+                ->andWhere('u.name LIKE :author')
+                ->setParameters(['genre' =>  $genre, 'author' =>  '%'.$author.'%']);
+            }
+        return $query->getQuery()
+            ->getResult();
     }
 
     public function filteredInstrusByKeyWord($value) {
@@ -77,7 +98,7 @@ class InstruRepository extends ServiceEntityRepository
             ->orderBy('i.created_at', 'DESC')
             ->andWhere('g.label IN (:genre)')
             ->andWhere('i.title LIKE :keyword')
-            ->setParameters([ 'genre' =>  $genre, 'keyword' =>  '%'.$keyword.'%'])
+            ->setParameters(['genre' =>  $genre, 'keyword' =>  '%'.$keyword.'%'])
             ->getQuery()
             ->getResult()
         ;

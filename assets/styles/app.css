@@ -101,7 +101,7 @@ a{text-decoration: none;}
 
 
 /* FIN DE CLASS PERSO */
-
+.hidden {display: none}
 /* CHARGEMENT */
 .chargement{
     position: relative;

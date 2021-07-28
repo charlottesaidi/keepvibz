@@ -20,25 +20,38 @@ class APIController extends AbstractController
     public function index(InstruRepository $instruRepository, Request $request): Response
     {
         if('POST' === $request->getMethod()) {
-            if(!empty($request->get('search'))) {
-                $keyword = $request->get('search');
-                $instrus = $instruRepository->filteredInstrusByKeyWord($keyword);
-            } elseif(!empty($request->get('instru'))) {
+            if(!empty($request->get('search')['title'])) {
+                $keyword = $request->get('search')['title'];
+                $instrus = $instruRepository->instrusList('', $keyword);
+            } 
+            if(!empty($request->get('instru'))) {
                 $genre = $request->get('instru')['genre'];
-                // foreach($genre as $value) {
-                    $instrus = $instruRepository->filteredInstrusByGenre($genre);
-                // }
                 if(in_array('tous', $genre)) {
                     $instrus = $instruRepository->instrusList();
+                } else {
+                    $instrus = $instruRepository->instrusList($genre, '', '');
                 }
-            } elseif(!empty($request->get('instru')) && !empty($request->get('search'))) {
-                $keyword = $request->get('search');
+            } 
+            if(!empty($request->get('search')['author'])) {
+                $keyword = $request->get('search')['author'];
+                $instrus = $instruRepository->instrusList('', '', $keyword);
+            } 
+            if(!empty($request->get('instru')) && !empty($request->get('search')['title'])) {
+                $keyword = $request->get('search')['title'];
                 $genre = $request->get('instru')['genre'];
-                foreach($genre as $value) {
-                    $instrus = $instruRepository->filteredInstrusByBoth($value, $keyword);
-                }
                 if(in_array('tous', $genre)) {
-                    $instrus = $instruRepository->filteredInstrusByKeyWord($keyword);
+                    $instrus = $instruRepository->instrusList('', $keyword, '');
+                } else {
+                    $instrus = $instruRepository->instrusList($genre, $keyword, '');
+                }
+            }
+            if(!empty($request->get('instru')) && !empty($request->get('search')['author'])) {
+                $keyword = $request->get('search')['author'];
+                $genre = $request->get('instru')['genre'];
+                if(in_array('tous', $genre)) {
+                    $instrus = $instruRepository->instrusList('', '', $keyword);
+                } else {
+                    $instrus = $instruRepository->instrusList($genre, '', $keyword);
                 }
             }
         } else {

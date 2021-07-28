@@ -240,6 +240,30 @@ $(document).ready(function(){
     //   });
     var module = document.getElementsByClassName("refrain_caroussel");
     module.forEach(element => $clamp(element, {clamp: 5}));
+
+    // FILTRE INSTRUS: Toggle entre champ de recherche "Par titre" ou "Par auteur"
+    // champs text
+    var authorField = $('#search_author');
+    var titleField = $('#search_title');
+    // champs radio
+    var byAuthor = $('#auteur');
+    var byTitle = $('#title');
+    
+    // Check radio 'title' par défaut si rien n'est choisi pour la recherche par mot clé
+    var $radios = $('input:radio[name=search_type]');
+    if($radios.is(':checked') === false) {
+        $radios.filter('[value=title]').prop('checked', true);
+    }
+
+    byAuthor.on('click', function() {
+        authorField.show();
+        titleField.hide();
+    })
+
+    byTitle.on('click', function() {
+        authorField.hide();
+        titleField.show();
+    })
 })
 // FUNCTIONS
 function flexSliderInit(flexslider, itemWidth, itemMargin, minItems, maxItems, controls, navigation) {

@@ -8,7 +8,7 @@ parameters:
     imagesInstrus_directory: '%kernel.project_dir%/public/uploads/images/instrus'
     instrus_directory: '%kernel.project_dir%/public/uploads/instrus'
     toplines_directory: '%kernel.project_dir%/public/uploads/toplines'
-    counter_directory: '%kernel.project_dir%'
+    counter_directory: '%kernel.project_dir%/src/Service'
 
 services:
     # default configuration for services in *this* file

@@ -69,11 +69,11 @@ class ContactAdminController extends AbstractController
                 ->htmlTemplate('admin/contact/reply_contact.html.twig');
             $mailer->send($email);
 
-            $this->addFlash('success', 'Réponse envoyée');
+            $this->addFlash('reply_success', 'Réponse envoyée');
         } else {
             $this->addFlash('error', 'La réponse ne peut pas être vide');
         }
-        return $this->redirect('/admin/contact/'. $contact->getId());
+        return $this->redirect('/admin/contact/');
     }
 
     #[Route('/{id}', name: 'contact_delete', methods: ['POST'])]

@@ -47,7 +47,7 @@ __Fixtures(fake datas)__
 php bin/console doctrine:fixtures:load
 ```  
 __Modèle de données__  
-![modele_logique_de_donnees](https://www.zupimages.net/up/21/23/uhg7.png) 
+![modele_logique_de_donnees](./erd_keepvibz.png) 
 
 ##
 

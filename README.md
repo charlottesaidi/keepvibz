@@ -37,7 +37,6 @@ Après 'composer install', activer l'extension "gd" dans le fichier php.ini
 
 __Création de la base de donnée__
 ```bash
-php bin/console doctrine:database:drop // seulement si une base de donnée existe déjà
 php bin/console doctrine:database:create
 ```  
 ```bash

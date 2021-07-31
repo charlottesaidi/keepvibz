@@ -88,7 +88,6 @@ $(document).ready(function(){
     //SECTION BOTTOM
     $('.btn_bottom_keepvibz').on('click', function(){
         $('.submenu_center1').slideToggle('slow');
-        console.log('dede')
 
     })
     $('.btn_bottom_navigation').on('click', function(){

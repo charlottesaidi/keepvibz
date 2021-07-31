@@ -1,0 +1,49 @@
+{% extends 'auth-base.html.twig' %}
+
+{% block title %}KeepVibz | Inscription{% endblock %}
+
+{% block body %}
+    <div class="wrap">
+        <div>
+            <a class="reset-link" href="{{path('home')}}">Accueil</a>
+        </div>
+        <div>
+            <h1>Inscription</h1>
+        </div>
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="error" role="alert">{{ flashError }}</div>
+        {% endfor %} 
+
+        {{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+            
+            <div class="input-group">
+                <label for="registration_form_name"><span><i class="fas fa-user-tag"></i></span> Nom d'utilisateur</label>
+                {{ form_widget(registrationForm.name)}}
+                {{ form_errors(registrationForm.name)}}
+            </div>
+            <div class="input-group">
+                <label for="registration_form_email"><span><i class="fas fa-envelope"></i></span> Adresse e-mail</label>
+                {{ form_widget(registrationForm.email) }}
+                {{ form_errors(registrationForm.email) }}
+            </div>
+            <div class="pass-group">
+                <div class="input-group">
+                    <label for="registration_form_plainPassword.first"><span><i class="fas fa-unlock-alt"></i></span> Mot de passe</label>
+                    {{ form_widget(registrationForm.plainPassword.first) }}
+                </div>
+                <div class="input-group">
+                    <label for="registration_form_plainPassword.second"><span><i class="fas fa-check"></i></span> Confirmer le mot de passe</label>
+                    {{ form_widget(registrationForm.plainPassword.second) }}
+                </div>
+            </div>
+                    {{ form_errors(registrationForm.plainPassword.first) }}
+                    {{ form_errors(registrationForm.plainPassword.second) }}
+            <div class="input-group">
+                <button type="submit" class="btn-primary">S'incrire <span><i class="fas fa-paper-plane"></i></span></button>
+            </div>
+            <div class="input-group">
+                <p>Tu as déjà un compte ? <a class="link" href="{{path('app_login')}}">Connectes-toi</a>.</p>
+            </div>
+        {{ form_end(registrationForm) }}
+    </div>
+{% endblock %}

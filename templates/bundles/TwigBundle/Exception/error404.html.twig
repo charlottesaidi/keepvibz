@@ -1,0 +1,26 @@
+{% extends 'error-base.html.twig' %}
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('error-pages') }}
+{% endblock %}
+
+
+{% block body %}
+
+<div class="main">
+    <div class="error_template">
+
+        <div id="error">
+            <div class="error">
+                <div class="error-message">
+                {% set referer = app.request.server.get('http-referer')|default('/') %}
+                    <h1>404</h1>
+                    <h2>Page Introuvable</h2>
+                </div>
+                <a class="error-link" href="{{referer}}">Retour</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

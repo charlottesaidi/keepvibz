@@ -1,0 +1,65 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Détail de l'avatar{% endblock %}
+
+{% block body %}
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Fiche Avatar</h1>
+				    </div>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <tbody>
+                                            <tr>
+                                                <th class="cell">Référence</th>
+                                                <td class="cell">#{{ avatar.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Fichier</th>
+                                                <td class="cell">{% if avatar.file %}
+                                                 <img src="{{asset('uploads/images/avatars/' ~ avatar.file)}}" alt="avatar utilisateur">
+                                                {% endif %}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Utilisateur correspondant</th>
+                                                <td class="cell">{{ avatar.user.name }}</td>
+                                            </tr>
+                                                <th class="cell">Date d'ajout</th>
+                                                <td class="cell">{{ avatar.createdAt ? avatar.createdAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Dernière modification</th>
+                                                <td class="cell">{{ avatar.modifiedAt ? avatar.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="container mt-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <a class="btn app-btn-secondary" href="{{ path('avatar_edit', {'id': avatar.id}) }}">Modifier</a>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{ include('admin/avatar/_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

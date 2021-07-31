@@ -1,0 +1,187 @@
+/*
+|-------------------------------------
+| PRESET
+|-------------------------------------
+*/
+@import "preset.scss"; 
+@import "form.scss";
+/*
+|-------------------------------------
+| STYLE
+|-------------------------------------
+*/
+body {
+    .btn-secondary {
+        display: inline-block;
+        margin: 30px 0;
+    }
+    .title_instrus_associees {
+        padding: 10px 0;
+    }
+	font-family: $font-style;
+	letter-spacing: $three;
+    .profile-main {
+        color: $font-primary;
+        padding-top: 0;
+        h2, .main-title {
+            font-size: 28px;
+            text-align: right;
+            color: $font-secondary;
+        }
+        display: flex;
+        justify-content: space-between;
+        align-items: stretch;
+        .container {
+            margin-top: 98px;
+            padding-right: 40px; 
+            .listing {
+                padding-top: 30px;
+            }
+            .user-block {
+                h3 {
+                    padding: 20px 0;
+                    font-size: 25px;
+                    color: $font-secondary;
+                }
+                .attr-block {
+                    padding: 20px 0;
+                    border-bottom: solid 1px hsla(0,0%,100%,.12);
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    .profile-block {
+                        width: 33.33333%;
+                    }
+                    .avatar {
+                        height: 200px;
+                        width: 200px;
+                        border-radius: 50%;
+                        overflow: hidden;
+                    }
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                    .hidden {
+                        display: none;
+                    }
+                    .show {
+                        display: block;
+                    }
+                    .edit-block, .delete-block {
+                        .input-group {
+                            width: 100%;
+                            .btn-primary {
+                                background: $font-secondary;
+                                border: 1px solid $font-secondary;
+                                padding: 0 16px;
+                            }
+                            .btn-primary:hover {
+                                background: transparent;
+                            }
+                        }
+                    }
+                }
+                .global, .attr-block.account {
+                    border: none;
+                }
+            }
+            .block_textes.flex.sb.fw {
+                padding: 5px 10px;
+            }
+            .title_instrus_associees {
+                margin: auto;
+            }
+            .flex {
+                .link {
+                    margin: auto 10px;
+                    font-size: 20px;
+                }
+                a:not(.link) {
+                    color: $font-primary;
+                }
+            }
+        }
+    }
+    .side-nav{
+        padding-top: 200px;
+        width: 20%;
+        button.tablinks {
+            font-size: 16px;
+            text-align: left;
+            width: 100%;
+            display: block;
+            padding: 20px 20px;
+            background: transparent;
+            border: none;
+            color: $font-primary;
+            cursor: pointer;
+            font-family: $font-style;
+            letter-spacing: $three;
+            transition: all .3s;
+        }
+        button.active {
+            padding-left: 35px;
+            background: $font-secondary;
+        }
+        button.tablinks:hover {
+            padding-left: 35px;
+        }
+    }
+}
+@media screen AND (max-width: 850px) {
+    body .profile-main {
+        flex-direction: column;
+        .side-nav {
+            border-bottom: solid 1px hsla(0,0%,100%,.12);
+            width: 100%;
+            padding-top: 98px;
+            ul {
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                li {
+                    width: 25%;
+                    button {
+                        text-align: center;
+                    }
+                }
+            }
+            .button.tablinks {
+                width: 50%;
+            }
+        }
+    }
+    body .profile-main .side-nav button.tablinks:hover, body .profile-main .side-nav button.active {
+        padding-left: 20px;
+        background: $font-secondary;
+    }
+    body .profile-main .container {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+@media screen AND (max-width: 750px) {
+    body .profile-main .container .user-block .attr-block {
+        flex-direction: column;
+        align-items: flex-start;
+        .profile-block {
+            width: 100%;
+        }
+    }
+    body .profile-main .container .user-block .global, body .profile-main .container .user-block .attr-block.account {
+        form {
+            margin-top: 10px;
+        }
+    }
+}
+@media screen AND (max-width: 650px) {
+    body .profile-main .side-nav {
+        padding-top: 78px;
+        ul {
+            li {
+                width: 50%;
+            }
+        }
+    } 
+}

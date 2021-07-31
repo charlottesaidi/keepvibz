@@ -1,0 +1,457 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user-profile') }}
+    
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
+    {{ parent() }}
+    {{ encore_entry_script_tags('user-profile') }}
+{% endblock %}
+
+{% block title %}KeepVibz | Profil{% endblock %}
+
+{% block body %}
+
+    <div class="profile-main">
+
+        <div class="side-nav">
+            <nav>
+                <ul>
+                    <li>
+                        <button href="#!" class="tablinks" id="prof-link">Profil</button>
+                    </li>
+                    <li>
+                        <button href="#!" class="tablinks" id="instru-link">Mes Instrus</button>
+                    </li>
+                    <li>
+                        <button href="#!" class="tablinks" id="top-link">Mes Toplines</button>
+                    </li>
+                    <li>
+                        <button href="#!" class="tablinks" id="text-link">Mes Textes</button>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="container">
+
+            <div class="messages">
+                {% for message in app.flashes('success') %}
+                    <div class="success">
+                        {{ message }}
+                    </div>
+                {% endfor %}                   
+                {% for message in app.flashes('text-success') %}
+                    <div class="success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('topline-success') %}
+                    <div class="success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for message in app.flashes('instru-success') %}
+                    <div class="success">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                {% for error in app.flashes('error') %}
+                    <div class="invalid-feedback d-block">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+                {% for error in passwordErrors %}
+                    <div class="invalid-feedback d-block">
+                        {{ error }}
+                    </div>
+                {% endfor %} 
+                {% for error in profileErrors %}
+                    <div class="invalid-feedback d-block">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div id="profil" class="tabcontent" style="display: block">
+                <h2>Profil</h2>
+                <div class="user-block">
+                    {{ form_start(avatarForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                        {{form_errors(avatarForm.file)}}
+                        <h3>Photo de profil</h3>
+                        <div class="attr-block avatar">
+                            <div class="title-block profile-block">
+                                {% if app.user.avatar != null %}
+                                        <p class="avatar"><img src="{{asset('uploads/images/avatars/' ~ app.user.avatar.file)}}"> </p> 
+                                    {% else %}
+                                        <p class="avatar"><img src="{{asset('assets/images/caroussel/1.jpg')}}"> </p>
+                                {% endif %}
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="avatar-button">Modifier</a>
+                            </div>
+                            <div class="edit-block profile-block formsection hidden" id="edit-avatar">
+                                <div class="input-group">
+                                    {{form_widget(avatarForm.file)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </div>
+                        </div>
+                    {{form_end(avatarForm)}}
+
+                    {{ form_start(profileForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                        {{form_errors(profileForm.email)}}
+                        {{form_errors(profileForm.name)}}
+                        {{form_errors(profileForm.bio)}}
+                        {{form_errors(profileForm.phoneNumber)}}
+
+                        <h3>Pseudo</h3>
+                        <div class="attr-block name">
+                            <div class="title-block profile-block">
+                                <p> {{app.user.name}} </p>
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="name-button">Modifier</a>
+                            </div>
+                            <div class="edit-block profile-block formsection hidden" id="edit-name">
+                                <div class="input-group">
+                                    {{form_widget(profileForm.name)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Informations personnelles</h3>
+                        <div class="global-attr-block">
+                            <div class="attr-block global email">
+                                <div class="title-block profile-block">
+                                    <p> <span><i class="fas fa-envelope"></i></span> {{app.user.email}} </p>
+                                </div>
+                                <div class="edit-button profile-block">
+                                    <a href="" class="btn-secondary formbuttons" id="email-button">Modifier</a>
+                                </div>
+                                <div class="edit-block profile-block formsection hidden" id="edit-email">
+                                    <div class="input-group">
+                                        {{form_widget(profileForm.email)}}
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="submit" class="btn-primary" value="Valider">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="attr-block global town">
+                                <div class="title-block profile-block">
+                                    <p> <span><i class="fas fa-map-marker-alt"></i></span> {{app.user.town}} </p>
+                                </div>
+                                <div class="edit-button profile-block">
+                                    <a href="" class="btn-secondary formbuttons" id="town-button">Modifier</a>
+                                </div>
+                                <div class="edit-block profile-block formsection hidden" id="edit-town">
+                                    <div class="input-group">
+                                        {{form_widget(profileForm.town)}}
+                                    </div>
+                                    <div class="input-group">
+                                        <button type="input" id='form_city' class="btn-primary">Valider</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="attr-block global phone">
+                                <div class="title-block profile-block">
+                                    <p> <span><i class="fas fa-phone-alt"></i></span> {% if app.user.phoneNumber %}
+                                    {{app.user.phoneNumber|phone_number_format('NATIONAL')}}
+                                    {% endif %} </p>
+                                </div>
+                                <div class="edit-button profile-block">
+                                    <a href="" class="btn-secondary formbuttons" id="phone-button">Modifier</a>
+                                </div>
+                                <div class="edit-block profile-block formsection hidden" id="edit-phone">
+                                    <div class="input-group">
+                                        {{form_widget(profileForm.phoneNumber)}}
+                                    </div>
+                                    <div class="input-group">
+                                        <input type="submit" class="btn-primary" value="Valider">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>A propos de moi</h3>
+                        <div class="attr-block description">
+                            <div class="title-block profile-block">
+                                {% if app.user.bio %}
+                                        <p> {{ app.user.bio|nl2br }} </p>  
+                                    {% else %}
+                                {% endif %}
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="desc-button">Modifier</a>
+                            </div>
+                            <div class="edit-block profile-block formsection hidden" id="edit-desc">
+                                <div class="input-group">
+                                    {{form_widget(profileForm.bio, {'attr': {'placeholder': 'Courte description...'}})}}
+                                    {{form_errors(profileForm.bio)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Activités sur le réseau</h3>
+                        <div class="attr-block competence">
+                            <div class="title-block profile-block">
+                                {% if app.user.competences %}
+                                        {% for competence in app.user.competences %}
+                                            <p> {{competence.title}} </p>  
+                                        {% endfor %}
+                                    {% else %}
+                                {% endif %}
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="competence-button">Modifier</a>
+                            </div>
+                            <div class="edit-block profile-block formsection hidden" id="edit-competence">
+                                <div class="input-group">
+                                    <label for="competences">Ajouter des compétences</label>
+                                    {{form_widget(profileForm.competences)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3>Visibilité</h3>
+                        <div class="attr-block visibility">
+                            <div class="title-block profile-block">
+                                <p>Tu peux choisir de rendre tes infos personnelles (comme ton email, ton numéro de téléphone...) accessibles aux membres de la communauté.</p>
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="visibility-button">Modifier</a>
+                            </div>
+                            <div class="edit-block profile-block formsection hidden" id="edit-visibility">
+                                <div class="input-group">
+                                    <label for="visible"></label>
+                                    {{form_widget(profileForm.visible)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            </div>
+                        </div>
+                    {{form_end(profileForm)}}
+                    <h3>Paramètres</h3>
+                    <div class="global-attr-block">
+                        
+                        <div class="attr-block global account">    
+                            <div class="title-block profile-block">
+                                <p> Modifier mon mot de passe </p>
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="password-button">Modifier</a>
+                            </div>
+                            <div class="edit-block profile-block formsection hidden" id="edit-password">
+                            {{ form_start(passwordForm, {'attr': {'novalidate': 'novalidate'}}) }}
+                                <div class="input-group">
+                                    <label for="password">Mot de passe actuel</label>
+                                    {{form_widget(passwordForm.oldPassword)}}
+                                </div>
+                                <div class="input-group">
+                                    <label for="password">Nouveau mot de passe</label>
+                                    {{form_widget(passwordForm.newPassword.first)}}
+                                </div>
+                                <div class="input-group">
+                                    <label for="password">Confirmer</label>
+                                    {{form_widget(passwordForm.newPassword.second)}}
+                                </div>
+                                <div class="input-group">
+                                    <input type="submit" class="btn-primary" value="Valider">
+                                </div>
+                            {{form_end(passwordForm)}}
+                            </div>
+                        </div>
+
+                        <div class="attr-block account">
+                            <div class="title-block profile-block">
+                                <p> Supprimer mon compte </p>
+                            </div>
+                            <div class="edit-button profile-block">
+                                <a href="" class="btn-secondary formbuttons" id="delete-button">Supprimer</a>
+                            </div>
+                            <div class="delete-block profile-block formsection hidden" id="delete">
+                                <div class="input-group">
+                                    <form method="post" action="{{ path('auth_user_delete', {'id': app.user.id}) }}" onsubmit="return confirm('T\'es sûr(e) de vouloir faire ça ?');">
+                                        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ app.user.id) }}">
+                                        <button type="submit" class="btn btn-danger mb-3">Confirmer</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="instrus" class="tabcontent" style="display: none">
+                <h2>Mes Instrus</h2>
+                <div>
+                    <a class="btn-secondary" href="{{ path('instrus_new') }}">Uploader un morceau</a>
+                </div>
+                <div class="listing">
+                    <div class="right_content flex col">
+                    <div class="content_instrus flex sb fw">
+                        {% for instru in instrus %}
+                            <li class="content_download_instrus flex col tac pr">
+                                <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_{{ instru.id }}"></audio>
+                                <div class="image_downloaded">
+                                    <a href="{{path('instru_show', {'id': instru.id})}}">
+                                        <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}">
+                                    </a>
+                                </div>
+                                <div class="btn_play_caroussel btn"  id="btn_ref_{{ instru.id }}">
+                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                                </div>
+                                <div class="block_info_instrus flex col">
+                                    <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ instru.title }}</span></h4>
+                                    <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
+                                        {% for genre in instru.genres %}
+                                            {{ genre.label }},
+                                        {% endfor %}
+                                    </h4>
+                                    <h4 class="description_downloaded">Key : <span class="span_downloaded">{{ instru.cle }}</span> - <span class="span_downloaded">{{ instru.bpm }}</span> BPM</h4>
+                                    <div> 
+                                        <a class="link" href="{{ path('instrus_edit', {'id': instru.id}) }}">Modifier</a>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="toplines" class="tabcontent" style="display: none">
+                <h2>Mes Toplines</h2>
+                <div>
+                    <a class="btn-secondary" href="{{ path('toplines_new') }}">Uploader une topline</a>
+                </div>
+                
+                <div class="listing">
+                    <div class="wrap2_instrus_show flex col">
+                        {% for topline in toplines %}
+                            <div class="others_instrus_author flex aic pr">
+                                <div class="left_others_instrus_author flex aic">
+                                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ topline.file) }}" controls id="player_{{ topline.id }}"></audio>
+                                    <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ topline.id }}">
+                                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                                    </div>
+                                </div>
+                                <div class="right_others_instrus_author right_others_topline_author  flex col">
+                                    <div class="top_right_others_instrus_author">
+                                        <p class="title_others_instrus_author">{{ topline.title }}</p>
+                                    </div>
+                                    <div class="bottom_right_others_instrus_author flex ">
+                                        <p class="user_others_instrus_author grey_text">Instru associée <span class="name_others_instrus_author">{{ topline.instru.title }}</span></p>
+                                        <p class="separator_others_instrus_author grey_text"> | </p>
+                                    </div>
+                                </div>
+                                <div class="top_right_others_instrus_author pa">
+                                    <div class="flex">
+                                        <a class="link" href="{{ path('toplines_edit', {'id': topline.id}) }}">
+                                        <i class="far fa-edit"></i></a>
+                                        <a class="link" href="{{ path('toplines_delete', {'id': topline.id}) }}">
+                                        <i class="far fa-trash-alt"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div id="textes" class="tabcontent" style="display: none">
+                <h2>Mes Textes</h2>
+                <div>
+                    <a class="btn-secondary" href="{{ path('textes_new') }}">Publier un texte</a>
+                </div>
+                <ul class="listing">
+                    {% for texte in textes %}
+                        {% if texte.deletedAt %}
+                            <div class="warning">
+                                L'administrateur a retiré cette publication. Contactes le support pour plus d'infos.
+                            </div>
+                        {% else %}
+                            <li class="block_textes flex sb fw">
+                                <div class="link_text flex aic">
+                                    <div class="flex">
+                                        <a class="link" href="{{ path('textes_edit', {'id': texte.id}) }}">
+                                        <i class="far fa-edit"></i></a>
+                                        <form method="post" action="{{ path('textes_delete', {'id': texte.id}) }}" onsubmit="return confirm('Confirmer la suppression?');">
+                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ texte.id) }}">
+                                            <button class="link"><i class="far fa-trash-alt"></i></button>
+                                        </form>
+                                    </div>
+                                    <div class="description_textes">
+                                        <h3 class="title_texte"><a href="{{ path('texte_show', {'id': texte.id}) }}">{{texte.title}}</h3></a>
+                                        <h3 class="author_textes">
+                                            <span class="date">{{ texte.createdAt ? texte.createdAt|date('d/m/Y') : '' }}</span><br>
+                                            <span class="time">{{ texte.createdAt ? texte.createdAt|date('H:i') : '' }}</span>
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="instrus_associees flex">
+                                    <p class="title_instrus_associees">Instrus associées: </p>
+                                    <ul class="block_instrus_associees flex aic">
+                                    {% if texte.instrus %}
+                                        {% for instru in texte.instrus %}
+                                            <li class="link_instru_associee"><a href="{{path('instru_show', {'id': instru.id})}}" class="titre_instru_associee"> {{instru.title}} </a></li>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </ul>
+                                </div>
+                            </li>
+                        {% endif %}     
+                    {% endfor %}               
+                </ul>
+            </div>
+            
+        </div>
+
+    </div>
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        // API Base d'adresses nationale gouvernement (adrien.poupa.fr)
+        $("#user_profile_town").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "https://api-adresse.data.gouv.fr/search/?city="+$("input[name='ville']").val(),
+                    data: { q: request.term },
+                    dataType: "json",
+                    success: function (data) {
+                        var cities = [];
+                        response($.map(data.features, function (item) {
+                            // Ici on est obligé d'ajouter les villes dans un array pour ne pas avoir plusieurs fois la même
+                            if ($.inArray(item.properties.postcode, cities) == -1) {
+                                cities.push(item.properties.postcode);
+                                return { label: item.properties.postcode + " - " + item.properties.city, 
+                                        postcode: item.properties.postcode,
+                                        value: item.properties.city
+                                };
+                            }
+                        }));
+                    }
+                });
+            },
+        });
+    </script>
+{% endblock %}

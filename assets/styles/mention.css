@@ -1,0 +1,38 @@
+
+.wrap-mentions p{
+    color: white;
+    line-height: 22px;
+    margin-bottom: 30px;
+}
+.wrap-mentions h2{
+    color: #A27440;
+    font-size: 2em;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    font-weight: bold;
+}
+.wrap-mentions h3{
+    color: #A27440;
+    font-size: 1.2em;
+    padding-bottom: 10px;
+    padding-top: 10px; 
+    font-weight:600  ;
+}
+.wrap-mentions .mentions{
+    margin-top: 160px;
+    margin-bottom: 30px;
+}
+.wrap-mentions{
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.wrap-mentions .articles{
+    margin-bottom: 50px;
+}
+
+@media screen and (max-width: 615px){
+    .wrap-mentions{margin-top: 85px;}
+  }
+  

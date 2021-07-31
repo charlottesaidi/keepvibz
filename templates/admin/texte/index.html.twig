@@ -1,0 +1,112 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Textes{% endblock %}
+
+{% block body %}
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Textes</h1>
+                    {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+				    </div>
+				    <div class="col-auto">
+					     <div class="page-utilities">
+						    <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+							    <div class="col-auto">
+								    <form class="table-search-form row gx-1 align-items-center">
+					                    <div class="col-auto">
+					                        <input type="text" id="search-orders" name="searchorders" class="form-control search-orders" placeholder="Search">
+					                    </div>
+					                    <div class="col-auto">
+					                        <button type="submit" class="btn app-btn-secondary">Rechercher</button>
+					                    </div>
+					                </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-2 justify-content-start justify-content-md-end align-items-center">
+                    <div class="col-auto">
+                        <a class="btn app-btn-secondary mb-3" href="{{ path('texte_new') }}">Publier un texte</a>
+                    </div>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <thead>
+                                            <tr>
+                                                <th class="cell">Référence</th>
+                                                <th class="cell">Titre</th>
+                                                <th class="cell">Auteur</th>
+                                                <th class="cell">Status</th>
+                                                <th class="cell">Date de publication</th>
+                                                <th class="cell">Dernière modification</th>
+                                                <th class="cell">Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        {% for texte in textes %}
+                                            <tr>
+                                                <td class="cell">#{{ texte.id }}</td>
+                                                <td class="cell">{{ texte.title }}</td>
+                                                <td class="cell">{{ texte.user.name }}</td>
+                                                <td class="cell">
+                                                    {% if 'published' in texte.status %}
+                                                        <span class="badge bg-success">Publié</span>
+                                                    {% endif %}
+                                                    {% if 'refused' in texte.status %}
+                                                        <span class="badge bg-danger">Refusé</span>
+                                                    {% endif %}
+                                                    {% if 'draft' in texte.status %}
+                                                        <span class="badge bg-warning">Brouillon</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td class="cell">
+                                                    <span class="cell-data">{{ texte.createdAt ? texte.createdAt|date('d/m/Y') : '' }}</span>
+                                                    <span class="note">{{ texte.createdAt ? texte.createdAt|date('H:i') : '' }}</span>
+                                                </td>
+                                                <td class="cell">
+                                                    <span class="cell-data">{{ texte.modifiedAt ? texte.modifiedAt|date('d/m/Y') : '' }}</span>
+                                                    <span class="note">{{ texte.modifiedAt ? texte.modifiedAt|date('H:i') : '' }}</span>
+                                                </td>
+                                                <td class="cell">
+                                                    <div class="d-flex align-center">
+                                                        <a href="{{ path('texte-show', {'id': texte.id}) }}" class="btn-sm app-btn-secondary"><i class="far fa-eye"></i></a>
+                                                        <a href="{{ path('texte_edit', {'id': texte.id}) }}" class="btn-sm app-btn-secondary"><i class="far fa-edit"></i></a>
+                                                        <form method="post" action="{{ path('texte_delete', {'id': texte.id}) }}" onsubmit="return confirm('Confirmer la suppression?');">
+                                                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ texte.id) }}">
+                                                            <button class="btn-sm app-btn-secondary"><i class="far fa-trash-alt"></i></button>
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% else %}
+                                            <tr>
+                                                <td  class="cell" colspan="6">Aucun résultat trouvé</td>
+                                            </tr>
+                                        {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {{include('admin/admin_pagination.html.twig')}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endblock %}

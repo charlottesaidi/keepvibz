@@ -1,0 +1,74 @@
+{% extends 'admin-base.html.twig' %}
+
+{% block title %}Admin | Toplines{% endblock %}
+
+{% block body %}
+    <div class="app-wrapper">
+	    
+	    <div class="app-content pt-3 p-md-3 p-lg-4">
+		    <div class="container-xl">
+			    
+			    <div class="row g-3 mb-4 align-items-center justify-content-between">
+				    <div class="col-auto">
+			            <h1 class="app-page-title mb-0">Fiche Toplines</h1>
+				    </div>
+                </div>
+
+                <div class="tab-content">
+                    <div class="tab-pane fade show active">
+                        <div class="app-card app-card-orders-table shadow-sm mb-5">
+                            <div class="app-card-body">
+                                <div class="table-responsive">
+                                    <table class="table app-table-hover mb-0 text-left">
+                                        <tbody>
+                                            <tr>
+                                                <th class="cell">Référence</th>
+                                                <td class="cell">#{{ topline.id }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Morceau associé</th>
+                                                <td class="cell"> 
+                                                    <span><a href="{{ path('instru-show', {'id':  topline.instru.id}) }}">{{  topline.instru.title }}</a></span><br>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Titre</th>
+                                                <td class="cell">{{ topline.title }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Fichier</th>
+                                                <td class="cell">{{ topline.file }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Auteur</th>
+                                                <td class="cell">{{ topline.user.name }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Date de publication</th>
+                                                <td class="cell">{{ topline.createdAt ? topline.createdAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="cell">Dernière modification</th>
+                                                <td class="cell">{{ topline.modifiedAt ? topline.modifiedAt|date('d/m/Y, H:i') : '' }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <div class="container mt-3">
+                                        <div class="row">
+                                            <div class="col-auto">
+                                                <a class="btn app-btn-secondary" href="{{ path('topline_edit', {'id': topline.id}) }}">Modifier</a>
+                                            </div>
+                                            <div class="col-auto">
+                                                {{ include('admin/topline/_delete_form.html.twig') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

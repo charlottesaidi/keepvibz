@@ -1,0 +1,28 @@
+<div class="form-container">
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}    
+    <div class="input-group">
+    <label for="form_title">Titre</label>
+        {{ form_widget(form.title)}}
+        {{ form_errors(form.title) }}
+    </div> 
+    <div class="input-group">
+    <label for="form_refrain">Refrain</label>
+        {{ form_widget(form.refrain)}}
+        {{ form_errors(form.refrain) }}
+    </div> 
+    <div class="input-group">
+    <label for="form_couplet">Couplets</label>
+        {{ form_widget(form.couplet)}}
+        {{ form_errors(form.couplet) }}
+    </div>
+    <div class="input-group">
+    <label for="form_instrus">Pour quel morceau ?</label>
+        {{ form_widget(form.instrus)}}
+        {{ form_errors(form.instrus) }}
+    </div>
+        {{ form_widget(form.status)}}
+    <div class="input-group">
+        <button class="btn-primary">{{ button_label|default('Publier') }}</button>
+    </div>
+{{ form_end(form) }}
+</div>

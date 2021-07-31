@@ -1,0 +1,37 @@
+<div class="form-container">
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="input-group">
+    <label for="form_title">Titre</label>
+        {{ form_widget(form.title) }}
+        {{ form_errors(form.title) }}
+    </div>
+    <div class="input-group">
+    <label for="form_genre">Genre</label>
+        {{ form_widget(form.genres) }}
+        {{ form_errors(form.genres) }}
+    </div>
+    <div class="input-group">
+    <label for="form_bpm">BPM</label>
+        {{ form_widget(form.bpm) }}
+        {{ form_errors(form.bpm) }}
+    </div>
+    <div class="input-group">
+    <label for="form_cle">Clé</label>
+        {{ form_widget(form.cle) }}
+        {{ form_errors(form.cle) }}
+    </div>
+    <div class="input-group">
+    <label for="form_file">Son</label>
+        {{ form_widget(form.file) }}
+        {{ form_errors(form.file) }}
+    </div>
+    <div class="input-group">
+    <label for="form_image">Cover</label>
+        {{ form_widget(form.image) }}
+        {{ form_errors(form.image) }}
+    </div>
+    <div class="input-group">
+        <button class="btn-primary">{{ button_label|default('Upload') }}</button>
+    </div>
+{{ form_end(form) }}
+</div>

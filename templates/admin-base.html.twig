@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Meta -->
+        <meta charset="utf-8">
+        <title>{% block title %}KeepVibz | Admin{% endblock %}</title>
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('favicons/apple-touch-icon.png')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicons/favicon-32x32.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicons/favicon-16x16.png')}}">
+        <link rel="manifest" href="{{asset('favicons/site.webmanifest')}}">
+        <link rel="mask-icon" href="{{asset('favicons/safari-pinned-tab.svg')}}" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Xiaoying Riley at 3rd Wave Media"> 
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('admin') }}
+			<style>.app-nav .nav-link.active {color: #A27440; border-left: 3px solid #A27440} .app-nav .nav-link:hover {color: #A27440} .app-btn-secondary {display: inline-block; margin: 2px} .app-btn-secondary:hover {color: #A27440; border: 1px solid #A27440} a.p-1 {color: #A27440}</style>
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('admin') }} 
+        {% endblock %}
+    </head>
+	<body>
+
+		<header class="app-header fixed-top">	   	            
+			<div class="app-header-inner">  
+				<div class="container-fluid py-2">
+					<div class="app-header-content"> 
+						<div class="row justify-content-between align-items-center">
+						
+						<div class="col-auto">
+							<a id="sidepanel-toggler" class="sidepanel-toggler d-inline-block d-xl-none" href="#">
+								<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" role="img"><title>Menu</title><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg>
+							</a>
+						</div><!--//col-->
+						
+						<div class="app-utilities col-auto">
+							<div class="app-utility-item app-user-dropdown dropdown">
+								<a class="dropdown-toggle" id="user-dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+									<i class="fas fa-user-circle profile-image"></i>
+								</a>
+								<ul class="dropdown-menu" aria-labelledby="user-dropdown-toggle">
+									<li>
+										<a class="dropdown-item d-flex flex-row justify-content-evenly align-items-center" href="{{path('user_profile')}}">
+											<span><i width="1em" height="1em" class="fas fa-user-circle"></i></span>
+											<span>Mon profil</span>
+										</a>
+									</li>
+									<li><hr class="dropdown-divider"></li>
+									<li>
+										<a class="dropdown-item d-flex flex-row justify-content-evenly align-items-center" href="{{path('app_logout')}}">
+											<span><i width="1em" height="1em" class="fas fa-sign-out-alt"></i></span>
+											<span>Déconnexion</span>
+										</a>
+									</li>
+								</ul>
+							</div><!--//app-user-dropdown--> 
+						</div><!--//app-utilities-->
+					</div><!--//row-->
+					</div><!--//app-header-content-->
+				</div><!--//container-fluid-->
+			</div><!--//app-header-inner-->
+			<div id="app-sidepanel" class="app-sidepanel"> 
+				<div id="sidepanel-drop" class="sidepanel-drop"></div>
+				<div class="sidepanel-inner d-flex flex-column">
+					<a href="#" id="sidepanel-close" class="sidepanel-close d-xl-none">&times;</a>
+					<div class="app-branding">
+						<a class="app-logo" href="{{path('home')}}">
+						<img class="logo-icon me-2" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"><span class="logo-text">KeepVibz | Admin</span>
+						</a>
+		
+					</div><!--//app-branding-->  
+					
+					<nav id="app-nav-main" class="app-nav app-nav-main flex-grow-1">
+						<ul class="app-menu list-unstyled accordion" id="menu-accordion">
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'admin_dashboard' ? 'active' }}" href="{{path('admin_dashboard')}}">
+										<span class="nav-icon">
+									<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+										<path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+										<path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+									</svg>
+									</span>
+									<span class="nav-link-text">Tableau de bord</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'contact_index' ? 'active' }}" href="{{path('contact_index')}}">
+									<span class="nav-icon">
+										<i class="fas fa-mail-bulk"></i>
+									</span>
+									<span class="nav-link-text">Messages</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+							<li><hr class="divider"></li>
+
+							<li class="nav-header text-center"> <small>Utilisateurs</small></li>
+
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'user_index' ? 'active' }}" href="{{path('user_index')}}">
+									<span class="nav-icon">
+										<i width="1em" height="1em" fill="currentColor" class="fas fa-users"></i>
+									</span>
+									<span class="nav-link-text">Membres</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'competence_index' ? 'active' }}" href="{{path('competence_index')}}">
+									<span class="nav-icon">
+										<i class="fas fa-user-tag"></i>
+									</span>
+									<span class="nav-link-text">Compétences</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'avatar_index' ? 'active' }}" href="{{path('avatar_index')}}">
+									<span class="nav-icon">
+										<i class="fas fa-camera"></i>
+									</span>
+									<span class="nav-link-text">Avatars</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+							
+							<li><hr class="divider"></li>
+
+							<li class="nav-header text-center"> <small>Musique</small></li>
+
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'genre_index' ? 'active' }}" href="{{path('genre_index')}}">
+									<span class="nav-icon">
+										<i class="fas fa-music"></i>
+									</span>
+									<span class="nav-link-text">Genres</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'instru_index' ? 'active' }}" href="{{path('instru_index')}}">
+									<span class="nav-icon">
+										<i class="fas fa-music"></i>
+									</span>
+									<span class="nav-link-text">Instrumentales</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'topline_index' ? 'active' }}" href="{{path('topline_index')}}">
+									<span class="nav-icon">
+										<i class="fas fa-music"></i>
+									</span>
+									<span class="nav-link-text">Toplines</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+							<li class="nav-item">
+								<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+								<a class="nav-link {{ app.request.get('_route') == 'texte_index' ? 'active' }}" href="{{path('texte_index')}}">
+									<span class="nav-icon">
+										<i class="far fa-file-alt"></i>
+									</span>
+									<span class="nav-link-text">Textes</span>
+								</a><!--//nav-link-->
+							</li><!--//nav-item-->
+
+					</nav><!--//app-nav-->
+					<div class="app-sidepanel-footer">
+						<nav class="app-nav app-nav-footer">
+							<ul class="app-menu footer-menu list-unstyled">
+								<li class="nav-item">
+									<!--//Bootstrap Icons: https://icons.getbootstrap.com/ -->
+									<a class="nav-link" href="https://themes.3rdwavemedia.com/bootstrap-templates/admin-dashboard/portal-free-bootstrap-admin-dashboard-template-for-developers/">
+										<span class="nav-icon">
+											<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-file-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+												<path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v10.755S4 11 8 11s5 1.755 5 1.755V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+												<path fill-rule="evenodd" d="M8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+											</svg>
+										</span>
+										<span class="nav-link-text">Licence</span>
+									</a><!--//nav-link-->
+								</li><!--//nav-item-->
+							</ul><!--//footer-menu-->
+						</nav>
+					</div><!--//app-sidepanel-footer-->
+				
+				</div><!--//sidepanel-inner-->
+			</div><!--//app-sidepanel-->
+		</header><!--//app-header-->
+
+		<div class="app">
+			{% block body %}{% endblock %}
+		</div>
+
+    </body>
+</html>

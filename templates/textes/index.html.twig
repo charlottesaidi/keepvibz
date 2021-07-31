@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KeepVibz | Tous les textes !{% endblock %}
+
+{% block body %}
+    <div class="main_textes">
+        <div class="section_textes flex sb">
+            <div class="content_textes pr">
+                <h2 class="title_textes">Textes</h2>
+                <div class="block_all_textes flex col">
+                {% for texte in textes %}
+                        <li class="block_textes flex sb fw">
+                            <a class="link_text flex aic" href="{{path('texte_show', {'id': texte.id})}}">
+                                <div class="avatar_image_block">
+                                    <img src="{{asset('assets/images/icons/avatar.png')}}" alt="avatar du User" class="avatar_image">
+                                </div>
+                                <div class="description_textes">
+                                    <h3 class="title_texte">{{texte.title}}</h3>
+                                    <h3 class="author_textes">Par {{texte.user.name}}</h3>
+                                </div>
+                            </a>
+                            <div class="instrus_associees flex">
+                                <p class="title_instrus_associees">Instrus associées: </p>
+                                <ul class="block_instrus_associees flex aic">
+                                {% for instru in texte.instrus %}
+                                    <li class="link_instru_associee"><a href="{{path('instru_show', {'id': instru.id})}}" class="titre_instru_associee"> {{instru.title}} </a></li>
+                                {% endfor %}
+                                </ul>
+                            </div>
+                        </li>
+                {% endfor %}
+                </div>
+                <div class="block_pagination">
+                    {# PAGINATION #}
+                    {{ include('pagination.html.twig') }};
+                    {# PAGINATION #}
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

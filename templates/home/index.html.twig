@@ -1,0 +1,159 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KeepVibz | Ensemble on est plus fort !{% endblock %}
+
+{% block body %}
+
+    {# SECTION 1 #}
+    <section id="section_1" class="section_home_1">
+        <div class="background_1">
+            {# <img class="gif_background" src="{{asset('assets/images/background/fond_projet_png.png')}}" alt="image animée en fond d'ecran"> #}
+            <div class="gif_background"></div>
+            <div class="gradient"></div>
+        </div>
+        <div class="background_2">
+            <img class="background" src="{{asset('assets/images/background/fond_responsive.jpg')}}" alt="image en fond d'ecran">
+            <div class="gradient"></div>
+        </div>
+            {# PLAYER #}
+            <div class="block_player tchv">
+                <div class="content_player">
+                    <div class="top_block_accroche">
+                        <h2 class="accroche">"Ensemble <span>on est plus fort !</span>"</h2>
+                    </div>
+                    <h2 class="latest_upload">Dernier upload</h2>
+                    {# {% for audio in lastUpload %} #}
+                    <audio preload controls>   
+                        {% if lastUpload.file %}
+                            <source src="{{asset('uploads/instrus/' ~ lastUpload.file)}}" type="audio/mpeg">
+                        {% else %}
+                            <source src="http://icecast.skyrock.net/s/natio_mp3_128k" type="audio/mpeg">
+                        {% endif %}
+                    </audio>
+                    <h3 class="title_player">{{lastUpload.title}} (Par {{lastUpload.user.name}} - BPM {{lastUpload.bpm}})</h3>
+                    {# {% endfor %} #}
+                </div>
+            </div>
+    </section>
+    {# FIN SECTION 1 #}
+
+    {# SECTION 2 #}
+    <section id="section_2" class="section_home_2">
+        <div class="wrap4">
+            <h2 id="instrus_populaires" class="most_downloads_beats">Les 10 dernières instrus</h2>
+            <div class="flexslider carousel">
+                {# CUSTOM NAVIGATION #}
+                <div class="custom-navigation">
+                    <div class="paginate_button flex jcfe">
+                        <a href="#" class="flex-prev"><img src="{{asset('assets/images/icons/arrow-92-64.png')}}" alt="icône de navigation (précédent)"></a>
+                        <a href="#" class="flex-next"><img src="{{asset('assets/images/icons/arrow-28-64.png')}}" alt="icône de navigation (suivant)"></a>
+                    </div>
+                </div>
+                {# CUSTOM NAVIGATION #}
+                    <ul class="slides">
+                        {% for beat in instrus %}
+                        <li class="content_download flex col">
+                            <audio class="player_audio_selected audio_player" preload controls id="player_{{ beat.id }}">   
+                                {% if beat.file %}
+                                    <source src="{{asset('uploads/instrus/' ~ beat.file)}}" type="audio/mpeg">
+                                {% else %}
+                                    <source src="http://icecast.skyrock.net/s/natio_mp3_128k" type="audio/mpeg">
+                                {% endif %}
+                            </audio>
+                            <div class="image_downloaded">
+                                <a href="{{path('instru_show', {'id': beat.id})}}">               
+                                    {% if beat.image is empty %}
+                                        <img class="img_downloaded" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="{{ beat.title }}">
+                                    {% else %}
+                                        <img class="img_downloaded" src="{{ asset('uploads/images/instrus/' ~ beat.image) }}" alt="{{ beat.title }}">
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <div class="btn_play_caroussel btn" id="btn_ref_{{ beat.id }}">
+                                    <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture et pause audio">
+                            </div>
+                            <div class="block_info_instrus flex col tac">
+                                <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ beat.title }}</span></h4>
+                                <h4 class="genre_downloaded">Genre : <span class="span_downloaded">
+                                {% for genre in beat.genres %}
+                                    {{ genre.label }},
+                                {% endfor %}
+                                </span></h4>
+                                <h4 class="description_downloaded">CLé : <span class="span_downloaded">{{ beat.cle }}</span> - <span class="span_downloaded">{{ beat.bpm }}</span> BPM</h4>
+                                <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ beat.user.name }}</span></h4>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+    </section>
+    {# FIN SECTION 2 #}
+
+    {# SECTION 3 #}
+    <section id="section_3" class="section_home_3">
+        <div class="wrap4">
+            <div class="background_3">
+                <div class="block_accroche2 tcv">
+                    <h2 class="accroche2">"Poses <span>tes toplines sur leurs instrus !</span>"</h2>
+                </div>
+            </div>
+        </div>
+    </section>
+    {# FIN SECTION 3 #}
+
+
+
+    {# SECTION 4 #}
+    <section id="section_4" class="section_home_4">
+        <div class="background_4">
+            <div class="gradient_3"></div>
+            <img class="background_section4" src="{{asset('assets/images/background/writter.jpg')}}" alt="image de fond représentant un homme qui écrit un texte destiné à la musique">
+            <div class="gradient_2"></div>
+        </div>
+        <div class="block_accroche3 tcv">
+            <h2 class="accroche3">"Partages <span>tes textes !</span>"</h2>
+        </div>
+    </section>
+    {# FIN SECTION 4 #}
+
+    {# SECTION 4 #}
+    <section id="section_5" class="section_home_5">
+        <div class="wrap4">
+            <h2 class="most_downloads_texts">Les 10 derniers textes</h2>
+            <div class="flexslider2 carousel">
+                {# CUSTOM NAVIGATION #}
+                <div class="custom-navigation2 custom-controls-container2">
+                    <div class="paginate_button flex jcfe">
+                            <a href="#" class="flex-prev"><img src="{{asset('assets/images/icons/arrow-92-64.png')}}" alt="icône de navigation (précédent)"></a>
+                            <a href="#" class="flex-next"><img src="{{asset('assets/images/icons/arrow-28-64.png')}}" alt="icône de navigation (suivant)"></a>
+                    </div>
+                </div>
+                {# CUSTOM NAVIGATION #}
+                    <ul class="slides">
+                        {% for text in textes %}
+                                <li class="content_download flex col">
+                                    <div class="image_downloaded_index_texte">
+                                        <a href="{{path('texte_show', {'id': text.id})}}">
+                                        {% if text.user.avatar is empty  %}
+                                            <div class="background_avatar_empty">
+                                                <p class="refrain_caroussel tac" style="color:#fff"> {{ text.refrain }}</p>
+                                            </div>
+                                        {% else %}
+                                            <img class="img_downloaded" src="{{ asset('uploads/images/avatars/' ~ text.user.avatar.file) }}" alt="{{ text.title }}">
+                                        {% endif %}
+                                        </a>
+                                    </div>
+                                    <div class="block_info_instrus flex col tac">
+                                        <h4 class="title_downloaded">Titre : <span class="span_downloaded">{{ text.title }}</span></h4>
+                                        <h4 class="author_downloaded">Auteur : <span class="span_downloaded">{{ text.user.name }}</span></h4>
+                                    </div>
+                                </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+    </section>
+    {# FIN SECTION 4 #}
+
+{% endblock %}

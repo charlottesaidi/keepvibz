@@ -1,0 +1,20 @@
+{{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
+    <div class="mb-3">
+        {{ form_row(form.email)}}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.name) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.password) }}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.roles)}}
+    </div>
+    <div class="mb-3">
+        {{ form_row(form.actif)}}
+    </div>
+    <div class="mb-3">
+        <button class="btn app-btn-primary">{{ button_label|default('Valider') }}</button>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KeepVibz | Publier un texte{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user-profile') }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="main">
+    <a class="link" href="{{path('user_profile')}}">Retour</a>
+        <div class="form-wrap">
+            <h1 class="main-title">Publier un texte</h1>
+                {{ include('textes/_form.html.twig') }}
+        </div>
+        
+    </div>
+{% endblock %}

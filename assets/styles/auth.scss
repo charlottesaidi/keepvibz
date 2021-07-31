@@ -1,0 +1,87 @@
+/*
+|-------------------------------------
+| PRESET
+|-------------------------------------
+*/
+@import "preset.scss"; 
+@import "form.scss";
+/*
+|-------------------------------------
+| STYLE
+|-------------------------------------
+*/
+
+.full-height {
+	height: 100%; 
+}
+
+body {
+    background: $theme;
+	.auth {
+		font-family: $font-style;
+		letter-spacing: $three;
+		margin-top: -50px;
+		.social-nav a {
+			color: $font-primary;
+			text-decoration: none;
+			font-weight: bold;
+			font-size: 14px;
+		}
+		h1 {
+			text-align: center;
+			font-size: 35px;
+			color: $font-secondary;
+			font-weight: bold;
+			padding: 20px 0;
+		}
+		.wrap {
+			max-width: 600px;
+			width: 95%;
+			margin: 0 auto;
+		} 
+		.container .wrap {
+			display: flex;
+			flex-direction: column;
+			height: 100%;
+		}
+		footer {
+			.wrap {
+				display: flex;
+				flex-flow: row wrap;
+				justify-content: space-between;
+				align-items: center;
+				img {
+					width: 100px;
+				}
+				.social-nav ul {
+					display: flex;
+					flex-flow: row wrap;
+					justify-content: space-between;
+					align-items: center;
+					li {
+						a:hover {
+							background: $font-secondary;
+							border-radius: 15px 5px 15px 5px;
+						}
+						a {
+							font-size: 20px;
+							transition: all .4s;
+							padding: 8px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+@media screen AND (max-width: 500px) {
+	body .auth footer .wrap {
+		flex-direction: column-reverse;
+		div:not(.logo) {
+			padding: 15px 0;
+		}
+		.logo {
+			order: 2
+		}
+	}
+}

@@ -3,17 +3,194 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('favicons/apple-touch-icon.png')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('favicons/favicon-32x32.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('favicons/favicon-16x16.png')}}">
+        <link rel="manifest" href="{{asset('favicons/site.webmanifest')}}">
+        <link rel="mask-icon" href="{{asset('favicons/safari-pinned-tab.svg')}}" color="#5bbad5">
+        <meta name="msapplication-TileColor" content="#da532c">
+        <meta name="theme-color" content="#ffffff">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="KeepVibz - Une communauté collaborative de la musique urbaine">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        {# <link href="https://fonts.googleapis.com/css2?family=Squada+One&display=swap" rel="stylesheet"> #}
+        <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Pathway+Gothic+One&family=Roboto&family=Shadows+Into+Light&display=swap" rel="stylesheet">
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            {{ encore_entry_link_tags('app') }}
         {% endblock %}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+    
+        {% if app.request.get('_route') == 'home' %}
+            {# PAGE DE CHARGEMENT #}
+            <div class="chargement">
+                <div id="preloader">
+                    <div class="logo_chargement pa">
+                        <img class="img_logo_chargement" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo">
+                    </div>
+                    <div class="loader">Please wait...</div>
+                </div>
+            </div>
+            {# PAGE DE CHARGEMENT #}
+        {% endif %}
+
+        {# NAV MOBILE #}
+        <div class="navigation_mobile">
+            <div class="top_block_menu">
+                <p class="title_nav">MENU</p>
+            </div>
+            <ul class="nav_mobile flex col aic">
+                <li class="link_mobile"><a class="nav_link" href="{{path('instrus')}}">Instrus</a></li>
+                <li class="link_mobile"><a class="nav_link" href="{{path('textes')}}">Textes</a></li>
+                <li class="link_mobile"><a class="nav_link" href="{{path('contact_new')}}">Nous contacter</a></li>
+            </ul>
+            <ul class="nav_mobile2 flex col aic">
+            {% if app.user %}
+                <li class="link_mobile"><a class="nav_link" href="{{path('user_profile')}}">Profil</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <li class="link_mobile"><a class="nav_link" href="{{ path ('admin_dashboard') }}">Admin</a></li>
+                {% endif %}
+                <li><a href="{{ path ('app_logout') }}">Déconnexion</a></li>
+            {% else %}
+                <li class="link_mobile"><a class="nav_link" href="{{path('user_new')}}">Inscription</a></li>
+                <li class="link_mobile"><a class="nav_link" href="{{path('app_login')}}">Connexion</a></li>
+            {% endif %}
+            </ul>
+        </div>
+        {# NAV MOBILE #}
+
+        {# HEADER #}
+        <header id="header" class="header fixed">
+            <h1 class="site">KeepVibz</h1>
+            <div class="wrap2 flex sb aic">
+                <div class="left flex sb aic">
+                    <div class="logo">
+                        <a href="{{path('home')}}"><img class="img_logo" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
+                    </div>
+                    <nav class="navigation flex aic">
+                        <ul class="nav flex">
+                            <li class="link"><a class="nav_link" href="{{path('instrus')}}">Instrus</a></li>
+                            <li class="link"><a class="nav_link" href="{{path('textes')}}">Textes</a></li>
+                            <li class="link"><a class="nav_link" href="{{path('contact_new')}}">Nous contacter</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                {# MOBILE A PARTIR DE 615px #}
+                <div class="top_header flex sb">
+                    <div class="logo_mobile">
+                        <a href="/"><img class="img_logo_mobile" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo sur mobile"></a>
+                    </div>
+                    <div class="block_burger">
+                        <a class="btn_burger" href="#"><img class="button_burger" src="{{asset('assets/images/logo_mobile.png')}}" alt="logo sur mobile"></a>
+                    </div>
+                </div>
+                {# MOBILE A PARTIR DE 615px #}
+                
+                <nav class="right">
+                    <ul class="flex sb aic">
+                {% if app.user %}
+                        <li class="link"><a class="nav_link" href="{{ path ('user_profile') }}">Profil</a></li>
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li class="link"><a class="nav_link" href="{{ path ('admin_dashboard') }}">Admin</a></li>
+                        {% endif %}
+                        <li class="link"><a class="link_connexion" href="{{ path ('app_logout') }}">Déconnexion</a></li>
+                    {% else %}
+                        <li class="link"><a class="nav_link" href="{{ path ('app_register') }}">Inscription</a></li>
+                        <li class="link"><a class="link_connexion" href="{{ path ('app_login') }}">Connexion</a></li>
+                {% endif %}
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        {# HEADER #}
+        {% block body %}
+
+        {% endblock %}
+        {# SECTION FIXE AVANT FOOTER #}
+        <section class="section_bottom flex aic wrap">
+            <div class="wrap4 flex wrap sb">
+                <div class="left_bottom flex col aic">
+                    <a class="link_img_logo_bottom" href="/"><img class="img_logo_bottom" src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" alt="logo"></a>
+                    <div class="block_social_icons flex sb wrap">
+                        <a href="https://www.facebook.com/" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/facebook-3-64.png')}}" alt="icone facebook"></a>
+                        <a href="https://www.instagram.com/" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/instagram-3-64.png')}}" alt="icone instagram"></a>
+                        <a href="https://www.youtube.com/" class="social_icon youtube"><img src="{{asset('assets/images/icons/social_blanc/youtube1.svg')}}" alt="icone linkedin"></a>
+                        <a href="https://twitter.com/" class="social_icon"><img src="{{asset('assets/images/icons/social_blanc/twitter-3-64.png')}}" alt="icone twitter"></a>
+                    </div>
+                </div>
+                {# ====================================================== #}
+                <div class="center2 flex col">
+                    <h4 class="title_bottom">Navigation<img class="btn_bottom_navigation" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu Navigation"></h4>
+                    <ul class="nav_bottom1">
+                        <li><a href="{{path('instrus')}}">Toutes les Instrus</a></li>
+                        <li><a href="{{path('textes')}}">Tous les Textes</a></li>
+                        <li id="anchor_instrus_pop"><a href="{{path('home')}}#instrus_populaires">Les 10 dernières instrus</a></li>
+                    </ul>
+                    {# ====================================================== #}
+                    {# SUB MENU NAVIGATION MOBILE #}
+                    <div class="submenu_center2">
+                        <ul class="nav_bottom2">
+                            <li><a href="{{path('instrus')}}">Toutes les Instrus</a></li>
+                            <li><a href="{{path('textes')}}">Tous les Textes</a></li>
+                            <li id="anchor_instrus_pop"><a href="{{path('home')}}#instrus_populaires">Les 10 dernières instrus</a></li>
+                        </ul>
+                    </div>
+                </div>
+                {# ====================================================== #}
+                <div class="center1 flex col">
+                    <h4 class="title_bottom">Keepvibz<img class="btn_bottom_keepvibz" src="{{asset('assets/images/icons/arrow-204-64.png')}}" alt="bouton pour déployer le sous-menu KeepVibz"></h4>
+                    <ul class="nav_bottom1">
+                        <li><a href="{{path('home')}}">Accueil</a></li>
+                        <li><a href="{{path('contact_new')}}">Nous contacter</a></li>
+                        <li><a href="{{path('mention')}}">Mentions légales</a></li>
+                        <li><a href="{{path('faq')}}">F.A.Q.</a></li>
+                    </ul>
+                    {# ====================================================== #}
+                    {# SUB MENU KEEPVIBZ MOBILE #}
+                    <div class="submenu_center1">
+                        <ul class="nav_bottom2">
+                            <li><a href="{{path('home')}}">Accueil</a></li>
+                            <li><a href="{{path('contact_new')}}">Nous contacter</a></li>
+                            <li><a href="{{path('mention')}}">Mentions légales</a></li>
+                            <li><a href="{{path('faq')}}">F.A.Q.</a></li>
+                    </div>
+                </div>
+                <div class="right_bottom flex col">
+                    {{include('stats/stats.html.twig')}}
+                </div>
+                <div class="top_right flex aic sb">
+                    <iframe id="discord" src="https://discordapp.com/widget?id=853899148105744396&theme=dark" width="250" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts">
+                    </iframe> 
+                    <button id="btn-up"><i class="fas fa-chevron-up"></i></button>
+                    <button class="btn-discord"><i class="fas fa-chevron-down"></i></button>
+                </div>               
+            </div>
+        </section>
+        {# SECTION FIXE AVANT FOOTER #}
+
+        {# FOOTER #}
+        <footer>
+            <div id="footer" class="footer flex aic sb">
+                <div class="wrap4 flex wrap jcc">
+                        {% set startYear = 2021 %}
+                        {% set currentYear = "now"|date("Y") %}
+
+                        {% if startYear == currentYear %}
+                            {% set copyrightYears = startYear %}
+                        {% else %}
+                            {% set copyrightYears = startYear ~ ' - ' ~ currentYear %}
+                        {% endif %}
+                    <p class="copyright">&copy; {{ copyrightYears }} KeepVibz</p>
+                </div>
+            </div>
+        </footer>
+        {# FOOTER #}
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
     </body>
 </html>

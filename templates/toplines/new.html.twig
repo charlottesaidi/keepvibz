@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin | Uploader une topline{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('user-profile') }}
+{% endblock %}
+
+
+{% block body %}
+    <div class="main">
+    <a class="link" href="{{path('user_profile')}}">Retour</a>
+	    <div class="form-wrap">
+            <h1 class="main-title">Uploader une topline</h1>
+                {{ include('toplines/_form.html.twig') }}
+        </div>
+        
+    </div>
+{% endblock %}

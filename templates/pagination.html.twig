@@ -1,0 +1,26 @@
+{% if paginator.numPages > 1 %}
+    <ul class="pagination d-flex justify-content-center">
+        {% if paginator.prevUrl %}
+            <li class="navigation_prev_pagination tac" onclick="document.location.href='{{ paginator.prevUrl }}';">
+                {# <a class="p-1" href="{{ paginator.prevUrl }}">&laquo; </a> #}
+                <a class="p-1" href="{{ paginator.prevUrl }}">Précédent</a>
+            </li>
+        {% endif %}
+
+        {# {% for page in paginator.pages %}
+            {% if page.url %}
+                <li {{ page.isCurrent ? 'class="active"' : '' }}><a class="p-1" href="{{ page.url }}">{{ page.num }}</a></li>
+            {% else %}
+                <li class="disabled"><span class="p-1">{{ page.num }}</span></li>
+            {% endif %}
+        {% endfor %} #}
+
+        {% if paginator.nextUrl %}
+            <li class="navigation_next_pagination tac" onclick="document.location.href='{{ paginator.nextUrl }}';">
+            {# <a class="p-1" href="{{ paginator.nextUrl }}"> &raquo; #}
+            <a class="p-1" href="{{ paginator.nextUrl }}">Suivant
+            </a></li>
+        {% endif %}
+        <li><a href=""></a></li>
+    </ul>
+{% endif %}

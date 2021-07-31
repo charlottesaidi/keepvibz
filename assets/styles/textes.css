@@ -1,0 +1,164 @@
+
+/* PAGINATION */
+/* UL */
+.pagination {position: absolute; right: 0; bottom: 0; width: 100%; }
+
+/* LI PRECEDENT */
+.navigation_prev_pagination{ width: 103px; padding: 10px;  background-color: #3d3c3c; border-radius: 4px; cursor: pointer;}
+.navigation_prev_pagination:hover{opacity: .7;}
+.p-1:active{color: #A27440;}
+
+/* LI SUIVANT */
+.navigation_next_pagination{ width: 103px; padding: 10px;  background-color: #3d3c3c; border-radius: 4px; cursor: pointer; right: 0; bottom: 0;}
+.navigation_next_pagination:hover{opacity: .7;}
+.p-1:active{color: #A27440;}
+
+
+
+/* PAGE textes */
+.main_textes{width: 100%; max-width: 1300px; margin: 0 auto; padding: 0 20px; background-color: #000; }
+.section_textes{margin-top: 94px;}
+.content_textes{width: 100%; margin-top: 20px; }
+.title_textes{color: #fff; font-size: 2em;}
+.block_all_textes {margin-bottom: 20px;}
+.block_textes{padding: 10px 20px; border-radius: 5px;background-color: #3d3c3c; margin-bottom: 20px;}
+.block_textes:hover{background-color: transparent; outline: 1px solid #fff;}
+.background_avatar_empty{ background-color: transparent; height: 150px; display: flex; overflow: hidden; padding: 10px 0}
+.refrain_caroussel{margin: auto; }
+.avatar_image_block{height: 40px; width: 40px; background-color: #fff; border-radius: 5px;}
+.avatar_image{width: 100%;}
+.description_textes{margin: 4px 0px 4px 20px;}
+.title_texte{color: #fff;}
+.author_textes{color: #756e6c;}
+.title_instrus_associees{color: #756e6c;}
+.block_instrus_associees{margin-left: 10px;}
+.link_instru_associee{padding: 10px 10px; border-radius: 20px; border: 1px solid #756e6c; text-align: center;}
+.titre_instru_associee{color: #fff; text-align: center; text-overflow: ellipsis;}
+.titre_instru_associee:hover{text-decoration: underline; text-underline-offset: 5px;}
+.link_2_instru_associee{margin-left: 20px;}
+/* PAGE textes */
+
+
+/* PAGE SHOW INSTRUS */
+.wrap1_textes_show{ width: 100%; margin: 0 auto;}
+.wrap2_instrus_show{max-width: 1300px; width: 100%; margin: 0 auto; padding: 0 20px;}
+
+
+
+
+
+/* TOP */
+/* .textes_show{margin-top: 146px;} */
+.top_content_textes_show{padding-top: 30px;}
+.top_container_show{background: rgb(255,255,255);
+  background: radial-gradient(circle, rgba(255,255,255,0) 0%, rgba(74,67,75,1) 0%, rgba(68,56,70,1) 6%, rgba(51,27,56,0.9611441988904937) 45%); padding-bottom: 50px; border-bottom: 1px solid hsla(0,0%,100%,.12);}
+.title_content_show_texte, .name_author_content_show_instru{color: #fff;}
+.title_content_show_texte{margin: 5px 0px 0px 9px; font-size: 24px;}
+.author_content_show_texte{color: #828282; margin-top: 10px;}
+.details_content_show_texte{margin: 8px 2px 0px 0px; margin-top: 20px;padding: 0 20px;}
+.block_link_items_associes{margin-top: 20px;}
+
+.first_autres_textes{cursor: pointer ;margin: 0 20px ;background-color: #3d3c3c; border-radius: 8px; padding: 15px;
+  -webkit-box-shadow: inset 1px 0px 26px 5px #000000; 
+  box-shadow: inset 1px 0px 26px 5px #000000; font-size: .8em;
+  display: none;
+}
+
+.second_instrus{cursor: pointer ;margin: 0 20px ;background-color: #3d3c3c; border-radius: 8px; padding: 15px;
+  -webkit-box-shadow: inset 1px 0px 26px 5px #000000; 
+  box-shadow: inset 1px 0px 26px 5px #000000; font-size: .8em;}
+
+.third_topline{cursor: pointer ;margin: 0 20px ;background-color: #3d3c3c; border-radius: 8px; padding: 15px;
+  -webkit-box-shadow: inset 1px 0px 26px 5px #000000; 
+  box-shadow: inset 1px 0px 26px 5px #000000; font-size: .8em;}
+
+.fourth_auteur{cursor: pointer ;margin: 0 20px ;background-color: #3d3c3c; border-radius: 8px; padding: 15px;
+  -webkit-box-shadow: inset 1px 0px 26px 5px #000000; 
+  box-shadow: inset 1px 0px 26px 5px #000000; font-size: .8em;}
+
+
+.full_content_textes{ margin: 20px 0; width: 60%; border-radius: 3px; background-color: #b8b3b3;
+  -webkit-box-shadow: inset 3px 3px 4px 0px #000000; 
+  box-shadow: inset 3px 3px 4px 0px #000000;
+
+}
+
+.content_couplet {margin-top: 20px;}
+.content_refrain{margin: 20px 0;}
+
+
+
+.first_autres_textes:hover{opacity: .7;} 
+.second_instrus:hover{opacity: .7;}
+.third_topline:hover{opacity: .7;}
+
+
+/* BOTTOM */
+.title_groupe_bottom{color: lightgray; font-size: 18px; text-decoration: underline #3d3c3c; text-underline-offset: 5px;}
+
+
+.others_instrus_author{ padding: 9px 10px; margin-bottom: 20px;}
+.others_instrus_author:hover{ background-color: #313030; border-radius: 4px; }
+.right_others_topline_author{margin-left: 20px;}
+
+.btn_play_hover{width: 30px;}
+.block_image_instru_author{ width: 60px; border: none; margin: 0 20px 0px 15px;}
+.img_instru_author{width: 100%; border-radius: 5px;}
+.bottom_right_others_instrus_author{margin-top: 5px;}
+.title_others_instrus_author{font-size: 18px;}
+.name_others_instrus_author, .bpm_others_instrus_author{color: #fff; font-size: 14px;}
+.grey_text{color: #828282; font-size: 14px;}
+
+.bottom_autres_textes_show_textes{margin-top: 30px;}
+.bottom_instrus_associees_show_textes{display: none; margin-top: 30px;}
+.bottom_informations_auteur_show_textes{display: none ; margin-top: 30px;}
+
+/* PAGE SHOW INSTRUS */
+
+
+/* INFOS AUTEUR */
+.left_block_image_infos{width: 60px; height: 60px;}
+.img_infos_show{width: 100%;}
+.right_block_image_infos{margin-left: 30px;}
+.pseudo_infos_show{color: #fff;}
+.second_block_infos{margin-top: 20px;}
+.email_infos_show, .town_infos_show, .number_infos_show, .details_infos_show, .activite_infos_show{color: #fff; margin-bottom: 10px; line-height: 22px;}
+.third_block_infos{margin-top: 20px;}
+.grey_text_bottom_description{color: #828282; font-size: 17px;}
+/* INFOS AUTEUR */
+
+
+
+
+@media screen and (max-width: 730px){
+    .block_textes{align-content: center;}
+}
+  
+
+@media screen and (max-width: 615px){
+    .section_textes{margin-top: 85px;}
+    .textes_show{margin-top: 85px;}
+    .les_autres_textes_auteur{text-align: center;}
+    .title_groupe_bottom{text-align: center;}
+
+}
+
+
+
+
+@media screen and (max-width: 470px){
+    .link_text{justify-content: center; flex-wrap: wrap;}
+    .instrus_associees{justify-content: center;}
+    .block_instrus_associees{margin-left: 0px ;}
+}
+  
+
+@media screen and (max-width: 450px){
+    .instrus_associees {flex-wrap: wrap; margin-top: 15px;}
+	.title_instrus_associees{margin-bottom: 10px;}
+}
+  
+
+
+
+

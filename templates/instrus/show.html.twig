@@ -1,0 +1,215 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}KeepVibz | {{ instru.title }}{% endblock %}
+
+{% block body %}
+<section class="instru_show">
+    {# TOP SHOW INSTRU  #}
+    <div class="wrap1_instrus_show">
+        <div class="top_container_show pr">
+            <div class="top_content_instrus_show flex col aic">
+                <div class="up_content_img">
+                    {% if instru.image %}
+                    <img src="{{ asset('uploads/images/instrus/' ~ instru.image) }}" alt="{{ instru.title }}" class="image_content_show_instru">
+                    {% else %}
+                    <img src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" class="image_content_show_instru">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="down_content flex col aic">
+                <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ instru.file) }}" controls id="player_{{ instru.id }}"></audio>
+                <div class="top_down_content_show_instru flex fw">
+                    <div class="btn_play_caroussel_show_instrus btn" id="btn_ref_{{ instru.id }}">
+                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                    </div>
+                    <p class="title_content_show_instru">{{ instru.title }}</p>
+                </div>
+                <p class="author_content_show_instru">par <span class="name_author_content_show_instru">{{ instru.user.name }}</span></p>
+                <div class="details_content_show_instru flex jcc fw">
+                    <p class="genre_content_show_instru">
+                        {% for genre in instru.genres %}
+                            {{ genre.label }}
+                        {% endfor %}
+                        <span class="genre_separator">|</span>
+                    </p>
+                    <p class="bpm_content_show_instru"> {{ instru.bpm }} <span class="bpm_show_instru"> BPM</span></p>
+                    <span class="genre_separator">|</span>
+                    <p class="key_content_show_instru">Key: {{ instru.cle }}</p>
+                    {# <p class="nombre_content_show_instru">Nombre de lecture: <span class="resultat_nbre_lectures"></span>  </p> #}
+                </div>
+                <div class="block_link_items_associes">
+                    <ul class="links_textes_toplines flex jcc">
+                        <li class="first_autres_instrus tac"><a href="#">Mes autres instrus</a></li>
+                        <li class="second_textes tac"><a href="#">Textes associés</a></li>
+                        <li class="third_topline tac"><a href="#">Toplines associées</a></li>
+                        <li class="fourth_auteur tac"><a href="#">Infos perso</a></li>
+                    </ul>
+                </div>
+                <div class="top_show_instru_downloading">
+                    <a class="download_btn" href="{{asset('uploads/instrus/' ~ instru.file)}}" download="{{ instru.file }}">
+                        <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    {# FIN TOP SHOW INSTRU  #}
+
+    {# BOTTOM AUTRES INSTRUS AUTEUR  #}
+    <div class="bottom_autres_instrus_show_instrus">
+        <div class="wrap2_instrus_show flex col">
+            <h2 class="title_groupe_bottom">Autres instrus de l'auteur</h2>
+            {% for beats in instru.user.instrus %}
+            {% if beats.id != instru.id %}
+            <div class="others_instrus_author flex aic pr">
+                <div class="left_others_instrus_author flex aic">
+                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/instrus/' ~ beats.file) }}" controls id="player_{{ beats.id }}"></audio>
+                    <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ beats.id }}">
+                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                    </div>
+                    <a href="{{path('instru_show', {'id': beats.id})}}">
+                        <div class="block_image_instru_author">
+                        {% if beats.image != null %}
+                        <img src="{{ asset('uploads/images/instrus/' ~ beats.image) }}" alt="{{ beats.title }}" class="img_instru_author">
+                            {% else %}
+                                <img src="{{asset('assets/images/logo2Fichier_4_svg.svg')}}" class="img_instru_author">
+                        {% endif %}
+                        </div>
+                    </a>
+                </div>
+                <a href="{{path('instru_show', {'id': beats.id})}}">
+                    <div class="right_others_instrus_author flex col">
+                        <div class="top_right_others_instrus_author">
+                            <p class="title_others_instrus_author">{{ beats.title }}</p>
+                        </div>
+                        <div class="bottom_right_others_instrus_author flex ">
+                            <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ beats.user.name }}</span></p>
+                            <p class="separator_others_instrus_author grey_text"> | </p>
+                            <p class="bpm_others_instrus_author">{{ beats.bpm }} <span class="grey_text"> BPM</span></p>
+                            <p class="separator_others_instrus_author grey_text"> | </p>
+                            {# <p class="nombre_lecture_others_instrus_author">(nombres DYNAMIQUE) lectures</p> #}
+                        </div>
+                        <div class="top_right_others_instrus_author pa">
+                            <div class="block_downloading pr">
+                                <a class="download_btn" href="{{asset('uploads/instrus/' ~ beats.file)}}" download="{{ beats.file }}">
+                                    <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}            
+            {% endfor %}
+        </div>
+    </div>
+    {# BOTTOM AUTRES INSTRUS AUTEUR  #}
+
+    {# BOTTOM TEXTES ASSOCIES #}
+    <div class="bottom_textes_associees_show_instrus">
+        <div class="wrap2_instrus_show flex col">
+            <h2 class="title_groupe_bottom tac">Textes associées à l'instru</h2>
+            <div class="content_textes pr">
+                <div class="block_all_textes flex col">
+                {% for userText in instru.textes %}
+                    <li class="block_textes flex sb fw">
+                        <a class="link_text flex aic" href="{{path('texte_show', {'id': userText.id})}}">
+                            <div class="avatar_image_block">
+                                <img src="{{asset('assets/images/icons/avatar.png')}}" alt="avatar du User" class="avatar_image">
+                            </div>
+                            <div class="description_textes">
+                                <h3 class="title_texte">{{userText.title}} | </h3>
+                                {# <span class="read_count"></span> vues #}
+                                <h3 class="author_textes">Par {{userText.user.name}}</h3>
+                            </div>
+                        </a>
+                    </li>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    {# BOTTOM TEXTES ASSOCIES #}
+
+    {# BOTTOM TOPLINES ASSOCIES #}
+    <div class="bottom_toplines_associees_show_instrus">
+        <div class="wrap2_instrus_show flex col">
+            <h2 class="title_groupe_bottom tac">Toplines associées à l'instru</h2>
+            {% for topline in instru.toplines %}
+            <div class="others_instrus_author flex aic pr">
+                <div class="left_others_instrus_author flex aic">
+                    <audio class="player_audio_selected audio_player" preload src="{{ asset('uploads/toplines/' ~ topline.file) }}" controls id="player_{{ topline.id }}"></audio>
+                    <div class="btn_play_caroussel_show_instrus btn btn_play_hover" id="btn_ref_{{ topline.id }}">
+                        <img class="img_play_caroussel" src="{{asset('assets/images/icons/play.png')}}" alt="bouton de lecture audio">
+                    </div>
+                </div>
+                <div class="right_others_instrus_author right_others_topline_author  flex col">
+                    <div class="top_right_others_instrus_author">
+                        <p class="title_others_instrus_author">{{ topline.title }}</p>
+                    </div>
+                    <div class="bottom_right_others_instrus_author flex ">
+                        <p class="user_others_instrus_author grey_text">par <span class="name_others_instrus_author">{{ topline.user.name }}</span></p>
+                        <p class="separator_others_instrus_author grey_text"> | </p>
+                        {# <p class="nombre_lecture_others_instrus_author"><span class="read_count">0</span> lectures</p> #}
+                    </div>
+                </div>
+                <div class="top_right_others_instrus_author pa">
+                    <div class="block_downloading pr">
+                        <a class="download_btn" href="{{asset('uploads/toplines/' ~ topline.file)}}" download="{{ topline.file }}">
+                            <img class="image_downloading pa tchv" src="{{asset('assets/images/icons/social_blanc/downloading-64.png')}}" alt="icône pour telecharger l'item en particulier">
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {# BOTTOM TOPLINES ASSOCIES #}
+
+    {# BOTTOM INFOS AUTEUR #}
+    <div class="bottom_informations_auteur_show_instrus">
+        <div class="wrap2_instrus_show">
+            <h2 class="title_groupe_bottom tac">Informations sur l'auteur</h2>
+                <div class="block_infos_perso flex col aic">
+                    <div class="first_block_infos flex fw aic">
+                        {% if instru.user.avatar != null %}
+                        <div class="left_block_image_infos">
+                            <img src="{{asset('uploads/images/avatars/' ~ instru.user.avatar.file)}}" alt="avatar de l'utilisateur" class="img_infos_show">
+                        </div>
+                        {% else %}
+                        <div class="left_block_image_infos">
+                            <img src="{{asset('assets/images/caroussel/1.jpg')}}" alt="avatar par défaut" class="img_infos_show">
+                        </div>
+                        {% endif %}
+                        <div class="right_block_image_infos">
+                            <p class="pseudo_infos_show"><span class="grey_text_bottom_description">Pseudo: </span>{{instru.user.name}} </p>
+                        </div>
+                    </div>
+                    <div class="second_block_infos flex col aic">
+                    {% if instru.user.visible == true %}
+                        <p class="email_infos_show"> <span><i class="fas fa-envelope"></i></span> {{instru.user.email}} </p>
+                        <p class="town_infos_show"><span class="grey_text_bottom_description">Ville:</span>  {{ instru.user.town }} </p>
+                        <p class="number_infos_show tac"> 
+                            {% if instru.user.phoneNumber %}
+                                {{ instru.user.phoneNumber|phone_number_format('NATIONAL') }}
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                    </div>
+                    <div class="third_block_infos flex col aic">
+                        <p class="details_infos_show tac"> {{ instru.user.bio }} </p>
+                        {% for competence in instru.user.competences %}
+                            <p class="activite_infos_show tac"> {{ competence.title }} </p>
+                        {% endfor %}
+                    </div>
+                </div>
+        </div>
+    </div>
+    {# BOTTOM INFOS AUTEUR #}
+</section>
+
+{% endblock %}
+
+
+

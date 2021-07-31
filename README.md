@@ -8,20 +8,62 @@ Projet final de groupe - 3 collaborateurs
 - Master:  
 Branche principale | installation du projet  
 - Dev  
-Branche de développement | projet abouti  
+Branche de développement  
+- Filter    
+Fonctionnalité de recherche par filtre, test ajax 
 
-### Installation  
+### Installation
 
-#### Projet  
-Vendor:  
+__Bundles et dépendances Vendor__  
 ```bash
 composer install
 ```  
-NodeModule:  
+__Packages et dépendances NodeModule__  
 ```bash
 npm install
 ```  
-Dépendance Webpack PopperJS:  
+__Webpack Compile__
 ```bash
-npm i @popperjs/core
+npm run dev-server  
+npm run watch
 ```  
+__Intervention/image__  
+Redimension d'image.  
+Après 'composer install', activer l'extension "gd" dans le fichier php.ini  
+
+##
+
+### Base de données  
+
+__Création de la base de donnée__
+```bash
+php bin/console doctrine:database:create
+```  
+```bash
+php bin/console doctrine:migrations:migrate
+```  
+__Fixtures(fake datas)__
+```bash
+php bin/console doctrine:fixtures:load
+```  
+__Modèle de données__  
+![modele_logique_de_donnees](./erd_keepvibz.png) 
+
+##
+
+### Test  
+__Serveur local__  
+```bash
+php -S localhost:8000 -t public
+```  
+__Connexion__  
+- _Administrateur_     
+Email: admin@example.fr  
+Mot de passe: passAdmin  
+- _Utilisateur_   
+Email: user@example.fr  
+Mot de passe: passUser  
+
+__Back-office__   
+Accessible uniquement si connecté en tant qu'administrateur:  
+__http://localhost:8000/admin__

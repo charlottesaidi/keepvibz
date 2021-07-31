@@ -4,6 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    avatars_directory: '%kernel.project_dir%/public/uploads/images/avatars'
+    imagesInstrus_directory: '%kernel.project_dir%/public/uploads/images/instrus'
+    instrus_directory: '%kernel.project_dir%/public/uploads/instrus'
+    toplines_directory: '%kernel.project_dir%/public/uploads/toplines'
+    counter_directory: '%kernel.project_dir%/src/Service'
 
 services:
     # default configuration for services in *this* file
@@ -23,3 +28,9 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    gedmo.listener.softdeleteable:
+        class: Gedmo\SoftDeleteable\SoftDeleteableListener
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+        calls:
+            - [ setAnnotationReader, [ "@annotation_reader" ] ]

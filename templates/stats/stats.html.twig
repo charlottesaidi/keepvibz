@@ -1,0 +1,22 @@
+
+    <h4 class="title_bottom">Statistiques</h4>
+    <div class="block_statistiques flex col">
+        <div class="top_block_statistiques flex sb ">
+            <div class="left1 flex col">
+                <h5 class="visites">Visites</h5>
+                <p class="number"> 
+                    {{stats.getVisits}} 
+                </p>
+            </div>
+            <div class="left2 flex col">
+                <h5 class="posts">Posts</h5>
+                <p class="number"> {{stats.getAllPostsCount}} </p>
+            </div>
+        </div>
+        <div class="bottom_block_statistiques flex col">
+            <div class="right1 flex col">
+                <h5 class="membres">Membres</h5>
+                <p class="number"> {{stats.getMembersCount}} </p>
+            </div>
+        </div>
+    </div>

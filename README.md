@@ -8,7 +8,7 @@ Projet final de groupe - 3 collaborateurs
 - Master:  
 Branche principale | installation du projet  
 - Dev  
-Branche de développement  
+Branche de développement commune 
 - Filter    
 Fonctionnalité de recherche par filtre, test ajax 
 
